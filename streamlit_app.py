@@ -1,5 +1,5 @@
 import streamlit as st
-import pd as pd
+import pandas as pd  # FIXED: Changed from 'import pd as pd'
 import plotly.express as px
 import requests
 import random
@@ -19,7 +19,6 @@ st.markdown("""
     .stApp { background-color: #050505 !important; font-family: 'Courier New', Courier, monospace !important; }
     h1, h2, h3, h4, h5, h6, p, label, .stMarkdown, div[data-testid="stCaptionContainer"] { color: #00ff41 !important; font-family: 'Courier New', Courier, monospace !important; }
     
-    /* Metric HUD */
     div[data-testid="stMetric"] {
         background-color: #0a0a0a !important;
         border: 1px solid #222;
@@ -59,7 +58,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- DATA RESTORATION ---
+# --- DATASET RESTORATION ---
 df_ransom = pd.DataFrame([
     {"RANK": "01", "GROUP": "Qilin", "STATUS": "ACTIVE", "VECTOR": "VPN 0-Day"},
     {"RANK": "02", "GROUP": "Akira", "STATUS": "ACTIVE", "VECTOR": "ESXi Esc"},
@@ -108,7 +107,7 @@ def get_fallback_data():
 
 if "global_threats" not in st.session_state: st.session_state.global_threats = [get_fallback_data() for _ in range(15)]
 
-# --- HEADER ---
+# --- HEADER (Level Removed) ---
 st.title("🔒 SecAI-Nexus")
 st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
 st.caption("Target: Worldwide • Protocol: Real-time Intelligence")
@@ -140,7 +139,7 @@ with col_main:
 with col_side:
     st.subheader(">> ANALYTICS")
     
-    # CVSS Distro
+    # CVSS Distro Chart
     df_f = pd.DataFrame(st.session_state.global_threats)
     df_f['Sev'] = df_f['CVSS'].apply(lambda x: 'CRITICAL' if x>=9.0 else 'HIGH' if x>=7.0 else 'MED')
     f_counts = df_f['Sev'].value_counts().reset_index()
@@ -151,7 +150,7 @@ with col_side:
     fig1.update_traces(textinfo='percent+label', textfont_size=9)
     st.plotly_chart(fig1, use_container_width=True)
 
-    # Status Mix
+    # Threat Status Mix Chart
     status_data = pd.concat([df_ransom['STATUS'], df_phish['STATUS'], df_apt['STATUS']])
     s_counts = status_data.value_counts().reset_index()
     
