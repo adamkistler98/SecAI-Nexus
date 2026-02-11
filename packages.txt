@@ -1,2 +1,2 @@
 build-essential
-default-jdk
+openjdk-17-jdk
