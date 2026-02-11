@@ -80,20 +80,23 @@ m3.metric("EVENTS", "91", "Feb'26")
 m4.metric("CONFID", "94.2%", "↑")
 st.markdown("---")
 
-# === NEW: LIVE CYBER THREAT MAPS (Placed First) ===
+# === LIVE CYBER THREAT MAPS (Placed First - 4 reliable maps) ===
 st.subheader(">> LIVE CYBER THREAT MAPS")
-st.caption("Real-time global attack activity from trusted sources")
-map_col1, map_col2 = st.columns(2)
+st.caption("Real-time global attack activity")
+map_row1 = st.columns(2)
+map_row2 = st.columns(2)
 
-with map_col1:
+with map_row1[0]:
     st.markdown("**Bitdefender Global Threat Map**")
     st.components.v1.iframe("https://threatmap.bitdefender.com/", height=380, scrolling=True)
-    st.markdown("**Kaspersky Cybermap**")
-    st.components.v1.iframe("https://cybermap.kaspersky.com/", height=380, scrolling=True)
+with map_row1[1]:
+    st.markdown("**Norse Attack Map**")
+    st.components.v1.iframe("https://map.norsecorp.com/", height=380, scrolling=True)
 
-with map_col2:
-    st.markdown("**Fortinet Threat Map**")
-    st.components.v1.iframe("https://threatmap.fortinet.com/", height=380, scrolling=True)
+with map_row2[0]:
+    st.markdown("**Digital Attack Map**")
+    st.components.v1.iframe("https://www.digitalattackmap.com/", height=380, scrolling=True)
+with map_row2[1]:
     st.markdown("**Check Point ThreatCloud**")
     st.components.v1.iframe("https://threatmap.checkpoint.com/", height=380, scrolling=True)
 
@@ -146,7 +149,7 @@ with col_right:
 
 st.markdown("---")
 
-# --- INFRASTRUCTURE RISK LANDSCAPE (LOCKED) ---
+# --- INFRASTRUCTURE RISK LANDSCAPE (locked) ---
 st.subheader(">> INFRASTRUCTURE RISK LANDSCAPE")
 t1, t2, t3, t4 = st.columns(4)
 def gen_landscape_data(category):
