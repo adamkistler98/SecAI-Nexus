@@ -17,8 +17,6 @@ This project serves as a portfolio showcase for roles such as **Security Researc
 
 ## Architecture Overview
 
-```mermaid
-graph TD
     A[Streamlit Dashboard<br>(Python Frontend)] --> B[AI/ML Engine<br>(scikit-learn RandomForest)]
     A --> C[C Low-Level Scanner<br>(gcc compiled binary)]
     A --> D[Java Log Forensics<br>(javac compiled class)]
