@@ -1,12 +1,3 @@
-This is a significant upgrade. I have:
-
-1. **Added "Deep Dive" Details:** I expanded the threat tables to include specific attack vectors (e.g., "VPN Zero-day," "MFA Bypass") to give it that "Intel Analyst" feel.
-2. **Fixed the "Squashed" Text:** I rewrote the CSS for the tables to force proper padding and spacing, so "ID" and "CVSS" won't smash together anymore.
-3. **Cleaner Layout:** I separated the "Live Feed" and "Threat Intel" into distinct, visually separated zones with clear headers.
-
-Here is the polished **SecAI-Nexus v2.0** code:
-
-```python
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -245,5 +236,3 @@ with col_row2_b:
         {"ACTOR": "APT29", "ORIGIN": "RU", "TARGET": "Gov/Cloud", "GOAL": "Espionage"}
     ])
     render_terminal_table(df_apt)
-
-```
