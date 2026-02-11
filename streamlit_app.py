@@ -140,7 +140,7 @@ if "global_threats" not in st.session_state:
 # --- HEADER & METRICS ---
 st.title("🔒 SecAI-Nexus")
 st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
-st.caption("Target: Worldwide • Protocol: Real-time Intelligence • Level: Classified")
+st.caption("Target: Worldwide • Protocol: Real-time Intelligence")
 st.markdown("---")
 
 m1, m2, m3, m4 = st.columns(4)
