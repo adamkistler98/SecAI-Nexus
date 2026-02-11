@@ -110,7 +110,7 @@ def render_terminal_table(df):
     html += '</tbody></table>'
     st.markdown(html, unsafe_allow_html=True)
 
-# --- LIVE CVE SECTION (Fixed - Real data, side-by-side) ---
+# --- LIVE CVE SECTION (Fixed + Side-by-side) ---
 st.subheader(">> LIVE CVE VULNERABILITIES")
 col_sync, _ = st.columns([1, 6])
 with col_sync:
@@ -118,24 +118,17 @@ with col_sync:
 
 if "grc_stream" not in st.session_state or sync_trigger:
     try:
-        resp = requests.get("https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=20", timeout=12)
+        resp = requests.get("https://cve.circl.lu/api/last/20", timeout=10)
         resp.raise_for_status()
-        data = resp.json()
-        vulnerabilities = data.get("vulnerabilities", [])
+        raw = resp.json()
         
         clean = []
-        for item in vulnerabilities:
-            cve = item.get("cve", {})
-            cid = cve.get("id", "CVE-UNKNOWN")
-            
-            # Get CVSS score (v3.1 preferred, then v3.0, then fallback)
-            cvss = 0.0
-            if "cvssMetricV31" in cve.get("metrics", {}):
-                cvss = cve["metrics"]["cvssMetricV31"][0].get("cvssData", {}).get("baseScore", 0.0)
-            elif "cvssMetricV30" in cve.get("metrics", {}):
-                cvss = cve["metrics"]["cvssMetricV30"][0].get("cvssData", {}).get("baseScore", 0.0)
-            
-            summary = cve.get("descriptions", [{}])[0].get("value", "No summary available")
+        for i in raw:
+            cid = i.get('id', 'CVE-UNKNOWN')
+            cvss = float(i.get('cvss') or i.get('cvss3') or 0.0)
+            summary = i.get('summary', '').strip()
+            if cid in summary:
+                summary = summary.replace(cid, "").strip(" .:-")
             if len(summary) > 95:
                 summary = summary[:92] + "..."
             
@@ -150,7 +143,7 @@ if "grc_stream" not in st.session_state or sync_trigger:
             for _ in range(20)
         ]
 
-# Side-by-side tables (matching bottom style)
+# Side-by-side terminal tables (matching bottom style)
 col_left, col_right = st.columns(2)
 
 with col_left:
