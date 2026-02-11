@@ -13,13 +13,12 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- CUSTOM CSS (Optimized HUD) ---
+# --- CUSTOM CSS ---
 st.markdown("""
 <style>
     .stApp { background-color: #050505 !important; font-family: 'Courier New', Courier, monospace !important; }
     h1, h2, h3, h4, h5, h6, p, label, .stMarkdown, div[data-testid="stCaptionContainer"] { color: #00ff41 !important; font-family: 'Courier New', Courier, monospace !important; }
     
-    /* Live Clock Header */
     .clock-header {
         font-size: 1.2rem;
         font-weight: bold;
@@ -67,10 +66,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- LIVE CLOCK INJECTOR ---
 st.markdown(f'<div class="clock-header">SYSTEM_TIME: {datetime.now().strftime("%H:%M:%S")} UTC</div>', unsafe_allow_html=True)
 
-# --- EXTENDED DATASETS (20 ENTRIES EACH) ---
+# --- DATA GENERATORS ---
 def gen_ransom_data():
     groups = ["Qilin", "Akira", "LockBit", "Play", "BlackBasta", "Medusa", "BianLian", "Rhysida", "Phobos", "INC Ransom", "Storm-0506", "Cactus", "8Base", "ALPHV", "Hunters", "Fog", "Embargo", "RansomHub", "Dragonforce", "Estate"]
     vectors = ["VPN 0-Day", "ESXi Esc", "Supply Ch", "RDP Brute", "AD Takeover", "Public Exp", "Exfiltration", "Phishing", "Credential Stuff", "Citrix Bleed", "Zyxel Vuln", "Fortinet Exp", "ScreenConnect", "Ivanti Bypass", "Atera RMM", "Palo Alto Exp"]
@@ -89,12 +87,6 @@ def gen_apt_data():
     actors = ["Volt Typhoon", "Lazarus", "APT29", "Sandworm", "Mustang Panda", "Fancy Bear", "Kimsuky", "Charming Kitten", "MuddyWater", "SideWinder", "APT41", "OceanLotus", "Turla", "Cozy Bear", "Evil Corp", "Scattered Spider"]
     return pd.DataFrame([{"RANK": f"{i+1:02}", "ACTOR": actors[i % len(actors)], "STATUS": random.choice(["ACTIVE", "STABLE"]), "ORIGIN": random.choice(["CN", "RU", "NK", "IR", "BR", "VN"])} for i in range(20)])
 
-df_ransom = gen_ransom_data()
-df_malware = gen_malware_data()
-df_phish = gen_phish_data()
-df_apt = gen_apt_data()
-
-# --- HELPERS ---
 def render_terminal_table(df):
     html = '<table class="terminal-table"><thead><tr>' + ''.join(f'<th>{col}</th>' for col in df.columns) + '</tr></thead><tbody>'
     for _, row in df.iterrows():
@@ -108,9 +100,22 @@ def render_terminal_table(df):
     html += '</tbody></table>'
     st.markdown(html, unsafe_allow_html=True)
 
-# Initialize Session State with updated column name
+# --- FALLBACK LOGIC ---
+def get_intel_summary():
+    intel = [
+        "Unauthorized lateral movement detected",
+        "Credential harvesting via ADFS bypass",
+        "RCE vulnerability in edge gateway",
+        "Encrypted tunnel established to known C2",
+        "Privilege escalation in container runtime",
+        "Zero-day exploit detected in SSL stack",
+        "Memory corruption in kernel driver"
+    ]
+    return random.choice(intel)
+
+# Initialize Session State
 if "global_threats" not in st.session_state: 
-    st.session_state.global_threats = [{"ID": f"CVE-26-{random.randint(100, 999)}", "CVSS": random.choice([9.8, 8.5, 7.2]), "LIVE CSS VULNERABILITIES": "System Handshake Active"} for _ in range(20)]
+    st.session_state.global_threats = [{"ID": f"CVE-26-{random.randint(100, 999)}", "CVSS": 8.5, "SUMMARY": "Initial Handshake Sync..."} for _ in range(20)]
 
 # --- HEADER ---
 st.title("🔒 SecAI-Nexus")
@@ -129,14 +134,30 @@ st.markdown("---")
 col_main, col_side = st.columns([7, 3])
 
 with col_main:
-    st.subheader(">> LIVE STREAM")
+    st.subheader(">> LIVE CSS VULNERABILITIES") # UPDATED TITLE
     if st.button("🔄 SYNC"):
         try:
             resp = requests.get("https://cve.circl.lu/api/last/20", timeout=3)
             raw_data = resp.json() if resp.status_code == 200 else []
-            # Renaming SUMMARY field to LIVE CSS VULNERABILITIES in clean_data
-            clean_data = [{"ID": item.get('id'), "CVSS": float(item.get('cvss')) if item.get('cvss') else 5.0, "LIVE CSS VULNERABILITIES": (item.get('summary')[:35] + "..") if item.get('summary') else "No Intel"} for item in raw_data if item.get('id')]
-            while len(clean_data) < 20: clean_data.append({"ID": f"CVE-26-{random.randint(100, 999)}", "CVSS": 8.0, "LIVE CSS VULNERABILITIES": "Inbound Threat Pattern"})
+            clean_data = []
+            for item in raw_data:
+                # Cleanup summary to remove ID bleed
+                raw_summary = item.get('summary', 'Pending Intel')
+                clean_summary = raw_summary.split('..')[-1].strip() if '..' in raw_summary else raw_summary
+                if len(clean_summary) < 5: clean_summary = get_intel_summary()
+
+                clean_data.append({
+                    "ID": item.get('id'), 
+                    "CVSS": float(item.get('cvss')) if item.get('cvss') else 5.0, 
+                    "SUMMARY": (clean_summary[:45] + "..")
+                })
+            
+            while len(clean_data) < 20: 
+                clean_data.append({
+                    "ID": f"CVE-26-{random.randint(100, 999)}", 
+                    "CVSS": random.choice([9.2, 8.1, 7.5]), 
+                    "SUMMARY": get_intel_summary()
+                })
             st.session_state.global_threats = clean_data
         except: pass
     
@@ -144,8 +165,6 @@ with col_main:
 
 with col_side:
     st.subheader(">> ANALYTICS")
-    
-    # CVSS Distro
     df_f = pd.DataFrame(st.session_state.global_threats)
     df_f['Sev'] = df_f['CVSS'].apply(lambda x: 'CRITICAL' if float(x)>=9.0 else 'HIGH' if float(x)>=7.0 else 'MED')
     f_counts = df_f['Sev'].value_counts().reset_index()
@@ -156,19 +175,19 @@ with col_side:
     fig1.update_traces(textinfo='percent+label', textfont_size=10)
     st.plotly_chart(fig1, use_container_width=True)
 
-    # Threat Status Mix
-    all_status = pd.concat([df_ransom['STATUS'], df_phish['STATUS'], df_apt['STATUS']])
+    df_ransom = gen_ransom_data()
+    all_status = pd.concat([df_ransom['STATUS']])
     s_counts = all_status.value_counts().reset_index()
     
     fig2 = px.pie(s_counts, values='count', names='STATUS', hole=0.7, title="THREAT_STATUS",
-                 color='STATUS', color_discrete_map={'ACTIVE':'#ff3333', 'SURGING':'#ff3333', 'STABLE':'#ffaa00', 'DORMANT':'#00ff41'})
+                 color='STATUS', color_discrete_map={'ACTIVE':'#ff3333', 'STABLE':'#ffaa00', 'DORMANT':'#00ff41'})
     fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=210, showlegend=False, margin=dict(t=30, b=0, l=0, r=0))
     fig2.update_traces(textinfo='percent+label', textfont_size=10)
     st.plotly_chart(fig2, use_container_width=True)
 
 st.markdown("---")
 
-# --- QUAD-TABLE LANDSCAPE (20 ROWS EACH) ---
+# --- QUAD-TABLE LANDSCAPE ---
 st.subheader(">> THREAT LANDSCAPE")
 t1, t2, t3, t4 = st.columns(4)
 
@@ -177,13 +196,10 @@ with t1:
     render_terminal_table(df_ransom)
 
 with t2:
-    st.markdown("### 🦠 MALWARE")
-    render_terminal_table(df_malware)
+    render_terminal_table(gen_malware_data())
 
 with t3:
-    st.markdown("### 🎣 PHISHING")
-    render_terminal_table(df_phish)
+    render_terminal_table(gen_phish_data())
 
 with t4:
-    st.markdown("### 🕵️ APT")
-    render_terminal_table(df_apt)
+    render_terminal_table(gen_apt_data())
