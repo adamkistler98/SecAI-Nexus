@@ -108,7 +108,9 @@ def render_terminal_table(df):
     html += '</tbody></table>'
     st.markdown(html, unsafe_allow_html=True)
 
-if "global_threats" not in st.session_state: st.session_state.global_threats = [{"ID": f"CVE-26-{random.randint(100, 999)}", "CVSS": random.choice([9.8, 8.5, 7.2]), "SUMMARY": "System Handshake Active"} for _ in range(20)]
+# Initialize Session State with updated column name
+if "global_threats" not in st.session_state: 
+    st.session_state.global_threats = [{"ID": f"CVE-26-{random.randint(100, 999)}", "CVSS": random.choice([9.8, 8.5, 7.2]), "LIVE CSS VULNERABILITIES": "System Handshake Active"} for _ in range(20)]
 
 # --- HEADER ---
 st.title("🔒 SecAI-Nexus")
@@ -132,8 +134,9 @@ with col_main:
         try:
             resp = requests.get("https://cve.circl.lu/api/last/20", timeout=3)
             raw_data = resp.json() if resp.status_code == 200 else []
-            clean_data = [{"ID": item.get('id'), "CVSS": float(item.get('cvss')) if item.get('cvss') else 5.0, "SUMMARY": (item.get('summary')[:35] + "..") if item.get('summary') else "No Intel"} for item in raw_data if item.get('id')]
-            while len(clean_data) < 20: clean_data.append({"ID": f"CVE-26-{random.randint(100, 999)}", "CVSS": 8.0, "SUMMARY": "Inbound Threat Pattern"})
+            # Renaming SUMMARY field to LIVE CSS VULNERABILITIES in clean_data
+            clean_data = [{"ID": item.get('id'), "CVSS": float(item.get('cvss')) if item.get('cvss') else 5.0, "LIVE CSS VULNERABILITIES": (item.get('summary')[:35] + "..") if item.get('summary') else "No Intel"} for item in raw_data if item.get('id')]
+            while len(clean_data) < 20: clean_data.append({"ID": f"CVE-26-{random.randint(100, 999)}", "CVSS": 8.0, "LIVE CSS VULNERABILITIES": "Inbound Threat Pattern"})
             st.session_state.global_threats = clean_data
         except: pass
     
