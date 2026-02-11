@@ -13,7 +13,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- ADVANCED GRC CSS ---
+# --- ADVANCED GRC CSS (matches your bottom tables) ---
 st.markdown("""
 <style>
     .stApp { background-color: #050505 !important; font-family: 'Courier New', Courier, monospace !important; }
@@ -38,7 +38,7 @@ st.markdown("""
         border-collapse: collapse;
         color: #cccccc;
         font-family: 'Courier New', monospace;
-        font-size: 0.78rem;
+        font-size: 0.82rem;
         margin-bottom: 15px;
         border: 1px solid #222;
         background-color: #050505;
@@ -46,14 +46,14 @@ st.markdown("""
     .terminal-table th {
         border-bottom: 1px solid #00ff41;
         text-align: left;
-        padding: 6px 8px;
+        padding: 8px 10px;
         color: #00ff41;
         background-color: #111;
         text-transform: uppercase;
     }
     .terminal-table td { 
         border-bottom: 1px solid #1a1a1a; 
-        padding: 6px 8px; 
+        padding: 8px 10px; 
         background-color: #050505; 
     }
    
@@ -62,13 +62,16 @@ st.markdown("""
     .med { color: #00ff41 !important; }
     .stButton>button {
         background-color: #000000; color: #00ff41; border: 1px solid #333;
-        font-size: 0.65rem; font-weight: bold; text-transform: uppercase; height: 26px;
+        font-size: 0.65rem; font-weight: bold; text-transform: uppercase; height: 28px;
     }
     .stButton>button:hover { border-color: #00ff41; box-shadow: 0 0 8px #00ff41; }
+    
+    /* Force Plotly dark */
+    .js-plotly-plot .plotly .main-svg { background: #050505 !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# --- HEADER SECTION ---
+# --- HEADER ---
 st.markdown(f'<div class="clock-header">SYSTEM_TIME: {datetime.now().strftime("%H:%M:%S")} UTC</div>', unsafe_allow_html=True)
 st.title("🔒 SecAI-Nexus")
 st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
@@ -110,7 +113,7 @@ def render_terminal_table(df):
     html += '</tbody></table>'
     st.markdown(html, unsafe_allow_html=True)
 
-# --- LIVE VULNERABILITY STREAM (FIXED) ---
+# --- LIVE CVE SECTION (Fixed + Side-by-side charts) ---
 st.subheader(">> LIVE CVE VULNERABILITIES")
 col_sync, _ = st.columns([1, 6])
 with col_sync:
@@ -125,15 +128,10 @@ if "grc_stream" not in st.session_state or sync_trigger:
         clean = []
         for i in raw:
             cid = i.get('id', 'CVE-UNKNOWN')
-            # Robust CVSS extraction
-            cvss = float(i.get('cvss') or i.get('cvss3') or i.get('score') or 0.0)
+            cvss = float(i.get('cvss') or i.get('cvss3') or 0.0)
             summary = i.get('summary', '').strip()
-            
-            # Clean redundant CVE ID from summary
             if cid in summary:
                 summary = summary.replace(cid, "").strip(" .:-")
-            
-            # Truncate for table
             if len(summary) > 95:
                 summary = summary[:92] + "..."
             
@@ -143,34 +141,33 @@ if "grc_stream" not in st.session_state or sync_trigger:
         
     except Exception as e:
         st.error(f"API Sync Failed: {e}")
-        # Minimal fallback
         st.session_state.grc_stream = [
             {"ID": f"CVE-2026-{random.randint(1000,9999)}", "CVSS": round(random.uniform(6.0, 9.8), 1), "SUMMARY": get_intel_summary()}
             for _ in range(12)
         ]
 
-# Side-by-side charts + table (shrunk summary)
-col_chart1, col_chart2 = st.columns(2)
+# Side-by-side charts + compact tables
+col_left, col_right = st.columns(2)
 
-with col_chart1:
+with col_left:
     st.subheader("Latest 10 CVEs")
-    df = pd.DataFrame(st.session_state.grc_stream[:10])
-    fig1 = px.bar(df, x='ID', y='CVSS', title="Top 10 CVSS Scores", height=280)
+    df1 = pd.DataFrame(st.session_state.grc_stream[:10])
+    fig1 = px.bar(df1, x='ID', y='CVSS', title="Top 10 CVSS", height=260)
     fig1.update_layout(paper_bgcolor="#050505", plot_bgcolor="#050505", font_color="#00ff41")
     st.plotly_chart(fig1, use_container_width=True)
-    st.dataframe(df[['ID', 'CVSS', 'SUMMARY']], use_container_width=True, height=220)
+    render_terminal_table(df1[['ID', 'CVSS', 'SUMMARY']])
 
-with col_chart2:
+with col_right:
     st.subheader("Next 10 CVEs")
     df2 = pd.DataFrame(st.session_state.grc_stream[10:20])
-    fig2 = px.bar(df2, x='ID', y='CVSS', title="Next 10 CVSS Scores", height=280)
+    fig2 = px.bar(df2, x='ID', y='CVSS', title="Next 10 CVSS", height=260)
     fig2.update_layout(paper_bgcolor="#050505", plot_bgcolor="#050505", font_color="#00ff41")
     st.plotly_chart(fig2, use_container_width=True)
-    st.dataframe(df2[['ID', 'CVSS', 'SUMMARY']], use_container_width=True, height=220)
+    render_terminal_table(df2[['ID', 'CVSS', 'SUMMARY']])
 
 st.markdown("---")
 
-# --- The rest of your original code (QUAD-TABLE + ANALYTICS) remains unchanged ---
+# --- QUAD-TABLE LANDSCAPE (unchanged) ---
 st.subheader(">> INFRASTRUCTURE RISK LANDSCAPE")
 t1, t2, t3, t4 = st.columns(4)
 def gen_landscape_data(category):
@@ -198,7 +195,7 @@ with t4:
 
 st.markdown("---")
 
-# --- ANALYTICS (BOTTOM SECTION) ---
+# --- ANALYTICS (BOTTOM) ---
 st.subheader(">> RISK_MATURITY_HUD")
 c_viz1, c_viz2 = st.columns(2)
 df_f = pd.DataFrame(st.session_state.grc_stream)
@@ -206,11 +203,11 @@ df_f['Sev'] = df_f['CVSS'].apply(lambda x: 'CRITICAL' if x>=9.0 else 'HIGH' if x
 with c_viz1:
     fig1 = px.pie(df_f['Sev'].value_counts().reset_index(), values='count', names='Sev', hole=0.7, title="RISK_DISTRIBUTION",
                  color='Sev', color_discrete_map={'CRITICAL':'#ff3333', 'HIGH':'#ffaa00', 'MED':'#00ff41'})
-    fig1.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=250, showlegend=True, margin=dict(t=50, b=10, l=10, r=10))
+    fig1.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=250)
     st.plotly_chart(fig1, use_container_width=True)
 with c_viz2:
     status_mix = pd.DataFrame({"Category": ["COMPLIANT", "NON-COMPLIANT", "UNDER_REVIEW"], "Count": [72, 18, 10]})
     fig2 = px.pie(status_mix, values='Count', names='Category', hole=0.7, title="OPERATIONAL_POSTURE",
                  color_discrete_sequence=['#00ff41', '#ff3333', '#ffaa00'])
-    fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=250, showlegend=True, margin=dict(t=50, b=10, l=10, r=10))
+    fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=250)
     st.plotly_chart(fig2, use_container_width=True)
