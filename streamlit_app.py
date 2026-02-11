@@ -46,7 +46,7 @@ st.markdown("""
     .terminal-table td { border-bottom: 1px solid #222; padding: 6px 10px; background-color: #050505; }
     .terminal-table tr:hover td { background-color: #1a1a1a; color: #fff; }
     
-    .crit { color: #ff3333 !important; font-weight: bold; }
+    .crit { color: #ff3333 !important; font-weight: bold; text-shadow: 0 0 8px #ff0000; }
     .high { color: #ffaa00 !important; }
     .med { color: #00ff41 !important; }
 
@@ -57,6 +57,33 @@ st.markdown("""
     .stButton>button:hover { background-color: #00ff41; color: #000000; box-shadow: 0 0 15px #00ff41; }
 </style>
 """, unsafe_allow_html=True)
+
+# --- GLOBAL DATA DEFINITIONS (Top 10s) ---
+df_ransom = pd.DataFrame([
+    {"RANK": "01", "GROUP": "Qilin", "LEVEL": "CRITICAL", "VECTOR": "VPN Zero-Day"},
+    {"RANK": "02", "GROUP": "Akira", "LEVEL": "HIGH", "VECTOR": "ESXi Escape"},
+    {"RANK": "03", "GROUP": "LockBit", "LEVEL": "HIGH", "VECTOR": "Supply Chain"},
+    {"RANK": "04", "GROUP": "Play", "LEVEL": "MED", "VECTOR": "RDP Brute"},
+    {"RANK": "05", "GROUP": "BlackBasta", "LEVEL": "HIGH", "VECTOR": "AD Admin Takeover"},
+    {"RANK": "06", "GROUP": "Medusa", "LEVEL": "MED", "VECTOR": "Public Exploit"},
+    {"RANK": "07", "GROUP": "BianLian", "LEVEL": "HIGH", "VECTOR": "Data Exfiltration"},
+    {"RANK": "08", "GROUP": "Rhysida", "LEVEL": "MED", "VECTOR": "Phishing Infil"},
+    {"RANK": "09", "GROUP": "Phobos", "LEVEL": "LOW", "VECTOR": "Smallsync Scan"},
+    {"RANK": "10", "GROUP": "INC Ransom", "LEVEL": "HIGH", "VECTOR": "Citrix Bleed"}
+])
+
+df_malware = pd.DataFrame([
+    {"RANK": "01", "FAMILY": "LummaC2", "TYPE": "Stealer", "RISK": "9.8"},
+    {"RANK": "02", "FAMILY": "AsyncRAT", "TYPE": "RAT", "RISK": "8.5"},
+    {"RANK": "03", "FAMILY": "XWorm", "TYPE": "Loader", "RISK": "7.9"},
+    {"RANK": "04", "FAMILY": "RedLine", "TYPE": "Stealer", "RISK": "7.2"},
+    {"RANK": "05", "FAMILY": "AgentTesla", "TYPE": "Spyware", "RISK": "8.1"},
+    {"RANK": "06", "FAMILY": "Pikabot", "TYPE": "Loader", "RISK": "7.5"},
+    {"RANK": "07", "FAMILY": "Vidar", "TYPE": "Stealer", "RISK": "6.8"},
+    {"RANK": "08", "FAMILY": "Remcos", "TYPE": "RAT", "RISK": "8.2"},
+    {"RANK": "09", "FAMILY": "SnakeKey", "TYPE": "Exfiltrator", "RISK": "7.0"},
+    {"RANK": "10", "FAMILY": "Gootloader", "TYPE": "JS-Loader", "RISK": "6.5"}
+])
 
 # --- HELPER: RENDER TABLE ---
 def render_terminal_table(df):
@@ -80,7 +107,7 @@ def get_fallback_data():
 # --- SESSION STATE ---
 if "global_threats" not in st.session_state: st.session_state.global_threats = []
 
-# --- HEADER & METRICS ---
+# --- HEADER ---
 st.title("🔒 SecAI-Nexus")
 st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
 st.caption("Target: Worldwide • Protocol: Real-time Intelligence • Level: Classified")
@@ -94,8 +121,9 @@ m4.metric("AI CONFIDENCE", "94.2%", "↑")
 
 st.markdown("---")
 
-# --- LIVE FEED & CHARTS ---
-c_feed, c_viz = st.columns([5, 3])
+# --- DUAL CHART & STREAM SECTION ---
+c_feed, c_charts = st.columns([5, 4])
+
 with c_feed:
     st.subheader(">> LIVE VULNERABILITY STREAM (TOP 20)")
     if st.button("🔄 SYNC FEED"):
@@ -112,15 +140,44 @@ with c_feed:
         render_terminal_table(pd.DataFrame(st.session_state.global_threats))
     else: st.info("AWAITING SYNC...")
 
-with c_viz:
-    st.subheader(">> THREAT SEVERITY MIX")
+with c_charts:
+    st.subheader(">> ANALYTICS HUD")
+    
+    # Chart logic
+    viz_col1, viz_col2 = st.columns(2)
+    
+    # Logic for Chart 1: Live Feed Severity
     if st.session_state.global_threats:
-        df = pd.DataFrame(st.session_state.global_threats)
-        df['Severity'] = df['CVSS'].apply(lambda x: 'CRITICAL' if x>=9.0 else 'HIGH' if x>=7.0 else 'MED')
-        fig = px.pie(df['Severity'].value_counts().reset_index(), values='count', names='Severity', hole=0.6,
-                     color='Severity', color_discrete_map={'CRITICAL':'#ff3333', 'HIGH':'#ffaa00', 'MED':'#00ff41'})
-        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=350, margin=dict(t=20, b=0, l=0, r=0))
-        st.plotly_chart(fig, use_container_width=True)
+        df_feed = pd.DataFrame(st.session_state.global_threats)
+        df_feed['Sev'] = df_feed['CVSS'].apply(lambda x: 'CRITICAL' if x>=9.0 else 'HIGH' if x>=7.0 else 'MED')
+        feed_counts = df_feed['Sev'].value_counts().reset_index()
+        
+        # Logic for Chart 2: Landscape Risk (Ransomware + Malware levels)
+        # Mapping Malware Risk (numerical) to categories
+        mal_sev = df_malware['RISK'].apply(lambda x: 'CRITICAL' if float(x)>=9.0 else 'HIGH' if float(x)>=7.0 else 'MED')
+        total_landscape = pd.concat([df_ransom['LEVEL'], mal_sev])
+        land_counts = total_landscape.value_counts().reset_index()
+        land_counts.columns = ['Level', 'count']
+
+        chart_colors = {'CRITICAL':'#ff3333', 'HIGH':'#ffaa00', 'MED':'#00ff41', 'LOW':'#00cc66'}
+
+        with viz_col1:
+            fig1 = px.pie(feed_counts, values='count', names='Sev', hole=0.7, title="VULN_SEVERITY",
+                         color='Sev', color_discrete_map=chart_colors)
+            fig1.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=280, 
+                              showlegend=False, margin=dict(t=40, b=0, l=0, r=0))
+            fig1.update_traces(textposition='inside', textinfo='percent+label')
+            st.plotly_chart(fig1, use_container_width=True)
+
+        with viz_col2:
+            fig2 = px.pie(land_counts, values='count', names='Level', hole=0.7, title="LANDSCAPE_RISK",
+                         color='Level', color_discrete_map=chart_colors)
+            fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=280, 
+                              showlegend=False, margin=dict(t=40, b=0, l=0, r=0))
+            fig2.update_traces(textposition='inside', textinfo='percent+label')
+            st.plotly_chart(fig2, use_container_width=True)
+    else:
+        st.write("[HUD OFFLINE - SYNC REQUIRED]")
 
 st.markdown("---")
 
@@ -131,18 +188,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.markdown("### 💀 TOP 10 RANSOMWARE ACTORS")
-    render_terminal_table(pd.DataFrame([
-        {"RANK": "01", "GROUP": "Qilin", "LEVEL": "CRITICAL", "VECTOR": "VPN Zero-Day"},
-        {"RANK": "02", "GROUP": "Akira", "LEVEL": "HIGH", "VECTOR": "ESXi Escape"},
-        {"RANK": "03", "GROUP": "LockBit", "LEVEL": "HIGH", "VECTOR": "Supply Chain"},
-        {"RANK": "04", "GROUP": "Play", "LEVEL": "MED", "VECTOR": "RDP Brute"},
-        {"RANK": "05", "GROUP": "BlackBasta", "LEVEL": "HIGH", "VECTOR": "AD Admin Takeover"},
-        {"RANK": "06", "GROUP": "Medusa", "LEVEL": "MED", "VECTOR": "Public Exploit"},
-        {"RANK": "07", "GROUP": "BianLian", "LEVEL": "HIGH", "VECTOR": "Data Exfiltration"},
-        {"RANK": "08", "GROUP": "Rhysida", "LEVEL": "MED", "VECTOR": "Phishing Infil"},
-        {"RANK": "09", "GROUP": "Phobos", "LEVEL": "LOW", "VECTOR": "Smallsync Scan"},
-        {"RANK": "10", "GROUP": "INC Ransom", "LEVEL": "HIGH", "VECTOR": "Citrix Bleed"}
-    ]))
+    render_terminal_table(df_ransom)
 
     st.markdown("### 🎣 TOP 10 PHISHING VECTORS")
     render_terminal_table(pd.DataFrame([
@@ -160,18 +206,7 @@ with col1:
 
 with col2:
     st.markdown("### 🦠 TOP 10 MALWARE SIGNATURES")
-    render_terminal_table(pd.DataFrame([
-        {"RANK": "01", "FAMILY": "LummaC2", "TYPE": "Stealer", "RISK": "9.8"},
-        {"RANK": "02", "FAMILY": "AsyncRAT", "TYPE": "RAT", "RISK": "8.5"},
-        {"RANK": "03", "FAMILY": "XWorm", "TYPE": "Loader", "RISK": "7.9"},
-        {"RANK": "04", "FAMILY": "RedLine", "TYPE": "Stealer", "RISK": "7.2"},
-        {"RANK": "05", "FAMILY": "AgentTesla", "TYPE": "Spyware", "RISK": "8.1"},
-        {"RANK": "06", "FAMILY": "Pikabot", "TYPE": "Loader", "RISK": "7.5"},
-        {"RANK": "07", "FAMILY": "Vidar", "TYPE": "Stealer", "RISK": "6.8"},
-        {"RANK": "08", "FAMILY": "Remcos", "TYPE": "RAT", "RISK": "8.2"},
-        {"RANK": "09", "FAMILY": "SnakeKey", "TYPE": "Exfiltrator", "RISK": "7.0"},
-        {"RANK": "10", "FAMILY": "Gootloader", "TYPE": "JS-Loader", "RISK": "6.5"}
-    ]))
+    render_terminal_table(df_malware)
 
     st.markdown("### 🕵️ TOP 10 APT TRACKING")
     render_terminal_table(pd.DataFrame([
