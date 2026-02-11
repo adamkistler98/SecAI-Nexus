@@ -80,37 +80,41 @@ m3.metric("EVENTS", "91", "Feb'26")
 m4.metric("CONFID", "94.2%", "↑")
 st.markdown("---")
 
-# --- DATA GENERATORS ---
-def get_intel_summary():
-    intel = [
-        "Unauthorized lateral movement detected via SMB exploit",
-        "Credential harvesting via ADFS identity bypass kit",
-        "Critical RCE vulnerability in edge VPN gateway",
-        "Encrypted tunnel established to known C2 infrastructure",
-        "Privilege escalation identified in container runtime",
-        "Zero-day exploit observed targeting local SSL stack",
-        "Memory corruption identified in active kernel driver",
-        "Sensitive data exfiltration attempt via DNS tunneling"
-    ]
-    return random.choice(intel)
+# === LIVE CYBER THREAT MAPS (Placed First - 8 maps) ===
+st.subheader(">> LIVE CYBER THREAT MAPS")
+st.caption("Real-time global attack activity from trusted public sources")
+map_row1 = st.columns(4)
+map_row2 = st.columns(4)
 
-def render_terminal_table(df):
-    html = '<table class="terminal-table"><thead><tr>' + ''.join(f'<th>{col}</th>' for col in df.columns) + '</tr></thead><tbody>'
-    for _, row in df.iterrows():
-        html += '<tr>'
-        for col in df.columns:
-            val = str(row[col])
-            if any(k in val.upper() for k in ["CRITICAL", "9.", "SURGING", "IMMINENT"]):
-                html += f'<td class="crit">{val}</td>'
-            elif any(k in val.upper() for k in ["HIGH", "8.", "7."]):
-                html += f'<td class="high">{val}</td>'
-            else:
-                html += f'<td class="med">{val}</td>'
-        html += '</tr>'
-    html += '</tbody></table>'
-    st.markdown(html, unsafe_allow_html=True)
+with map_row1[0]:
+    st.markdown("**Bitdefender**")
+    st.components.v1.iframe("https://threatmap.bitdefender.com/", height=340, scrolling=True)
+with map_row1[1]:
+    st.markdown("**Fortinet**")
+    st.components.v1.iframe("https://threatmap.fortinet.com/", height=340, scrolling=True)
+with map_row1[2]:
+    st.markdown("**Kaspersky**")
+    st.components.v1.iframe("https://cybermap.kaspersky.com/", height=340, scrolling=True)
+with map_row1[3]:
+    st.markdown("**Check Point**")
+    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=340, scrolling=True)
 
-# --- LIVE CVE SECTION (Fixed - Real data, side-by-side) ---
+with map_row2[0]:
+    st.markdown("**AlienVault OTX**")
+    st.components.v1.iframe("https://otx.alienvault.com/pulse", height=340, scrolling=True)
+with map_row2[1]:
+    st.markdown("**IBM X-Force**")
+    st.components.v1.iframe("https://exchange.xforce.ibmcloud.com/", height=340, scrolling=True)
+with map_row2[2]:
+    st.markdown("**Norse Attack Map**")
+    st.components.v1.iframe("https://map.norsecorp.com/", height=340, scrolling=True)
+with map_row2[3]:
+    st.markdown("**Palo Alto Unit 42**")
+    st.components.v1.iframe("https://unit42.paloaltonetworks.com/threat-intelligence/", height=340, scrolling=True)
+
+st.markdown("---")
+
+# --- LIVE CVE VULNERABILITIES (Side-by-side) ---
 st.subheader(">> LIVE CVE VULNERABILITIES")
 col_sync, _ = st.columns([1, 6])
 with col_sync:
@@ -118,24 +122,17 @@ with col_sync:
 
 if "grc_stream" not in st.session_state or sync_trigger:
     try:
-        resp = requests.get("https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=20", timeout=12)
+        resp = requests.get("https://cve.circl.lu/api/last/20", timeout=10)
         resp.raise_for_status()
-        data = resp.json()
-        vulnerabilities = data.get("vulnerabilities", [])
+        raw = resp.json()
         
         clean = []
-        for item in vulnerabilities:
-            cve = item.get("cve", {})
-            cid = cve.get("id", "CVE-UNKNOWN")
-            
-            # Get CVSS score (v3.1 preferred, then v3.0, then fallback)
-            cvss = 0.0
-            if "cvssMetricV31" in cve.get("metrics", {}):
-                cvss = cve["metrics"]["cvssMetricV31"][0].get("cvssData", {}).get("baseScore", 0.0)
-            elif "cvssMetricV30" in cve.get("metrics", {}):
-                cvss = cve["metrics"]["cvssMetricV30"][0].get("cvssData", {}).get("baseScore", 0.0)
-            
-            summary = cve.get("descriptions", [{}])[0].get("value", "No summary available")
+        for i in raw:
+            cid = i.get('id', 'CVE-UNKNOWN')
+            cvss = float(i.get('cvss') or i.get('cvss3') or 0.0)
+            summary = i.get('summary', '').strip()
+            if cid in summary:
+                summary = summary.replace(cid, "").strip(" .:-")
             if len(summary) > 95:
                 summary = summary[:92] + "..."
             
@@ -150,7 +147,6 @@ if "grc_stream" not in st.session_state or sync_trigger:
             for _ in range(20)
         ]
 
-# Side-by-side tables (matching bottom style)
 col_left, col_right = st.columns(2)
 
 with col_left:
@@ -165,7 +161,7 @@ with col_right:
 
 st.markdown("---")
 
-# --- INFRASTRUCTURE RISK LANDSCAPE (LOCKED IN) ---
+# --- INFRASTRUCTURE RISK LANDSCAPE (unchanged) ---
 st.subheader(">> INFRASTRUCTURE RISK LANDSCAPE")
 t1, t2, t3, t4 = st.columns(4)
 def gen_landscape_data(category):
@@ -193,7 +189,7 @@ with t4:
 
 st.markdown("---")
 
-# --- ANALYTICS (BOTTOM SECTION) ---
+# --- RISK MATURITY HUD (unchanged) ---
 st.subheader(">> RISK_MATURITY_HUD")
 c_viz1, c_viz2 = st.columns(2)
 df_f = pd.DataFrame(st.session_state.grc_stream)
