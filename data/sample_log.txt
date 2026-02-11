@@ -1,0 +1,11 @@
+[2025-02-11 10:00] INFO Login successful for user admin
+[2025-02-11 10:01] ERROR Failed login attempt from 192.168.1.100
+[2025-02-11 10:02] WARNING Potential SQL injection detected in query
+[2025-02-11 10:03] INFO Normal user activity
+[2025-02-11 10:04] ERROR Failed login attempt from 192.168.1.101
+[2025-02-11 10:05] CRITICAL Possible brute force attack detected
+[2025-02-11 10:06] INFO File access granted
+[2025-02-11 10:07] ERROR Suspicious process execution: cmd.exe
+[2025-02-11 10:08] WARNING Multiple failed authentications
+[2025-02-11 10:09] INFO System backup completed
+[2025-02-11 10:10] ALERT Potential ransomware encryption pattern
