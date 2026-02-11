@@ -6,7 +6,7 @@ import plotly.express as px
 import sys
 import requests
 
-# Strong dark stealth theme
+# Clean stealthy dark theme
 st.markdown("""
 <style>
     .main, .stApp {background-color: #0a0a0a !important; color: #00cc66 !important;}
@@ -51,8 +51,8 @@ with st.sidebar:
                 st.error(f"Error: {e}")
 
     with st.expander("About"):
-        st.write("Single-dashboard real-time threat visibility tool.")
-        st.write("Live CVE feed + active ransomware, malware, phishing & APT intel.")
+        st.write("Single-dashboard real-time threat visibility platform.")
+        st.write("Live CVE feed + active ransomware, malware, phishing & APT tracking.")
 
 st.title("🔒 SecAI-Nexus")
 st.markdown("**GLOBAL THREAT VISIBILITY DASHBOARD**")
@@ -81,6 +81,7 @@ if st.button("🔄 Refresh Live CVE Data"):
         except Exception as e:
             st.error(f"API error: {e}")
 
+# CVE Charts & Table (only show when data exists)
 if st.session_state.global_threats:
     df = pd.DataFrame(st.session_state.global_threats)
     if 'cvss' in df.columns:
@@ -92,7 +93,7 @@ if st.session_state.global_threats:
     col_left, col_right = st.columns(2)
     with col_left:
         fig_sev = px.bar(df['severity'].value_counts().reset_index(), x='index', y='severity',
-                         title="CVE Severity", color='index',
+                         title="CVE Severity Distribution", color='index',
                          color_discrete_map={'Critical':'#ff3333','High':'#ffaa00','Medium':'#ffdd00','Low':'#00cc66'},
                          height=280)
         fig_sev.update_layout(paper_bgcolor="#0a0a0a", plot_bgcolor="#0a0a0a", font_color="#00cc66")
@@ -107,6 +108,8 @@ if st.session_state.global_threats:
     
     st.subheader("Latest CVEs")
     st.dataframe(df[['id', 'cvss', 'summary']].head(10), use_container_width=True, height=300)
+else:
+    st.info("Click 'Refresh Live CVE Data' to load current worldwide vulnerabilities.")
 
 # Ransomware
 st.subheader("Top 5 Active Ransomware Groups (Feb 2026)")
@@ -148,7 +151,7 @@ st.dataframe(pd.DataFrame([
     {"Group": "Salt Typhoon (China)", "Activity": "Rising", "Detail": "Telecom and ISP infrastructure attacks."}
 ]), use_container_width=True, height=220)
 
-# Threat Distribution Pie (dark background)
+# Threat Distribution Pie
 st.subheader("Current Threat Distribution")
 threat_data = pd.DataFrame({
     "Type": ["Ransomware", "Infostealer", "APT", "Phishing"],
