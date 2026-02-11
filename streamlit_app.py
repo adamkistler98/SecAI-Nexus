@@ -38,7 +38,7 @@ st.markdown("""
         border-collapse: collapse;
         color: #cccccc;
         font-family: 'Courier New', monospace;
-        font-size: 0.85rem;
+        font-size: 0.78rem;
         margin-bottom: 15px;
         border: 1px solid #222;
         background-color: #050505;
@@ -46,15 +46,14 @@ st.markdown("""
     .terminal-table th {
         border-bottom: 1px solid #00ff41;
         text-align: left;
-        padding: 8px 10px;
+        padding: 6px 8px;
         color: #00ff41;
         background-color: #111;
         text-transform: uppercase;
-        font-weight: bold;
     }
     .terminal-table td { 
         border-bottom: 1px solid #1a1a1a; 
-        padding: 8px 10px; 
+        padding: 6px 8px; 
         background-color: #050505; 
     }
    
@@ -126,15 +125,15 @@ if "grc_stream" not in st.session_state or sync_trigger:
         clean = []
         for i in raw:
             cid = i.get('id', 'CVE-UNKNOWN')
-            # Get real CVSS (handles both 'cvss' and 'cvss3' keys)
-            cvss = float(i.get('cvss') or i.get('cvss3') or 0.0)
+            # Robust CVSS extraction
+            cvss = float(i.get('cvss') or i.get('cvss3') or i.get('score') or 0.0)
             summary = i.get('summary', '').strip()
             
-            # Clean summary (remove redundant CVE ID if present)
+            # Clean redundant CVE ID from summary
             if cid in summary:
                 summary = summary.replace(cid, "").strip(" .:-")
             
-            # Truncate cleanly for table
+            # Truncate for table
             if len(summary) > 95:
                 summary = summary[:92] + "..."
             
@@ -144,18 +143,34 @@ if "grc_stream" not in st.session_state or sync_trigger:
         
     except Exception as e:
         st.error(f"API Sync Failed: {e}")
-        # Minimal fallback only if API fails completely
+        # Minimal fallback
         st.session_state.grc_stream = [
             {"ID": f"CVE-2026-{random.randint(1000,9999)}", "CVSS": round(random.uniform(6.0, 9.8), 1), "SUMMARY": get_intel_summary()}
             for _ in range(12)
         ]
 
-# Render the table
-render_terminal_table(pd.DataFrame(st.session_state.grc_stream))
+# Side-by-side charts + table (shrunk summary)
+col_chart1, col_chart2 = st.columns(2)
+
+with col_chart1:
+    st.subheader("Latest 10 CVEs")
+    df = pd.DataFrame(st.session_state.grc_stream[:10])
+    fig1 = px.bar(df, x='ID', y='CVSS', title="Top 10 CVSS Scores", height=280)
+    fig1.update_layout(paper_bgcolor="#050505", plot_bgcolor="#050505", font_color="#00ff41")
+    st.plotly_chart(fig1, use_container_width=True)
+    st.dataframe(df[['ID', 'CVSS', 'SUMMARY']], use_container_width=True, height=220)
+
+with col_chart2:
+    st.subheader("Next 10 CVEs")
+    df2 = pd.DataFrame(st.session_state.grc_stream[10:20])
+    fig2 = px.bar(df2, x='ID', y='CVSS', title="Next 10 CVSS Scores", height=280)
+    fig2.update_layout(paper_bgcolor="#050505", plot_bgcolor="#050505", font_color="#00ff41")
+    st.plotly_chart(fig2, use_container_width=True)
+    st.dataframe(df2[['ID', 'CVSS', 'SUMMARY']], use_container_width=True, height=220)
 
 st.markdown("---")
 
-# --- The rest of your original code remains unchanged ---
+# --- The rest of your original code (QUAD-TABLE + ANALYTICS) remains unchanged ---
 st.subheader(">> INFRASTRUCTURE RISK LANDSCAPE")
 t1, t2, t3, t4 = st.columns(4)
 def gen_landscape_data(category):
