@@ -7,7 +7,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import sys
 
-# Import custom modules
+# Ensure imports from src/python work
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(project_root, 'src', 'python'))
 
@@ -69,7 +69,6 @@ with tabs[0]:
     fig_pie = px.pie(threat_data, values="Count", names="Threat Type", title="Threat Distribution")
     st.plotly_chart(fig_pie, use_container_width=True)
     
-    # Trend & history charts (as before)
     dates = pd.date_range(end=pd.Timestamp.now(), periods=7).strftime("%Y-%m-%d")
     trend_data = pd.DataFrame({"Date": dates, "Threat Score": [45, 52, 48, 61, 55, 72, 68]})
     st.plotly_chart(px.line(trend_data, x="Date", y="Threat Score", title="Threat Score Trend (Simulated)"), use_container_width=True)
@@ -85,44 +84,58 @@ with tabs[1]:
     
     col_a, col_b = st.columns([3, 1])
     with col_a:
-        uploaded = st.file_uploader("Upload file for analysis", type=None)
+        uploaded_file = st.file_uploader("Upload file for analysis", type=None, key="ai_uploader")
     with col_b:
-        if st.button("Load Suspicious Sample"):
+        sample_choice = st.radio("Or use sample:", ["None", "Suspicious", "Benign"])
+
+    content = None
+    file_name = "uploaded_file"
+
+    if uploaded_file is not None:
+        content = uploaded_file.read()
+        file_name = uploaded_file.name
+    elif sample_choice == "Suspicious":
+        try:
             with open("data/sample_suspicious_file.txt", "rb") as f:
                 content = f.read()
-                uploaded = type('obj', (object,), {'name': 'sample_suspicious_file.txt', 'read': lambda: content})()
-        if st.button("Load Benign Sample"):
+            file_name = "sample_suspicious_file.txt"
+        except FileNotFoundError:
+            st.error("Sample file not found in data/ folder")
+    elif sample_choice == "Benign":
+        try:
             with open("data/sample_benign.txt", "rb") as f:
                 content = f.read()
-                uploaded = type('obj', (object,), {'name': 'sample_benign.txt', 'read': lambda: content})()
-    
-    if uploaded:
-        content = uploaded.read() if isinstance(uploaded, (bytes, bytearray)) else uploaded.read()
+            file_name = "sample_benign.txt"
+        except FileNotFoundError:
+            st.error("Sample file not found in data/ folder")
+
+    if content is not None and st.button("Analyze File", key="ai_analyze"):
         with st.spinner("Running ML classification..."):
             result = analyze_file(content)
         
-        # Gauge chart
+        # Gauge
         fig_gauge = go.Figure(go.Indicator(
             mode="gauge+number+delta",
             value=result["threat_score"],
             title={"text": "Threat Score"},
-            gauge={"axis": {"range": [0, 100]},
-                   "bar": {"color": "darkred" if result["threat_score"] > 60 else "forestgreen"},
-                   "steps": [{"range": [0, 40], "color": "lightgreen"},
-                             {"range": [40, 70], "color": "yellow"},
-                             {"range": [70, 100], "color": "red"}]}
+            gauge={
+                "axis": {"range": [0, 100]},
+                "bar": {"color": "darkred" if result["threat_score"] > 60 else "forestgreen"},
+                "steps": [
+                    {"range": [0, 40], "color": "lightgreen"},
+                    {"range": [40, 70], "color": "yellow"},
+                    {"range": [70, 100], "color": "red"}
+                ]
+            }
         ))
         st.plotly_chart(fig_gauge, use_container_width=True)
         
         col1, col2 = st.columns(2)
-        with col1:
-            st.metric("Prediction", result["prediction"], delta=None)
-        with col2:
-            st.metric("Confidence", f"{result['confidence']}%")
+        col1.metric("Prediction", result["prediction"])
+        col2.metric("Confidence", f"{result['confidence']}%")
         
-        st.subheader("Feature Breakdown")
-        features_df = pd.DataFrame([result["features"]])
-        st.dataframe(features_df, use_container_width=True)
+        st.subheader("Extracted Features")
+        st.dataframe(pd.DataFrame([result["features"]]), use_container_width=True)
         
         if result["threat_score"] > 60:
             st.error("🚨 HIGH THREAT DETECTED — Recommend immediate quarantine and deeper analysis")
@@ -130,78 +143,102 @@ with tabs[1]:
             st.success("✅ File appears benign")
         
         st.session_state.scan_history.append({
-            "Type": "AI", "File": uploaded.name, "Score": result["threat_score"], "Result": result["prediction"]
+            "Type": "AI",
+            "File": file_name,
+            "Score": result["threat_score"],
+            "Result": result["prediction"]
         })
 
 # ==================== C SCANNER ====================
 with tabs[2]:
     st.header("C Low-Level Scanner")
-    st.markdown("**Performance-critical file integrity & signature scanner** (simulates EDR/AV components)")
+    st.markdown("**Performance-critical file integrity & signature scanner**")
     
-    uploaded = st.file_uploader("Upload file for low-level scan", key="c_upload")
-    if st.button("Load Suspicious Sample (C Scan)"):
-        with open("data/sample_suspicious_file.txt", "rb") as f:
-            content = f.read()
-            uploaded = type('obj', (object,), {'name': 'suspicious_sample.txt', 'getvalue': lambda: content})()
-    
-    if uploaded and st.button("Run C Scanner"):
+    uploaded_file = st.file_uploader("Upload file for low-level scan", key="c_uploader")
+    sample_c = st.button("Load Suspicious Sample (C)")
+
+    if sample_c:
+        try:
+            with open("data/sample_suspicious_file.txt", "rb") as f:
+                content = f.read()
+            uploaded_file = type('FakeFile', (), {'name': 'sample_suspicious.txt', 'getvalue': lambda: content})()
+        except FileNotFoundError:
+            st.error("Sample file missing")
+
+    if uploaded_file is not None and st.button("Run C Scanner"):
         if not os.path.exists("bin/c_scanner"):
             st.error("C binary not found")
         else:
             with tempfile.NamedTemporaryFile(delete=False) as tmp:
-                tmp.write(uploaded.getvalue() if hasattr(uploaded, 'getvalue') else uploaded.read())
+                if hasattr(uploaded_file, 'getvalue'):
+                    tmp.write(uploaded_file.getvalue())
+                else:
+                    tmp.write(uploaded_file.read())
                 tmp_path = tmp.name
             
-            with st.spinner("Scanning file at low level..."):
-                result = subprocess.run(["bin/c_scanner", tmp_path], capture_output=True, text=True, timeout=15)
+            with st.spinner("Scanning..."):
+                proc = subprocess.run(["bin/c_scanner", tmp_path], capture_output=True, text=True, timeout=15)
             
-            st.subheader("Scan Report")
-            st.code(result.stdout)
-            
-            # Simple visual alert
-            if "ALERT" in result.stdout.upper():
+            st.subheader("C Scanner Report")
+            st.code(proc.stdout)
+            if "ALERT" in proc.stdout.upper() or "threat" in proc.stdout.lower():
                 st.error("🚨 Potential threat indicators found")
             else:
                 st.success("✅ Clean")
             
-            st.session_state.scan_history.append({"Type": "C", "File": uploaded.name, "Result": "Completed"})
+            st.session_state.scan_history.append({
+                "Type": "C",
+                "File": uploaded_file.name,
+                "Result": "Completed"
+            })
             os.unlink(tmp_path)
 
 # ==================== JAVA FORENSICS ====================
 with tabs[3]:
     st.header("Java Log Forensics")
-    st.markdown("**Rule-based IOC detection in logs** (SIEM-style correlation engine)")
+    st.markdown("**Rule-based IOC detection in logs** (SIEM-style)")
     
-    uploaded = st.file_uploader("Upload log file", type=["txt", "log"], key="java_upload")
-    if st.button("Load Sample Log"):
-        with open("data/sample_log.txt", "rb") as f:
-            content = f.read()
-            uploaded = type('obj', (object,), {'name': 'sample_log.txt', 'getvalue': lambda: content})()
-    
-    if uploaded and st.button("Analyze with Java"):
+    uploaded_file = st.file_uploader("Upload log file", type=["txt", "log"], key="java_uploader")
+    sample_log_btn = st.button("Load Sample Log")
+
+    if sample_log_btn:
+        try:
+            with open("data/sample_log.txt", "rb") as f:
+                content = f.read()
+            uploaded_file = type('FakeFile', (), {'name': 'sample_log.txt', 'getvalue': lambda: content})()
+        except FileNotFoundError:
+            st.error("Sample log missing")
+
+    if uploaded_file is not None and st.button("Analyze Log"):
         if not os.path.exists("bin/LogAnalyzer.class"):
             st.error("Java class not found")
         else:
             with tempfile.NamedTemporaryFile(delete=False, suffix=".txt") as tmp:
-                tmp.write(uploaded.getvalue() if hasattr(uploaded, 'getvalue') else uploaded.read())
+                if hasattr(uploaded_file, 'getvalue'):
+                    tmp.write(uploaded_file.getvalue())
+                else:
+                    tmp.write(uploaded_file.read())
                 tmp_path = tmp.name
             
-            with st.spinner("Parsing log for IOCs..."):
-                result = subprocess.run(["java", "-cp", "bin", "LogAnalyzer", tmp_path], capture_output=True, text=True, timeout=15)
+            with st.spinner("Parsing log..."):
+                proc = subprocess.run(["java", "-cp", "bin", "LogAnalyzer", tmp_path], capture_output=True, text=True, timeout=15)
             
-            st.subheader("Forensics Report")
-            st.code(result.stdout)
+            st.subheader("Java Forensics Report")
+            st.code(proc.stdout)
             
-            # Simple stats
-            suspicious_count = result.stdout.count("suspicious") + result.stdout.count("ALERT") + result.stdout.count("HIGH RISK")
-            st.metric("Suspicious Entries Detected", suspicious_count)
+            suspicious = proc.stdout.lower().count("suspicious") + proc.stdout.lower().count("high risk") + proc.stdout.lower().count("alert")
+            st.metric("Suspicious Entries", suspicious)
             
-            if suspicious_count > 3:
-                st.error("HIGH RISK: Potential security incident")
+            if suspicious > 3:
+                st.error("HIGH RISK — Potential incident detected")
             else:
                 st.success("Log appears normal")
             
-            st.session_state.scan_history.append({"Type": "Java", "File": uploaded.name, "Result": "Analyzed"})
+            st.session_state.scan_history.append({
+                "Type": "Java",
+                "File": uploaded_file.name,
+                "Result": "Analyzed"
+            })
             os.unlink(tmp_path)
 
 # ==================== GRC & SIMULATIONS ====================
@@ -217,22 +254,25 @@ with tabs[4]:
         data_exposure = st.slider("Data Exposure Risk", 0, 10, 2)
         third_party = st.slider("Third-Party Risk", 0, 10, 5)
     
-    risk_factors = {"unpatched": unpatched, "auth": weak_auth, "exposure": data_exposure, "third_party": third_party}
-    
-    if st.button("Calculate Risk Score & Generate Report"):
+    if st.button("Calculate Risk & Generate Report"):
+        risk_factors = {
+            "unpatched": unpatched,
+            "auth": weak_auth,
+            "exposure": data_exposure,
+            "third_party": third_party
+        }
         result = perform_grc_check(risk_factors)
+        
+        st.subheader("Risk Assessment Result")
         st.json(result)
         
-        # Risk heatmap
         risk_matrix = pd.DataFrame({
-            "Category": ["Unpatched", "Authentication", "Data Exposure", "Third-Party"],
-            "Risk": [unpatched*10, weak_auth*10, data_exposure*10, third_party*10]
+            "Category": ["Unpatched", "Auth", "Exposure", "3rd Party"],
+            "Score": [unpatched*10, weak_auth*10, data_exposure*10, third_party*10]
         })
-        fig = px.bar(risk_matrix, x="Category", y="Risk", title="Risk Heatmap", color="Risk",
-                     color_continuous_scale="RdYlGn_r")
+        fig = px.bar(risk_matrix, x="Category", y="Score", color="Score",
+                     title="Risk Factor Heatmap", color_continuous_scale="RdYlGn_r")
         st.plotly_chart(fig, use_container_width=True)
-        
-        st.success("Report ready for audit simulation")
 
 # Global export
 if st.button("Export Full Scan History"):
