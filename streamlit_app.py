@@ -111,7 +111,7 @@ def render_terminal_table(df):
     html += '</tbody></table>'
     st.markdown(html, unsafe_allow_html=True)
 
-# --- LIVE VULNERABILITY STREAM (FIXED SECTION) ---
+# --- LIVE VULNERABILITY STREAM (FIXED) ---
 st.subheader(">> LIVE CVE VULNERABILITIES")
 col_sync, _ = st.columns([1, 6])
 with col_sync:
@@ -125,17 +125,18 @@ if "grc_stream" not in st.session_state or sync_trigger:
         
         clean = []
         for i in raw:
-            cid = i.get('id', f"CVE-2026-{random.randint(1000,9999)}")
-            cvss = float(i.get('cvss') or 5.0)
+            cid = i.get('id', 'CVE-UNKNOWN')
+            # Get real CVSS (handles both 'cvss' and 'cvss3' keys)
+            cvss = float(i.get('cvss') or i.get('cvss3') or 0.0)
             summary = i.get('summary', '').strip()
             
             # Clean summary (remove redundant CVE ID if present)
             if cid in summary:
                 summary = summary.replace(cid, "").strip(" .:-")
             
-            # Truncate cleanly
-            if len(summary) > 85:
-                summary = summary[:82] + "..."
+            # Truncate cleanly for table
+            if len(summary) > 95:
+                summary = summary[:92] + "..."
             
             clean.append({"ID": cid, "CVSS": round(cvss, 1), "SUMMARY": summary})
         
@@ -143,9 +144,9 @@ if "grc_stream" not in st.session_state or sync_trigger:
         
     except Exception as e:
         st.error(f"API Sync Failed: {e}")
-        # Minimal fallback only if API completely fails
+        # Minimal fallback only if API fails completely
         st.session_state.grc_stream = [
-            {"ID": f"CVE-2026-{random.randint(1000,9999)}", "CVSS": 8.5, "SUMMARY": get_intel_summary()}
+            {"ID": f"CVE-2026-{random.randint(1000,9999)}", "CVSS": round(random.uniform(6.0, 9.8), 1), "SUMMARY": get_intel_summary()}
             for _ in range(12)
         ]
 
@@ -154,7 +155,7 @@ render_terminal_table(pd.DataFrame(st.session_state.grc_stream))
 
 st.markdown("---")
 
-# --- The rest of your code (QUAD-TABLE LANDSCAPE + ANALYTICS) remains unchanged ---
+# --- The rest of your original code remains unchanged ---
 st.subheader(">> INFRASTRUCTURE RISK LANDSCAPE")
 t1, t2, t3, t4 = st.columns(4)
 def gen_landscape_data(category):
