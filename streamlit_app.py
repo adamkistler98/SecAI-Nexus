@@ -80,41 +80,26 @@ m3.metric("EVENTS", "91", "Feb'26")
 m4.metric("CONFID", "94.2%", "↑")
 st.markdown("---")
 
-# === LIVE CYBER THREAT MAPS (Placed First - 8 maps) ===
+# === NEW: LIVE CYBER THREAT MAPS (Placed First) ===
 st.subheader(">> LIVE CYBER THREAT MAPS")
-st.caption("Real-time global attack activity from trusted public sources")
-map_row1 = st.columns(4)
-map_row2 = st.columns(4)
+st.caption("Real-time global attack activity from trusted sources")
+map_col1, map_col2 = st.columns(2)
 
-with map_row1[0]:
-    st.markdown("**Bitdefender**")
-    st.components.v1.iframe("https://threatmap.bitdefender.com/", height=340, scrolling=True)
-with map_row1[1]:
-    st.markdown("**Fortinet**")
-    st.components.v1.iframe("https://threatmap.fortinet.com/", height=340, scrolling=True)
-with map_row1[2]:
-    st.markdown("**Kaspersky**")
-    st.components.v1.iframe("https://cybermap.kaspersky.com/", height=340, scrolling=True)
-with map_row1[3]:
-    st.markdown("**Check Point**")
-    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=340, scrolling=True)
+with map_col1:
+    st.markdown("**Bitdefender Global Threat Map**")
+    st.components.v1.iframe("https://threatmap.bitdefender.com/", height=380, scrolling=True)
+    st.markdown("**Kaspersky Cybermap**")
+    st.components.v1.iframe("https://cybermap.kaspersky.com/", height=380, scrolling=True)
 
-with map_row2[0]:
-    st.markdown("**AlienVault OTX**")
-    st.components.v1.iframe("https://otx.alienvault.com/pulse", height=340, scrolling=True)
-with map_row2[1]:
-    st.markdown("**IBM X-Force**")
-    st.components.v1.iframe("https://exchange.xforce.ibmcloud.com/", height=340, scrolling=True)
-with map_row2[2]:
-    st.markdown("**Norse Attack Map**")
-    st.components.v1.iframe("https://map.norsecorp.com/", height=340, scrolling=True)
-with map_row2[3]:
-    st.markdown("**Palo Alto Unit 42**")
-    st.components.v1.iframe("https://unit42.paloaltonetworks.com/threat-intelligence/", height=340, scrolling=True)
+with map_col2:
+    st.markdown("**Fortinet Threat Map**")
+    st.components.v1.iframe("https://threatmap.fortinet.com/", height=380, scrolling=True)
+    st.markdown("**Check Point ThreatCloud**")
+    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=380, scrolling=True)
 
 st.markdown("---")
 
-# --- LIVE CVE VULNERABILITIES (Side-by-side) ---
+# --- LIVE CVE SECTION ---
 st.subheader(">> LIVE CVE VULNERABILITIES")
 col_sync, _ = st.columns([1, 6])
 with col_sync:
@@ -161,7 +146,7 @@ with col_right:
 
 st.markdown("---")
 
-# --- INFRASTRUCTURE RISK LANDSCAPE (unchanged) ---
+# --- INFRASTRUCTURE RISK LANDSCAPE (LOCKED) ---
 st.subheader(">> INFRASTRUCTURE RISK LANDSCAPE")
 t1, t2, t3, t4 = st.columns(4)
 def gen_landscape_data(category):
@@ -189,7 +174,7 @@ with t4:
 
 st.markdown("---")
 
-# --- RISK MATURITY HUD (unchanged) ---
+# --- RISK MATURITY HUD ---
 st.subheader(">> RISK_MATURITY_HUD")
 c_viz1, c_viz2 = st.columns(2)
 df_f = pd.DataFrame(st.session_state.grc_stream)
