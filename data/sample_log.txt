@@ -1,11 +1,8 @@
-[2025-02-11 10:00] INFO Login successful for user admin
-[2025-02-11 10:01] ERROR Failed login attempt from 192.168.1.100
-[2025-02-11 10:02] WARNING Potential SQL injection detected in query
-[2025-02-11 10:03] INFO Normal user activity
-[2025-02-11 10:04] ERROR Failed login attempt from 192.168.1.101
-[2025-02-11 10:05] CRITICAL Possible brute force attack detected
-[2025-02-11 10:06] INFO File access granted
-[2025-02-11 10:07] ERROR Suspicious process execution: cmd.exe
-[2025-02-11 10:08] WARNING Multiple failed authentications
-[2025-02-11 10:09] INFO System backup completed
-[2025-02-11 10:10] ALERT Potential ransomware encryption pattern
+[2026-02-10 08:15:22] INFO User login successful: admin@company.com from 10.0.0.45
+[2026-02-10 08:17:03] ERROR Failed login attempt from 185.220.101.XX - IP blocked
+[2026-02-10 08:20:45] WARNING SQL injection attempt detected in /login.php
+[2026-02-10 08:22:10] INFO Normal file access: /reports/Q4_financials.pdf
+[2026-02-10 08:25:33] CRITICAL Multiple failed logins from same IP - possible brute force
+[2026-02-10 08:30:01] ALERT Suspicious process: powershell.exe spawning from unusual location
+[2026-02-10 08:35:12] INFO System backup completed successfully
+[2026-02-10 08:40:55] ERROR Failed login attempt from 45.76.XX.XX
