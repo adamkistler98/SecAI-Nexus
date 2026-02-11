@@ -43,7 +43,7 @@ st.markdown("""
         background-color: #111;
         text-transform: uppercase;
     }
-    .terminal-table td { border-bottom: 1px solid #222; padding: 8px 10px; background-color: #050505; }
+    .terminal-table td { border-bottom: 1px solid #222; padding: 6px 10px; background-color: #050505; }
     .terminal-table tr:hover td { background-color: #1a1a1a; color: #fff; }
     
     .crit { color: #ff3333 !important; font-weight: bold; }
@@ -74,8 +74,17 @@ def render_terminal_table(df):
 
 # --- FALLBACK DATA GENERATOR ---
 def get_fallback_data():
-    mock_vulns = ["Kernel Heap Overflow", "MFA Bypass Pattern", "Auth Token Leak", "RCE in API Gateway", "Encrypted Tunnel Injection"]
-    return {"ID": f"CVE-2026-{random.randint(10000, 99999)}", "CVSS": random.choice([9.8, 8.5, 7.2, 5.5]), "SUMMARY": random.choice(mock_vulns)}
+    mock_vulns = [
+        "Kernel Heap Overflow", "MFA Bypass Pattern", "Auth Token Leak", 
+        "RCE in API Gateway", "Encrypted Tunnel Injection", "SQLi in Core Auth",
+        "Privilege Escalation", "Directory Traversal", "Broken X.509 Validation",
+        "SSRF via Webhook", "Memory Corruption", "Deserialization Flaw"
+    ]
+    return {
+        "ID": f"CVE-2026-{random.randint(10000, 99999)}", 
+        "CVSS": random.choice([9.8, 9.1, 8.5, 7.2, 5.5, 4.2]), 
+        "SUMMARY": random.choice(mock_vulns)
+    }
 
 # --- SESSION STATE ---
 if "global_threats" not in st.session_state: st.session_state.global_threats = []
@@ -95,19 +104,23 @@ m4.metric("AI CONFIDENCE", "94.2%", "↑")
 st.markdown("---")
 
 # --- LIVE FEED & CHARTS ---
-c_feed, c_viz = st.columns([4, 3])
+c_feed, c_viz = st.columns([5, 3])
 with c_feed:
-    st.subheader(">> LIVE VULNERABILITY STREAM")
+    st.subheader(">> LIVE VULNERABILITY STREAM (TOP 20)")
     if st.button("🔄 SYNC FEED"):
         try:
-            resp = requests.get("https://cve.circl.lu/api/last/10", timeout=3)
+            # Fetching 20 records instead of 10
+            resp = requests.get("https://cve.circl.lu/api/last/20", timeout=5)
             raw_data = resp.json() if resp.status_code == 200 else []
-            clean_data = [{"ID": item.get('id'), "CVSS": float(item.get('cvss')) if item.get('cvss') else random.choice([7.5, 5.0]), "SUMMARY": item.get('summary')[:60] + "..."} for item in raw_data if item.get('id')]
-            while len(clean_data) < 10: clean_data.append(get_fallback_data())
+            # Reduced summary length to 45 chars for cleaner look
+            clean_data = [{"ID": item.get('id'), "CVSS": float(item.get('cvss')) if item.get('cvss') else random.choice([7.5, 5.0]), "SUMMARY": (item.get('summary')[:42] + "...") if item.get('summary') else "No Data Provided"} for item in raw_data if item.get('id')]
+            while len(clean_data) < 20: clean_data.append(get_fallback_data())
             st.session_state.global_threats = clean_data
-        except: st.session_state.global_threats = [get_fallback_data() for _ in range(10)]
+        except: 
+            st.session_state.global_threats = [get_fallback_data() for _ in range(20)]
 
     if st.session_state.global_threats:
+        # Ensuring we display all 20
         render_terminal_table(pd.DataFrame(st.session_state.global_threats))
     else: st.info("AWAITING SYNC...")
 
@@ -118,7 +131,7 @@ with c_viz:
         df['Severity'] = df['CVSS'].apply(lambda x: 'CRITICAL' if x>=9.0 else 'HIGH' if x>=7.0 else 'MED')
         fig = px.pie(df['Severity'].value_counts().reset_index(), values='count', names='Severity', hole=0.6,
                      color='Severity', color_discrete_map={'CRITICAL':'#ff3333', 'HIGH':'#ffaa00', 'MED':'#00ff41'})
-        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=280, margin=dict(t=20, b=0, l=0, r=0))
+        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=350, margin=dict(t=20, b=0, l=0, r=0))
         st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
