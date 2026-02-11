@@ -1,8 +1,3 @@
-Here is the updated `streamlit_app.py` file with added debug statements and defensive checks to help identify why the tabs appear blank on Streamlit Community Cloud.
-
-Copy-paste this entire content and replace your existing `streamlit_app.py`:
-
-```python
 import streamlit as st
 import subprocess
 import tempfile
@@ -26,7 +21,7 @@ except ImportError as e:
     st.stop()
 
 # Debug banner at the very top
-st.markdown("**DEBUG MODE ACTIVE – This helps diagnose deployment issues**")
+st.markdown("**DEBUG MODE ACTIVE - This helps diagnose deployment issues**")
 
 # Show basic environment info
 st.write("Python version:", sys.version)
@@ -43,7 +38,7 @@ if "scan_history" not in st.session_state:
 with st.sidebar:
     st.header("Tools & Debug")
     
-    if st.button("🔨 Try to Build C & Java (make)"):
+    if st.button("Try to Build C & Java (make)"):
         with st.spinner("Running make..."):
             try:
                 result = subprocess.run(
@@ -63,16 +58,19 @@ with st.sidebar:
                 st.error(f"Could not run make: {build_err}")
                 st.error(traceback.format_exc())
 
-    st.info("For full functionality on Streamlit Cloud:\n"
-            "- packages.txt must contain: build-essential + openjdk-17-jdk\n"
-            "- make must succeed during or after build")
+    st.info(
+        "For full functionality on Streamlit Cloud:\n"
+        "- packages.txt must contain: build-essential and openjdk-17-jdk\n"
+        "- make must succeed during or after build\n"
+        "After pushing changes, reboot the app at https://share.streamlit.io"
+    )
 
     with st.expander("About this Project"):
         st.write("Portfolio project demonstrating Python, C, and Java in a cybersecurity context.")
         st.write("AI threat classification, low-level file scanning, log forensics, GRC risk scoring.")
 
 # Main title
-st.title("🔒 SecAI-Nexus v2.0")
+st.title("SecAI-Nexus v2.0")
 st.markdown("**AI-Powered Cybersecurity Research & Analysis Platform**")
 
 # Tabs
@@ -91,7 +89,7 @@ with tab1:
     col2.metric("AI Accuracy (Demo)", "92%", "-")
     col3.metric("GRC Compliance", "89/100", "↑4")
     
-    if st.button("🔄 Simulate New Threat Feed"):
+    if st.button("Simulate New Threat Feed"):
         st.success("New IOCs ingested: 3 malware hashes, 2 suspicious domains")
     
     if st.session_state.scan_history:
@@ -109,9 +107,9 @@ with tab2:
                 result = analyze_file(content)
             st.json(result)
             if result["threat_score"] > 60:
-                st.error("🚨 HIGH THREAT")
+                st.error("HIGH THREAT")
             else:
-                st.success("✅ Benign")
+                st.success("Benign")
             st.session_state.scan_history.append({
                 "Type": "AI",
                 "File": uploaded.name,
@@ -221,24 +219,3 @@ if st.button("Export Scan History"):
         )
     else:
         st.info("No scans recorded yet.")
-```
-
-### What this version adds / changes:
-
-- Early debug messages (Python version, cwd, binary existence)
-- Try-except around critical imports
-- Try-except around every major operation (AI, C, Java, GRC)
-- Detailed error display when things fail
-- Build button now shows stdout/stderr from `make`
-- Clear messages when binaries are missing
-
-After replacing the file:
-
-1. Commit & push to GitLab
-2. Go to https://share.streamlit.io → find your app → Reboot (or force redeploy)
-3. Watch the build logs carefully — especially for any `apt-get`, `make`, or Python errors
-4. Open the app again and look at what debug messages appear
-
-Share what you see now (debug output + any errors) — that will tell us exactly where it's breaking.
-
-Good luck!
