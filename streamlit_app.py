@@ -1,23 +1,21 @@
 import streamlit as st
 import subprocess
-import tempfile
 import os
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
 import sys
 import requests
 
-# Stealthy dark theme - clean & readable
+# Strong dark stealth theme
 st.markdown("""
 <style>
-    .main {background-color: #0a0a0a; color: #00cc66;}
-    .stApp {background-color: #0a0a0a;}
-    h1, h2, h3, h4 {color: #00cc66; font-family: monospace;}
-    .stMetric {background-color: #1a1a1a; border-left: 4px solid #00cc66;}
-    .stButton>button {background-color: #00cc66; color: #000000;}
-    .stDataFrame {background-color: #1a1a1a !important;}
-    .stDataFrame td, .stDataFrame th {color: #00cc66 !important; background-color: #1a1a1a !important;}
+    .main, .stApp {background-color: #0a0a0a !important; color: #00cc66 !important;}
+    h1, h2, h3, h4 {color: #00cc66 !important; font-family: monospace;}
+    .stMetric {background-color: #1a1a1a !important; border-left: 4px solid #00cc66 !important;}
+    .stButton>button {background-color: #00cc66; color: #000000; font-weight: bold;}
+    .stDataFrame, .stTable {background-color: #1a1a1a !important;}
+    .stDataFrame td, .stDataFrame th, .stTable td, .stTable th {color: #00cc66 !important; background-color: #1a1a1a !important;}
+    .stPlotlyChart {background-color: #0a0a0a !important;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -53,14 +51,14 @@ with st.sidebar:
                 st.error(f"Error: {e}")
 
     with st.expander("About"):
-        st.write("Single-dashboard real-time threat visibility platform.")
-        st.write("Live CVE feed + active ransomware, malware, phishing & APT tracking.")
+        st.write("Single-dashboard real-time threat visibility tool.")
+        st.write("Live CVE feed + active ransomware, malware, phishing & APT intel.")
 
 st.title("🔒 SecAI-Nexus")
 st.markdown("**GLOBAL THREAT VISIBILITY DASHBOARD**")
-st.caption("Real-time intelligence for security researchers • February 2026")
+st.caption("Real-time intelligence • February 2026")
 
-# Top metrics
+# Metrics
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Active Threats", "24", "+7")
 col2.metric("Critical CVEs (24h)", "6", "+2")
@@ -70,7 +68,7 @@ col4.metric("AI Detection", "93%", "↑")
 # Live CVE Feed
 st.subheader("🌍 Live CVE Feed (Worldwide)")
 if st.button("🔄 Refresh Live CVE Data"):
-    with st.spinner("Fetching latest CVEs from CIRCL..."):
+    with st.spinner("Fetching latest CVEs..."):
         try:
             resp = requests.get("https://cve.circl.lu/api/last/20", timeout=15)
             resp.raise_for_status()
@@ -85,7 +83,6 @@ if st.button("🔄 Refresh Live CVE Data"):
 
 if st.session_state.global_threats:
     df = pd.DataFrame(st.session_state.global_threats)
-    # Safe cvss handling
     if 'cvss' in df.columns:
         df['cvss'] = pd.to_numeric(df['cvss'], errors='coerce').fillna(0)
     else:
@@ -95,10 +92,10 @@ if st.session_state.global_threats:
     col_left, col_right = st.columns(2)
     with col_left:
         fig_sev = px.bar(df['severity'].value_counts().reset_index(), x='index', y='severity',
-                         title="CVE Severity Distribution", color='index',
+                         title="CVE Severity", color='index',
                          color_discrete_map={'Critical':'#ff3333','High':'#ffaa00','Medium':'#ffdd00','Low':'#00cc66'},
                          height=280)
-        fig_sev.update_layout(paper_bgcolor="#0a0a0a", plot_bgcolor="#0a0a0a")
+        fig_sev.update_layout(paper_bgcolor="#0a0a0a", plot_bgcolor="#0a0a0a", font_color="#00cc66")
         st.plotly_chart(fig_sev, use_container_width=True)
     
     with col_right:
@@ -113,49 +110,45 @@ if st.session_state.global_threats:
 
 # Ransomware
 st.subheader("Top 5 Active Ransomware Groups (Feb 2026)")
-ransom_data = pd.DataFrame([
+st.dataframe(pd.DataFrame([
     {"Group": "Qilin", "Activity": "Very High", "Detail": "Dominant RaaS in healthcare/government. Double extortion standard."},
     {"Group": "Akira", "Activity": "High", "Detail": "Strong Linux/VMware encryption. Rapid victim publication."},
     {"Group": "LockBit", "Activity": "High", "Detail": "Resilient after disruptions. Aggressive recruitment."},
     {"Group": "Play", "Activity": "Medium-High", "Detail": "Retail & manufacturing targets. Heavy data exfiltration."},
     {"Group": "INC", "Activity": "Medium", "Detail": "Emerging group targeting legal/professional services."}
-])
-st.dataframe(ransom_data, use_container_width=True, height=220)
+]), use_container_width=True, height=220)
 
 # Malware
 st.subheader("Top 5 Active Malware Families")
-malware_data = pd.DataFrame([
+st.dataframe(pd.DataFrame([
     {"Family": "Lumma Stealer", "Type": "Infostealer", "Detail": "Leading credential and crypto stealer in 2026 campaigns."},
     {"Family": "AsyncRAT", "Type": "RAT", "Detail": "Widely used for initial access and persistence."},
     {"Family": "XWorm", "Type": "Loader/RAT", "Detail": "Multi-platform with strong evasion."},
     {"Family": "RedLine", "Type": "Stealer", "Detail": "Persistent stealer sold on underground markets."},
     {"Family": "Atomic Stealer", "Type": "macOS Stealer", "Detail": "Growing threat targeting macOS credentials and wallets."}
-])
-st.dataframe(malware_data, use_container_width=True, height=220)
+]), use_container_width=True, height=220)
 
 # Phishing
 st.subheader("Top 5 Active Phishing Threats")
-phishing_data = pd.DataFrame([
+st.dataframe(pd.DataFrame([
     {"Campaign": "Business Email Compromise (BEC)", "Target": "Finance & Executives", "Detail": "Highly targeted attacks impersonating CEOs and vendors."},
     {"Campaign": "Microsoft 365 Phishing", "Target": "Corporate users", "Detail": "Fake login pages and MFA bypass attempts surging."},
     {"Campaign": "Invoice & Payment Fraud", "Target": "Accounting teams", "Detail": "Fake invoices with urgent payment requests."},
     {"Campaign": "Credential Harvesting via SMS", "Target": "General public", "Detail": "Smishing campaigns combined with malicious links."},
     {"Campaign": "Supply Chain Phishing", "Target": "IT & Vendors", "Detail": "Compromised vendor emails used to attack customers."}
-])
-st.dataframe(phishing_data, use_container_width=True, height=220)
+]), use_container_width=True, height=220)
 
 # APT
 st.subheader("Top 5 Notable APT Groups")
-apt_data = pd.DataFrame([
+st.dataframe(pd.DataFrame([
     {"Group": "Lazarus (North Korea)", "Activity": "High", "Detail": "Financial theft and espionage operations."},
     {"Group": "Volt Typhoon (China)", "Activity": "High", "Detail": "Critical infrastructure pre-positioning."},
     {"Group": "Mustang Panda (China)", "Activity": "Medium-High", "Detail": "Espionage against NGOs and governments."},
     {"Group": "APT29 (Russia)", "Activity": "Medium", "Detail": "Cloud compromise and diplomatic targeting."},
     {"Group": "Salt Typhoon (China)", "Activity": "Rising", "Detail": "Telecom and ISP infrastructure attacks."}
-])
-st.dataframe(apt_data, use_container_width=True, height=220)
+]), use_container_width=True, height=220)
 
-# Threat Distribution Pie
+# Threat Distribution Pie (dark background)
 st.subheader("Current Threat Distribution")
 threat_data = pd.DataFrame({
     "Type": ["Ransomware", "Infostealer", "APT", "Phishing"],
