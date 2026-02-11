@@ -1,0 +1,4 @@
+{
+  "threat_threshold": 60,
+  "suspicious_keywords": ["exec", "shell", "malware", "virus", "trojan", "exploit", "failed login", "attack", "injection", "brute"]
+}
