@@ -39,13 +39,8 @@ Bash# Clone the repository
 git clone https://gitlab.com/your-username/SecAI-Nexus.git
 cd SecAI-Nexus
 
-# Install Python dependencies
 pip install -r requirements.txt
-
-# Compile C and Java components
 make
-
-# Launch the application
 streamlit run streamlit_app.py
 Open http://localhost:8501 in your browser.
 Docker alternative (includes gcc and JDK):
