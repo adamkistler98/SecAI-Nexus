@@ -1,3 +1,9 @@
-This is a completely normal document containing standard business text.
-No executable code, no suspicious keywords, and nothing malicious.
-Just regular content for testing clean file analysis.
+Quarterly Security Compliance Report - Q4 2025
+Prepared by: Security Operations Team
+
+All systems patched as of January 2026.
+Multi-factor authentication enforced across 98% of accounts.
+No unauthorized access detected in the past 90 days.
+Backup verification completed successfully on 2026-02-01.
+
+Confidential - Internal Use Only
