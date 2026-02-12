@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # --- STEALTH CONFIGURATION ---
 st.set_page_config(
@@ -67,7 +67,7 @@ st.markdown("""
     }
     .stButton>button:hover { border-color: #00ff41; box-shadow: 0 0 8px #00ff41; }
     
-    /* Specific styling for Download Button to match stealth theme */
+    /* Specific styling for Download Button */
     div[data-testid="stDownloadButton"]>button {
         background-color: #111 !important;
         color: #00ff41 !important;
@@ -75,6 +75,28 @@ st.markdown("""
         font-family: 'Courier New', monospace !important;
         text-transform: uppercase;
     }
+
+    /* Live Log Stream Styling */
+    .log-container {
+        height: 300px;
+        overflow-y: scroll;
+        background-color: #000;
+        border: 1px solid #333;
+        padding: 10px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.75rem;
+    }
+    .log-entry {
+        border-bottom: 1px solid #111;
+        padding: 2px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+    .log-time { color: #888; margin-right: 10px; }
+    .log-src { color: #00ff41; }
+    .log-dst { color: #ccc; }
+    .log-alert { color: #ff3333; font-weight: bold; }
+    
 </style>
 """, unsafe_allow_html=True)
 
@@ -89,7 +111,6 @@ def render_terminal_table(df):
         html += '<tr>'
         for col in df.columns:
             val = str(row[col])
-            # Logic to color text based on content
             if any(k in val.upper() for k in ["CRITICAL", "9.", "ACTIVE_EXPLOIT", "BREACH"]):
                 html += f'<td class="crit">{val}</td>'
             elif any(k in val.upper() for k in ["HIGH", "8.", "7.", "ELEVATED"]):
@@ -120,9 +141,9 @@ with map_row1[1]:
     st.markdown("**Sicherheitstacho (DT)**")
     st.components.v1.iframe("https://www.sicherheitstacho.eu/?lang=en", height=480, scrolling=True)
 with map_row1[2]:
-    # REPLACED: CheckPoint -> LookingGlass (Wireframe/Cyber aesthetic)
-    st.markdown("**LookingGlass Cyber**")
-    st.components.v1.iframe("https://map.lookingglasscyber.com/", height=480, scrolling=True)
+    # REPLACED: LookingGlass -> PewPew (High visual impact, reliable)
+    st.markdown("**PewPew Attack Sim**")
+    st.components.v1.iframe("https://pewpew.live/maps/pewpew.html", height=480, scrolling=True)
 with map_row1[3]:
     st.markdown("**Radware Live Threat Map**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
@@ -162,7 +183,6 @@ def generate_realistic_cves():
             "CVSS": score,
             "SUMMARY": f"{vuln_type} in {vendor} Core causing denial of service or data leak."
         })
-    # Sort by severity
     return sorted(cves, key=lambda x: x['CVSS'], reverse=True)
 
 if "grc_stream" not in st.session_state:
@@ -174,22 +194,20 @@ with col_sync:
         st.rerun()
 
 with col_download:
-    # CSV GENERATOR
+    # UPDATED: Download Button Label
     csv_data = pd.DataFrame(st.session_state.grc_stream).to_csv(index=False).encode('utf-8')
     st.download_button(
-        label="⬇ DOWNLOAD INTEL REPORT (.CSV)",
+        label="⬇ DOWNLOAD VULNERABILITY REPORT (.CSV)",
         data=csv_data,
-        file_name=f"intel_report_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
+        file_name=f"vuln_report_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
         mime="text/csv"
     )
 
 col_left, col_right = st.columns(2)
-
 with col_left:
     st.subheader("CRITICAL VULNERABILITIES (Top 10)")
     df1 = pd.DataFrame(st.session_state.grc_stream[:10])
     render_terminal_table(df1[['ID', 'CVSS', 'SUMMARY']])
-
 with col_right:
     st.subheader("ELEVATED VULNERABILITIES (Next 10)")
     df2 = pd.DataFrame(st.session_state.grc_stream[10:20])
@@ -204,55 +222,27 @@ t1, t2, t3, t4 = st.columns(4)
 def gen_landscape_data(category):
     risks = ["CRITICAL", "HIGH", "MEDIUM"]
     statuses = ["ACTIVE_EXPLOIT", "PATCHING", "MONITORING", "CONTAINED"]
-    
     data = []
-    for i in range(10): # Top 10 per category
+    for i in range(10): 
         risk = random.choice(risks)
-        # Weight statuses based on risk
-        if risk == "CRITICAL":
-            status = "ACTIVE_EXPLOIT" 
-        else:
-            status = random.choice(statuses)
-            
+        status = "ACTIVE_EXPLOIT" if risk == "CRITICAL" else random.choice(statuses)
+        
         if category == "RANSOMWARE":
             groups = ["BlackCat", "LockBit 3.0", "Akira", "Clop", "Royal"]
             sectors = ["Healthcare", "Finance", "Mfg", "Retail"]
-            data.append({
-                "GROUP": random.choice(groups),
-                "SECTOR": random.choice(sectors),
-                "RISK": risk,
-                "STATUS": status
-            })
-            
+            data.append({"GROUP": random.choice(groups), "SECTOR": random.choice(sectors), "RISK": risk, "STATUS": status})
         elif category == "MALWARE":
             families = ["Emotet", "Cobalt Strike", "Qakbot", "AgentTesla"]
             vectors = ["Email", "Drive-by", "USB", "RDP"]
-            data.append({
-                "FAMILY": random.choice(families),
-                "VECTOR": random.choice(vectors),
-                "RISK": risk,
-                "STATUS": status
-            })
-            
+            data.append({"FAMILY": random.choice(families), "VECTOR": random.choice(vectors), "RISK": risk, "STATUS": status})
         elif category == "PHISHING":
             types = ["Spear Phishing", "Whaling", "Clone Phishing", "Smishing"]
             targets = ["Execs", "HR Dept", "IT Admins", "Sales"]
-            data.append({
-                "TYPE": random.choice(types),
-                "TARGET": random.choice(targets),
-                "RISK": risk,
-                "STATUS": status
-            })
-            
+            data.append({"TYPE": random.choice(types), "TARGET": random.choice(targets), "RISK": risk, "STATUS": status})
         elif category == "APT":
             actors = ["APT29 (RU)", "APT41 (CN)", "Lazarus (NK)", "Charming Kitten (IR)"]
             methods = ["Supply Chain", "Zero-Day", "Social Eng.", "Valid Accts"]
-            data.append({
-                "ACTOR": random.choice(actors),
-                "METHOD": random.choice(methods),
-                "RISK": risk,
-                "STATUS": status
-            })
+            data.append({"ACTOR": random.choice(actors), "METHOD": random.choice(methods), "RISK": risk, "STATUS": status})
 
     return pd.DataFrame(data)
 
@@ -271,19 +261,43 @@ with t4:
 
 st.markdown("---")
 
-# --- RISK MATURITY HUD ---
-st.subheader(">> RISK_MATURITY_HUD")
-c_viz1, c_viz2 = st.columns(2)
-df_f = pd.DataFrame(st.session_state.grc_stream)
-df_f['Sev'] = df_f['CVSS'].apply(lambda x: 'CRITICAL' if x>=9.0 else 'HIGH' if x>=7.0 else 'MED')
-with c_viz1:
-    fig1 = px.pie(df_f['Sev'].value_counts().reset_index(), values='count', names='Sev', hole=0.7, title="RISK_DISTRIBUTION",
-                  color='Sev', color_discrete_map={'CRITICAL':'#ff3333', 'HIGH':'#ffaa00', 'MED':'#00ff41'})
-    fig1.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=250, showlegend=True, margin=dict(t=50, b=10, l=10, r=10))
-    st.plotly_chart(fig1, use_container_width=True)
-with c_viz2:
-    status_mix = pd.DataFrame({"Category": ["COMPLIANT", "NON-COMPLIANT", "UNDER_REVIEW"], "Count": [72, 18, 10]})
-    fig2 = px.pie(status_mix, values='Count', names='Category', hole=0.7, title="OPERATIONAL_POSTURE",
-                  color_discrete_sequence=['#00ff41', '#ff3333', '#ffaa00'])
-    fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=250, showlegend=True, margin=dict(t=50, b=10, l=10, r=10))
-    st.plotly_chart(fig2, use_container_width=True)
+# --- LIVE INTRUSION DETECTION STREAM (REPLACES PIE CHARTS) ---
+st.subheader(">> LIVE INTRUSION DETECTION STREAM")
+
+# Generate Fake Logs
+def generate_logs(n=20):
+    logs = []
+    protocols = ["TCP", "UDP", "ICMP", "HTTP/S", "SSH", "FTP"]
+    alerts = ["SQL_INJECTION", "XSS_ATTEMPT", "BRUTE_FORCE_ROOT", "MALWARE_C2_BEACON", "PORT_SCAN_DETECTED"]
+    
+    for _ in range(n):
+        now = datetime.now()
+        ts = (now - timedelta(seconds=random.randint(1, 300))).strftime("%H:%M:%S.%f")[:-3]
+        src = f"{random.randint(1,255)}.{random.randint(0,255)}.{random.randint(0,255)}.{random.randint(0,255)}"
+        dst = f"10.{random.randint(0,255)}.{random.randint(0,255)}.{random.randint(0,255)}"
+        proto = random.choice(protocols)
+        alert = random.choice(alerts)
+        
+        # Color coding logic inline for HTML
+        color = "#ff3333" if "ROOT" in alert or "C2" in alert else "#ffaa00"
+        
+        log_html = f"""
+        <div class="log-entry">
+            <span class="log-time">[{ts}]</span>
+            <span>SRC: <span class="log-src">{src}</span></span>
+            <span>DST: <span class="log-dst">{dst}</span></span>
+            <span>PROTO: {proto}</span>
+            <span style="color: {color}; font-weight: bold;">>>> ALERT: {alert}</span>
+        </div>
+        """
+        logs.append(log_html)
+    return "".join(logs)
+
+# Render logs in a scrolling container
+log_content = generate_logs(30)
+st.markdown(f"""
+<div class="log-container">
+    {log_content}
+    <div style="color: #00ff41; margin-top: 10px;">_ SYSTEM MONITORING ACTIVE... LISTENING ON INTERFACE ETH0...</div>
+</div>
+""", unsafe_allow_html=True)
