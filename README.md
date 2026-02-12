@@ -1,48 +1,93 @@
-# SecAI-Nexus v2.0
+🔒 SecAI-Nexus // GRC
+Global Threat Visibility & Intelligence Dashboard
+Status: OPERATIONAL | Encryption: AES-256 | Protocol: REAL-TIME
 
-**AI-Powered Cybersecurity Research and Analysis Platform**
+📡 Overview
+SecAI-Nexus GRC is a unified situational awareness console designed for Security Operations Centers (SOC) and Governance, Risk, and Compliance (GRC) teams.
 
-SecAI-Nexus is a modular, multi-language cybersecurity toolkit designed to demonstrate practical skills in threat detection, digital forensics, low-level system analysis, and Governance, Risk, and Compliance (GRC) assessment. It integrates artificial intelligence, compiled native code, and interactive visualization into a single, user-friendly Streamlit dashboard.
+It aggregates real-time cyber threat telemetry from multiple Tier-1 intelligence sources into a single, high-contrast "stealth" interface. Unlike static dashboards, SecAI-Nexus pulls live data from global sensors, vulnerability databases, and threat intelligence feeds to provide an instant pulse on the global cyber battlefield.
 
-This project serves as a portfolio showcase for roles such as **Security Researcher**, **Cybersecurity Analyst**, **Threat Intelligence Analyst**, or **GRC Specialist**, highlighting cross-language development, secure coding practices, and domain-specific cybersecurity techniques.
+👁️ Key Capabilities
+1. Multi-Vector Threat Maps
+A synchronized 4x2 grid visualizing live attack vectors across the globe.
 
-## Key Features
+Sources: Bitdefender, Deutsche Telekom (Sicherheitstacho), Check Point ThreatCloud, Radware, Fortinet, Kaspersky, SonicWall, and Threatbutt.
 
-- **Interactive Dashboard** — Real-time metrics, threat distribution charts (Plotly), simulated threat feed, and scan history with exportable CSV reports.
-- **AI Threat Analyzer** (Python + scikit-learn) — Random Forest classification of files based on engineered features: file size, Shannon entropy, and suspicious keyword density. Simulates static malware analysis.
-- **C Low-Level Scanner** — High-performance file scanner (compiled binary) performing size checks, signature string detection, and simulated hash reporting. Demonstrates low-level file I/O and potential EDR/AV component design.
-- **Java Log Forensics Analyzer** — Rule-based log parser (compiled Java class) detecting indicators of compromise such as failed logins, brute-force attempts, injection patterns, and ransomware signals. Mimics SIEM correlation rules.
-- **GRC Risk Assessment Tool** — Interactive slider-based risk scoring with qualitative levels (Low/Medium/High/Critical) and policy recommendations.
-- **Cross-Language Integration** — Python orchestrates subprocess calls to compiled C and Java binaries, showcasing heterogeneous system design.
+Utility: Instant visualization of DDoS campaigns, malware propagation, and botnet activity.
 
-## Architecture Overview
+2. Internet Noise Intelligence (GreyNoise)
+A dedicated, large-scale viewport for the GreyNoise Visualizer.
 
-    A[Streamlit Dashboard<br>(Python Frontend)] --> B[AI/ML Engine<br>(scikit-learn RandomForest)]
-    A --> C[C Low-Level Scanner<br>(gcc compiled binary)]
-    A --> D[Java Log Forensics<br>(javac compiled class)]
-    A --> E[GRC Risk Calculator<br>(Pure Python)]
-    B --> F[Feature Extraction Utils<br>(Entropy, Keyword Scan)]
-    C & D --> G[Subprocess Execution Layer]
-    F --> H[Sample Datasets & Config]
+Function: A search engine and intelligence tool that analyzes "internet background noise." It identifies mass-scanners, bots, and benign crawlers (like Shodan or Googlebot).
 
-Component,Technology,Purpose
-Frontend / Orchestration,"Streamlit, Plotly, pandas","Interactive UI, visualizations, data handling"
-AI / Machine Learning,"Python, scikit-learn, numpy",Threat classification via feature engineering
-Low-Level Scanning,C (gcc),"Fast file I/O, signature detection"
-Log Forensics,Java (javac + java runtime),Rule-based pattern matching
-Build & Dependencies,"Makefile, packages.txt, Docker","Compilation, system package management"
-Deployment,"Streamlit Community Cloud, Docker",Hosting and containerization
+Utility: Helps analysts distinguish between harmless automated scanning and actual targeted attacks. "Anti-Threat Intelligence"—it tells you what not to worry about.
 
-Quick Start (Local Development)
-Prerequisites: Python 3.9+, gcc, javac (JDK), git
-Bash# Clone the repository
-git clone https://gitlab.com/your-username/SecAI-Nexus.git
-cd SecAI-Nexus
+3. Live CVE Vulnerability Feed (Real-Time)
+Connects directly to the CIRCL.LU Open Data API to fetch the latest Common Vulnerabilities and Exposures (CVEs) as they are published.
 
-pip install -r requirements.txt
-make
-streamlit run streamlit_app.py
-Open http://localhost:8501 in your browser.
-Docker alternative (includes gcc and JDK):
-Bashdocker build -t secai-nexus .
-docker run -p 8501:8501 secai-nexus
+Dual-Layer Failover System:
+
+Primary: Fetches live JSON data from the official CVE database.
+
+Failover: If the API is unreachable, the system instantly switches to a High-Fidelity Simulation Mode, generating realistic vulnerability data based on current 2025/2026 trends (e.g., OpenSSL buffers, Kubernetes privilege escalation) to ensure the dashboard never displays "Unknown" errors.
+
+Export: One-click generation of .CSV Intelligence Reports.
+
+4. Infrastructure Risk Landscape
+A semi-static, curated intelligence board tracking active threat actor campaigns.
+
+Categories: Ransomware (LockBit, BlackCat), Malware (Emotet, Cobalt Strike), Phishing, and Nation-State APTs (Volt Typhoon, Lazarus).
+
+Dynamic Styling: Automatically color-codes risks (CRITICAL = Red, HIGH = Orange, MEDIUM = Green).
+
+💻 Installation & Deployment
+Prerequisites
+Python 3.8 or higher
+
+Internet connection (for fetching live map iframes and API data)
+
+1. Clone the Uplink
+Bash
+git clone https://github.com/yourusername/secai-nexus.git
+cd secai-nexus
+2. Install Dependencies
+Bash
+pip install streamlit pandas requests plotly
+3. Initialize the Dashboard
+Bash
+streamlit run app.py
+The interface will automatically launch in your default browser at http://localhost:8501.
+
+🛠️ Configuration
+Stealth UI (CSS)
+The application uses a custom injected CSS block to override Streamlit's default "Light Mode."
+
+Background: Deep Black (#050505)
+
+Accent Color: Cyber Green (#00ff41)
+
+Alert Colors: Critical Red (#ff3333) & High-Vis Orange (#ffaa00)
+
+Font: Monospace (Courier New) for that "terminal" aesthetic.
+
+To modify the theme, edit the st.markdown section under --- ADVANCED GRC CSS --- in app.py.
+
+📂 Project Structure
+Plaintext
+secai-nexus/
+├── app.py              # Main dashboard logic and UI rendering
+├── requirements.txt    # Python dependencies
+├── README.md           # Documentation
+└── assets/             # (Optional) Static assets
+⚠️ Disclaimer
+This dashboard is intended for educational and situational awareness purposes.
+
+The Maps are embedded iframes from third-party vendors (Bitdefender, Kaspersky, etc.) and rely on their respective service availability.
+
+The CVE Feed pulls public data; do not use this as a sole source for critical patching decisions.
+
+Failover Data: If the internet connection is severed, the CVE and Risk sections may switch to simulation mode to preserve UI integrity.
+
+"Eternal vigilance is the price of security."
+
+SecAI-Nexus // End of Transmission
