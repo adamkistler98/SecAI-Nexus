@@ -189,7 +189,7 @@ st.caption("Target: Worldwide • Protocol: Real-time Intelligence • Encryptio
 st.markdown("---")
 
 # === LIVE CYBER THREAT MAPS (SMALL GRID) ===
-st.subheader(">> LIVE CYBER THREAT MAPS (SECTOR A)")
+st.subheader(">> LIVE CYBER THREAT MAPS")
 st.caption("Real-time global attack activity from trusted sources")
 map_row1 = st.columns(4)
 map_row2 = st.columns(4)
