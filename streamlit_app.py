@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
-import plotly.graph_objects as go
 import random
-from datetime import datetime, timedelta
+from datetime import datetime
 
 # --- STEALTH CONFIGURATION ---
 st.set_page_config(
@@ -42,22 +41,6 @@ st.markdown("""
     }
     div[data-testid="stMetricValue"] { color: #00ff41 !important; font-size: 1.2rem !important; }
     div[data-testid="stMetricLabel"] { color: #888 !important; }
-
-    /* CUSTOM DATAFRAME / TABLE STYLING (Packet Sniffer) */
-    .dataframe {
-        background-color: #000 !important;
-        color: #00ff41 !important;
-        font-family: 'Courier New', monospace !important;
-        border: 1px solid #333 !important;
-    }
-    th {
-        background-color: #111 !important;
-        color: #fff !important;
-        border-bottom: 1px solid #00ff41 !important;
-    }
-    td {
-        border-bottom: 1px solid #222 !important;
-    }
     
     /* TERMINAL TABLE STYLING */
     .terminal-table {
@@ -154,9 +137,9 @@ with map_row1[1]:
     st.markdown("**Sicherheitstacho (DT)**")
     st.components.v1.iframe("https://www.sicherheitstacho.eu/?lang=en", height=480, scrolling=True)
 with map_row1[2]:
-    # REPLACED: LookingGlass -> Submarine Cable Map (Layer 1 Intelligence)
-    st.markdown("**Submarine Cable (Layer 1)**")
-    st.components.v1.iframe("https://www.submarinecablemap.com/", height=480, scrolling=True)
+    # REPLACED: Submarine -> GreyNoise (High-End Sensor Grid)
+    st.markdown("**GreyNoise Visualizer**")
+    st.components.v1.iframe("https://viz.greynoise.io/", height=480, scrolling=True)
 with map_row1[3]:
     st.markdown("**Radware Live Threat Map**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
@@ -207,7 +190,7 @@ with col_sync:
         st.rerun()
 
 with col_download:
-    # UPDATED: Download Button Label
+    # CSV GENERATOR
     csv_data = pd.DataFrame(st.session_state.grc_stream).to_csv(index=False).encode('utf-8')
     st.download_button(
         label="⬇ DOWNLOAD VULNERABILITY REPORT (.CSV)",
@@ -272,72 +255,4 @@ with t4:
     st.markdown("### 🕵️ APT GROUPS")
     render_terminal_table(gen_landscape_data("APT"))
 
-st.markdown("---")
-
-# --- TACTICAL DATA LINK (NEW BOTTOM SECTION) ---
-st.subheader(">> TACTICAL DATA LINK")
-
-col_oscilloscope, col_sniffer = st.columns([1, 2])
-
-# 1. LEFT COLUMN: SIGNAL INTERCEPT OSCILLOSCOPE (Plotly)
-with col_oscilloscope:
-    st.markdown("#### >> SIGNAL INTERCEPT (NET/IO)")
-    # Generate fake signal data
-    x_data = list(range(50))
-    y_data = [random.randint(10, 80) + (i % 5)*10 for i in x_data]
-    
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(
-        x=x_data, y=y_data,
-        fill='tozeroy',
-        mode='lines',
-        line=dict(color='#00ff41', width=1),
-        fillcolor='rgba(0, 255, 65, 0.1)' 
-    ))
-    
-    fig.update_layout(
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        margin=dict(l=0, r=0, t=0, b=0),
-        height=300,
-        xaxis=dict(showgrid=True, gridcolor='#222', visible=False),
-        yaxis=dict(showgrid=True, gridcolor='#222', range=[0, 150], visible=False)
-    )
-    st.plotly_chart(fig, use_container_width=True)
-    st.caption("Monitoring interface: eth0 // Bandwidth: 14.2 Gbps")
-
-# 2. RIGHT COLUMN: LIVE PACKET SNIFFER (Styled Dataframe)
-with col_sniffer:
-    st.markdown("#### >> LIVE PACKET CAPTURE (PCAP)")
-    
-    # Generate fake PCAP data
-    protocols = ["TCP", "UDP", "ICMP", "HTTPS", "SSH"]
-    actions = ["ALLOW", "DROP", "ALERT", "SCAN"]
-    
-    pcap_data = []
-    for i in range(12):
-        ts = datetime.now().strftime("%H:%M:%S") + f".{random.randint(10,99)}"
-        src = f"192.168.1.{random.randint(2, 254)}"
-        dst = f"10.0.{random.randint(1, 9)}.{random.randint(1, 254)}"
-        proto = random.choice(protocols)
-        act = random.choice(actions)
-        size = f"{random.randint(64, 1500)}b"
-        pcap_data.append({"TIME": ts, "SRC": src, "DST": dst, "PROTO": proto, "SIZE": size, "ACTION": act})
-    
-    df_pcap = pd.DataFrame(pcap_data)
-    
-    # Custom color highlighting function
-    def highlight_action(val):
-        color = '#00ff41' # Green default
-        if val == 'DROP': color = '#ff3333' # Red
-        if val == 'ALERT': color = '#ffaa00' # Orange
-        if val == 'SCAN': color = '#ffff00' # Yellow
-        return f'color: {color}; font-weight: bold;'
-
-    # Apply style
-    st.dataframe(
-        df_pcap.style.applymap(highlight_action, subset=['ACTION']),
-        use_container_width=True,
-        height=300,
-        hide_index=True
-    )
+# DASHBOARD ENDS HERE
