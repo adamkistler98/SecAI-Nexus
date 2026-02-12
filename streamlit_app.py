@@ -18,7 +18,7 @@ st.markdown("""
 <style>
     .stApp { background-color: #050505 !important; font-family: 'Courier New', Courier, monospace !important; }
     h1, h2, h3, h4, h5, h6, p, label, .stMarkdown { color: #00ff41 !important; }
-   
+    
     .clock-header {
         font-size: 1rem;
         font-weight: bold;
@@ -32,7 +32,7 @@ st.markdown("""
         border-left: 3px solid #00ff41 !important;
         padding: 5px 10px;
     }
-   
+    
     .terminal-table {
         width: 100%;
         border-collapse: collapse;
@@ -56,7 +56,7 @@ st.markdown("""
         padding: 8px 10px; 
         background-color: #050505; 
     }
-   
+    
     .crit { color: #ff3333 !important; font-weight: bold; }
     .high { color: #ffaa00 !important; }
     .med { color: #00ff41 !important; }
@@ -127,18 +127,20 @@ with map_row1[3]:
     st.markdown("**Radware Live Threat Map**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
 
+# --- FIXED MAPS SECTION ---
 with map_row2[0]:
-    st.markdown("**Norse Attack Map**")
-    st.components.v1.iframe("https://map.norsecorp.com/", height=480, scrolling=True)
+    st.markdown("**Fortinet Threat Map**")
+    st.components.v1.iframe("https://threatmap.fortiguard.com/", height=480, scrolling=True)
 with map_row2[1]:
-    st.markdown("**SecurityWizardry Radar**")
-    st.components.v1.iframe("https://radar.securitywizardry.com/", height=480, scrolling=True)
+    st.markdown("**Kaspersky Cybermap**")
+    # Using the dark widget URL which is designed for embedding
+    st.components.v1.iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=480, scrolling=True)
 with map_row2[2]:
-    st.markdown("**Talos Intelligence**")
-    st.components.v1.iframe("https://talosintelligence.com/threat-map", height=480, scrolling=True)
+    st.markdown("**SonicWall Live Map**")
+    st.components.v1.iframe("https://attackmap.sonicwall.com/live-attack-map/", height=480, scrolling=True)
 with map_row2[3]:
-    st.markdown("**NETSCOUT Arbor**")
-    st.components.v1.iframe("https://www.netscout.com/ddos-attack-map", height=480, scrolling=True)
+    st.markdown("**Imperva Threat Map**")
+    st.components.v1.iframe("https://www.imperva.com/cyber-threat-attack-map/", height=480, scrolling=True)
 
 st.markdown("---")
 
@@ -224,12 +226,12 @@ df_f = pd.DataFrame(st.session_state.grc_stream)
 df_f['Sev'] = df_f['CVSS'].apply(lambda x: 'CRITICAL' if x>=9.0 else 'HIGH' if x>=7.0 else 'MED')
 with c_viz1:
     fig1 = px.pie(df_f['Sev'].value_counts().reset_index(), values='count', names='Sev', hole=0.7, title="RISK_DISTRIBUTION",
-                 color='Sev', color_discrete_map={'CRITICAL':'#ff3333', 'HIGH':'#ffaa00', 'MED':'#00ff41'})
+                  color='Sev', color_discrete_map={'CRITICAL':'#ff3333', 'HIGH':'#ffaa00', 'MED':'#00ff41'})
     fig1.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=250, showlegend=True, margin=dict(t=50, b=10, l=10, r=10))
     st.plotly_chart(fig1, use_container_width=True)
 with c_viz2:
     status_mix = pd.DataFrame({"Category": ["COMPLIANT", "NON-COMPLIANT", "UNDER_REVIEW"], "Count": [72, 18, 10]})
     fig2 = px.pie(status_mix, values='Count', names='Category', hole=0.7, title="OPERATIONAL_POSTURE",
-                 color_discrete_sequence=['#00ff41', '#ff3333', '#ffaa00'])
+                  color_discrete_sequence=['#00ff41', '#ff3333', '#ffaa00'])
     fig2.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color='#00ff41', height=250, showlegend=True, margin=dict(t=50, b=10, l=10, r=10))
     st.plotly_chart(fig2, use_container_width=True)
