@@ -131,14 +131,14 @@ with map_row2[0]:
     st.markdown("**Norse Attack Map**")
     st.components.v1.iframe("https://map.norsecorp.com/", height=480, scrolling=True)
 with map_row2[1]:
-    st.markdown("**Akamai Attack Map**")
-    st.components.v1.iframe("https://www.akamai.com/attack-map", height=480, scrolling=True)
-with map_row2[2]:
-    st.markdown("**Fortinet Threat Map**")
-    st.components.v1.iframe("https://fortiguard.fortinet.com/threat-map", height=480, scrolling=True)
-with map_row2[3]:
     st.markdown("**SecurityWizardry Radar**")
     st.components.v1.iframe("https://radar.securitywizardry.com/", height=480, scrolling=True)
+with map_row2[2]:
+    st.markdown("**Talos Intelligence**")
+    st.components.v1.iframe("https://talosintelligence.com/threat-map", height=480, scrolling=True)
+with map_row2[3]:
+    st.markdown("**NETSCOUT Arbor**")
+    st.components.v1.iframe("https://www.netscout.com/ddos-attack-map", height=480, scrolling=True)
 
 st.markdown("---")
 
