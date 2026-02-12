@@ -66,6 +66,15 @@ st.markdown("""
         font-size: 0.65rem; font-weight: bold; text-transform: uppercase; height: 28px;
     }
     .stButton>button:hover { border-color: #00ff41; box-shadow: 0 0 8px #00ff41; }
+    
+    /* Specific styling for Download Button to match stealth theme */
+    div[data-testid="stDownloadButton"]>button {
+        background-color: #111 !important;
+        color: #00ff41 !important;
+        border: 1px solid #00ff41 !important;
+        font-family: 'Courier New', monospace !important;
+        text-transform: uppercase;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -108,12 +117,12 @@ with map_row1[0]:
     st.markdown("**Bitdefender**")
     st.components.v1.iframe("https://threatmap.bitdefender.com/", height=480, scrolling=True)
 with map_row1[1]:
-    # REPLACED: Digital Attack Map -> Sicherheitstacho (Deutsche Telekom Honeypot)
     st.markdown("**Sicherheitstacho (DT)**")
     st.components.v1.iframe("https://www.sicherheitstacho.eu/?lang=en", height=480, scrolling=True)
 with map_row1[2]:
-    st.markdown("**Check Point ThreatCloud**")
-    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
+    # REPLACED: CheckPoint -> LookingGlass (Wireframe/Cyber aesthetic)
+    st.markdown("**LookingGlass Cyber**")
+    st.components.v1.iframe("https://map.lookingglasscyber.com/", height=480, scrolling=True)
 with map_row1[3]:
     st.markdown("**Radware Live Threat Map**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
@@ -135,10 +144,7 @@ st.markdown("---")
 
 # --- LIVE CVE VULNERABILITIES ---
 st.subheader(">> LIVE CVE VULNERABILITIES")
-col_sync, _ = st.columns([1, 6])
-with col_sync:
-    # RENAMED BUTTON
-    sync_trigger = st.button("🔄 RE-SYNC/REFRESH")
+col_sync, col_download, _ = st.columns([1, 2, 4])
 
 # Realistic CVE Simulator
 def generate_realistic_cves():
@@ -159,8 +165,23 @@ def generate_realistic_cves():
     # Sort by severity
     return sorted(cves, key=lambda x: x['CVSS'], reverse=True)
 
-if "grc_stream" not in st.session_state or sync_trigger:
+if "grc_stream" not in st.session_state:
     st.session_state.grc_stream = generate_realistic_cves()
+
+with col_sync:
+    if st.button("🔄 RE-SYNC/REFRESH"):
+        st.session_state.grc_stream = generate_realistic_cves()
+        st.rerun()
+
+with col_download:
+    # CSV GENERATOR
+    csv_data = pd.DataFrame(st.session_state.grc_stream).to_csv(index=False).encode('utf-8')
+    st.download_button(
+        label="⬇ DOWNLOAD INTEL REPORT (.CSV)",
+        data=csv_data,
+        file_name=f"intel_report_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
+        mime="text/csv"
+    )
 
 col_left, col_right = st.columns(2)
 
