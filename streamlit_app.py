@@ -108,7 +108,7 @@ st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
 st.caption("Target: Worldwide • Protocol: Real-time Intelligence")
 st.markdown("---")
 
-# === LIVE CYBER THREAT MAPS (First on page - 8 reliable maps) ===
+# === LIVE CYBER THREAT MAPS (Row 1 - Existing) ===
 st.subheader(">> LIVE CYBER THREAT MAPS")
 st.caption("Real-time global attack activity from trusted sources")
 map_row1 = st.columns(4)
@@ -127,20 +127,21 @@ with map_row1[3]:
     st.markdown("**Radware Live Threat Map**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
 
-# --- FIXED MAPS SECTION ---
+# === REPLACED MAPS (Row 2 - New Working Replacements) ===
 with map_row2[0]:
     st.markdown("**Fortinet Threat Map**")
     st.components.v1.iframe("https://threatmap.fortiguard.com/", height=480, scrolling=True)
 with map_row2[1]:
     st.markdown("**Kaspersky Cybermap**")
-    # Using the dark widget URL which is designed for embedding
+    # Using the dark widget URL which is optimized for embedding
     st.components.v1.iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=480, scrolling=True)
 with map_row2[2]:
     st.markdown("**SonicWall Live Map**")
     st.components.v1.iframe("https://attackmap.sonicwall.com/live-attack-map/", height=480, scrolling=True)
 with map_row2[3]:
-    st.markdown("**Imperva Threat Map**")
-    st.components.v1.iframe("https://www.imperva.com/cyber-threat-attack-map/", height=480, scrolling=True)
+    st.markdown("**Threatbutt Attack Map**")
+    # A highly visual "hacker" style map (excellent visual replacement for Norse)
+    st.components.v1.iframe("https://threatbutt.com/map/", height=480, scrolling=True)
 
 st.markdown("---")
 
