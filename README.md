@@ -6,9 +6,6 @@ A sleek, terminal-style Streamlit application delivering live visibility into wo
 
 Built for Security Operations, Threat Intelligence, and GRC teams who want an always-on, immersive "war room" view.
 
-![Terminal Aesthetic](https://via.placeholder.com/800x400/050505/00ff41?text=SecAI-Nexus+Dashboard+Screenshot)  
-*(Replace with actual screenshots once deployed)*
-
 ---
 
 ## ✨ Features
