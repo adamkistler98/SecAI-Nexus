@@ -137,9 +137,9 @@ with map_row1[1]:
     st.markdown("**Sicherheitstacho (DT)**")
     st.components.v1.iframe("https://www.sicherheitstacho.eu/?lang=en", height=480, scrolling=True)
 with map_row1[2]:
-    # REPLACED: Barracuda -> NETSCOUT Cyber Threat Horizon (High-end 3D Map)
-    st.markdown("**NETSCOUT Threat Horizon**")
-    st.components.v1.iframe("https://horizon.netscout.com/?kiosk=true", height=480, scrolling=True)
+    # REPLACED: Netscout -> WatchGuard Threat Lab (Retro/Cyber Style)
+    st.markdown("**WatchGuard Threat Lab**")
+    st.components.v1.iframe("https://www.secplicity.org/threatmap/", height=480, scrolling=True)
 with map_row1[3]:
     st.markdown("**Radware Live Threat Map**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
@@ -160,7 +160,6 @@ with map_row2[3]:
 st.markdown("---")
 
 # === LARGE MAP SECTION (GREYNOISE - NO HEADER) ===
-# Header removed as requested. Directly placing the large sensor map.
 st.components.v1.iframe("https://viz.greynoise.io/", height=800, scrolling=True)
 
 st.markdown("---")
