@@ -1,93 +1,101 @@
-🔒 SecAI-Nexus // GRC
-Global Threat Visibility & Intelligence Dashboard
-Status: OPERATIONAL | Encryption: AES-256 | Protocol: REAL-TIME
+# 🔒 SecAI-Nexus GRC
 
-📡 Overview
-SecAI-Nexus GRC is a unified situational awareness console designed for Security Operations Centers (SOC) and Governance, Risk, and Compliance (GRC) teams.
+**Global Real-Time Cyber Threat Intelligence Dashboard**
 
-It aggregates real-time cyber threat telemetry from multiple Tier-1 intelligence sources into a single, high-contrast "stealth" interface. Unlike static dashboards, SecAI-Nexus pulls live data from global sensors, vulnerability databases, and threat intelligence feeds to provide an instant pulse on the global cyber battlefield.
+A sleek, terminal-style Streamlit application delivering live visibility into worldwide cyber threats, vulnerabilities, and attack activity.
 
-👁️ Key Capabilities
-1. Multi-Vector Threat Maps
-A synchronized 4x2 grid visualizing live attack vectors across the globe.
+Built for Security Operations, Threat Intelligence, and GRC teams who want an always-on, immersive "war room" view.
 
-Sources: Bitdefender, Deutsche Telekom (Sicherheitstacho), Check Point ThreatCloud, Radware, Fortinet, Kaspersky, SonicWall, and Threatbutt.
+![Terminal Aesthetic](https://via.placeholder.com/800x400/050505/00ff41?text=SecAI-Nexus+Dashboard+Screenshot)  
+*(Replace with actual screenshots once deployed)*
 
-Utility: Instant visualization of DDoS campaigns, malware propagation, and botnet activity.
+---
 
-2. Internet Noise Intelligence (GreyNoise)
-A dedicated, large-scale viewport for the GreyNoise Visualizer.
+## ✨ Features
 
-Function: A search engine and intelligence tool that analyzes "internet background noise." It identifies mass-scanners, bots, and benign crawlers (like Shodan or Googlebot).
+- **Live Cyber Threat Maps** — 8+ embedded real-time attack maps (Bitdefender, Check Point, Fortinet, Kaspersky, GreyNoise, SonicWall, etc.)
+- **Large GreyNoise Visualization** — Full-height advanced threat intelligence map
+- **Real-Time CVE Feed** — Pulls latest CVEs from the circl.lu API with intelligent fallback to high-fidelity simulated data
+- **Infrastructure Risk Landscape** — Dynamic panels for:
+  - Ransomware groups (LockBit, BlackCat, Akira, etc.)
+  - Malware families (Emotet, Qakbot, Cobalt Strike, etc.)
+  - Phishing tactics and targets
+  - Nation-state APT actors (APT29, Volt Typhoon, Lazarus, etc.)
+- **Terminal-Style UI** — Dark cyberpunk theme with matrix-green accents, color-coded risk levels (Critical/High/Medium), and authentic hacker aesthetic
+- **Export & Refresh** — One-click RE-SYNC and CSV download of vulnerability reports
+- **Stealth Mode** — Collapsed sidebar, hidden Streamlit elements, system-clock header
 
-Utility: Helps analysts distinguish between harmless automated scanning and actual targeted attacks. "Anti-Threat Intelligence"—it tells you what not to worry about.
+---
 
-3. Live CVE Vulnerability Feed (Real-Time)
-Connects directly to the CIRCL.LU Open Data API to fetch the latest Common Vulnerabilities and Exposures (CVEs) as they are published.
+## 🛠️ Tech Stack
 
-Dual-Layer Failover System:
+- **Framework**: Streamlit
+- **Data**: pandas, requests
+- **Styling**: Custom CSS (terminal tables, glow effects, dark theme)
+- **Data Sources**:
+  - Real: [circl.lu CVE API](https://cve.circl.lu/api/last/30)
+  - Maps: Public threat intelligence providers
+  - Simulation: Realistic synthetic data when API is unavailable
 
-Primary: Fetches live JSON data from the official CVE database.
+---
 
-Failover: If the API is unreachable, the system instantly switches to a High-Fidelity Simulation Mode, generating realistic vulnerability data based on current 2025/2026 trends (e.g., OpenSSL buffers, Kubernetes privilege escalation) to ensure the dashboard never displays "Unknown" errors.
+## 🚀 Quick Start
 
-Export: One-click generation of .CSV Intelligence Reports.
+### 1. Prerequisites
+- Python 3.9 or higher
 
-4. Infrastructure Risk Landscape
-A semi-static, curated intelligence board tracking active threat actor campaigns.
+### 2. Installation
 
-Categories: Ransomware (LockBit, BlackCat), Malware (Emotet, Cobalt Strike), Phishing, and Nation-State APTs (Volt Typhoon, Lazarus).
+```bash
+# Clone or download the project
+git clone <your-repo-url>
+cd sec-ai-nexus-grc
 
-Dynamic Styling: Automatically color-codes risks (CRITICAL = Red, HIGH = Orange, MEDIUM = Green).
+# Create virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate    # Windows: venv\Scripts\activate
 
-💻 Installation & Deployment
-Prerequisites
-Python 3.8 or higher
+# Install dependencies
+pip install streamlit pandas requests
+3. Run the Dashboard
+Bashstreamlit run sec_ai_nexus.py
+Open http://localhost:8501 in your browser.
 
-Internet connection (for fetching live map iframes and API data)
+📋 Requirements (requirements.txt)
+txtstreamlit>=1.30.0
+pandas
+requests
+Install with:
+Bashpip install -r requirements.txt
 
-1. Clone the Uplink
-Bash
-git clone https://github.com/yourusername/secai-nexus.git
-cd secai-nexus
-2. Install Dependencies
-Bash
-pip install streamlit pandas requests plotly
-3. Initialize the Dashboard
-Bash
-streamlit run app.py
-The interface will automatically launch in your default browser at http://localhost:8501.
+📖 How It Works
 
-🛠️ Configuration
-Stealth UI (CSS)
-The application uses a custom injected CSS block to override Streamlit's default "Light Mode."
+CVE Section: Attempts a real API call to https://cve.circl.lu/api/last/30. If it fails (network issues, rate limits, etc.), it seamlessly switches to generate_high_fidelity_sim() which creates realistic, up-to-date-looking CVE entries.
+Threat Maps: Embedded via st.components.v1.iframe for zero-maintenance live feeds.
+Risk Landscape Panels: Procedurally generated tables using real threat actor/group names for training and demonstration realism.
+Styling: Heavy custom CSS injected via st.markdown(..., unsafe_allow_html=True) to create the distinctive terminal/cyberpunk look.
+State Management: Uses st.session_state to persist CVE data between refreshes.
 
-Background: Deep Black (#050505)
 
-Accent Color: Cyber Green (#00ff41)
+⚠️ Important Notes
 
-Alert Colors: Critical Red (#ff3333) & High-Vis Orange (#ffaa00)
+Internet connection is required for live threat maps and real CVE data.
+Some map providers may occasionally block iframes or experience slow loading due to their own protections.
+All simulated data is for demonstration and training purposes only and uses publicly known threat actor names.
+The dashboard is intentionally styled to look "stealth" and operator-focused.
 
-Font: Monospace (Courier New) for that "terminal" aesthetic.
 
-To modify the theme, edit the st.markdown section under --- ADVANCED GRC CSS --- in app.py.
+🎯 Customization Ideas
 
-📂 Project Structure
-Plaintext
-secai-nexus/
-├── app.py              # Main dashboard logic and UI rendering
-├── requirements.txt    # Python dependencies
-├── README.md           # Documentation
-└── assets/             # (Optional) Static assets
-⚠️ Disclaimer
-This dashboard is intended for educational and situational awareness purposes.
+Add more threat intelligence sources (AlienVault OTX, MITRE ATT&CK, etc.)
+Integrate real APIs for ransomware or malware tracking
+Add filtering, search, and pagination
+Deploy to Streamlit Community Cloud, Hugging Face Spaces, or Docker
+Extend the simulation engine with more realistic logic
 
-The Maps are embedded iframes from third-party vendors (Bitdefender, Kaspersky, etc.) and rely on their respective service availability.
 
-The CVE Feed pulls public data; do not use this as a sole source for critical patching decisions.
+📄 License
+This project is open-source and free for educational, defensive security, and personal use.
+Made with 🔥 for the cyber defense community.
 
-Failover Data: If the internet connection is severed, the CVE and Risk sections may switch to simulation mode to preserve UI integrity.
-
-"Eternal vigilance is the price of security."
-
-SecAI-Nexus // End of Transmission
+SecAI-Nexus GRC — Because visibility is the first step in defense.
