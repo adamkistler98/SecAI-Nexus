@@ -95,6 +95,9 @@ def get_intel_summary():
     return random.choice(intel)
 
 def render_terminal_table(df):
+    if df.empty or df is None:
+        st.info("No data available yet. Click RE-SYNC.")
+        return
     html = '<table class="terminal-table"><thead><tr>' + ''.join(f'<th>{col}</th>' for col in df.columns) + '</tr></thead><tbody>'
     for _, row in df.iterrows():
         html += '<tr>'
@@ -110,7 +113,7 @@ def render_terminal_table(df):
     html += '</tbody></table>'
     st.markdown(html, unsafe_allow_html=True)
 
-# --- LIVE CVE VULNERABILITIES (Side-by-side terminal tables) ---
+# --- LIVE CVE VULNERABILITIES ---
 st.subheader(">> LIVE CVE VULNERABILITIES")
 col_sync, _ = st.columns([1, 6])
 with col_sync:
@@ -143,6 +146,7 @@ if "grc_stream" not in st.session_state or sync_trigger:
             for _ in range(20)
         ]
 
+# Side-by-side terminal tables
 col_left, col_right = st.columns(2)
 
 with col_left:
@@ -157,7 +161,7 @@ with col_right:
 
 st.markdown("---")
 
-# --- INFRASTRUCTURE RISK LANDSCAPE (LOCKED IN) ---
+# --- INFRASTRUCTURE RISK LANDSCAPE (locked) ---
 st.subheader(">> INFRASTRUCTURE RISK LANDSCAPE")
 t1, t2, t3, t4 = st.columns(4)
 def gen_landscape_data(category):
