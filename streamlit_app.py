@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import plotly.graph_objects as go
 import random
 from datetime import datetime, timedelta
 
@@ -15,23 +15,51 @@ st.set_page_config(
 # --- ADVANCED GRC CSS ---
 st.markdown("""
 <style>
+    /* GLOBAL DARK THEME */
     .stApp { background-color: #050505 !important; font-family: 'Courier New', Courier, monospace !important; }
     h1, h2, h3, h4, h5, h6, p, label, .stMarkdown { color: #00ff41 !important; }
     
+    /* REMOVE WHITE ELEMENTS */
+    header, footer { visibility: hidden; }
+    .stDeployButton { display: none; }
+    
+    /* SYSTEM HEADER */
     .clock-header {
         font-size: 1rem;
         font-weight: bold;
         text-align: right;
         color: #00ff41;
         margin-bottom: -20px;
+        text-shadow: 0 0 5px #00ff41;
     }
+    
+    /* METRICS BOXES */
     div[data-testid="stMetric"] {
         background-color: #0a0a0a !important;
-        border: 1px solid #222;
+        border: 1px solid #333;
         border-left: 3px solid #00ff41 !important;
         padding: 5px 10px;
     }
+    div[data-testid="stMetricValue"] { color: #00ff41 !important; font-size: 1.2rem !important; }
+    div[data-testid="stMetricLabel"] { color: #888 !important; }
+
+    /* CUSTOM DATAFRAME / TABLE STYLING (Packet Sniffer) */
+    .dataframe {
+        background-color: #000 !important;
+        color: #00ff41 !important;
+        font-family: 'Courier New', monospace !important;
+        border: 1px solid #333 !important;
+    }
+    th {
+        background-color: #111 !important;
+        color: #fff !important;
+        border-bottom: 1px solid #00ff41 !important;
+    }
+    td {
+        border-bottom: 1px solid #222 !important;
+    }
     
+    /* TERMINAL TABLE STYLING */
     .terminal-table {
         width: 100%;
         border-collapse: collapse;
@@ -56,47 +84,32 @@ st.markdown("""
         background-color: #050505; 
     }
     
-    /* Dynamic Text Coloring Logic */
-    .crit { color: #ff3333 !important; font-weight: bold; } /* Red */
-    .high { color: #ffaa00 !important; } /* Orange */
-    .med { color: #00ff41 !important; } /* Green */
+    /* STATUS COLORS */
+    .crit { color: #ff3333 !important; font-weight: bold; text-shadow: 0 0 5px #ff3333; }
+    .high { color: #ffaa00 !important; }
+    .med { color: #00ff41 !important; }
     
+    /* BUTTON STYLING */
     .stButton>button {
         background-color: #000000; color: #00ff41; border: 1px solid #333;
-        font-size: 0.65rem; font-weight: bold; text-transform: uppercase; height: 28px;
+        font-size: 0.75rem; font-weight: bold; text-transform: uppercase; 
+        width: 100%;
     }
-    .stButton>button:hover { border-color: #00ff41; box-shadow: 0 0 8px #00ff41; }
+    .stButton>button:hover { 
+        border-color: #00ff41; 
+        box-shadow: 0 0 8px #00ff41; 
+        color: #fff;
+    }
     
-    /* Specific styling for Download Button */
+    /* DOWNLOAD BUTTON */
     div[data-testid="stDownloadButton"]>button {
         background-color: #111 !important;
         color: #00ff41 !important;
         border: 1px solid #00ff41 !important;
         font-family: 'Courier New', monospace !important;
         text-transform: uppercase;
+        width: 100%;
     }
-
-    /* Live Log Stream Styling */
-    .log-container {
-        height: 300px;
-        overflow-y: scroll;
-        background-color: #000;
-        border: 1px solid #333;
-        padding: 10px;
-        font-family: 'Courier New', monospace;
-        font-size: 0.75rem;
-    }
-    .log-entry {
-        border-bottom: 1px solid #111;
-        padding: 2px 0;
-        display: flex;
-        justify-content: space-between;
-    }
-    .log-time { color: #888; margin-right: 10px; }
-    .log-src { color: #00ff41; }
-    .log-dst { color: #ccc; }
-    .log-alert { color: #ff3333; font-weight: bold; }
-    
 </style>
 """, unsafe_allow_html=True)
 
@@ -122,10 +135,10 @@ def render_terminal_table(df):
     st.markdown(html, unsafe_allow_html=True)
 
 # --- HEADER SECTION ---
-st.markdown(f'<div class="clock-header">SYSTEM_TIME: {datetime.now().strftime("%H:%M:%S")} UTC</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="clock-header">SYSTEM_TIME: {datetime.now().strftime("%H:%M:%S")} UTC // SECURE_UPLINK_ESTABLISHED</div>', unsafe_allow_html=True)
 st.title("🔒 SecAI-Nexus")
 st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
-st.caption("Target: Worldwide • Protocol: Real-time Intelligence")
+st.caption("Target: Worldwide • Protocol: Real-time Intelligence • Encryption: AES-256")
 st.markdown("---")
 
 # === LIVE CYBER THREAT MAPS ===
@@ -141,9 +154,9 @@ with map_row1[1]:
     st.markdown("**Sicherheitstacho (DT)**")
     st.components.v1.iframe("https://www.sicherheitstacho.eu/?lang=en", height=480, scrolling=True)
 with map_row1[2]:
-    # REPLACED: LookingGlass -> PewPew (High visual impact, reliable)
-    st.markdown("**PewPew Attack Sim**")
-    st.components.v1.iframe("https://pewpew.live/maps/pewpew.html", height=480, scrolling=True)
+    # REPLACED: LookingGlass -> Submarine Cable Map (Layer 1 Intelligence)
+    st.markdown("**Submarine Cable (Layer 1)**")
+    st.components.v1.iframe("https://www.submarinecablemap.com/", height=480, scrolling=True)
 with map_row1[3]:
     st.markdown("**Radware Live Threat Map**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
@@ -261,43 +274,70 @@ with t4:
 
 st.markdown("---")
 
-# --- LIVE INTRUSION DETECTION STREAM (REPLACES PIE CHARTS) ---
-st.subheader(">> LIVE INTRUSION DETECTION STREAM")
+# --- TACTICAL DATA LINK (NEW BOTTOM SECTION) ---
+st.subheader(">> TACTICAL DATA LINK")
 
-# Generate Fake Logs
-def generate_logs(n=20):
-    logs = []
-    protocols = ["TCP", "UDP", "ICMP", "HTTP/S", "SSH", "FTP"]
-    alerts = ["SQL_INJECTION", "XSS_ATTEMPT", "BRUTE_FORCE_ROOT", "MALWARE_C2_BEACON", "PORT_SCAN_DETECTED"]
+col_oscilloscope, col_sniffer = st.columns([1, 2])
+
+# 1. LEFT COLUMN: SIGNAL INTERCEPT OSCILLOSCOPE (Plotly)
+with col_oscilloscope:
+    st.markdown("#### >> SIGNAL INTERCEPT (NET/IO)")
+    # Generate fake signal data
+    x_data = list(range(50))
+    y_data = [random.randint(10, 80) + (i % 5)*10 for i in x_data]
     
-    for _ in range(n):
-        now = datetime.now()
-        ts = (now - timedelta(seconds=random.randint(1, 300))).strftime("%H:%M:%S.%f")[:-3]
-        src = f"{random.randint(1,255)}.{random.randint(0,255)}.{random.randint(0,255)}.{random.randint(0,255)}"
-        dst = f"10.{random.randint(0,255)}.{random.randint(0,255)}.{random.randint(0,255)}"
-        proto = random.choice(protocols)
-        alert = random.choice(alerts)
-        
-        # Color coding logic inline for HTML
-        color = "#ff3333" if "ROOT" in alert or "C2" in alert else "#ffaa00"
-        
-        log_html = f"""
-        <div class="log-entry">
-            <span class="log-time">[{ts}]</span>
-            <span>SRC: <span class="log-src">{src}</span></span>
-            <span>DST: <span class="log-dst">{dst}</span></span>
-            <span>PROTO: {proto}</span>
-            <span style="color: {color}; font-weight: bold;">>>> ALERT: {alert}</span>
-        </div>
-        """
-        logs.append(log_html)
-    return "".join(logs)
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=x_data, y=y_data,
+        fill='tozeroy',
+        mode='lines',
+        line=dict(color='#00ff41', width=1),
+        fillcolor='rgba(0, 255, 65, 0.1)' 
+    ))
+    
+    fig.update_layout(
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        margin=dict(l=0, r=0, t=0, b=0),
+        height=300,
+        xaxis=dict(showgrid=True, gridcolor='#222', visible=False),
+        yaxis=dict(showgrid=True, gridcolor='#222', range=[0, 150], visible=False)
+    )
+    st.plotly_chart(fig, use_container_width=True)
+    st.caption("Monitoring interface: eth0 // Bandwidth: 14.2 Gbps")
 
-# Render logs in a scrolling container
-log_content = generate_logs(30)
-st.markdown(f"""
-<div class="log-container">
-    {log_content}
-    <div style="color: #00ff41; margin-top: 10px;">_ SYSTEM MONITORING ACTIVE... LISTENING ON INTERFACE ETH0...</div>
-</div>
-""", unsafe_allow_html=True)
+# 2. RIGHT COLUMN: LIVE PACKET SNIFFER (Styled Dataframe)
+with col_sniffer:
+    st.markdown("#### >> LIVE PACKET CAPTURE (PCAP)")
+    
+    # Generate fake PCAP data
+    protocols = ["TCP", "UDP", "ICMP", "HTTPS", "SSH"]
+    actions = ["ALLOW", "DROP", "ALERT", "SCAN"]
+    
+    pcap_data = []
+    for i in range(12):
+        ts = datetime.now().strftime("%H:%M:%S") + f".{random.randint(10,99)}"
+        src = f"192.168.1.{random.randint(2, 254)}"
+        dst = f"10.0.{random.randint(1, 9)}.{random.randint(1, 254)}"
+        proto = random.choice(protocols)
+        act = random.choice(actions)
+        size = f"{random.randint(64, 1500)}b"
+        pcap_data.append({"TIME": ts, "SRC": src, "DST": dst, "PROTO": proto, "SIZE": size, "ACTION": act})
+    
+    df_pcap = pd.DataFrame(pcap_data)
+    
+    # Custom color highlighting function
+    def highlight_action(val):
+        color = '#00ff41' # Green default
+        if val == 'DROP': color = '#ff3333' # Red
+        if val == 'ALERT': color = '#ffaa00' # Orange
+        if val == 'SCAN': color = '#ffff00' # Yellow
+        return f'color: {color}; font-weight: bold;'
+
+    # Apply style
+    st.dataframe(
+        df_pcap.style.applymap(highlight_action, subset=['ACTION']),
+        use_container_width=True,
+        height=300,
+        hide_index=True
+    )
