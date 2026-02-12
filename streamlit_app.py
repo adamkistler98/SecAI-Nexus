@@ -121,21 +121,21 @@ with map_row1[1]:
     st.markdown("**Digital Attack Map**")
     st.components.v1.iframe("https://www.digitalattackmap.com/", height=480, scrolling=True)
 with map_row1[2]:
-    st.markdown("**Check Point ThreatCloud**")
+    st.markdown("**Check Point**")
     st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
 with map_row1[3]:
-    st.markdown("**Radware Live Threat Map**")
+    st.markdown("**Radware**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
 
 with map_row2[0]:
-    st.markdown("**Shadowserver**")
-    st.components.v1.iframe("https://www.shadowserver.org/", height=480, scrolling=True)
+    st.markdown("**SecurityWizardry Radar**")
+    st.components.v1.iframe("https://radar.securitywizardry.com/", height=480, scrolling=True)
 with map_row2[1]:
-    st.markdown("**IBM X-Force**")
-    st.components.v1.iframe("https://exchange.xforce.ibmcloud.com/", height=480, scrolling=True)
+    st.markdown("**Akamai**")
+    st.components.v1.iframe("https://www.akamai.com/us/en/resources/akamai-threat-map.jsp", height=480, scrolling=True)
 with map_row2[2]:
-    st.markdown("**Palo Alto Unit 42**")
-    st.components.v1.iframe("https://unit42.paloaltonetworks.com/threat-intelligence/", height=480, scrolling=True)
+    st.markdown("**Kaspersky**")
+    st.components.v1.iframe("https://cybermap.kaspersky.com/", height=480, scrolling=True)
 with map_row2[3]:
     st.markdown("**Fortinet**")
     st.components.v1.iframe("https://threatmap.fortinet.com/", height=480, scrolling=True)
