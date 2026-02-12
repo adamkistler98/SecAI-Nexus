@@ -6,6 +6,7 @@ A sleek, terminal-style Streamlit application delivering live visibility into wo
 
 Built for Security Operations, Threat Intelligence, and GRC teams who want an always-on, immersive "war room" view.
 
+****** Works on PC and Mobile ******
 ---
 
 ## ✨ Features
