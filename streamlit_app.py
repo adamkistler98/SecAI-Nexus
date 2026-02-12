@@ -108,11 +108,11 @@ st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
 st.caption("Target: Worldwide • Protocol: Real-time Intelligence")
 st.markdown("---")
 
-# === LIVE CYBER THREAT MAPS (First) ===
+# === LIVE CYBER THREAT MAPS (First on page - 8 maps) ===
 st.subheader(">> LIVE CYBER THREAT MAPS")
-st.caption("Real-time global attack activity")
-map_row1 = st.columns(2)
-map_row2 = st.columns(2)
+st.caption("Real-time global attack activity from trusted sources")
+map_row1 = st.columns(4)
+map_row2 = st.columns(4)
 
 with map_row1[0]:
     st.markdown("**Bitdefender**")
@@ -120,13 +120,25 @@ with map_row1[0]:
 with map_row1[1]:
     st.markdown("**Digital Attack Map**")
     st.components.v1.iframe("https://www.digitalattackmap.com/", height=480, scrolling=True)
+with map_row1[2]:
+    st.markdown("**Check Point**")
+    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
+with map_row1[3]:
+    st.markdown("**Radware Live Threat Map**")
+    st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
 
 with map_row2[0]:
-    st.markdown("**Check Point ThreatCloud**")
-    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
+    st.markdown("**Kaspersky**")
+    st.components.v1.iframe("https://cybermap.kaspersky.com/", height=480, scrolling=True)
 with map_row2[1]:
-    st.markdown("**Shadowserver Threat Map**")
-    st.components.v1.iframe("https://www.shadowserver.org/", height=480, scrolling=True)
+    st.markdown("**Fortinet**")
+    st.components.v1.iframe("https://fortiguard.fortinet.com/threat-map", height=480, scrolling=True)
+with map_row2[2]:
+    st.markdown("**Imperva**")
+    st.components.v1.iframe("https://www.imperva.com/cyber-threat-attack-map/", height=480, scrolling=True)
+with map_row2[3]:
+    st.markdown("**NETSCOUT**")
+    st.components.v1.iframe("https://www.netscout.com/ddos-attack-map", height=480, scrolling=True)
 
 st.markdown("---")
 
