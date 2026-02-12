@@ -108,14 +108,14 @@ st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
 st.caption("Target: Worldwide • Protocol: Real-time Intelligence")
 st.markdown("---")
 
-# === LIVE CYBER THREAT MAPS (First on page) ===
+# === LIVE CYBER THREAT MAPS (First) ===
 st.subheader(">> LIVE CYBER THREAT MAPS")
 st.caption("Real-time global attack activity")
 map_row1 = st.columns(2)
 map_row2 = st.columns(2)
 
 with map_row1[0]:
-    st.markdown("**Bitdefender Global Threat Map**")
+    st.markdown("**Bitdefender**")
     st.components.v1.iframe("https://threatmap.bitdefender.com/", height=480, scrolling=True)
 with map_row1[1]:
     st.markdown("**Digital Attack Map**")
@@ -125,8 +125,8 @@ with map_row2[0]:
     st.markdown("**Check Point ThreatCloud**")
     st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
 with map_row2[1]:
-    st.markdown("**AlienVault OTX Pulse**")
-    st.components.v1.iframe("https://otx.alienvault.com/pulse", height=480, scrolling=True)
+    st.markdown("**Shadowserver Threat Map**")
+    st.components.v1.iframe("https://www.shadowserver.org/", height=480, scrolling=True)
 
 st.markdown("---")
 
