@@ -73,45 +73,29 @@ st.markdown(f'<div class="clock-header">SYSTEM_TIME: {datetime.now().strftime("%
 st.title("🔒 SecAI-Nexus")
 st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
 st.caption("Target: Worldwide • Protocol: Real-time Intelligence")
-m1, m2, m3, m4 = st.columns(4)
-m1.metric("THREATS", "31", "+7")
-m2.metric("CRIT_CVE", "9", "+3")
-m3.metric("EVENTS", "91", "Feb'26")
-m4.metric("CONFID", "94.2%", "↑")
 st.markdown("---")
 
-# --- DATA GENERATORS ---
-def get_intel_summary():
-    intel = [
-        "Unauthorized lateral movement detected via SMB exploit",
-        "Credential harvesting via ADFS identity bypass kit",
-        "Critical RCE vulnerability in edge VPN gateway",
-        "Encrypted tunnel established to known C2 infrastructure",
-        "Privilege escalation identified in container runtime",
-        "Zero-day exploit observed targeting local SSL stack",
-        "Memory corruption identified in active kernel driver",
-        "Sensitive data exfiltration attempt via DNS tunneling"
-    ]
-    return random.choice(intel)
+# === LIVE CYBER THREAT MAPS (Placed First) ===
+st.subheader(">> LIVE CYBER THREAT MAPS")
+st.caption("Real-time global attack activity")
+map_row1 = st.columns(2)
+map_row2 = st.columns(2)
 
-def render_terminal_table(df):
-    if df.empty or df is None:
-        st.info("No data available yet. Click RE-SYNC.")
-        return
-    html = '<table class="terminal-table"><thead><tr>' + ''.join(f'<th>{col}</th>' for col in df.columns) + '</tr></thead><tbody>'
-    for _, row in df.iterrows():
-        html += '<tr>'
-        for col in df.columns:
-            val = str(row[col])
-            if any(k in val.upper() for k in ["CRITICAL", "9.", "SURGING", "IMMINENT"]):
-                html += f'<td class="crit">{val}</td>'
-            elif any(k in val.upper() for k in ["HIGH", "8.", "7."]):
-                html += f'<td class="high">{val}</td>'
-            else:
-                html += f'<td class="med">{val}</td>'
-        html += '</tr>'
-    html += '</tbody></table>'
-    st.markdown(html, unsafe_allow_html=True)
+with map_row1[0]:
+    st.markdown("**Bitdefender**")
+    st.components.v1.iframe("https://threatmap.bitdefender.com/", height=380, scrolling=True)
+with map_row1[1]:
+    st.markdown("**Norse Attack Map**")
+    st.components.v1.iframe("https://map.norsecorp.com/", height=380, scrolling=True)
+
+with map_row2[0]:
+    st.markdown("**Digital Attack Map**")
+    st.components.v1.iframe("https://www.digitalattackmap.com/", height=380, scrolling=True)
+with map_row2[1]:
+    st.markdown("**Check Point ThreatCloud**")
+    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=380, scrolling=True)
+
+st.markdown("---")
 
 # --- LIVE CVE VULNERABILITIES ---
 st.subheader(">> LIVE CVE VULNERABILITIES")
@@ -146,7 +130,6 @@ if "grc_stream" not in st.session_state or sync_trigger:
             for _ in range(20)
         ]
 
-# Side-by-side terminal tables
 col_left, col_right = st.columns(2)
 
 with col_left:
@@ -161,7 +144,7 @@ with col_right:
 
 st.markdown("---")
 
-# --- INFRASTRUCTURE RISK LANDSCAPE (locked) ---
+# --- INFRASTRUCTURE RISK LANDSCAPE ---
 st.subheader(">> INFRASTRUCTURE RISK LANDSCAPE")
 t1, t2, t3, t4 = st.columns(4)
 def gen_landscape_data(category):
