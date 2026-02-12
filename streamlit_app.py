@@ -108,8 +108,9 @@ with map_row1[0]:
     st.markdown("**Bitdefender**")
     st.components.v1.iframe("https://threatmap.bitdefender.com/", height=480, scrolling=True)
 with map_row1[1]:
-    st.markdown("**Digital Attack Map**")
-    st.components.v1.iframe("https://www.digitalattackmap.com/", height=480, scrolling=True)
+    # REPLACED: Digital Attack Map -> Sicherheitstacho (Deutsche Telekom Honeypot)
+    st.markdown("**Sicherheitstacho (DT)**")
+    st.components.v1.iframe("https://www.sicherheitstacho.eu/?lang=en", height=480, scrolling=True)
 with map_row1[2]:
     st.markdown("**Check Point ThreatCloud**")
     st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
@@ -136,9 +137,10 @@ st.markdown("---")
 st.subheader(">> LIVE CVE VULNERABILITIES")
 col_sync, _ = st.columns([1, 6])
 with col_sync:
-    sync_trigger = st.button("🔄 RE-SYNC INFRASTRUCTURE")
+    # RENAMED BUTTON
+    sync_trigger = st.button("🔄 RE-SYNC/REFRESH")
 
-# Replaced flaky API with robust realistic generator
+# Realistic CVE Simulator
 def generate_realistic_cves():
     vendors = ["Apache", "Microsoft", "Cisco", "Oracle", "VMware", "Adobe", "Linux Kernel", "Kubernetes"]
     types = ["Remote Code Execution", "Privilege Escalation", "SQL Injection", "Buffer Overflow", "XSS"]
@@ -175,7 +177,6 @@ with col_right:
 st.markdown("---")
 
 # --- INFRASTRUCTURE RISK LANDSCAPE ---
-# UPDATED: Now uses useful columns (Risk Level, Status) and realistic threat data
 st.subheader(">> INFRASTRUCTURE RISK LANDSCAPE")
 t1, t2, t3, t4 = st.columns(4)
 
