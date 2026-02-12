@@ -121,24 +121,24 @@ with map_row1[1]:
     st.markdown("**Digital Attack Map**")
     st.components.v1.iframe("https://www.digitalattackmap.com/", height=480, scrolling=True)
 with map_row1[2]:
-    st.markdown("**Check Point**")
+    st.markdown("**Check Point ThreatCloud**")
     st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
 with map_row1[3]:
-    st.markdown("**Radware**")
+    st.markdown("**Radware Live Threat Map**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
 
 with map_row2[0]:
+    st.markdown("**Norse Attack Map**")
+    st.components.v1.iframe("https://map.norsecorp.com/", height=480, scrolling=True)
+with map_row2[1]:
+    st.markdown("**Akamai Attack Map**")
+    st.components.v1.iframe("https://www.akamai.com/attack-map", height=480, scrolling=True)
+with map_row2[2]:
+    st.markdown("**Fortinet Threat Map**")
+    st.components.v1.iframe("https://fortiguard.fortinet.com/threat-map", height=480, scrolling=True)
+with map_row2[3]:
     st.markdown("**SecurityWizardry Radar**")
     st.components.v1.iframe("https://radar.securitywizardry.com/", height=480, scrolling=True)
-with map_row2[1]:
-    st.markdown("**Akamai**")
-    st.components.v1.iframe("https://www.akamai.com/us/en/resources/akamai-threat-map.jsp", height=480, scrolling=True)
-with map_row2[2]:
-    st.markdown("**Kaspersky**")
-    st.components.v1.iframe("https://cybermap.kaspersky.com/", height=480, scrolling=True)
-with map_row2[3]:
-    st.markdown("**Fortinet**")
-    st.components.v1.iframe("https://threatmap.fortinet.com/", height=480, scrolling=True)
 
 st.markdown("---")
 
