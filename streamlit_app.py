@@ -68,6 +68,39 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# --- DATA GENERATORS ---
+def get_intel_summary():
+    intel = [
+        "Unauthorized lateral movement detected via SMB exploit",
+        "Credential harvesting via ADFS identity bypass kit",
+        "Critical RCE vulnerability in edge VPN gateway",
+        "Encrypted tunnel established to known C2 infrastructure",
+        "Privilege escalation identified in container runtime",
+        "Zero-day exploit observed targeting local SSL stack",
+        "Memory corruption identified in active kernel driver",
+        "Sensitive data exfiltration attempt via DNS tunneling"
+    ]
+    return random.choice(intel)
+
+def render_terminal_table(df):
+    if df is None or df.empty:
+        st.info("No data available yet. Click RE-SYNC.")
+        return
+    html = '<table class="terminal-table"><thead><tr>' + ''.join(f'<th>{col}</th>' for col in df.columns) + '</tr></thead><tbody>'
+    for _, row in df.iterrows():
+        html += '<tr>'
+        for col in df.columns:
+            val = str(row[col])
+            if any(k in val.upper() for k in ["CRITICAL", "9.", "SURGING", "IMMINENT"]):
+                html += f'<td class="crit">{val}</td>'
+            elif any(k in val.upper() for k in ["HIGH", "8.", "7."]):
+                html += f'<td class="high">{val}</td>'
+            else:
+                html += f'<td class="med">{val}</td>'
+        html += '</tr>'
+    html += '</tbody></table>'
+    st.markdown(html, unsafe_allow_html=True)
+
 # --- HEADER SECTION ---
 st.markdown(f'<div class="clock-header">SYSTEM_TIME: {datetime.now().strftime("%H:%M:%S")} UTC</div>', unsafe_allow_html=True)
 st.title("🔒 SecAI-Nexus")
@@ -75,25 +108,25 @@ st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
 st.caption("Target: Worldwide • Protocol: Real-time Intelligence")
 st.markdown("---")
 
-# === LIVE CYBER THREAT MAPS (First on page - Larger) ===
+# === LIVE CYBER THREAT MAPS (First) ===
 st.subheader(">> LIVE CYBER THREAT MAPS")
-st.caption("Real-time global attack activity from trusted sources")
+st.caption("Real-time global attack activity")
 map_row1 = st.columns(2)
 map_row2 = st.columns(2)
 
 with map_row1[0]:
-    st.markdown("**Bitdefender Global Threat Map**")
-    st.components.v1.iframe("https://threatmap.bitdefender.com/", height=480, scrolling=True)
+    st.markdown("**Bitdefender**")
+    st.components.v1.iframe("https://threatmap.bitdefender.com/", height=420, scrolling=True)
 with map_row1[1]:
     st.markdown("**Norse Attack Map**")
-    st.components.v1.iframe("https://map.norsecorp.com/", height=480, scrolling=True)
+    st.components.v1.iframe("https://map.norsecorp.com/", height=420, scrolling=True)
 
 with map_row2[0]:
     st.markdown("**Digital Attack Map**")
-    st.components.v1.iframe("https://www.digitalattackmap.com/", height=480, scrolling=True)
+    st.components.v1.iframe("https://www.digitalattackmap.com/", height=420, scrolling=True)
 with map_row2[1]:
     st.markdown("**Check Point ThreatCloud**")
-    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
+    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=420, scrolling=True)
 
 st.markdown("---")
 
