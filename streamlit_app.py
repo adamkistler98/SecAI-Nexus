@@ -137,9 +137,9 @@ with map_row1[1]:
     st.markdown("**Sicherheitstacho (DT)**")
     st.components.v1.iframe("https://www.sicherheitstacho.eu/?lang=en", height=480, scrolling=True)
 with map_row1[2]:
-    # REPLACED: Netscout -> WatchGuard Threat Lab (Retro/Cyber Style)
-    st.markdown("**WatchGuard Threat Lab**")
-    st.components.v1.iframe("https://www.secplicity.org/threatmap/", height=480, scrolling=True)
+    # REPLACED: WatchGuard -> Check Point ThreatCloud (Verified Working)
+    st.markdown("**Check Point ThreatCloud**")
+    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
 with map_row1[3]:
     st.markdown("**Radware Live Threat Map**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
