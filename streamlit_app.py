@@ -75,25 +75,25 @@ st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
 st.caption("Target: Worldwide • Protocol: Real-time Intelligence")
 st.markdown("---")
 
-# === LIVE CYBER THREAT MAPS (Placed First) ===
+# === LIVE CYBER THREAT MAPS (First on page - Larger) ===
 st.subheader(">> LIVE CYBER THREAT MAPS")
-st.caption("Real-time global attack activity")
+st.caption("Real-time global attack activity from trusted sources")
 map_row1 = st.columns(2)
 map_row2 = st.columns(2)
 
 with map_row1[0]:
-    st.markdown("**Bitdefender**")
-    st.components.v1.iframe("https://threatmap.bitdefender.com/", height=380, scrolling=True)
+    st.markdown("**Bitdefender Global Threat Map**")
+    st.components.v1.iframe("https://threatmap.bitdefender.com/", height=480, scrolling=True)
 with map_row1[1]:
     st.markdown("**Norse Attack Map**")
-    st.components.v1.iframe("https://map.norsecorp.com/", height=380, scrolling=True)
+    st.components.v1.iframe("https://map.norsecorp.com/", height=480, scrolling=True)
 
 with map_row2[0]:
     st.markdown("**Digital Attack Map**")
-    st.components.v1.iframe("https://www.digitalattackmap.com/", height=380, scrolling=True)
+    st.components.v1.iframe("https://www.digitalattackmap.com/", height=480, scrolling=True)
 with map_row2[1]:
     st.markdown("**Check Point ThreatCloud**")
-    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=380, scrolling=True)
+    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
 
 st.markdown("---")
 
