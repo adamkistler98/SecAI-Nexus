@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import requests
 import random
 from datetime import datetime
 
@@ -96,7 +97,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- DATA GENERATORS ---
+# --- DATA FETCHING & PROCESSING ---
 
 def render_terminal_table(df):
     if df is None or df.empty:
@@ -107,15 +108,53 @@ def render_terminal_table(df):
         html += '<tr>'
         for col in df.columns:
             val = str(row[col])
+            # Intelligent Color Logic
             if any(k in val.upper() for k in ["CRITICAL", "9.", "ACTIVE_EXPLOIT", "BREACH"]):
                 html += f'<td class="crit">{val}</td>'
-            elif any(k in val.upper() for k in ["HIGH", "8.", "7.", "ELEVATED"]):
+            elif any(k in val.upper() for k in ["HIGH", "8.", "7.", "ELEVATED", "PATCHING"]):
                 html += f'<td class="high">{val}</td>'
             else:
                 html += f'<td class="med">{val}</td>'
         html += '</tr>'
     html += '</tbody></table>'
     st.markdown(html, unsafe_allow_html=True)
+
+# 1. REAL CVE API (CIRCL.LU)
+# Fetches the last 30 CVEs published globally
+def fetch_real_cves():
+    url = "https://cve.circl.lu/api/last/30"
+    try:
+        response = requests.get(url, timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            cve_list = []
+            for item in data:
+                cve_id = item.get("id", "UNKNOWN")
+                # Try to find a CVSS score (v3 or v2)
+                cvss = item.get("cvss", 0.0)
+                if not cvss and "cvss3" in item:
+                    cvss = item["cvss3"]
+                
+                # Clean up summary
+                summary = item.get("summary", "No description available.")
+                if len(summary) > 100:
+                    summary = summary[:97] + "..."
+                
+                cve_list.append({
+                    "ID": cve_id,
+                    "CVSS": float(cvss) if cvss else 0.0,
+                    "SUMMARY": summary
+                })
+            # Sort by CVSS descending to show most critical first
+            return sorted(cve_list, key=lambda x: x['CVSS'], reverse=True)
+        else:
+            return generate_fallback_data()
+    except:
+        return generate_fallback_data()
+
+def generate_fallback_data():
+    # Fallback only if API fails
+    return [{"ID": "API-ERR-01", "CVSS": 0.0, "SUMMARY": "Unable to reach CVE database. Check uplink."}]
 
 # --- HEADER SECTION ---
 st.markdown(f'<div class="clock-header">SYSTEM_TIME: {datetime.now().strftime("%H:%M:%S")} UTC // SECURE_UPLINK_ESTABLISHED</div>', unsafe_allow_html=True)
@@ -137,7 +176,6 @@ with map_row1[1]:
     st.markdown("**Sicherheitstacho (DT)**")
     st.components.v1.iframe("https://www.sicherheitstacho.eu/?lang=en", height=480, scrolling=True)
 with map_row1[2]:
-    # REPLACED: WatchGuard -> Check Point ThreatCloud (Verified Working)
     st.markdown("**Check Point ThreatCloud**")
     st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
 with map_row1[3]:
@@ -164,34 +202,18 @@ st.components.v1.iframe("https://viz.greynoise.io/", height=800, scrolling=True)
 
 st.markdown("---")
 
-# --- LIVE CVE VULNERABILITIES ---
-st.subheader(">> LIVE CVE VULNERABILITIES")
+# --- LIVE CVE VULNERABILITIES (REAL DATA) ---
+st.subheader(">> LIVE CVE VULNERABILITIES (REAL-TIME FEED)")
 col_sync, col_download, _ = st.columns([1, 2, 4])
 
-# Realistic CVE Simulator
-def generate_realistic_cves():
-    vendors = ["Apache", "Microsoft", "Cisco", "Oracle", "VMware", "Adobe", "Linux Kernel", "Kubernetes"]
-    types = ["Remote Code Execution", "Privilege Escalation", "SQL Injection", "Buffer Overflow", "XSS"]
-    cves = []
-    for _ in range(20):
-        year = random.choice([2025, 2026])
-        num = random.randint(1000, 99999)
-        score = round(random.uniform(5.0, 10.0), 1)
-        vendor = random.choice(vendors)
-        vuln_type = random.choice(types)
-        cves.append({
-            "ID": f"CVE-{year}-{num}",
-            "CVSS": score,
-            "SUMMARY": f"{vuln_type} in {vendor} Core causing denial of service or data leak."
-        })
-    return sorted(cves, key=lambda x: x['CVSS'], reverse=True)
-
+# Initialize Session State
 if "grc_stream" not in st.session_state:
-    st.session_state.grc_stream = generate_realistic_cves()
+    with st.spinner('INITIALIZING SECURE LINK...'):
+        st.session_state.grc_stream = fetch_real_cves()
 
 with col_sync:
     if st.button("🔄 RE-SYNC/REFRESH"):
-        st.session_state.grc_stream = generate_realistic_cves()
+        st.session_state.grc_stream = fetch_real_cves()
         st.rerun()
 
 with col_download:
@@ -210,39 +232,49 @@ with col_left:
     df1 = pd.DataFrame(st.session_state.grc_stream[:10])
     render_terminal_table(df1[['ID', 'CVSS', 'SUMMARY']])
 with col_right:
-    st.subheader("ELEVATED VULNERABILITIES (Next 10)")
+    st.subheader("RECENT VULNERABILITIES (Next 10)")
     df2 = pd.DataFrame(st.session_state.grc_stream[10:20])
     render_terminal_table(df2[['ID', 'CVSS', 'SUMMARY']])
 
 st.markdown("---")
 
-# --- INFRASTRUCTURE RISK LANDSCAPE ---
+# --- INFRASTRUCTURE RISK LANDSCAPE (CURATED REAL INTEL) ---
 st.subheader(">> INFRASTRUCTURE RISK LANDSCAPE")
 t1, t2, t3, t4 = st.columns(4)
 
+# 2. SEMI-STATIC THREAT LANDSCAPE
+# Since there is no free "Live Ransomware Feed" API, we use a curated list
+# of currently active major threat groups (2025/2026 era) to ensure realism.
 def gen_landscape_data(category):
     risks = ["CRITICAL", "HIGH", "MEDIUM"]
     statuses = ["ACTIVE_EXPLOIT", "PATCHING", "MONITORING", "CONTAINED"]
+    
     data = []
     for i in range(10): 
         risk = random.choice(risks)
         status = "ACTIVE_EXPLOIT" if risk == "CRITICAL" else random.choice(statuses)
         
         if category == "RANSOMWARE":
-            groups = ["BlackCat", "LockBit 3.0", "Akira", "Clop", "Royal"]
-            sectors = ["Healthcare", "Finance", "Mfg", "Retail"]
+            # Real Groups
+            groups = ["BlackCat/ALPHV", "LockBit 3.0", "Akira", "Cl0p", "Royal", "Play", "8Base"]
+            sectors = ["Healthcare", "Finance", "Mfg", "Retail", "Gov", "Edu"]
             data.append({"GROUP": random.choice(groups), "SECTOR": random.choice(sectors), "RISK": risk, "STATUS": status})
+            
         elif category == "MALWARE":
-            families = ["Emotet", "Cobalt Strike", "Qakbot", "AgentTesla"]
+            # Real Families
+            families = ["Emotet", "Cobalt Strike", "Qakbot", "AgentTesla", "FormBook", "RedLine"]
             vectors = ["Email", "Drive-by", "USB", "RDP"]
             data.append({"FAMILY": random.choice(families), "VECTOR": random.choice(vectors), "RISK": risk, "STATUS": status})
+            
         elif category == "PHISHING":
-            types = ["Spear Phishing", "Whaling", "Clone Phishing", "Smishing"]
-            targets = ["Execs", "HR Dept", "IT Admins", "Sales"]
+            types = ["Spear Phishing", "Whaling", "AiTM (MFA Bypass)", "Smishing", "QR-Phish"]
+            targets = ["Execs", "HR Dept", "IT Admins", "Sales", "DevOps"]
             data.append({"TYPE": random.choice(types), "TARGET": random.choice(targets), "RISK": risk, "STATUS": status})
+            
         elif category == "APT":
-            actors = ["APT29 (RU)", "APT41 (CN)", "Lazarus (NK)", "Charming Kitten (IR)"]
-            methods = ["Supply Chain", "Zero-Day", "Social Eng.", "Valid Accts"]
+            # Real Nation-State Actors
+            actors = ["APT29 (Cozy Bear)", "APT41 (Double Dragon)", "Lazarus (Hidden Cobra)", "Volt Typhoon", "Sandworm"]
+            methods = ["Supply Chain", "Zero-Day", "Social Eng.", "Valid Accts", "Living-off-Land"]
             data.append({"ACTOR": random.choice(actors), "METHOD": random.choice(methods), "RISK": risk, "STATUS": status})
 
     return pd.DataFrame(data)
