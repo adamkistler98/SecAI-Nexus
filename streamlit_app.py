@@ -137,9 +137,9 @@ with map_row1[1]:
     st.markdown("**Sicherheitstacho (DT)**")
     st.components.v1.iframe("https://www.sicherheitstacho.eu/?lang=en", height=480, scrolling=True)
 with map_row1[2]:
-    # REPLACED: FireEye -> Barracuda Threat Map
-    st.markdown("**Barracuda Threat Map**")
-    st.components.v1.iframe("https://www.barracuda.com/threat-map", height=480, scrolling=True)
+    # REPLACED: Barracuda -> NETSCOUT Cyber Threat Horizon (High-end 3D Map)
+    st.markdown("**NETSCOUT Threat Horizon**")
+    st.components.v1.iframe("https://horizon.netscout.com/?kiosk=true", height=480, scrolling=True)
 with map_row1[3]:
     st.markdown("**Radware Live Threat Map**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
@@ -159,9 +159,8 @@ with map_row2[3]:
 
 st.markdown("---")
 
-# === LARGE MAP SECTION (GREYNOISE) ===
-# TITLE UPDATED AS REQUESTED
-st.subheader(">> GREYNOISE VISUALIZER - Real-time sensor grid analyzing internet background radiation and mass-scanning activity")
+# === LARGE MAP SECTION (GREYNOISE - NO HEADER) ===
+# Header removed as requested. Directly placing the large sensor map.
 st.components.v1.iframe("https://viz.greynoise.io/", height=800, scrolling=True)
 
 st.markdown("---")
