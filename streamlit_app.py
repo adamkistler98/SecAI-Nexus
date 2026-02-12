@@ -124,8 +124,8 @@ st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
 st.caption("Target: Worldwide • Protocol: Real-time Intelligence • Encryption: AES-256")
 st.markdown("---")
 
-# === LIVE CYBER THREAT MAPS ===
-st.subheader(">> LIVE CYBER THREAT MAPS")
+# === LIVE CYBER THREAT MAPS (SMALL GRID) ===
+st.subheader(">> LIVE CYBER THREAT MAPS (SECTOR A)")
 st.caption("Real-time global attack activity from trusted sources")
 map_row1 = st.columns(4)
 map_row2 = st.columns(4)
@@ -137,9 +137,9 @@ with map_row1[1]:
     st.markdown("**Sicherheitstacho (DT)**")
     st.components.v1.iframe("https://www.sicherheitstacho.eu/?lang=en", height=480, scrolling=True)
 with map_row1[2]:
-    # REPLACED: Submarine -> GreyNoise (High-End Sensor Grid)
-    st.markdown("**GreyNoise Visualizer**")
-    st.components.v1.iframe("https://viz.greynoise.io/", height=480, scrolling=True)
+    # REPLACED: GreyNoise moved down -> FireEye/Trellix Added Here
+    st.markdown("**FireEye / Trellix Map**")
+    st.components.v1.iframe("https://www.fireeye.com/cyber-map/threat-map.html", height=480, scrolling=True)
 with map_row1[3]:
     st.markdown("**Radware Live Threat Map**")
     st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
@@ -156,6 +156,14 @@ with map_row2[2]:
 with map_row2[3]:
     st.markdown("**Threatbutt Attack Map**")
     st.components.v1.iframe("https://threatbutt.com/map/", height=480, scrolling=True)
+
+st.markdown("---")
+
+# === LARGE MAP SECTION (GREYNOISE) ===
+st.subheader(">> DEEP SPACE SENSOR: GREYNOISE VISUALIZER")
+st.caption("Monitoring background internet radiation and mass-scan activity")
+# GreyNoise placed here, scaled up
+st.components.v1.iframe("https://viz.greynoise.io/", height=800, scrolling=True)
 
 st.markdown("---")
 
