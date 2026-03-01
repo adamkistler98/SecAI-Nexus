@@ -94,6 +94,17 @@ st.markdown("""
         text-transform: uppercase;
         width: 100%;
     }
+    
+    /* CUSTOM SUBTITLES */
+    .stealth-subtitle {
+        font-size: 0.9rem !important;
+        font-weight: bold;
+        color: #00ff41;
+        margin-top: 20px;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -119,20 +130,31 @@ def render_terminal_table(df):
     html += '</tbody></table>'
     st.markdown(html, unsafe_allow_html=True)
 
+# Helper function to render muted iframes
+def render_muted_iframe(url, height=480):
+    iframe_html = f"""
+    <iframe src="{url}" 
+            width="100%" 
+            height="{height}" 
+            style="border:none;" 
+            sandbox="allow-scripts allow-same-origin"
+            allow="autoplay 'none'; audio 'none'; microphone 'none'">
+    </iframe>
+    """
+    st.markdown(iframe_html, unsafe_allow_html=True)
+
 # 1. ROBUST DATA FETCHING (Live -> Simulation Fallback)
 def fetch_real_cves():
     url = "https://cve.circl.lu/api/last/30"
     try:
-        response = requests.get(url, timeout=3) # Short timeout to prevent hanging
+        response = requests.get(url, timeout=3)
         if response.status_code == 200:
             data = response.json()
             cve_list = []
             for item in data:
-                # Validation Logic
                 cve_id = item.get("id")
                 summary = item.get("summary")
                 
-                # If crucial data is missing, skip or fix
                 if not cve_id or not summary or "Unknown" in cve_id:
                     continue
                     
@@ -140,7 +162,6 @@ def fetch_real_cves():
                 if not cvss and "cvss3" in item:
                     cvss = item["cvss3"]
                 
-                # Truncate long summaries
                 if len(summary) > 90:
                     summary = summary[:87] + "..."
                 
@@ -150,18 +171,15 @@ def fetch_real_cves():
                     "SUMMARY": summary
                 })
             
-            # If API returns valid data, return it
             if len(cve_list) > 5:
                 return sorted(cve_list, key=lambda x: x['CVSS'], reverse=True)
             
     except Exception:
-        pass # Silently fail to simulation
+        pass 
     
-    # If fetch fails or data is empty, run High-Fidelity Simulation
     return generate_high_fidelity_sim()
 
 def generate_high_fidelity_sim():
-    """Generates 'Real-Feel' data so dashboard never shows 'UNKNOWN'."""
     vendors = ["Apache", "Microsoft", "Cisco", "Oracle", "VMware", "Adobe", "Linux Kernel", "Kubernetes", "OpenSSL", "Jenkins"]
     vuln_types = ["Remote Code Execution", "Privilege Escalation", "SQL Injection", "Heap Buffer Overflow", "XSS", "Deserialization"]
     
@@ -193,54 +211,54 @@ compact_header = f"""
             SYS_TIME: {datetime.now().strftime("%H:%M:%S")} UTC
         </div>
     </div>
-    <div style="font-size: 0.7rem; color: #888; margin-top: 4px; text-transform: uppercase;">
-        Target: Worldwide | Protocol: Real-time Intel | Enc: AES-256 | Uplink: SECURE
+    <div style="font-size: 0.55rem; color: #888; margin-top: 4px; text-transform: uppercase;">
+        Worldwide | Real-time | Enc: AES-256 | Status: <span style="color: #00ff41;">SECURE</span>
     </div>
 </div>
 """
 st.markdown(compact_header, unsafe_allow_html=True)
 
 # === LIVE CYBER THREAT MAPS (SMALL GRID) ===
-st.subheader(">> LIVE CYBER THREAT MAPS")
+st.markdown('<div class="stealth-subtitle">>> LIVE CYBER THREAT MAPS</div>', unsafe_allow_html=True)
 st.caption("Real-time global attack activity from trusted sources")
 map_row1 = st.columns(4)
 map_row2 = st.columns(4)
 
 with map_row1[0]:
     st.markdown("**Bitdefender**")
-    st.components.v1.iframe("https://threatmap.bitdefender.com/", height=480, scrolling=True)
+    render_muted_iframe("https://threatmap.bitdefender.com/", height=480)
 with map_row1[1]:
     st.markdown("**Sicherheitstacho (DT)**")
-    st.components.v1.iframe("https://www.sicherheitstacho.eu/?lang=en", height=480, scrolling=True)
+    render_muted_iframe("https://www.sicherheitstacho.eu/?lang=en", height=480)
 with map_row1[2]:
     st.markdown("**Check Point ThreatCloud**")
-    st.components.v1.iframe("https://threatmap.checkpoint.com/", height=480, scrolling=True)
+    render_muted_iframe("https://threatmap.checkpoint.com/", height=480)
 with map_row1[3]:
     st.markdown("**Radware Live Threat Map**")
-    st.components.v1.iframe("https://livethreatmap.radware.com/", height=480, scrolling=True)
+    render_muted_iframe("https://livethreatmap.radware.com/", height=480)
 
 with map_row2[0]:
     st.markdown("**Fortinet Threat Map**")
-    st.components.v1.iframe("https://threatmap.fortiguard.com/", height=480, scrolling=True)
+    render_muted_iframe("https://threatmap.fortiguard.com/", height=480)
 with map_row2[1]:
     st.markdown("**Kaspersky Cybermap**")
-    st.components.v1.iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=480, scrolling=True)
+    render_muted_iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=480)
 with map_row2[2]:
     st.markdown("**SonicWall Live Map**")
-    st.components.v1.iframe("https://attackmap.sonicwall.com/live-attack-map/", height=480, scrolling=True)
+    render_muted_iframe("https://attackmap.sonicwall.com/live-attack-map/", height=480)
 with map_row2[3]:
     st.markdown("**Threatbutt Attack Map**")
-    st.components.v1.iframe("https://threatbutt.com/map/", height=480, scrolling=True)
+    render_muted_iframe("https://threatbutt.com/map/", height=480)
 
 st.markdown("---")
 
 # === LARGE MAP SECTION (GREYNOISE - NO HEADER) ===
-st.components.v1.iframe("https://viz.greynoise.io/", height=800, scrolling=True)
+render_muted_iframe("https://viz.greynoise.io/", height=800)
 
 st.markdown("---")
 
 # --- LIVE CVE VULNERABILITIES (REAL DATA) ---
-st.subheader(">> LIVE CVE VULNERABILITIES (REAL-TIME FEED)")
+st.markdown('<div class="stealth-subtitle">>> LIVE CVE VULNERABILITIES (REAL-TIME FEED)</div>', unsafe_allow_html=True)
 col_sync, col_download, _ = st.columns([1, 2, 4])
 
 # Initialize Session State
@@ -265,18 +283,18 @@ with col_download:
 
 col_left, col_right = st.columns(2)
 with col_left:
-    st.subheader("CRITICAL VULNERABILITIES (Top 10)")
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">CRITICAL VULNERABILITIES (Top 10)</div>', unsafe_allow_html=True)
     df1 = pd.DataFrame(st.session_state.grc_stream[:10])
     render_terminal_table(df1[['ID', 'CVSS', 'SUMMARY']])
 with col_right:
-    st.subheader("RECENT VULNERABILITIES (Next 10)")
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">RECENT VULNERABILITIES (Next 10)</div>', unsafe_allow_html=True)
     df2 = pd.DataFrame(st.session_state.grc_stream[10:20])
     render_terminal_table(df2[['ID', 'CVSS', 'SUMMARY']])
 
 st.markdown("---")
 
 # --- INFRASTRUCTURE RISK LANDSCAPE (CURATED REAL INTEL) ---
-st.subheader(">> INFRASTRUCTURE RISK LANDSCAPE")
+st.markdown('<div class="stealth-subtitle">>> INFRASTRUCTURE RISK LANDSCAPE</div>', unsafe_allow_html=True)
 t1, t2, t3, t4 = st.columns(4)
 
 # 2. SEMI-STATIC THREAT LANDSCAPE
@@ -290,13 +308,11 @@ def gen_landscape_data(category):
         status = "ACTIVE_EXPLOIT" if risk == "CRITICAL" else random.choice(statuses)
         
         if category == "RANSOMWARE":
-            # Real Groups
             groups = ["BlackCat/ALPHV", "LockBit 3.0", "Akira", "Cl0p", "Royal", "Play", "8Base"]
             sectors = ["Healthcare", "Finance", "Mfg", "Retail", "Gov", "Edu"]
             data.append({"GROUP": random.choice(groups), "SECTOR": random.choice(sectors), "RISK": risk, "STATUS": status})
             
         elif category == "MALWARE":
-            # Real Families
             families = ["Emotet", "Cobalt Strike", "Qakbot", "AgentTesla", "FormBook", "RedLine"]
             vectors = ["Email", "Drive-by", "USB", "RDP"]
             data.append({"FAMILY": random.choice(families), "VECTOR": random.choice(vectors), "RISK": risk, "STATUS": status})
@@ -307,7 +323,6 @@ def gen_landscape_data(category):
             data.append({"TYPE": random.choice(types), "TARGET": random.choice(targets), "RISK": risk, "STATUS": status})
             
         elif category == "APT":
-            # Real Nation-State Actors
             actors = ["APT29 (Cozy Bear)", "APT41 (Double Dragon)", "Lazarus (Hidden Cobra)", "Volt Typhoon", "Sandworm"]
             methods = ["Supply Chain", "Zero-Day", "Social Eng.", "Valid Accts", "Living-off-Land"]
             data.append({"ACTOR": random.choice(actors), "METHOD": random.choice(methods), "RISK": risk, "STATUS": status})
@@ -315,16 +330,16 @@ def gen_landscape_data(category):
     return pd.DataFrame(data)
 
 with t1:
-    st.markdown("### 💀 RANSOMWARE")
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">💀 RANSOMWARE</div>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("RANSOMWARE"))
 with t2:
-    st.markdown("### 🦠 MALWARE")
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">🦠 MALWARE</div>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("MALWARE"))
 with t3:
-    st.markdown("### 🎣 PHISHING")
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">🎣 PHISHING</div>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("PHISHING"))
 with t4:
-    st.markdown("### 🕵️ APT GROUPS")
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">🕵️ APT GROUPS</div>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("APT"))
 
 # DASHBOARD ENDS HERE
