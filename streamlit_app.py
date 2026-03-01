@@ -23,24 +23,15 @@ st.markdown("""
     header, footer { visibility: hidden; }
     .stDeployButton { display: none; }
     
-# --- HEADER SECTION ---
-compact_header = f"""
-<div style="border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; margin-top: -50px;">
-    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
-        <div>
-            <span style="font-size: 1.2rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
-            <span style="font-size: 0.85rem; color: #00ff41; margin-left: 8px;">// GLOBAL THREAT VISIBILITY</span>
-        </div>
-        <div style="font-size: 0.85rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">
-            SYS_TIME: {datetime.now().strftime("%H:%M:%S")} UTC
-        </div>
-    </div>
-    <div style="font-size: 0.7rem; color: #888; margin-top: 4px; text-transform: uppercase;">
-        Target: Worldwide | Protocol: Real-time Intel | Enc: AES-256 | Uplink: SECURE
-    </div>
-</div>
-"""
-st.markdown(compact_header, unsafe_allow_html=True)
+    /* SYSTEM HEADER */
+    .clock-header {
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: right;
+        color: #00ff41;
+        margin-bottom: -20px;
+        text-shadow: 0 0 5px #00ff41;
+    }
     
     /* METRICS BOXES */
     div[data-testid="stMetric"] {
@@ -191,11 +182,23 @@ def generate_high_fidelity_sim():
 
 
 # --- HEADER SECTION ---
-st.markdown(f'<div class="clock-header">SYSTEM_TIME: {datetime.now().strftime("%H:%M:%S")} UTC // SECURE_UPLINK_ESTABLISHED</div>', unsafe_allow_html=True)
-st.title("🔒 SecAI-Nexus")
-st.markdown("**// GLOBAL THREAT VISIBILITY DASHBOARD**")
-st.caption("Target: Worldwide • Protocol: Real-time Intelligence • Encryption: AES-256")
-st.markdown("---")
+compact_header = f"""
+<div style="border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; margin-top: -50px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
+        <div>
+            <span style="font-size: 1.2rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
+            <span style="font-size: 0.85rem; color: #00ff41; margin-left: 8px;">// GLOBAL THREAT VISIBILITY</span>
+        </div>
+        <div style="font-size: 0.85rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">
+            SYS_TIME: {datetime.now().strftime("%H:%M:%S")} UTC
+        </div>
+    </div>
+    <div style="font-size: 0.7rem; color: #888; margin-top: 4px; text-transform: uppercase;">
+        Target: Worldwide | Protocol: Real-time Intel | Enc: AES-256 | Uplink: SECURE
+    </div>
+</div>
+"""
+st.markdown(compact_header, unsafe_allow_html=True)
 
 # === LIVE CYBER THREAT MAPS (SMALL GRID) ===
 st.subheader(">> LIVE CYBER THREAT MAPS")
