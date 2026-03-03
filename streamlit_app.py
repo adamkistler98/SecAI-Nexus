@@ -252,8 +252,22 @@ with map_row2[3]:
 
 st.markdown("---")
 
-# === LARGE MAP SECTION (GREYNOISE - NO HEADER) ===
+# === LARGE MAP SECTION (GREYNOISE ENHANCED) ===
+# GreyNoise Main Search with Direct Link
+st.markdown('<div class="stealth-subtitle">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://viz.greynoise.io/</a>)</div>', unsafe_allow_html=True)
 render_muted_iframe("https://viz.greynoise.io/", height=800)
+
+st.markdown("---")
+
+# GreyNoise Today Embed
+st.markdown('<div class="stealth-subtitle">>> GREYNOISE TODAY</div>', unsafe_allow_html=True)
+render_muted_iframe("https://viz.greynoise.io/query/last_seen:1d", height=800)
+
+st.markdown("---")
+
+# GreyNoise Trends Embed
+st.markdown('<div class="stealth-subtitle">>> GREYNOISE TRENDS</div>', unsafe_allow_html=True)
+render_muted_iframe("https://viz.greynoise.io/trends/trending", height=800)
 
 st.markdown("---")
 
