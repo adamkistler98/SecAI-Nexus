@@ -271,6 +271,12 @@ render_muted_iframe("https://viz.greynoise.io/trends/trending", height=800)
 
 st.markdown("---")
 
+# GreyNoise Tags Embed
+st.markdown('<div class="stealth-subtitle">>> GREYNOISE TAGS</div>', unsafe_allow_html=True)
+render_muted_iframe("https://viz.greynoise.io/tags", height=800)
+
+st.markdown("---")
+
 # --- LIVE CVE VULNERABILITIES (REAL DATA) ---
 st.markdown('<div class="stealth-subtitle">>> LIVE CVE VULNERABILITIES (REAL-TIME FEED)</div>', unsafe_allow_html=True)
 col_sync, col_download, _ = st.columns([1, 2, 4])
