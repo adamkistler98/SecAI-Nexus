@@ -280,9 +280,24 @@ render_muted_iframe("https://mitre-attack.github.io/attack-navigator/", height=7
 
 st.markdown("---")
 
-# === SHODAN EXPOSURE INTELLIGENCE ===
-st.markdown('<div class="stealth-subtitle">>> SHODAN EXPOSURE INTELLIGENCE (<a href="https://www.shodan.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://www.shodan.io/</a>) - The search engine for internet-connected devices, used to discover exposed infrastructure, open ports, and vulnerable services.</div>', unsafe_allow_html=True)
-render_muted_iframe("https://www.shodan.io/", height=650)
+# === OSINT & EXPOSURE INTELLIGENCE (2x2 GRID) ===
+st.markdown('<div class="stealth-subtitle">>> OSINT & EXPOSURE INTELLIGENCE</div>', unsafe_allow_html=True)
+
+osint_col1, osint_col2 = st.columns(2)
+
+with osint_col1:
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #888;">SHODAN (<a href="https://www.shodan.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://www.shodan.io/</a>) - The search engine for exposed internet-connected devices and open ports.</div>', unsafe_allow_html=True)
+    render_muted_iframe("https://www.shodan.io/", height=600)
+    
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; margin-top: 15px; color: #888;">EXPLOIT DATABASE (<a href="https://www.exploit-db.com/" target="_blank" style="color: #00ff41; text-decoration: none;">https://www.exploit-db.com/</a>) - The ultimate archive of public exploits and corresponding vulnerable software.</div>', unsafe_allow_html=True)
+    render_muted_iframe("https://www.exploit-db.com/", height=600)
+
+with osint_col2:
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #888;">CENSYS (<a href="https://search.censys.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://search.censys.io/</a>) - Advanced attack surface management and host/certificate intelligence.</div>', unsafe_allow_html=True)
+    render_muted_iframe("https://search.censys.io/", height=600)
+    
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; margin-top: 15px; color: #888;">ALIENVAULT OTX (<a href="https://otx.alienvault.com/" target="_blank" style="color: #00ff41; text-decoration: none;">https://otx.alienvault.com/</a>) - Open threat exchange for crowdsourced Indicators of Compromise (IOCs).</div>', unsafe_allow_html=True)
+    render_muted_iframe("https://otx.alienvault.com/", height=600)
 
 st.markdown("---")
 
