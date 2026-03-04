@@ -12,10 +12,10 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- INLINE CSS CONSTANTS (BACK TO NEON GREEN) ---
-GREEN_SUBTITLE = "font-size: 0.9rem !important; font-weight: bold !important; color: #00ff41 !important; margin-top: 20px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;"
-GREEN_LABEL = "font-size: 0.8rem !important; font-weight: bold !important; color: #00ff41 !important; margin-bottom: 5px; text-transform: uppercase;"
-GREEN_LABEL_MT = "font-size: 0.8rem !important; font-weight: bold !important; color: #00ff41 !important; margin-top: 15px; margin-bottom: 5px; text-transform: uppercase;"
+# --- INLINE CSS CONSTANTS (HIGH VISIBILITY GREEN) ---
+GREEN_SUBTITLE = "font-size: 1.0rem !important; font-weight: bold !important; color: #00ff41 !important; margin-top: 20px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;"
+GREEN_LABEL = "font-size: 0.85rem !important; font-weight: bold !important; color: #00ff41 !important; margin-bottom: 5px; text-transform: uppercase;"
+GREEN_LABEL_MT = "font-size: 0.85rem !important; font-weight: bold !important; color: #00ff41 !important; margin-top: 15px; margin-bottom: 5px; text-transform: uppercase;"
 
 # --- ADVANCED GRC CSS ---
 st.markdown("""
@@ -46,7 +46,7 @@ st.markdown("""
         border-collapse: collapse;
         color: #00cc33;
         font-family: 'Courier New', monospace;
-        font-size: 0.82rem;
+        font-size: 0.85rem;
         margin-bottom: 15px;
         border: 1px solid #222;
         background-color: #050505;
@@ -128,12 +128,12 @@ def render_muted_iframe(url, height=480):
     st.markdown(iframe_html, unsafe_allow_html=True)
 
 def render_simple_link(num, title, url, desc):
-    """Helper function to guarantee the links render perfectly with larger, green text."""
+    """Helper function to guarantee the links render perfectly with LARGER, green text."""
     return f"""
-    <div style="margin-bottom: 18px; font-family: 'Courier New', monospace;">
-        <span style="color: #00ff41; font-weight: bold; font-size: 1.1rem;">{num}.</span> 
-        <a href="{url}" target="_blank" style="color: #00ff41; font-weight: bold; font-size: 1.05rem; text-decoration: none; border-bottom: 1px dashed #00ff41;">{title}</a>
-        <div style="color: #00cc33; font-size: 0.95rem; margin-top: 5px; padding-left: 30px;">{desc}</div>
+    <div style="margin-bottom: 24px; font-family: 'Courier New', monospace;">
+        <span style="color: #00ff41; font-weight: bold; font-size: 1.4rem;">{num}.</span> 
+        <a href="{url}" target="_blank" style="color: #00ff41; font-weight: bold; font-size: 1.35rem; text-decoration: none; border-bottom: 1px dashed #00ff41;">{title}</a>
+        <div style="color: #00cc33; font-size: 1.15rem; margin-top: 8px; padding-left: 45px; line-height: 1.4;">{desc}</div>
     </div>
     """
 
@@ -183,8 +183,8 @@ compact_header = f"""
             SYS_TIME: {datetime.now().strftime("%H:%M:%S")} UTC
         </div>
     </div>
-    <div style="font-size: 0.55rem; color: #00cc33; margin-top: 4px; text-transform: uppercase;">
-        Worldwide | Real-time | Enc: AES-256 | Status: <span style="color: #00ff41;">SECURE</span>
+    <div style="font-size: 0.6rem; color: #00cc33; margin-top: 4px; text-transform: uppercase;">
+        Worldwide | Real-time | Enc: AES-256 | Status: <span style="color: #00ff41; font-weight: bold;">SECURE</span>
     </div>
 </div>
 """
@@ -254,8 +254,8 @@ with osint_col2:
 
 st.markdown("---")
 
-# === TOP 10 ESSENTIAL GRC & THREAT INTEL RESOURCES ===
-st.markdown(f'<div style="{GREEN_SUBTITLE}">>> TOP 10 ESSENTIAL GRC & THREAT INTEL RESOURCES</div>', unsafe_allow_html=True)
+# === ADDITIONAL GRC RESOURCES ===
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> ADDITIONAL GRC RESOURCES</div>', unsafe_allow_html=True)
 
 link_col1, link_col2 = st.columns(2)
 
