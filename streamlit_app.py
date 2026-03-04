@@ -16,6 +16,7 @@ st.set_page_config(
 GREEN_SUBTITLE = "font-size: 1.1rem; font-weight: bold; color: #00ff41; margin-top: 25px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.2px;"
 GREEN_LABEL = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-bottom: 8px; text-transform: uppercase;"
 BLUE_LABEL = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-bottom: 8px; text-transform: uppercase;"
+BLUE_LABEL_MT = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-top: 20px; margin-bottom: 8px; text-transform: uppercase;"
 
 # Base style for all readable sentences/descriptions
 SENTENCE_STYLE_GREEN = "color: #00ff41; font-size: 1.15rem; line-height: 1.6; font-family: 'Courier New', monospace; font-weight: normal; text-transform: none; letter-spacing: normal;"
@@ -81,17 +82,50 @@ st.markdown(f"""
     .high {{ color: #ffaa00 !important; }}
     .med {{ color: #00ff41 !important; }}
     
-    /* BUTTON STYLING */
-    .stButton>button {{
-        background-color: #000000; color: #008aff; border: 2px solid #333;
-        font-size: 0.9rem; font-weight: bold; text-transform: uppercase; 
-        width: 100%;
-        padding: 10px;
+    /* SYNC BUTTON STYLING */
+    div[data-testid="stButton"] > button {{
+        background-color: #050505 !important; 
+        border: 2px solid #333 !important;
+        width: 100% !important;
     }}
-    .stButton>button:hover {{ 
-        border-color: #00ff41; 
-        box-shadow: 0 0 10px #00ff41; 
-        color: #00ff41;
+    div[data-testid="stButton"] > button p,
+    div[data-testid="stButton"] > button span {{
+        color: #008aff !important;
+        font-family: 'Courier New', monospace !important;
+        font-size: 0.9rem !important; 
+        font-weight: bold !important; 
+        text-transform: uppercase !important; 
+    }}
+    div[data-testid="stButton"] > button:hover {{ 
+        border-color: #00ff41 !important; 
+        box-shadow: 0 0 10px #00ff41 !important; 
+    }}
+    div[data-testid="stButton"] > button:hover p,
+    div[data-testid="stButton"] > button:hover span {{
+        color: #00ff41 !important;
+    }}
+    
+    /* DOWNLOAD BUTTON FIX (PREVENT WHITE OUT) */
+    div[data-testid="stDownloadButton"] > button {{
+        background-color: #050505 !important;
+        border: 2px solid #008aff !important;
+        width: 100% !important;
+    }}
+    div[data-testid="stDownloadButton"] > button p,
+    div[data-testid="stDownloadButton"] > button span {{
+        color: #008aff !important;
+        font-family: 'Courier New', monospace !important;
+        font-size: 0.9rem !important;
+        font-weight: bold !important;
+        text-transform: uppercase !important;
+    }}
+    div[data-testid="stDownloadButton"] > button:hover {{
+        background-color: #008aff !important;
+        box-shadow: 0 0 10px #008aff !important;
+    }}
+    div[data-testid="stDownloadButton"] > button:hover p,
+    div[data-testid="stDownloadButton"] > button:hover span {{
+        color: #050505 !important;
     }}
 </style>
 """, unsafe_allow_html=True)
@@ -130,6 +164,7 @@ def render_muted_iframe(url, height=480):
     st.markdown(iframe_html, unsafe_allow_html=True)
 
 def render_simple_link(num, title, url, desc):
+    """Helper function to render Top 20 list with larger green text."""
     return f"""
     <div style="margin-bottom: 25px; font-family: 'Courier New', monospace;">
         <span style="color: #00ff41; font-weight: bold; font-size: 1.4rem;">{num}.</span> 
@@ -190,9 +225,13 @@ compact_header = f"""
 """
 st.markdown(compact_header, unsafe_allow_html=True)
 
-# === LIVE CYBER THREAT MAPS ===
-st.markdown(f'<div style="{GREEN_SUBTITLE}">>> LIVE CYBER THREAT MAPS</div>', unsafe_allow_html=True)
-st.markdown('Real-time global attack activity from trusted sources')
+# === LIVE CYBER THREAT MAPS (COMPACT TEXT) ===
+st.markdown(f'''
+<div style="margin-top: 15px; margin-bottom: 15px; line-height: 1.3;">
+    <span style="font-size: 0.85rem; font-weight: bold; color: #00ff41; text-transform: uppercase;">>> LIVE CYBER THREAT MAPS</span><br>
+    <span style="font-size: 0.75rem; color: #00ff41; font-family: 'Courier New', monospace;">Real-time global attack activity from trusted sources</span>
+</div>
+''', unsafe_allow_html=True)
 
 map_row1 = st.columns(4)
 map_row2 = st.columns(4)
@@ -225,7 +264,7 @@ with map_row2[3]:
 
 st.markdown("---")
 
-# === LARGE MAP SECTION (GREYNOISE TRENDS) ===
+# === LARGE MAP SECTION (GREYNOISE TRENDS VIEW) ===
 st.markdown(f'''
 <div style="{GREEN_SUBTITLE}">
     <span style="color: #008aff;">>> GREYNOISE INTELLIGENCE 
@@ -233,6 +272,7 @@ st.markdown(f'''
     - <span style="{SENTENCE_STYLE_GREEN}">A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious. (TRENDS VIEW)</span>
 </div>
 ''', unsafe_allow_html=True)
+
 render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1400)
 
 st.markdown("---")
@@ -251,6 +291,7 @@ st.markdown("---")
 
 # === ADDITIONAL GRC RESOURCES (TOP 25) ===
 st.markdown(f'<div style="{GREEN_SUBTITLE}">>> ADDITIONAL GRC RESOURCES</div>', unsafe_allow_html=True)
+
 link_col1, link_col2 = st.columns(2)
 
 with link_col1:
@@ -284,7 +325,7 @@ with link_col2:
 
 st.markdown("---")
 
-# --- LIVE CVE VULNERABILITIES ---
+# --- LIVE CVE VULNERABILITIES (REAL DATA) ---
 st.markdown(f'<div style="{GREEN_SUBTITLE}">>> LIVE CVE VULNERABILITIES (REAL-TIME FEED)</div>', unsafe_allow_html=True)
 col_sync, col_download, _ = st.columns([1, 2, 4])
 
@@ -318,7 +359,7 @@ with col_right:
 
 st.markdown("---")
 
-# --- INFRASTRUCTURE RISK LANDSCAPE ---
+# --- INFRASTRUCTURE RISK LANDSCAPE (CURATED REAL INTEL) ---
 st.markdown(f'<div style="{GREEN_SUBTITLE}">>> INFRASTRUCTURE RISK LANDSCAPE</div>', unsafe_allow_html=True)
 t1, t2, t3, t4 = st.columns(4)
 
