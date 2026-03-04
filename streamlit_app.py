@@ -13,7 +13,6 @@ st.set_page_config(
 )
 
 # --- INLINE CSS CONSTANTS (NEON GREEN & MEDIAN CYBER BLUE) ---
-# Calculated midpoint color: #008aff
 GREEN_SUBTITLE = "font-size: 1.1rem; font-weight: bold; color: #00ff41; margin-top: 25px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.2px;"
 GREEN_LABEL = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-bottom: 8px; text-transform: uppercase;"
 BLUE_LABEL = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-bottom: 8px; text-transform: uppercase;"
@@ -120,6 +119,7 @@ def render_terminal_table(df):
         html += '<tr>'
         for col in df.columns:
             val = str(row[col])
+            # Intelligent Color Logic
             if any(k in val.upper() for k in ["CRITICAL", "9.", "ACTIVE_EXPLOIT", "BREACH"]):
                 html += f'<td class="crit">{val}</td>'
             elif any(k in val.upper() for k in ["HIGH", "8.", "7.", "ELEVATED", "PATCHING"]):
@@ -239,26 +239,26 @@ with map_row2[3]:
 
 st.markdown("---")
 
-# === LARGE MAP SECTION (SINGLE GREYNOISE TODAY VIEW) ===
+# === LARGE MAP SECTION (GREYNOISE TRENDS VIEW) ===
 st.markdown(f'''
 <div style="{GREEN_SUBTITLE}">
     <span style="color: #008aff;">>> GREYNOISE INTELLIGENCE 
-    (<a href="https://viz.greynoise.io/" target="_blank" style="{LINK_STYLE_BLUE}">https://viz.greynoise.io/</a>)</span> 
-    - <span style="{SENTENCE_STYLE_GREEN}">A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious. (TODAY VIEW)</span>
+    (<a href="https://viz.greynoise.io/trends/trending" target="_blank" style="{LINK_STYLE_BLUE}">https://viz.greynoise.io/trends/trending</a>)</span> 
+    - <span style="{SENTENCE_STYLE_GREEN}">A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious. (TRENDS VIEW)</span>
 </div>
 ''', unsafe_allow_html=True)
 
-# Single, massive iframe for the GreyNoise Today feed.
-render_muted_iframe("https://viz.greynoise.io/query/last_seen:1d", height=1400)
+render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1400)
 
 st.markdown("---")
 
-# === OSINT, EXPOSURE & ANALYSIS FRAMEWORKS (2x2 GRID) ===
+# === OSINT, EXPOSURE & ANALYSIS FRAMEWORKS (2x3 GRID) ===
 st.markdown(f'<div style="{GREEN_SUBTITLE}">>> OSINT, EXPOSURE & ANALYSIS FRAMEWORKS</div>', unsafe_allow_html=True)
 
 osint_col1, osint_col2 = st.columns(2)
 
 with osint_col1:
+    # 1. MITRE ATT&CK
     st.markdown(f'''
     <div style="{BLUE_LABEL}">
         MITRE ATT&CK NAVIGATOR 
@@ -268,33 +268,56 @@ with osint_col1:
     ''', unsafe_allow_html=True)
     render_muted_iframe("https://mitre-attack.github.io/attack-navigator/", height=700)
     
+    # 3. SHODAN
     st.markdown(f'''
     <div style="{BLUE_LABEL_MT}">
-        CRT.SH (CERT SEARCH) 
-        (<a href="https://crt.sh/" target="_blank" style="{LINK_STYLE_BLUE}">https://crt.sh/</a>) 
-        - <span style="{SENTENCE_STYLE_GREEN}">Certificate Transparency log search for mapping external attack surfaces and subdomains.</span>
-    </div>
-    ''', unsafe_allow_html=True)
-    render_muted_iframe("https://crt.sh/", height=650)
-
-with osint_col2:
-    st.markdown(f'''
-    <div style="{BLUE_LABEL}">
         SHODAN 
         (<a href="https://www.shodan.io/" target="_blank" style="{LINK_STYLE_BLUE}">https://www.shodan.io/</a>) 
         - <span style="{SENTENCE_STYLE_GREEN}">The search engine for exposed internet-connected devices, open ports, and vulnerable services.</span>
     </div>
     ''', unsafe_allow_html=True)
     render_muted_iframe("https://www.shodan.io/", height=700)
-    
+
+    # 5. SANS ISC
     st.markdown(f'''
     <div style="{BLUE_LABEL_MT}">
-        CYBERCHEF 
-        (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="{LINK_STYLE_BLUE}">https://gchq.github.io/CyberChef/</a>) 
-        - <span style="{SENTENCE_STYLE_GREEN}">The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</span>
+        SANS INTERNET STORM CENTER (ISC) 
+        (<a href="https://isc.sans.edu/" target="_blank" style="{LINK_STYLE_BLUE}">https://isc.sans.edu/</a>) 
+        - <span style="{SENTENCE_STYLE_GREEN}">A global cooperative cyber threat monitor and alert system tracking emerging network anomalies.</span>
     </div>
     ''', unsafe_allow_html=True)
-    render_muted_iframe("https://gchq.github.io/CyberChef/", height=650)
+    render_muted_iframe("https://isc.sans.edu/", height=800)
+
+with osint_col2:
+    # 2. CRT.SH
+    st.markdown(f'''
+    <div style="{BLUE_LABEL}">
+        CRT.SH (CERT SEARCH) 
+        (<a href="https://crt.sh/" target="_blank" style="{LINK_STYLE_BLUE}">https://crt.sh/</a>) 
+        - <span style="{SENTENCE_STYLE_GREEN}">Certificate Transparency log search for mapping external attack surfaces and subdomains.</span>
+    </div>
+    ''', unsafe_allow_html=True)
+    render_muted_iframe("https://crt.sh/", height=700)
+    
+    # 4. FIRST CVSS CALCULATOR
+    st.markdown(f'''
+    <div style="{BLUE_LABEL_MT}">
+        FIRST CVSS 4.0 CALCULATOR 
+        (<a href="https://www.first.org/cvss/calculator/4.0" target="_blank" style="{LINK_STYLE_BLUE}">https://www.first.org/cvss/calculator/4.0</a>) 
+        - <span style="{SENTENCE_STYLE_GREEN}">The official framework and calculator for scoring vulnerability severity and calculating environmental risk.</span>
+    </div>
+    ''', unsafe_allow_html=True)
+    render_muted_iframe("https://www.first.org/cvss/calculator/4.0", height=700)
+
+    # 6. ABUSE.CH URLHAUS
+    st.markdown(f'''
+    <div style="{BLUE_LABEL_MT}">
+        ABUSE.CH URLHAUS 
+        (<a href="https://urlhaus.abuse.ch/browse/" target="_blank" style="{LINK_STYLE_BLUE}">https://urlhaus.abuse.ch/browse/</a>) 
+        - <span style="{SENTENCE_STYLE_GREEN}">An open-source repository for tracking and researching active malware distribution sites and payloads.</span>
+    </div>
+    ''', unsafe_allow_html=True)
+    render_muted_iframe("https://urlhaus.abuse.ch/browse/", height=800)
 
 st.markdown("---")
 
@@ -311,9 +334,9 @@ with link_col1:
     st.markdown(render_simple_link("05", "AlienVault OTX", "https://otx.alienvault.com/", "The largest open threat exchange community for gathering crowdsourced Indicators of Compromise (IOCs)."), unsafe_allow_html=True)
 
 with link_col2:
-    st.markdown(render_simple_link("06", "BleepingComputer", "https://www.bleepingcomputer.com/", "A premier, trusted news source for tracking ransomware attacks, data breaches, and daily cyber events."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("07", "Abuse.ch URLhaus", "https://urlhaus.abuse.ch/", "An excellent open project for sharing and tracking malware distribution sites and payloads."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("08", "FIRST CVSS 4.0 Calculator", "https://www.first.org/cvss/calculator/4.0", "The official home of the Common Vulnerability Scoring System to calculate exact risk severity."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("06", "CyberChef", "https://gchq.github.io/CyberChef/", "The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data locally in your browser."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("07", "BleepingComputer", "https://www.bleepingcomputer.com/", "A premier, trusted news source for tracking ransomware attacks, data breaches, and daily cyber events."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("08", "Any.Run Sandbox", "https://any.run/", "An interactive online malware analysis sandbox allowing researchers to safely detonate and observe malicious payloads."), unsafe_allow_html=True)
     st.markdown(render_simple_link("09", "NIST Cybersecurity Framework (CSF)", "https://www.nist.gov/cyberframework", "Voluntary guidance based on existing standards and practices to better manage and reduce cybersecurity risk."), unsafe_allow_html=True)
     st.markdown(render_simple_link("10", "ISO/IEC 27000 Family", "https://www.iso.org/isoiec-27001-information-security.html", "The official international standard for establishing Information Security Management Systems (ISMS)."), unsafe_allow_html=True)
 
