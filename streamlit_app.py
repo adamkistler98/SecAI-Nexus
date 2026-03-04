@@ -12,11 +12,11 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- INLINE CSS CONSTANTS (NEON GREEN & NEON BLUE) ---
+# --- INLINE CSS CONSTANTS (NEON GREEN & DEEP NEON BLUE) ---
 GREEN_SUBTITLE = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-top: 20px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;"
 GREEN_LABEL = "font-size: 0.85rem; font-weight: bold; color: #00ff41; margin-bottom: 5px; text-transform: uppercase;"
-BLUE_LABEL = "font-size: 0.85rem; font-weight: bold; color: #00bfff; margin-bottom: 5px; text-transform: uppercase;"
-BLUE_LABEL_MT = "font-size: 0.85rem; font-weight: bold; color: #00bfff; margin-top: 15px; margin-bottom: 5px; text-transform: uppercase;"
+BLUE_LABEL = "font-size: 0.85rem; font-weight: bold; color: #0055ff; margin-bottom: 5px; text-transform: uppercase;"
+BLUE_LABEL_MT = "font-size: 0.85rem; font-weight: bold; color: #0055ff; margin-top: 15px; margin-bottom: 5px; text-transform: uppercase;"
 
 # --- ADVANCED GRC CSS ---
 st.markdown("""
@@ -35,11 +35,11 @@ st.markdown("""
     div[data-testid="stMetric"] {
         background-color: #0a0a0a !important;
         border: 1px solid #333;
-        border-left: 3px solid #00bfff !important;
+        border-left: 3px solid #0055ff !important;
         padding: 5px 10px;
     }
     div[data-testid="stMetricValue"] { color: #00ff41 !important; font-size: 1.2rem !important; }
-    div[data-testid="stMetricLabel"] { color: #00bfff !important; }
+    div[data-testid="stMetricLabel"] { color: #0055ff !important; }
     
     /* TERMINAL TABLE STYLING */
     .terminal-table {
@@ -53,10 +53,10 @@ st.markdown("""
         background-color: #050505;
     }
     .terminal-table th {
-        border-bottom: 1px solid #00bfff;
+        border-bottom: 1px solid #0055ff;
         text-align: left;
         padding: 8px 10px;
-        color: #00bfff;
+        color: #0055ff;
         background-color: #111;
         text-transform: uppercase;
     }
@@ -73,7 +73,7 @@ st.markdown("""
     
     /* BUTTON STYLING */
     .stButton>button {
-        background-color: #000000; color: #00bfff; border: 1px solid #333;
+        background-color: #000000; color: #0055ff; border: 1px solid #333;
         font-size: 0.75rem; font-weight: bold; text-transform: uppercase; 
         width: 100%;
     }
@@ -86,8 +86,8 @@ st.markdown("""
     /* DOWNLOAD BUTTON */
     div[data-testid="stDownloadButton"]>button {
         background-color: #111 !important;
-        color: #00bfff !important;
-        border: 1px solid #00bfff !important;
+        color: #0055ff !important;
+        border: 1px solid #0055ff !important;
         font-family: 'Courier New', monospace !important;
         text-transform: uppercase;
         width: 100%;
@@ -129,11 +129,11 @@ def render_muted_iframe(url, height=480):
     st.markdown(iframe_html, unsafe_allow_html=True)
 
 def render_simple_link(num, title, url, desc):
-    """Helper function to guarantee the links render perfectly with NEON BLUE links and NEON GREEN descriptions."""
+    """Helper function to guarantee the links render perfectly with DEEP BLUE links and NEON GREEN descriptions."""
     return f"""
     <div style="margin-bottom: 24px; font-family: 'Courier New', monospace;">
         <span style="color: #00ff41; font-weight: bold; font-size: 1.4rem;">{num}.</span> 
-        <a href="{url}" target="_blank" style="color: #00bfff; font-weight: bold; font-size: 1.35rem; text-decoration: none; border-bottom: 1px dashed #00bfff;">{title}</a>
+        <a href="{url}" target="_blank" style="color: #0055ff; font-weight: bold; font-size: 1.35rem; text-decoration: none; border-bottom: 1px dashed #0055ff;">{title}</a>
         <div style="color: #00ff41; font-size: 1.15rem; margin-top: 8px; padding-left: 45px; line-height: 1.4;">{desc}</div>
     </div>
     """
@@ -178,14 +178,14 @@ compact_header = f"""
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
         <div>
             <span style="font-size: 1.2rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
-            <span style="font-size: 0.85rem; color: #00bfff; margin-left: 8px;">// GLOBAL THREAT VISIBILITY</span>
+            <span style="font-size: 0.85rem; color: #0055ff; margin-left: 8px;">// GLOBAL THREAT VISIBILITY</span>
         </div>
-        <div style="font-size: 0.85rem; font-weight: bold; color: #00bfff; text-shadow: 0 0 5px #00bfff;">
+        <div style="font-size: 0.85rem; font-weight: bold; color: #0055ff; text-shadow: 0 0 5px #0055ff;">
             SYS_TIME: {datetime.now().strftime("%H:%M:%S")} UTC
         </div>
     </div>
     <div style="font-size: 0.6rem; color: #00ff41; margin-top: 4px; text-transform: uppercase;">
-        Worldwide | Real-time | Enc: AES-256 | Status: <span style="color: #00bfff; font-weight: bold;">SECURE</span>
+        Worldwide | Real-time | Enc: AES-256 | Status: <span style="color: #0055ff; font-weight: bold;">SECURE</span>
     </div>
 </div>
 """
@@ -229,8 +229,8 @@ st.markdown("---")
 # === LARGE MAP SECTION (SINGLE GREYNOISE TODAY VIEW) ===
 st.markdown(f'''
 <div style="{GREEN_SUBTITLE}">
-    >> GREYNOISE INTELLIGENCE 
-    (<a href="https://viz.greynoise.io/" target="_blank" style="color: #00bfff; text-decoration: none; border-bottom: 1px dashed #00bfff;">https://viz.greynoise.io/</a>) 
+    <span style="color: #0055ff;">>> GREYNOISE INTELLIGENCE 
+    (<a href="https://viz.greynoise.io/" target="_blank" style="color: #0055ff; text-decoration: none; border-bottom: 1px dashed #0055ff;">https://viz.greynoise.io/</a>)</span> 
     - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious. (TODAY VIEW)</span>
 </div>
 ''', unsafe_allow_html=True)
@@ -249,7 +249,7 @@ with osint_col1:
     st.markdown(f'''
     <div style="{BLUE_LABEL}">
         MITRE ATT&CK NAVIGATOR 
-        (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="color: #00bfff; text-decoration: none; border-bottom: 1px dashed #00bfff;">https://mitre-attack.github.io/attack-navigator/</a>) 
+        (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="color: #0055ff; text-decoration: none; border-bottom: 1px dashed #0055ff;">https://mitre-attack.github.io/attack-navigator/</a>) 
         - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">The industry-standard matrix for mapping adversary tactics, techniques, and procedures.</span>
     </div>
     ''', unsafe_allow_html=True)
@@ -258,7 +258,7 @@ with osint_col1:
     st.markdown(f'''
     <div style="{BLUE_LABEL_MT}">
         CRT.SH (CERT SEARCH) 
-        (<a href="https://crt.sh/" target="_blank" style="color: #00bfff; text-decoration: none; border-bottom: 1px dashed #00bfff;">https://crt.sh/</a>) 
+        (<a href="https://crt.sh/" target="_blank" style="color: #0055ff; text-decoration: none; border-bottom: 1px dashed #0055ff;">https://crt.sh/</a>) 
         - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">Certificate Transparency log search for mapping external attack surfaces and subdomains.</span>
     </div>
     ''', unsafe_allow_html=True)
@@ -268,7 +268,7 @@ with osint_col2:
     st.markdown(f'''
     <div style="{BLUE_LABEL}">
         SHODAN 
-        (<a href="https://www.shodan.io/" target="_blank" style="color: #00bfff; text-decoration: none; border-bottom: 1px dashed #00bfff;">https://www.shodan.io/</a>) 
+        (<a href="https://www.shodan.io/" target="_blank" style="color: #0055ff; text-decoration: none; border-bottom: 1px dashed #0055ff;">https://www.shodan.io/</a>) 
         - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">The search engine for exposed internet-connected devices, open ports, and vulnerable services.</span>
     </div>
     ''', unsafe_allow_html=True)
@@ -277,7 +277,7 @@ with osint_col2:
     st.markdown(f'''
     <div style="{BLUE_LABEL_MT}">
         CYBERCHEF 
-        (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #00bfff; text-decoration: none; border-bottom: 1px dashed #00bfff;">https://gchq.github.io/CyberChef/</a>) 
+        (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #0055ff; text-decoration: none; border-bottom: 1px dashed #0055ff;">https://gchq.github.io/CyberChef/</a>) 
         - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</span>
     </div>
     ''', unsafe_allow_html=True)
