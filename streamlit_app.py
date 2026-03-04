@@ -119,7 +119,6 @@ def render_terminal_table(df):
         html += '<tr>'
         for col in df.columns:
             val = str(row[col])
-            # Intelligent Color Logic
             if any(k in val.upper() for k in ["CRITICAL", "9.", "ACTIVE_EXPLOIT", "BREACH"]):
                 html += f'<td class="crit">{val}</td>'
             elif any(k in val.upper() for k in ["HIGH", "8.", "7.", "ELEVATED", "PATCHING"]):
@@ -143,10 +142,11 @@ def render_muted_iframe(url, height=480):
     st.markdown(iframe_html, unsafe_allow_html=True)
 
 def render_simple_link(num, title, url, desc):
+    """Helper function to render Top 20 list with larger green text."""
     return f"""
     <div style="margin-bottom: 25px; font-family: 'Courier New', monospace;">
         <span style="color: #00ff41; font-weight: bold; font-size: 1.4rem;">{num}.</span> 
-        <a href="{url}" target="_blank" style="color: #008aff; font-weight: bold; font-size: 1.35rem; text-decoration: none; border-bottom: 2px dashed #008aff;">{title}</a>
+        <a href="{url}" target="_blank" style="color: #008aff; font-weight: bold; font-size: 1.35rem; text-decoration: none; border-bottom: 1px dashed #008aff;">{title}</a>
         <div style="color: #00ff41; font-size: 1.15rem; margin-top: 8px; padding-left: 45px; line-height: 1.6;">{desc}</div>
     </div>
     """
@@ -278,16 +278,6 @@ with osint_col1:
     ''', unsafe_allow_html=True)
     render_muted_iframe("https://www.shodan.io/", height=700)
 
-    # 5. SANS ISC
-    st.markdown(f'''
-    <div style="{BLUE_LABEL_MT}">
-        SANS INTERNET STORM CENTER (ISC) 
-        (<a href="https://isc.sans.edu/" target="_blank" style="{LINK_STYLE_BLUE}">https://isc.sans.edu/</a>) 
-        - <span style="{SENTENCE_STYLE_GREEN}">A global cooperative cyber threat monitor and alert system tracking emerging network anomalies.</span>
-    </div>
-    ''', unsafe_allow_html=True)
-    render_muted_iframe("https://isc.sans.edu/", height=800)
-
 with osint_col2:
     # 2. CRT.SH
     st.markdown(f'''
@@ -298,26 +288,6 @@ with osint_col2:
     </div>
     ''', unsafe_allow_html=True)
     render_muted_iframe("https://crt.sh/", height=700)
-    
-    # 4. FIRST CVSS CALCULATOR
-    st.markdown(f'''
-    <div style="{BLUE_LABEL_MT}">
-        FIRST CVSS 4.0 CALCULATOR 
-        (<a href="https://www.first.org/cvss/calculator/4.0" target="_blank" style="{LINK_STYLE_BLUE}">https://www.first.org/cvss/calculator/4.0</a>) 
-        - <span style="{SENTENCE_STYLE_GREEN}">The official framework and calculator for scoring vulnerability severity and calculating environmental risk.</span>
-    </div>
-    ''', unsafe_allow_html=True)
-    render_muted_iframe("https://www.first.org/cvss/calculator/4.0", height=700)
-
-    # 6. ABUSE.CH URLHAUS
-    st.markdown(f'''
-    <div style="{BLUE_LABEL_MT}">
-        ABUSE.CH URLHAUS 
-        (<a href="https://urlhaus.abuse.ch/browse/" target="_blank" style="{LINK_STYLE_BLUE}">https://urlhaus.abuse.ch/browse/</a>) 
-        - <span style="{SENTENCE_STYLE_GREEN}">An open-source repository for tracking and researching active malware distribution sites and payloads.</span>
-    </div>
-    ''', unsafe_allow_html=True)
-    render_muted_iframe("https://urlhaus.abuse.ch/browse/", height=800)
 
 st.markdown("---")
 
@@ -327,18 +297,28 @@ st.markdown(f'<div style="{GREEN_SUBTITLE}">>> ADDITIONAL GRC RESOURCES</div>', 
 link_col1, link_col2 = st.columns(2)
 
 with link_col1:
-    st.markdown(render_simple_link("01", "VirusTotal", "https://www.virustotal.com/", "The global standard for analyzing suspicious files, domains, IPs, and URLs for malware."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("02", "NIST National Vulnerability Database (NVD)", "https://nvd.nist.gov/", "The US Government repository of standards-based vulnerability management data."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("03", "CISA KEV Catalog", "https://www.cisa.gov/known-exploited-vulnerabilities-catalog", "The authoritative source for vulnerabilities currently being actively exploited in the wild."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("04", "Exploit Database (Exploit-DB)", "https://www.exploit-db.com/", "The ultimate archive of public exploits and corresponding vulnerable software validations."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("05", "AlienVault OTX", "https://otx.alienvault.com/", "The largest open threat exchange community for gathering crowdsourced Indicators of Compromise (IOCs)."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("01", "OWASP Top 10 Project", "https://owasp.org/www-project-top-ten/", "The foundational awareness document for the most critical web application security risks."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("02", "NIST Cybersecurity Framework (CSF)", "https://www.nist.gov/cyberframework", "Voluntary guidance based on existing standards and practices to better manage cybersecurity risk."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("03", "ISO/IEC 27000 Family", "https://www.iso.org/isoiec-27001-information-security.html", "The international standard for establishing and improving Information Security Management Systems."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("04", "Security Onion Solutions", "https://securityonionsolutions.com/", "A free and open-source platform for threat hunting, enterprise security monitoring, and log management."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("05", "Exploit Database (Exploit-DB)", "https://www.exploit-db.com/", "The ultimate archive of public exploits and corresponding vulnerable software validations."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("06", "VirusTotal", "https://www.virustotal.com/", "The global standard for analyzing suspicious files, domains, IPs, and URLs for malware."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("07", "NIST National Vulnerability Database (NVD)", "https://nvd.nist.gov/", "The primary US Government repository of standards-based vulnerability management data."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("08", "CISA KEV Catalog", "https://www.cisa.gov/known-exploited-vulnerabilities-catalog", "Authoritative source for vulnerabilities currently being actively exploited in the wild."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("09", "AlienVault Open Threat Exchange (OTX)", "https://otx.alienvault.com/", "The largest open community for gathering and sharing real-time crowdsourced IOCs."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("10", "SANS Internet Storm Center (ISC)", "https://isc.sans.edu/", "Global cooperative cyber threat monitor tracking network anomalies and port trends."), unsafe_allow_html=True)
 
 with link_col2:
-    st.markdown(render_simple_link("06", "CyberChef", "https://gchq.github.io/CyberChef/", "The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data locally in your browser."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("07", "BleepingComputer", "https://www.bleepingcomputer.com/", "A premier, trusted news source for tracking ransomware attacks, data breaches, and daily cyber events."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("08", "Any.Run Sandbox", "https://any.run/", "An interactive online malware analysis sandbox allowing researchers to safely detonate and observe malicious payloads."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("09", "NIST Cybersecurity Framework (CSF)", "https://www.nist.gov/cyberframework", "Voluntary guidance based on existing standards and practices to better manage and reduce cybersecurity risk."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("10", "ISO/IEC 27000 Family", "https://www.iso.org/isoiec-27001-information-security.html", "The official international standard for establishing Information Security Management Systems (ISMS)."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("11", "CyberChef", "https://gchq.github.io/CyberChef/", "The GCHQ 'Swiss Army Knife' for analyzing and decoding data locally in-browser."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("12", "Abuse.ch URLhaus", "https://urlhaus.abuse.ch/", "A project dedicated to sharing and tracking malware distribution sites and payloads."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("13", "MalwareBazaar", "https://bazaar.abuse.ch/", "A massive open-source repository of malware samples for researchers."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("14", "Pulsedive", "https://pulsedive.com/", "A community-driven threat intelligence platform with high-quality IOC pivoting."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("15", "FIRST CVSS 4.0 Calculator", "https://www.first.org/cvss/calculator/4.0", "The official tool for scoring vulnerability severity and environmental risk."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("16", "Triage Sandbox", "https://triage.com/", "A modern, free-tier friendly public malware sandbox for automated analysis."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("17", "URLScan.io", "https://urlscan.io/", "A free service to scan and analyze websites to see what a site is actually doing."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("18", "Any.Run Sandbox", "https://any.run/", "Interactive online malware analysis sandbox allowing live observation of payloads."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("19", "GTFOBins", "https://gtfobins.github.io/", "A curated list of Unix binaries that can be used to bypass local security restrictions."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("20", "LOLBAS Project", "https://lolbas-project.github.io/", "Living Off The Land Binaries and Scripts for Windows environments."), unsafe_allow_html=True)
 
 st.markdown("---")
 
