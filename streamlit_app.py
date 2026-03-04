@@ -12,28 +12,26 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+# --- INLINE CSS CONSTANTS (BULLETPROOF STREAMLIT OVERRIDE) ---
+# We use Python variables here so we don't have to write inline CSS 30 times.
+GREEN_SUBTITLE = "font-size: 0.9rem !important; font-weight: bold !important; color: #00ff41 !important; margin-top: 20px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;"
+GREY_SUBTITLE = "font-size: 0.8rem !important; font-weight: bold !important; color: #888888 !important; margin-top: 20px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;"
+GREY_LABEL = "font-size: 0.8rem !important; font-weight: bold !important; color: #888888 !important; margin-bottom: 5px; text-transform: uppercase;"
+GREY_LABEL_MT = "font-size: 0.8rem !important; font-weight: bold !important; color: #888888 !important; margin-top: 15px; margin-bottom: 5px; text-transform: uppercase;"
+
+
 # --- ADVANCED GRC CSS ---
 st.markdown("""
 <style>
     /* GLOBAL DARK THEME */
     .stApp { background-color: #050505 !important; font-family: 'Courier New', Courier, monospace !important; }
     
-    /* GLOBAL GREEN TEXT (Very aggressive, which is why grey was failing) */
-    h1, h2, h3, h4, h5, h6, p, label, .stMarkdown { color: #00ff41 !important; }
+    /* GLOBAL GREEN TEXT (Base text stays green) */
+    h1, h2, h3, h4, h5, h6, .stMarkdown p, label { color: #00ff41 !important; }
     
     /* REMOVE WHITE ELEMENTS */
     header, footer { visibility: hidden; }
     .stDeployButton { display: none; }
-    
-    /* SYSTEM HEADER */
-    .clock-header {
-        font-size: 1rem;
-        font-weight: bold;
-        text-align: right;
-        color: #00ff41;
-        margin-bottom: -20px;
-        text-shadow: 0 0 5px #00ff41;
-    }
     
     /* METRICS BOXES */
     div[data-testid="stMetric"] {
@@ -96,37 +94,6 @@ st.markdown("""
         text-transform: uppercase;
         width: 100%;
     }
-    
-    /* ORIGINAL SUBTITLE (GREEN) */
-    .stealth-subtitle {
-        font-size: 0.9rem !important;
-        font-weight: bold !important;
-        color: #00ff41 !important;
-        margin-top: 20px;
-        margin-bottom: 5px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    .stealth-subtitle p { color: #00ff41 !important; }
-    
-    /* NEW BULLETPROOF GREY TEXT OVERRIDE */
-    .grey-text, .grey-text p, .grey-text a, .grey-text span {
-        font-size: 0.8rem !important;
-        font-weight: bold !important;
-        color: #888888 !important;
-        text-decoration: none !important;
-    }
-    .grey-text a:hover {
-        color: #00ff41 !important;
-        text-decoration: underline !important;
-    }
-    
-    /* UTILITY MARGIN CLASSES */
-    .margin-top-20 { margin-top: 20px !important; margin-bottom: 5px !important; display: block; }
-    .margin-bottom-5 { margin-bottom: 5px !important; display: block; }
-    .margin-top-15 { margin-top: 15px !important; margin-bottom: 5px !important; display: block; }
-    .caps { text-transform: uppercase !important; letter-spacing: 1px; }
-
 </style>
 """, unsafe_allow_html=True)
 
@@ -141,6 +108,7 @@ def render_terminal_table(df):
         html += '<tr>'
         for col in df.columns:
             val = str(row[col])
+            # Intelligent Color Logic
             if any(k in val.upper() for k in ["CRITICAL", "9.", "ACTIVE_EXPLOIT", "BREACH"]):
                 html += f'<td class="crit">{val}</td>'
             elif any(k in val.upper() for k in ["HIGH", "8.", "7.", "ELEVATED", "PATCHING"]):
@@ -217,83 +185,85 @@ compact_header = f"""
 st.markdown(compact_header, unsafe_allow_html=True)
 
 # === LIVE CYBER THREAT MAPS (SMALL GRID) ===
-st.markdown('<div class="stealth-subtitle">>> LIVE CYBER THREAT MAPS</div>', unsafe_allow_html=True)
-st.markdown('<div class="grey-text caps margin-bottom-5">Real-time global attack activity from trusted sources</div>', unsafe_allow_html=True)
+# This stays GREEN per your request.
+st.markdown(f'<p style="{GREEN_SUBTITLE}">>> LIVE CYBER THREAT MAPS</p>', unsafe_allow_html=True)
+st.markdown(f'<p style="{GREY_LABEL}">REAL-TIME GLOBAL ATTACK ACTIVITY FROM TRUSTED SOURCES</p>', unsafe_allow_html=True)
+
 map_row1 = st.columns(4)
 map_row2 = st.columns(4)
 
 with map_row1[0]:
-    st.markdown('<div class="grey-text caps margin-bottom-5">Bitdefender</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">Bitdefender</p>', unsafe_allow_html=True)
     render_muted_iframe("https://threatmap.bitdefender.com/", height=480)
 with map_row1[1]:
-    st.markdown('<div class="grey-text caps margin-bottom-5">Sicherheitstacho (DT)</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">Sicherheitstacho (DT)</p>', unsafe_allow_html=True)
     render_muted_iframe("https://www.sicherheitstacho.eu/?lang=en", height=480)
 with map_row1[2]:
-    st.markdown('<div class="grey-text caps margin-bottom-5">Check Point ThreatCloud</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">Check Point ThreatCloud</p>', unsafe_allow_html=True)
     render_muted_iframe("https://threatmap.checkpoint.com/", height=480)
 with map_row1[3]:
-    st.markdown('<div class="grey-text caps margin-bottom-5">Radware Live Threat Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">Radware Live Threat Map</p>', unsafe_allow_html=True)
     render_muted_iframe("https://livethreatmap.radware.com/", height=480)
 
 with map_row2[0]:
-    st.markdown('<div class="grey-text caps margin-bottom-5">Fortinet Threat Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">Fortinet Threat Map</p>', unsafe_allow_html=True)
     render_muted_iframe("https://threatmap.fortiguard.com/", height=480)
 with map_row2[1]:
-    st.markdown('<div class="grey-text caps margin-bottom-5">Kaspersky Cybermap</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">Kaspersky Cybermap</p>', unsafe_allow_html=True)
     render_muted_iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=480)
 with map_row2[2]:
-    st.markdown('<div class="grey-text caps margin-bottom-5">SonicWall Live Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">SonicWall Live Map</p>', unsafe_allow_html=True)
     render_muted_iframe("https://attackmap.sonicwall.com/live-attack-map/", height=480)
 with map_row2[3]:
-    st.markdown('<div class="grey-text caps margin-bottom-5">Threatbutt Attack Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">Threatbutt Attack Map</p>', unsafe_allow_html=True)
     render_muted_iframe("https://threatbutt.com/map/", height=480)
 
 st.markdown("---")
 
 # === LARGE MAP SECTION (GREYNOISE GRID) ===
-st.markdown('<div class="grey-text margin-top-20">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank">https://viz.greynoise.io/</a>) - A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious.</div>', unsafe_allow_html=True)
+st.markdown(f'<p style="{GREY_SUBTITLE}">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="color: #888888 !important; text-decoration: none; border-bottom: 1px dashed #888;">https://viz.greynoise.io/</a>) - A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious.</p>', unsafe_allow_html=True)
 
 gn_col1, gn_col2 = st.columns(2)
 
 with gn_col1:
-    st.markdown('<div class="grey-text caps margin-bottom-5">MAIN SEARCH</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">MAIN SEARCH</p>', unsafe_allow_html=True)
     render_muted_iframe("https://viz.greynoise.io/", height=650)
     
-    st.markdown('<div class="grey-text caps margin-top-15">TRENDS</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL_MT}">TRENDS</p>', unsafe_allow_html=True)
     render_muted_iframe("https://viz.greynoise.io/trends/trending", height=650)
 
 with gn_col2:
-    st.markdown('<div class="grey-text caps margin-bottom-5">TODAY (LAST 24H)</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">TODAY (LAST 24H)</p>', unsafe_allow_html=True)
     render_muted_iframe("https://viz.greynoise.io/query/last_seen:1d", height=650)
     
-    st.markdown('<div class="grey-text caps margin-top-15">TAGS</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL_MT}">TAGS</p>', unsafe_allow_html=True)
     render_muted_iframe("https://viz.greynoise.io/tags", height=650)
 
 st.markdown("---")
 
 # === OSINT, EXPOSURE & ANALYSIS FRAMEWORKS (2x2 GRID) ===
-st.markdown('<div class="grey-text caps margin-top-20">>> OSINT, EXPOSURE & ANALYSIS FRAMEWORKS</div>', unsafe_allow_html=True)
+st.markdown(f'<p style="{GREY_SUBTITLE}">>> OSINT, EXPOSURE & ANALYSIS FRAMEWORKS</p>', unsafe_allow_html=True)
 
 osint_col1, osint_col2 = st.columns(2)
 
 with osint_col1:
-    st.markdown('<div class="grey-text margin-bottom-5">MITRE ATT&CK NAVIGATOR (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank">https://mitre-attack.github.io/attack-navigator/</a>) - The industry-standard matrix for mapping adversary tactics, techniques, and procedures.</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">MITRE ATT&CK NAVIGATOR (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="color: #888888 !important; text-decoration: none; border-bottom: 1px dashed #888;">https://mitre-attack.github.io/attack-navigator/</a>) - The industry-standard matrix for mapping adversary tactics, techniques, and procedures.</p>', unsafe_allow_html=True)
     render_muted_iframe("https://mitre-attack.github.io/attack-navigator/", height=700)
     
-    st.markdown('<div class="grey-text margin-top-15">CRT.SH (CERT SEARCH) (<a href="https://crt.sh/" target="_blank">https://crt.sh/</a>) - Certificate Transparency log search for mapping external attack surfaces and subdomains.</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL_MT}">CRT.SH (CERT SEARCH) (<a href="https://crt.sh/" target="_blank" style="color: #888888 !important; text-decoration: none; border-bottom: 1px dashed #888;">https://crt.sh/</a>) - Certificate Transparency log search for mapping external attack surfaces and subdomains.</p>', unsafe_allow_html=True)
     render_muted_iframe("https://crt.sh/", height=650)
 
 with osint_col2:
-    st.markdown('<div class="grey-text margin-bottom-5">SHODAN (<a href="https://www.shodan.io/" target="_blank">https://www.shodan.io/</a>) - The search engine for exposed internet-connected devices, open ports, and vulnerable services.</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">SHODAN (<a href="https://www.shodan.io/" target="_blank" style="color: #888888 !important; text-decoration: none; border-bottom: 1px dashed #888;">https://www.shodan.io/</a>) - The search engine for exposed internet-connected devices, open ports, and vulnerable services.</p>', unsafe_allow_html=True)
     render_muted_iframe("https://www.shodan.io/", height=700)
     
-    st.markdown('<div class="grey-text margin-top-15">CYBERCHEF (<a href="https://gchq.github.io/CyberChef/" target="_blank">https://gchq.github.io/CyberChef/</a>) - The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL_MT}">CYBERCHEF (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #888888 !important; text-decoration: none; border-bottom: 1px dashed #888;">https://gchq.github.io/CyberChef/</a>) - The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</p>', unsafe_allow_html=True)
     render_muted_iframe("https://gchq.github.io/CyberChef/", height=650)
 
 st.markdown("---")
 
 # --- LIVE CVE VULNERABILITIES (REAL DATA) ---
-st.markdown('<div class="grey-text caps margin-top-20">>> LIVE CVE VULNERABILITIES (REAL-TIME FEED)</div>', unsafe_allow_html=True)
+st.markdown(f'<p style="{GREY_SUBTITLE}">>> LIVE CVE VULNERABILITIES (REAL-TIME FEED)</p>', unsafe_allow_html=True)
 col_sync, col_download, _ = st.columns([1, 2, 4])
 
 if "grc_stream" not in st.session_state:
@@ -316,18 +286,18 @@ with col_download:
 
 col_left, col_right = st.columns(2)
 with col_left:
-    st.markdown('<div class="grey-text caps margin-bottom-5">CRITICAL VULNERABILITIES (Top 10)</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">CRITICAL VULNERABILITIES (Top 10)</p>', unsafe_allow_html=True)
     df1 = pd.DataFrame(st.session_state.grc_stream[:10])
     render_terminal_table(df1[['ID', 'CVSS', 'SUMMARY']])
 with col_right:
-    st.markdown('<div class="grey-text caps margin-bottom-5">RECENT VULNERABILITIES (Next 10)</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">RECENT VULNERABILITIES (Next 10)</p>', unsafe_allow_html=True)
     df2 = pd.DataFrame(st.session_state.grc_stream[10:20])
     render_terminal_table(df2[['ID', 'CVSS', 'SUMMARY']])
 
 st.markdown("---")
 
 # --- INFRASTRUCTURE RISK LANDSCAPE (CURATED REAL INTEL) ---
-st.markdown('<div class="grey-text caps margin-top-20">>> INFRASTRUCTURE RISK LANDSCAPE</div>', unsafe_allow_html=True)
+st.markdown(f'<p style="{GREY_SUBTITLE}">>> INFRASTRUCTURE RISK LANDSCAPE</p>', unsafe_allow_html=True)
 t1, t2, t3, t4 = st.columns(4)
 
 def gen_landscape_data(category):
@@ -348,16 +318,16 @@ def gen_landscape_data(category):
     return pd.DataFrame(data)
 
 with t1:
-    st.markdown('<div class="grey-text caps margin-bottom-5">💀 RANSOMWARE</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">💀 RANSOMWARE</p>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("RANSOMWARE"))
 with t2:
-    st.markdown('<div class="grey-text caps margin-bottom-5">🦠 MALWARE</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">🦠 MALWARE</p>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("MALWARE"))
 with t3:
-    st.markdown('<div class="grey-text caps margin-bottom-5">🎣 PHISHING</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">🎣 PHISHING</p>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("PHISHING"))
 with t4:
-    st.markdown('<div class="grey-text caps margin-bottom-5">🕵️ APT GROUPS</div>', unsafe_allow_html=True)
+    st.markdown(f'<p style="{GREY_LABEL}">🕵️ APT GROUPS</p>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("APT"))
 
 # DASHBOARD ENDS HERE
