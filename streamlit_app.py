@@ -95,17 +95,6 @@ st.markdown("""
         width: 100%;
     }
     
-    /* ORIGINAL SUBTITLE (GREEN) */
-    .stealth-subtitle {
-        font-size: 0.9rem !important;
-        font-weight: bold;
-        color: #00ff41;
-        margin-top: 20px;
-        margin-bottom: 5px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    
     /* NEW GREY SUBTITLE */
     .grey-subtitle {
         font-size: 0.8rem !important;
@@ -115,6 +104,16 @@ st.markdown("""
         margin-bottom: 5px;
         text-transform: uppercase;
         letter-spacing: 1px;
+    }
+    
+    /* HYPERLINK STYLING OVERRIDE FOR GREY TEXT */
+    .grey-subtitle a {
+        color: #888 !important;
+        text-decoration: none;
+    }
+    .grey-subtitle a:hover {
+        color: #00ff41 !important;
+        text-decoration: underline;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -230,7 +229,7 @@ compact_header = f"""
 st.markdown(compact_header, unsafe_allow_html=True)
 
 # === LIVE CYBER THREAT MAPS (SMALL GRID) ===
-st.markdown('<div class="stealth-subtitle">>> LIVE CYBER THREAT MAPS</div>', unsafe_allow_html=True)
+st.markdown('<div class="grey-subtitle">>> LIVE CYBER THREAT MAPS</div>', unsafe_allow_html=True)
 st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; color: #888;">REAL-TIME GLOBAL ATTACK ACTIVITY FROM TRUSTED SOURCES</div>', unsafe_allow_html=True)
 map_row1 = st.columns(4)
 map_row2 = st.columns(4)
@@ -264,7 +263,7 @@ with map_row2[3]:
 st.markdown("---")
 
 # === LARGE MAP SECTION (GREYNOISE GRID) ===
-st.markdown('<div class="grey-subtitle">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://viz.greynoise.io/</a>) - A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious.</div>', unsafe_allow_html=True)
+st.markdown('<div class="grey-subtitle">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="color: #888; text-decoration: none;">https://viz.greynoise.io/</a>) - A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious.</div>', unsafe_allow_html=True)
 
 gn_col1, gn_col2 = st.columns(2)
 
@@ -290,17 +289,17 @@ st.markdown('<div class="grey-subtitle">>> OSINT, EXPOSURE & ANALYSIS FRAMEWORKS
 osint_col1, osint_col2 = st.columns(2)
 
 with osint_col1:
-    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #888; text-transform: uppercase;">MITRE ATT&CK NAVIGATOR (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="color: #00ff41; text-decoration: none;">https://mitre-attack.github.io/attack-navigator/</a>) - The industry-standard matrix for mapping adversary tactics, techniques, and procedures.</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #888; text-transform: uppercase;">MITRE ATT&CK NAVIGATOR (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="color: #888; text-decoration: none;">https://mitre-attack.github.io/attack-navigator/</a>) - The industry-standard matrix for mapping adversary tactics, techniques, and procedures.</div>', unsafe_allow_html=True)
     render_muted_iframe("https://mitre-attack.github.io/attack-navigator/", height=700)
     
-    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; margin-top: 15px; color: #888; text-transform: uppercase;">CRT.SH (CERT SEARCH) (<a href="https://crt.sh/" target="_blank" style="color: #00ff41; text-decoration: none;">https://crt.sh/</a>) - Certificate Transparency log search for mapping external attack surfaces and subdomains.</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; margin-top: 15px; color: #888; text-transform: uppercase;">CRT.SH (CERT SEARCH) (<a href="https://crt.sh/" target="_blank" style="color: #888; text-decoration: none;">https://crt.sh/</a>) - Certificate Transparency log search for mapping external attack surfaces and subdomains.</div>', unsafe_allow_html=True)
     render_muted_iframe("https://crt.sh/", height=650)
 
 with osint_col2:
-    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #888; text-transform: uppercase;">SHODAN (<a href="https://www.shodan.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://www.shodan.io/</a>) - The search engine for exposed internet-connected devices, open ports, and vulnerable services.</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #888; text-transform: uppercase;">SHODAN (<a href="https://www.shodan.io/" target="_blank" style="color: #888; text-decoration: none;">https://www.shodan.io/</a>) - The search engine for exposed internet-connected devices, open ports, and vulnerable services.</div>', unsafe_allow_html=True)
     render_muted_iframe("https://www.shodan.io/", height=700)
     
-    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; margin-top: 15px; color: #888; text-transform: uppercase;">CYBERCHEF (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #00ff41; text-decoration: none;">https://gchq.github.io/CyberChef/</a>) - The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; margin-top: 15px; color: #888; text-transform: uppercase;">CYBERCHEF (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #888; text-decoration: none;">https://gchq.github.io/CyberChef/</a>) - The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</div>', unsafe_allow_html=True)
     render_muted_iframe("https://gchq.github.io/CyberChef/", height=650)
 
 st.markdown("---")
