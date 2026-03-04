@@ -253,7 +253,7 @@ with map_row2[3]:
 st.markdown("---")
 
 # === LARGE MAP SECTION (GREYNOISE GRID) ===
-st.markdown('<div class="stealth-subtitle">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://viz.greynoise.io/</a>)</div>', unsafe_allow_html=True)
+st.markdown('<div class="stealth-subtitle">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://viz.greynoise.io/</a>) - A threat intelligence platform that analyzes internet-wide scan traffic to filter out harmless background noise.</div>', unsafe_allow_html=True)
 
 # Create a 2x2 grid using Streamlit columns
 gn_col1, gn_col2 = st.columns(2)
