@@ -45,8 +45,9 @@ st.markdown(f"""
         border: 1px solid #333;
         border-left: 4px solid #008aff !important;
         padding: 8px 12px;
+        margin-bottom: 15px;
     }}
-    div[data-testid="stMetricValue"] {{ color: #00ff41 !important; font-size: 1.5rem !important; font-weight: bold; }}
+    div[data-testid="stMetricValue"] {{ color: #00ff41 !important; font-size: 1.6rem !important; font-weight: bold; }}
     div[data-testid="stMetricLabel"] {{ color: #008aff !important; font-size: 0.95rem; text-transform: uppercase; font-weight: bold;}}
     
     /* TERMINAL TABLE STYLING */
@@ -206,7 +207,7 @@ def generate_high_fidelity_sim():
 
 # --- HEADER SECTION ---
 compact_header = f"""
-<div style="border-bottom: 2px solid #333; padding-bottom: 12px; margin-bottom: 15px; margin-top: -50px;">
+<div style="border-bottom: 2px solid #333; padding-bottom: 12px; margin-bottom: 18px; margin-top: -50px;">
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
         <div>
             <span style="font-size: 1.3rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
@@ -222,14 +223,6 @@ compact_header = f"""
 </div>
 """
 st.markdown(compact_header, unsafe_allow_html=True)
-
-# === TOP LEVEL METRICS (NEW) ===
-m1, m2, m3, m4 = st.columns(4)
-m1.metric(label="DEFCON STATUS", value="LEVEL 3", delta="ELEVATED")
-m2.metric(label="CISA KEV ADDITIONS (7D)", value="14", delta="-2 from last week")
-m3.metric(label="ACTIVE APT CAMPAIGNS", value="8", delta="TRACKING")
-m4.metric(label="GLOBAL SCAN VOLUME", value="HIGH", delta="+12% Spike")
-st.markdown("---")
 
 # === LIVE CYBER THREAT MAPS (COMPACT TEXT) ===
 st.markdown(f'''
@@ -282,19 +275,26 @@ render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1200)
 
 st.markdown("---")
 
-# === CLOUDFLARE RADAR ===
-st.markdown(f'''
-<div style="{GREEN_SUBTITLE}">
-    <span style="color: #008aff;">>> CLOUDFLARE RADAR 
-    (<a href="https://radar.cloudflare.com/" target="_blank" style="{LINK_STYLE_BLUE}">https://radar.cloudflare.com/</a>)</span> 
-    - <span style="{SENTENCE_STYLE_GREEN}">Free real-time insights into global internet traffic anomalies, routing events, and DDoS attack patterns.</span>
-</div>
-''', unsafe_allow_html=True)
-render_muted_iframe("https://radar.cloudflare.com/", height=1000)
+# === GLOBAL THREAT METRICS (MOVED HERE) ===
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> GLOBAL THREAT METRICS</div>', unsafe_allow_html=True)
+
+# Row 1 of Metrics
+m1, m2, m3, m4 = st.columns(4)
+m1.metric(label="DEFCON STATUS", value="LEVEL 3", delta="ELEVATED")
+m2.metric(label="CISA KEV ADDITIONS (7D)", value="14", delta="-2 from last week")
+m3.metric(label="ACTIVE APT CAMPAIGNS", value="8", delta="TRACKING")
+m4.metric(label="GLOBAL SCAN VOLUME", value="HIGH", delta="+12% Spike")
+
+# Row 2 of Metrics
+m5, m6, m7, m8 = st.columns(4)
+m5.metric(label="ACTIVE ZERO-DAYS", value="3", delta="URGENT PATCHING")
+m6.metric(label="RANSOMWARE LEAKS (24H)", value="27", delta="+4 Since Yesterday")
+m7.metric(label="AVG TIME TO EXPLOIT (TTX)", value="5.2 Days", delta="-1.1 Days (Accelerating)")
+m8.metric(label="PHISHING VOLUME", value="CRITICAL", delta="AiTM Campaigns Active")
 
 st.markdown("---")
 
-# === ADDITIONAL GRC RESOURCES (TOP 25 - REFINED FOR MAXIMUM UTILITY) ===
+# === ADDITIONAL GRC RESOURCES (TOP 25) ===
 st.markdown(f'<div style="{GREEN_SUBTITLE}">>> ADDITIONAL GRC RESOURCES</div>', unsafe_allow_html=True)
 
 link_col1, link_col2 = st.columns(2)
@@ -330,91 +330,50 @@ with link_col2:
 
 st.markdown("---")
 
-# === DATA ANALYSIS SECTION (CYBERCHEF) ===
+# === DATA ANALYSIS SECTION (CYBERCHEF BELOW LINKS) ===
 st.markdown(f'''
 <div style="{GREEN_SUBTITLE}">
-    <span style="color: #008aff;">>> CYBERCHEF ANALYSIS TOOL 
-    (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="{LINK_STYLE_BLUE}">https://gchq.github.io/CyberChef/</a>)</span> 
-    - <span style="{SENTENCE_STYLE_GREEN}">The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data locally in your browser.</span>
+    <span style="color: #008aff;">>> CYBERCHEF ANALYSIS TOOL</span> 
+    - <span style="{SENTENCE_STYLE_GREEN}">Analyze suspicious payloads, decode malware, and manipulate data locally.</span>
 </div>
 ''', unsafe_allow_html=True)
 render_muted_iframe("https://gchq.github.io/CyberChef/", height=1000)
 
 st.markdown("---")
 
-# --- LIVE CVE VULNERABILITIES (REAL DATA) ---
-st.markdown(f'<div style="{GREEN_SUBTITLE}">>> LIVE CVE VULNERABILITIES (REAL-TIME FEED)</div>', unsafe_allow_html=True)
+# --- LIVE CVE FEED ---
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> LIVE CVE VULNERABILITIES</div>', unsafe_allow_html=True)
 col_sync, col_download, _ = st.columns([1, 2, 4])
-
-if "grc_stream" not in st.session_state:
-    st.session_state.grc_stream = fetch_real_cves()
-
+if "grc_stream" not in st.session_state: st.session_state.grc_stream = fetch_real_cves()
 with col_sync:
-    if st.button("🔄 RE-SYNC/REFRESH"):
-        with st.spinner("ESTABLISHING SECURE HANDSHAKE..."):
-            st.session_state.grc_stream = fetch_real_cves()
+    if st.button("🔄 RE-SYNC"):
+        st.session_state.grc_stream = fetch_real_cves()
         st.rerun()
-
 with col_download:
     csv_data = pd.DataFrame(st.session_state.grc_stream).to_csv(index=False).encode('utf-8')
-    st.download_button(
-        label="⬇ DOWNLOAD VULNERABILITY REPORT (.CSV)",
-        data=csv_data,
-        file_name=f"vuln_report_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
-        mime="text/csv"
-    )
+    st.download_button(label="⬇ DOWNLOAD VULNERABILITY REPORT (.CSV)", data=csv_data, file_name=f"vuln_report_{datetime.now().strftime('%Y%m%d_%H%M')}.csv", mime="text/csv")
 
 col_left, col_right = st.columns(2)
 with col_left:
-    st.markdown(f'<div style="{BLUE_LABEL}">CRITICAL VULNERABILITIES (Top 10)</div>', unsafe_allow_html=True)
-    df1 = pd.DataFrame(st.session_state.grc_stream[:10])
-    render_terminal_table(df1[['ID', 'CVSS', 'SUMMARY']])
+    st.markdown(f'<div style="{BLUE_LABEL}">CRITICAL (Top 10)</div>', unsafe_allow_html=True)
+    render_terminal_table(pd.DataFrame(st.session_state.grc_stream[:10]))
 with col_right:
-    st.markdown(f'<div style="{BLUE_LABEL}">RECENT VULNERABILITIES (Next 10)</div>', unsafe_allow_html=True)
-    df2 = pd.DataFrame(st.session_state.grc_stream[10:20])
-    render_terminal_table(df2[['ID', 'CVSS', 'SUMMARY']])
+    st.markdown(f'<div style="{BLUE_LABEL}">RECENT (Next 10)</div>', unsafe_allow_html=True)
+    render_terminal_table(pd.DataFrame(st.session_state.grc_stream[10:20]))
 
 st.markdown("---")
 
-# --- INFRASTRUCTURE RISK LANDSCAPE (CURATED REAL INTEL) ---
+# --- RISK LANDSCAPE (CURATED SIM) ---
 st.markdown(f'<div style="{GREEN_SUBTITLE}">>> INFRASTRUCTURE RISK LANDSCAPE</div>', unsafe_allow_html=True)
 t1, t2, t3, t4 = st.columns(4)
-
-def gen_landscape_data(category):
-    risks = ["CRITICAL", "HIGH", "MEDIUM"]
-    statuses = ["ACTIVE_EXPLOIT", "PATCHING", "MONITORING", "CONTAINED"]
+def gen_sim(cat):
     data = []
-    for i in range(10): 
-        risk = random.choice(risks)
-        status = "ACTIVE_EXPLOIT" if risk == "CRITICAL" else random.choice(statuses)
-        if category == "RANSOMWARE":
-            data.append({"GROUP": random.choice(["BlackCat/ALPHV", "LockBit 3.0", "Akira", "Cl0p", "Royal", "Play", "8Base"]), "SECTOR": random.choice(["Healthcare", "Finance", "Mfg", "Retail", "Gov", "Edu"]), "RISK": risk, "STATUS": status})
-        elif category == "MALWARE":
-            data.append({"FAMILY": random.choice(["Emotet", "Cobalt Strike", "Qakbot", "AgentTesla", "FormBook", "RedLine"]), "VECTOR": random.choice(["Email", "Drive-by", "USB", "RDP"]), "RISK": risk, "STATUS": status})
-        elif category == "PHISHING":
-            data.append({"TYPE": random.choice(["Spear Phishing", "Whaling", "AiTM (MFA Bypass)", "Smishing", "QR-Phish"]), "TARGET": random.choice(["Execs", "HR Dept", "IT Admins", "Sales", "DevOps"]), "RISK": risk, "STATUS": status})
-        elif category == "APT":
-            data.append({"ACTOR": random.choice(["APT29 (Cozy Bear)", "APT41 (Double Dragon)", "Lazarus (Hidden Cobra)", "Volt Typhoon", "Sandworm"]), "METHOD": random.choice(["Supply Chain", "Zero-Day", "Social Eng.", "Valid Accts", "Living-off-Land"]), "RISK": risk, "STATUS": status})
+    for _ in range(8):
+        data.append({"ENTITY": random.choice(["APT41", "LockBit", "Cisco Core", "MFA Bypass", "SolarWinds", "Log4j"]), "RISK": random.choice(["CRITICAL", "HIGH", "MEDIUM"])})
     return pd.DataFrame(data)
+with t1: render_terminal_table(gen_sim("RANSOMWARE"))
+with t2: render_terminal_table(gen_sim("MALWARE"))
+with t3: render_terminal_table(gen_sim("PHISHING"))
+with t4: render_terminal_table(gen_sim("APT"))
 
-with t1:
-    st.markdown(f'<div style="{BLUE_LABEL}">💀 RANSOMWARE</div>', unsafe_allow_html=True)
-    render_terminal_table(gen_landscape_data("RANSOMWARE"))
-with t2:
-    st.markdown(f'<div style="{BLUE_LABEL}">🦠 MALWARE</div>', unsafe_allow_html=True)
-    render_terminal_table(gen_landscape_data("MALWARE"))
-with t3:
-    st.markdown(f'<div style="{BLUE_LABEL}">🎣 PHISHING</div>', unsafe_allow_html=True)
-    render_terminal_table(gen_landscape_data("PHISHING"))
-with t4:
-    st.markdown(f'<div style="{BLUE_LABEL}">🕵️ APT GROUPS</div>', unsafe_allow_html=True)
-    render_terminal_table(gen_landscape_data("APT"))
-
-# --- FOOTER ---
-st.markdown(f"""
-<div style="border-top: 1px solid #333; padding-top: 15px; margin-top: 30px; text-align: center; font-family: 'Courier New', monospace;">
-    <span style="color: #008aff; font-size: 0.8rem;">SecAI-Nexus GRC v3.1 | TERMINAL SESSION END</span><br>
-    <span style="color: #00ff41; font-size: 0.7rem;">CONNECTION SECURE</span>
-</div>
-""", unsafe_allow_html=True)
-# DASHBOARD ENDS HERE
+# DASHBOARD ENDS
