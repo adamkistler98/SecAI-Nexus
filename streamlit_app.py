@@ -16,7 +16,6 @@ st.set_page_config(
 GREEN_SUBTITLE = "font-size: 1.1rem; font-weight: bold; color: #00ff41; margin-top: 25px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.2px;"
 GREEN_LABEL = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-bottom: 8px; text-transform: uppercase;"
 BLUE_LABEL = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-bottom: 8px; text-transform: uppercase;"
-BLUE_LABEL_MT = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-top: 20px; margin-bottom: 8px; text-transform: uppercase;"
 
 # Base style for all readable sentences/descriptions
 SENTENCE_STYLE_GREEN = "color: #00ff41; font-size: 1.15rem; line-height: 1.6; font-family: 'Courier New', monospace; font-weight: normal; text-transform: none; letter-spacing: normal;"
@@ -47,7 +46,7 @@ st.markdown(f"""
         border-left: 4px solid #008aff !important;
         padding: 8px 12px;
     }}
-    div[data-testid="stMetricValue"] {{ color: #00ff41 !important; font-size: 1.4rem !important; font-weight: bold; }}
+    div[data-testid="stMetricValue"] {{ color: #00ff41 !important; font-size: 1.5rem !important; font-weight: bold; }}
     div[data-testid="stMetricLabel"] {{ color: #008aff !important; font-size: 0.95rem; text-transform: uppercase; font-weight: bold;}}
     
     /* TERMINAL TABLE STYLING */
@@ -164,7 +163,6 @@ def render_muted_iframe(url, height=480):
     st.markdown(iframe_html, unsafe_allow_html=True)
 
 def render_simple_link(num, title, url, desc):
-    """Helper function to render Top 20 list with larger green text."""
     return f"""
     <div style="margin-bottom: 25px; font-family: 'Courier New', monospace;">
         <span style="color: #00ff41; font-weight: bold; font-size: 1.4rem;">{num}.</span> 
@@ -208,7 +206,7 @@ def generate_high_fidelity_sim():
 
 # --- HEADER SECTION ---
 compact_header = f"""
-<div style="border-bottom: 2px solid #333; padding-bottom: 12px; margin-bottom: 18px; margin-top: -50px;">
+<div style="border-bottom: 2px solid #333; padding-bottom: 12px; margin-bottom: 15px; margin-top: -50px;">
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
         <div>
             <span style="font-size: 1.3rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
@@ -225,9 +223,17 @@ compact_header = f"""
 """
 st.markdown(compact_header, unsafe_allow_html=True)
 
+# === TOP LEVEL METRICS (NEW) ===
+m1, m2, m3, m4 = st.columns(4)
+m1.metric(label="DEFCON STATUS", value="LEVEL 3", delta="ELEVATED")
+m2.metric(label="CISA KEV ADDITIONS (7D)", value="14", delta="-2 from last week")
+m3.metric(label="ACTIVE APT CAMPAIGNS", value="8", delta="TRACKING")
+m4.metric(label="GLOBAL SCAN VOLUME", value="HIGH", delta="+12% Spike")
+st.markdown("---")
+
 # === LIVE CYBER THREAT MAPS (COMPACT TEXT) ===
 st.markdown(f'''
-<div style="margin-top: 15px; margin-bottom: 15px; line-height: 1.3;">
+<div style="margin-top: 10px; margin-bottom: 15px; line-height: 1.3;">
     <span style="font-size: 0.85rem; font-weight: bold; color: #00ff41; text-transform: uppercase;">>> LIVE CYBER THREAT MAPS</span><br>
     <span style="font-size: 0.75rem; color: #00ff41; font-family: 'Courier New', monospace;">Real-time global attack activity from trusted sources</span>
 </div>
@@ -238,29 +244,29 @@ map_row2 = st.columns(4)
 
 with map_row1[0]:
     st.markdown(f'<div style="{BLUE_LABEL}">Bitdefender</div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatmap.bitdefender.com/", height=480)
+    render_muted_iframe("https://threatmap.bitdefender.com/", height=450)
 with map_row1[1]:
     st.markdown(f'<div style="{BLUE_LABEL}">Sicherheitstacho (DT)</div>', unsafe_allow_html=True)
-    render_muted_iframe("https://www.sicherheitstacho.eu/?lang=en", height=480)
+    render_muted_iframe("https://www.sicherheitstacho.eu/?lang=en", height=450)
 with map_row1[2]:
     st.markdown(f'<div style="{BLUE_LABEL}">Check Point ThreatCloud</div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatmap.checkpoint.com/", height=480)
+    render_muted_iframe("https://threatmap.checkpoint.com/", height=450)
 with map_row1[3]:
     st.markdown(f'<div style="{BLUE_LABEL}">Radware Live Threat Map</div>', unsafe_allow_html=True)
-    render_muted_iframe("https://livethreatmap.radware.com/", height=480)
+    render_muted_iframe("https://livethreatmap.radware.com/", height=450)
 
 with map_row2[0]:
     st.markdown(f'<div style="{BLUE_LABEL}">Fortinet Threat Map</div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatmap.fortiguard.com/", height=480)
+    render_muted_iframe("https://threatmap.fortiguard.com/", height=450)
 with map_row2[1]:
     st.markdown(f'<div style="{BLUE_LABEL}">Kaspersky Cybermap</div>', unsafe_allow_html=True)
-    render_muted_iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=480)
+    render_muted_iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=450)
 with map_row2[2]:
     st.markdown(f'<div style="{BLUE_LABEL}">SonicWall Live Map</div>', unsafe_allow_html=True)
-    render_muted_iframe("https://attackmap.sonicwall.com/live-attack-map/", height=480)
+    render_muted_iframe("https://attackmap.sonicwall.com/live-attack-map/", height=450)
 with map_row2[3]:
     st.markdown(f'<div style="{BLUE_LABEL}">Threatbutt Attack Map</div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatbutt.com/map/", height=480)
+    render_muted_iframe("https://threatbutt.com/map/", height=450)
 
 st.markdown("---")
 
@@ -272,8 +278,55 @@ st.markdown(f'''
     - <span style="{SENTENCE_STYLE_GREEN}">A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious. (TRENDS VIEW)</span>
 </div>
 ''', unsafe_allow_html=True)
+render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1200)
 
-render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1400)
+st.markdown("---")
+
+# === CLOUDFLARE RADAR ===
+st.markdown(f'''
+<div style="{GREEN_SUBTITLE}">
+    <span style="color: #008aff;">>> CLOUDFLARE RADAR 
+    (<a href="https://radar.cloudflare.com/" target="_blank" style="{LINK_STYLE_BLUE}">https://radar.cloudflare.com/</a>)</span> 
+    - <span style="{SENTENCE_STYLE_GREEN}">Free real-time insights into global internet traffic anomalies, routing events, and DDoS attack patterns.</span>
+</div>
+''', unsafe_allow_html=True)
+render_muted_iframe("https://radar.cloudflare.com/", height=1000)
+
+st.markdown("---")
+
+# === ADDITIONAL GRC RESOURCES (TOP 25 - REFINED FOR MAXIMUM UTILITY) ===
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> ADDITIONAL GRC RESOURCES</div>', unsafe_allow_html=True)
+
+link_col1, link_col2 = st.columns(2)
+
+with link_col1:
+    st.markdown(render_simple_link("01", "NIST Cybersecurity Framework (CSF)", "https://www.nist.gov/cyberframework", "Voluntary guidance based on existing standards and practices to better manage and reduce cybersecurity risk."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("02", "ISO/IEC 27000 Family", "https://www.iso.org/isoiec-27001-information-security.html", "The international standard for establishing and improving Information Security Management Systems (ISMS)."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("03", "OWASP Top 10 Project", "https://owasp.org/www-project-top-ten/", "The foundational awareness document for the most critical web application security risks."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("04", "NIST National Vulnerability Database (NVD)", "https://nvd.nist.gov/", "The primary US Government repository of standards-based vulnerability management data."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("05", "CIS Critical Security Controls", "https://www.cisecurity.org/controls/", "A prioritized set of safeguards to mitigate the most prevalent cyber-attacks against systems and networks."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("06", "CISA KEV Catalog", "https://www.cisa.gov/known-exploited-vulnerabilities-catalog", "The authoritative source for vulnerabilities currently being actively exploited in the wild."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("07", "MITRE ATT&CK", "https://mitre-attack.github.io/attack-navigator/", "The industry-standard matrix for mapping adversary tactics, techniques, and procedures (TTPs)."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("08", "FIRST CVSS 4.0 Calculator", "https://www.first.org/cvss/calculator/4.0", "The official home of the Common Vulnerability Scoring System for calculating environmental risk."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("09", "VirusTotal", "https://www.virustotal.com/", "The global standard for analyzing suspicious files, domains, IPs, and URLs for malware."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("10", "Exploit Database (Exploit-DB)", "https://www.exploit-db.com/", "The ultimate archive of public exploits and corresponding vulnerable software POCs."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("11", "Shodan Search", "https://www.shodan.io/", "The search engine for exposed internet-connected devices, open ports, and vulnerable services."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("12", "Have I Been Pwned", "https://haveibeenpwned.com/", "The industry standard for checking if an email address or domain has been compromised in a data breach."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("13", "Security Onion", "https://securityonionsolutions.com/", "Free and open-source platform for threat hunting and enterprise security monitoring."), unsafe_allow_html=True)
+
+with link_col2:
+    st.markdown(render_simple_link("14", "AlienVault OTX", "https://otx.alienvault.com/", "The largest open threat exchange community for gathering and sharing real-time crowdsourced IOCs."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("15", "crt.sh Certificate Search", "https://crt.sh/", "Certificate Transparency log search for mapping external attack surfaces and subdomains."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("16", "SANS Internet Storm Center (ISC)", "https://isc.sans.edu/", "Global cooperative cyber threat monitor tracking network anomalies and port trends."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("17", "BleepingComputer", "https://www.bleepingcomputer.com/", "A premier, trusted news source for tracking ransomware attacks and daily cyber events."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("18", "Abuse.ch URLhaus", "https://urlhaus.abuse.ch/", "Open project dedicated to sharing and tracking malware distribution sites and payloads."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("19", "Any.Run Sandbox", "https://any.run/", "Interactive online malware analysis sandbox allowing researchers to safely observe payloads."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("20", "URLScan.io", "https://urlscan.io/", "A free service to scan and analyze websites to see what a site is actually executing in the background."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("21", "GTFOBins", "https://gtfobins.github.io/", "A curated list of Unix binaries used to bypass local security restrictions."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("22", "LOLBAS Project", "https://lolbas-project.github.io/", "Living Off The Land Binaries and Scripts for Windows environments."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("23", "MalwareBazaar", "https://bazaar.abuse.ch/", "A massive open-source repository of malware samples for research and analysis."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("24", "CyberChef (Direct)", "https://gchq.github.io/CyberChef/", "Direct access to the browser-based data manipulation and decoding utility."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("25", "The Hacker News", "https://thehackernews.com/", "Trusted and widely-read cybersecurity news platform covering the latest breaches."), unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -286,42 +339,6 @@ st.markdown(f'''
 </div>
 ''', unsafe_allow_html=True)
 render_muted_iframe("https://gchq.github.io/CyberChef/", height=1000)
-
-st.markdown("---")
-
-# === ADDITIONAL GRC RESOURCES (TOP 25) ===
-st.markdown(f'<div style="{GREEN_SUBTITLE}">>> ADDITIONAL GRC RESOURCES</div>', unsafe_allow_html=True)
-
-link_col1, link_col2 = st.columns(2)
-
-with link_col1:
-    st.markdown(render_simple_link("01", "NIST Cybersecurity Framework (CSF)", "https://www.nist.gov/cyberframework", "Voluntary guidance based on existing standards and practices to better manage and reduce cybersecurity risk."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("02", "ISO/IEC 27000 Family", "https://www.iso.org/isoiec-27001-information-security.html", "The international standard for establishing and improving Information Security Management Systems (ISMS)."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("03", "OWASP Top 10 Project", "https://owasp.org/www-project-top-ten/", "The foundational awareness document for the most critical web application security risks."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("04", "NIST National Vulnerability Database (NVD)", "https://nvd.nist.gov/", "The primary US Government repository of standards-based vulnerability management data."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("05", "MITRE ATT&CK", "https://mitre-attack.github.io/attack-navigator/", "The industry-standard matrix for mapping adversary tactics, techniques, and procedures (TTPs)."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("06", "Shodan Search", "https://www.shodan.io/", "The search engine for exposed internet-connected devices, open ports, and vulnerable services."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("07", "crt.sh Certificate Search", "https://crt.sh/", "Certificate Transparency log search for mapping external attack surfaces and subdomains."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("08", "CISA KEV Catalog", "https://www.cisa.gov/known-exploited-vulnerabilities-catalog", "The authoritative source for vulnerabilities currently being actively exploited in the wild."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("09", "Exploit Database (Exploit-DB)", "https://www.exploit-db.com/", "The ultimate archive of public exploits and corresponding vulnerable software POCs."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("10", "VirusTotal", "https://www.virustotal.com/", "The global standard for analyzing suspicious files, domains, IPs, and URLs for malware."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("11", "AlienVault OTX", "https://otx.alienvault.com/", "The largest open threat exchange community for gathering and sharing real-time crowdsourced IOCs."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("12", "Security Onion", "https://securityonionsolutions.com/", "Free and open-source platform for threat hunting and enterprise security monitoring."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("13", "Abuse.ch URLhaus", "https://urlhaus.abuse.ch/", "Open project dedicated to sharing and tracking malware distribution sites and payloads."), unsafe_allow_html=True)
-
-with link_col2:
-    st.markdown(render_simple_link("14", "SANS Internet Storm Center (ISC)", "https://isc.sans.edu/", "Global cooperative cyber threat monitor tracking network anomalies and port trends."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("15", "BleepingComputer", "https://www.bleepingcomputer.com/", "A premier, trusted news source for tracking ransomware attacks and daily cyber events."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("16", "Any.Run Sandbox", "https://any.run/", "Interactive online malware analysis sandbox allowing researchers to safely observe payloads."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("17", "FIRST CVSS 4.0 Calculator", "https://www.first.org/cvss/calculator/4.0", "The official home of the Common Vulnerability Scoring System for calculating environmental risk."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("18", "MalwareBazaar", "https://bazaar.abuse.ch/", "A massive open-source repository of malware samples for research and analysis."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("19", "GTFOBins", "https://gtfobins.github.io/", "A curated list of Unix binaries used to bypass local security restrictions."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("20", "Cloudflare Radar", "https://radar.cloudflare.com/", "Free real-time insights into global internet traffic, security attacks, and adoption."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("21", "Triage Sandbox", "https://triage.com/", "A modern, free-tier friendly public malware sandbox for automated analysis."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("22", "URLScan.io", "https://urlscan.io/", "A free service to scan and analyze websites to see what a site is actually doing."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("23", "CyberChef (Direct)", "https://gchq.github.io/CyberChef/", "Direct access to the browser-based data manipulation and decoding utility."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("24", "LOLBAS Project", "https://lolbas-project.github.io/", "Living Off The Land Binaries and Scripts for Windows environments."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("25", "The Hacker News", "https://thehackernews.com/", "Trusted and widely-read cybersecurity news platform covering the latest breaches."), unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -393,4 +410,11 @@ with t4:
     st.markdown(f'<div style="{BLUE_LABEL}">🕵️ APT GROUPS</div>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("APT"))
 
+# --- FOOTER ---
+st.markdown(f"""
+<div style="border-top: 1px solid #333; padding-top: 15px; margin-top: 30px; text-align: center; font-family: 'Courier New', monospace;">
+    <span style="color: #008aff; font-size: 0.8rem;">SecAI-Nexus GRC v3.1 | TERMINAL SESSION END</span><br>
+    <span style="color: #00ff41; font-size: 0.7rem;">CONNECTION SECURE</span>
+</div>
+""", unsafe_allow_html=True)
 # DASHBOARD ENDS HERE
