@@ -253,7 +253,7 @@ with map_row2[3]:
 st.markdown("---")
 
 # === LARGE MAP SECTION (GREYNOISE GRID) ===
-st.markdown('<div class="stealth-subtitle">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://viz.greynoise.io/</a>) - A threat intelligence platform that filters out internet background noise to provide actionable insights into specific, targeted cyber threats.</div>', unsafe_allow_html=True)
+st.markdown('<div class="stealth-subtitle">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://viz.greynoise.io/</a>) - A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious.</div>', unsafe_allow_html=True)
 
 # Create a 2x2 grid using Streamlit columns
 gn_col1, gn_col2 = st.columns(2)
@@ -277,6 +277,12 @@ st.markdown("---")
 # === MITRE ATT&CK FRAMEWORK ===
 st.markdown('<div class="stealth-subtitle">>> MITRE ATT&CK NAVIGATOR (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="color: #00ff41; text-decoration: none;">https://mitre-attack.github.io/attack-navigator/</a>) - The industry-standard matrix for mapping adversary tactics, techniques, and procedures (TTPs).</div>', unsafe_allow_html=True)
 render_muted_iframe("https://mitre-attack.github.io/attack-navigator/", height=700)
+
+st.markdown("---")
+
+# === SHODAN EXPOSURE INTELLIGENCE ===
+st.markdown('<div class="stealth-subtitle">>> SHODAN EXPOSURE INTELLIGENCE (<a href="https://www.shodan.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://www.shodan.io/</a>) - The search engine for internet-connected devices, used to discover exposed infrastructure, open ports, and vulnerable services.</div>', unsafe_allow_html=True)
+render_muted_iframe("https://www.shodan.io/", height=650)
 
 st.markdown("---")
 
