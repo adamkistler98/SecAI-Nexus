@@ -12,7 +12,13 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- ADVANCED GRC CSS (HARDCODED GREEN OVERRIDES) ---
+# --- INLINE CSS CONSTANTS (NEON GREEN & NEON BLUE) ---
+GREEN_SUBTITLE = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-top: 20px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;"
+GREEN_LABEL = "font-size: 0.85rem; font-weight: bold; color: #00ff41; margin-bottom: 5px; text-transform: uppercase;"
+BLUE_LABEL = "font-size: 0.85rem; font-weight: bold; color: #00bfff; margin-bottom: 5px; text-transform: uppercase;"
+BLUE_LABEL_MT = "font-size: 0.85rem; font-weight: bold; color: #00bfff; margin-top: 15px; margin-bottom: 5px; text-transform: uppercase;"
+
+# --- ADVANCED GRC CSS ---
 st.markdown("""
 <style>
     /* GLOBAL DARK THEME */
@@ -20,35 +26,6 @@ st.markdown("""
     
     /* TARGETED GREEN TEXT */
     h1, h2, h3, h4, h5, h6, div[data-testid="stMarkdownContainer"] > p, label { color: #00ff41 !important; }
-    
-    /* BULLETPROOF NEON GREEN CLASSES */
-    .neon-title, .neon-title p, .neon-title a, .neon-title span {
-        font-size: 1.0rem !important;
-        font-weight: bold !important;
-        color: #00ff41 !important;
-        margin-top: 20px !important;
-        margin-bottom: 5px !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        text-decoration: none !important;
-    }
-    .neon-label, .neon-label p, .neon-label a, .neon-label span {
-        font-size: 0.85rem !important;
-        font-weight: bold !important;
-        color: #00ff41 !important;
-        margin-bottom: 5px !important;
-        text-transform: uppercase !important;
-        text-decoration: none !important;
-    }
-    .neon-label-mt, .neon-label-mt p, .neon-label-mt a, .neon-label-mt span {
-        font-size: 0.85rem !important;
-        font-weight: bold !important;
-        color: #00ff41 !important;
-        margin-top: 15px !important;
-        margin-bottom: 5px !important;
-        text-transform: uppercase !important;
-        text-decoration: none !important;
-    }
     
     /* REMOVE WHITE ELEMENTS */
     header, footer { visibility: hidden; }
@@ -58,17 +35,17 @@ st.markdown("""
     div[data-testid="stMetric"] {
         background-color: #0a0a0a !important;
         border: 1px solid #333;
-        border-left: 3px solid #00ff41 !important;
+        border-left: 3px solid #00bfff !important;
         padding: 5px 10px;
     }
     div[data-testid="stMetricValue"] { color: #00ff41 !important; font-size: 1.2rem !important; }
-    div[data-testid="stMetricLabel"] { color: #00ff41 !important; }
+    div[data-testid="stMetricLabel"] { color: #00bfff !important; }
     
     /* TERMINAL TABLE STYLING */
     .terminal-table {
         width: 100%;
         border-collapse: collapse;
-        color: #00cc33;
+        color: #00ff41;
         font-family: 'Courier New', monospace;
         font-size: 0.85rem;
         margin-bottom: 15px;
@@ -76,10 +53,10 @@ st.markdown("""
         background-color: #050505;
     }
     .terminal-table th {
-        border-bottom: 1px solid #00ff41;
+        border-bottom: 1px solid #00bfff;
         text-align: left;
         padding: 8px 10px;
-        color: #00ff41 !important;
+        color: #00bfff;
         background-color: #111;
         text-transform: uppercase;
     }
@@ -96,21 +73,21 @@ st.markdown("""
     
     /* BUTTON STYLING */
     .stButton>button {
-        background-color: #000000; color: #00ff41; border: 1px solid #333;
+        background-color: #000000; color: #00bfff; border: 1px solid #333;
         font-size: 0.75rem; font-weight: bold; text-transform: uppercase; 
         width: 100%;
     }
     .stButton>button:hover { 
         border-color: #00ff41; 
         box-shadow: 0 0 8px #00ff41; 
-        color: #fff;
+        color: #00ff41;
     }
     
     /* DOWNLOAD BUTTON */
     div[data-testid="stDownloadButton"]>button {
         background-color: #111 !important;
-        color: #00ff41 !important;
-        border: 1px solid #00ff41 !important;
+        color: #00bfff !important;
+        border: 1px solid #00bfff !important;
         font-family: 'Courier New', monospace !important;
         text-transform: uppercase;
         width: 100%;
@@ -152,11 +129,12 @@ def render_muted_iframe(url, height=480):
     st.markdown(iframe_html, unsafe_allow_html=True)
 
 def render_simple_link(num, title, url, desc):
+    """Helper function to guarantee the links render perfectly with NEON BLUE links and NEON GREEN descriptions."""
     return f"""
     <div style="margin-bottom: 24px; font-family: 'Courier New', monospace;">
-        <span style="color: #00ff41 !important; font-weight: bold; font-size: 1.4rem;">{num}.</span> 
-        <a href="{url}" target="_blank" style="color: #00ff41 !important; font-weight: bold; font-size: 1.35rem; text-decoration: none; border-bottom: 1px dashed #00ff41;">{title}</a>
-        <div style="color: #00cc33 !important; font-size: 1.15rem; margin-top: 8px; padding-left: 45px; line-height: 1.4;">{desc}</div>
+        <span style="color: #00ff41; font-weight: bold; font-size: 1.4rem;">{num}.</span> 
+        <a href="{url}" target="_blank" style="color: #00bfff; font-weight: bold; font-size: 1.35rem; text-decoration: none; border-bottom: 1px dashed #00bfff;">{title}</a>
+        <div style="color: #00ff41; font-size: 1.15rem; margin-top: 8px; padding-left: 45px; line-height: 1.4;">{desc}</div>
     </div>
     """
 
@@ -200,56 +178,62 @@ compact_header = f"""
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
         <div>
             <span style="font-size: 1.2rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
-            <span style="font-size: 0.85rem; color: #00ff41; margin-left: 8px;">// GLOBAL THREAT VISIBILITY</span>
+            <span style="font-size: 0.85rem; color: #00bfff; margin-left: 8px;">// GLOBAL THREAT VISIBILITY</span>
         </div>
-        <div style="font-size: 0.85rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">
+        <div style="font-size: 0.85rem; font-weight: bold; color: #00bfff; text-shadow: 0 0 5px #00bfff;">
             SYS_TIME: {datetime.now().strftime("%H:%M:%S")} UTC
         </div>
     </div>
-    <div style="font-size: 0.6rem; color: #00cc33; margin-top: 4px; text-transform: uppercase;">
-        Worldwide | Real-time | Enc: AES-256 | Status: <span style="color: #00ff41; font-weight: bold;">SECURE</span>
+    <div style="font-size: 0.6rem; color: #00ff41; margin-top: 4px; text-transform: uppercase;">
+        Worldwide | Real-time | Enc: AES-256 | Status: <span style="color: #00bfff; font-weight: bold;">SECURE</span>
     </div>
 </div>
 """
 st.markdown(compact_header, unsafe_allow_html=True)
 
 # === LIVE CYBER THREAT MAPS (SMALL GRID) ===
-st.markdown('<div class="neon-title">>> LIVE CYBER THREAT MAPS</div>', unsafe_allow_html=True)
-st.markdown('<div class="neon-label">REAL-TIME GLOBAL ATTACK ACTIVITY FROM TRUSTED SOURCES</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> LIVE CYBER THREAT MAPS</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="{GREEN_LABEL}">REAL-TIME GLOBAL ATTACK ACTIVITY FROM TRUSTED SOURCES</div>', unsafe_allow_html=True)
 
 map_row1 = st.columns(4)
 map_row2 = st.columns(4)
 
 with map_row1[0]:
-    st.markdown('<div class="neon-label">Bitdefender</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">Bitdefender</div>', unsafe_allow_html=True)
     render_muted_iframe("https://threatmap.bitdefender.com/", height=480)
 with map_row1[1]:
-    st.markdown('<div class="neon-label">Sicherheitstacho (DT)</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">Sicherheitstacho (DT)</div>', unsafe_allow_html=True)
     render_muted_iframe("https://www.sicherheitstacho.eu/?lang=en", height=480)
 with map_row1[2]:
-    st.markdown('<div class="neon-label">Check Point ThreatCloud</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">Check Point ThreatCloud</div>', unsafe_allow_html=True)
     render_muted_iframe("https://threatmap.checkpoint.com/", height=480)
 with map_row1[3]:
-    st.markdown('<div class="neon-label">Radware Live Threat Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">Radware Live Threat Map</div>', unsafe_allow_html=True)
     render_muted_iframe("https://livethreatmap.radware.com/", height=480)
 
 with map_row2[0]:
-    st.markdown('<div class="neon-label">Fortinet Threat Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">Fortinet Threat Map</div>', unsafe_allow_html=True)
     render_muted_iframe("https://threatmap.fortiguard.com/", height=480)
 with map_row2[1]:
-    st.markdown('<div class="neon-label">Kaspersky Cybermap</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">Kaspersky Cybermap</div>', unsafe_allow_html=True)
     render_muted_iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=480)
 with map_row2[2]:
-    st.markdown('<div class="neon-label">SonicWall Live Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">SonicWall Live Map</div>', unsafe_allow_html=True)
     render_muted_iframe("https://attackmap.sonicwall.com/live-attack-map/", height=480)
 with map_row2[3]:
-    st.markdown('<div class="neon-label">Threatbutt Attack Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">Threatbutt Attack Map</div>', unsafe_allow_html=True)
     render_muted_iframe("https://threatbutt.com/map/", height=480)
 
 st.markdown("---")
 
 # === LARGE MAP SECTION (SINGLE GREYNOISE TODAY VIEW) ===
-st.markdown('<div class="neon-title">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="border-bottom: 1px dashed #00ff41;">https://viz.greynoise.io/</a>) - A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious. (TODAY VIEW)</div>', unsafe_allow_html=True)
+st.markdown(f'''
+<div style="{GREEN_SUBTITLE}">
+    >> GREYNOISE INTELLIGENCE 
+    (<a href="https://viz.greynoise.io/" target="_blank" style="color: #00bfff; text-decoration: none; border-bottom: 1px dashed #00bfff;">https://viz.greynoise.io/</a>) 
+    - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious. (TODAY VIEW)</span>
+</div>
+''', unsafe_allow_html=True)
 
 # Single, massive iframe for the GreyNoise Today feed.
 render_muted_iframe("https://viz.greynoise.io/query/last_seen:1d", height=1400)
@@ -257,28 +241,52 @@ render_muted_iframe("https://viz.greynoise.io/query/last_seen:1d", height=1400)
 st.markdown("---")
 
 # === OSINT, EXPOSURE & ANALYSIS FRAMEWORKS (2x2 GRID) ===
-st.markdown('<div class="neon-title">>> OSINT, EXPOSURE & ANALYSIS FRAMEWORKS</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> OSINT, EXPOSURE & ANALYSIS FRAMEWORKS</div>', unsafe_allow_html=True)
 
 osint_col1, osint_col2 = st.columns(2)
 
 with osint_col1:
-    st.markdown('<div class="neon-label">MITRE ATT&CK NAVIGATOR (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="border-bottom: 1px dashed #00ff41;">https://mitre-attack.github.io/attack-navigator/</a>) - The industry-standard matrix for mapping adversary tactics, techniques, and procedures.</div>', unsafe_allow_html=True)
+    st.markdown(f'''
+    <div style="{BLUE_LABEL}">
+        MITRE ATT&CK NAVIGATOR 
+        (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="color: #00bfff; text-decoration: none; border-bottom: 1px dashed #00bfff;">https://mitre-attack.github.io/attack-navigator/</a>) 
+        - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">The industry-standard matrix for mapping adversary tactics, techniques, and procedures.</span>
+    </div>
+    ''', unsafe_allow_html=True)
     render_muted_iframe("https://mitre-attack.github.io/attack-navigator/", height=700)
     
-    st.markdown('<div class="neon-label-mt">CRT.SH (CERT SEARCH) (<a href="https://crt.sh/" target="_blank" style="border-bottom: 1px dashed #00ff41;">https://crt.sh/</a>) - Certificate Transparency log search for mapping external attack surfaces and subdomains.</div>', unsafe_allow_html=True)
+    st.markdown(f'''
+    <div style="{BLUE_LABEL_MT}">
+        CRT.SH (CERT SEARCH) 
+        (<a href="https://crt.sh/" target="_blank" style="color: #00bfff; text-decoration: none; border-bottom: 1px dashed #00bfff;">https://crt.sh/</a>) 
+        - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">Certificate Transparency log search for mapping external attack surfaces and subdomains.</span>
+    </div>
+    ''', unsafe_allow_html=True)
     render_muted_iframe("https://crt.sh/", height=650)
 
 with osint_col2:
-    st.markdown('<div class="neon-label">SHODAN (<a href="https://www.shodan.io/" target="_blank" style="border-bottom: 1px dashed #00ff41;">https://www.shodan.io/</a>) - The search engine for exposed internet-connected devices, open ports, and vulnerable services.</div>', unsafe_allow_html=True)
+    st.markdown(f'''
+    <div style="{BLUE_LABEL}">
+        SHODAN 
+        (<a href="https://www.shodan.io/" target="_blank" style="color: #00bfff; text-decoration: none; border-bottom: 1px dashed #00bfff;">https://www.shodan.io/</a>) 
+        - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">The search engine for exposed internet-connected devices, open ports, and vulnerable services.</span>
+    </div>
+    ''', unsafe_allow_html=True)
     render_muted_iframe("https://www.shodan.io/", height=700)
     
-    st.markdown('<div class="neon-label-mt">CYBERCHEF (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="border-bottom: 1px dashed #00ff41;">https://gchq.github.io/CyberChef/</a>) - The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</div>', unsafe_allow_html=True)
+    st.markdown(f'''
+    <div style="{BLUE_LABEL_MT}">
+        CYBERCHEF 
+        (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #00bfff; text-decoration: none; border-bottom: 1px dashed #00bfff;">https://gchq.github.io/CyberChef/</a>) 
+        - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</span>
+    </div>
+    ''', unsafe_allow_html=True)
     render_muted_iframe("https://gchq.github.io/CyberChef/", height=650)
 
 st.markdown("---")
 
 # === ADDITIONAL GRC RESOURCES ===
-st.markdown('<div class="neon-title">>> ADDITIONAL GRC RESOURCES</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> ADDITIONAL GRC RESOURCES</div>', unsafe_allow_html=True)
 
 link_col1, link_col2 = st.columns(2)
 
@@ -299,7 +307,7 @@ with link_col2:
 st.markdown("---")
 
 # --- LIVE CVE VULNERABILITIES (REAL DATA) ---
-st.markdown('<div class="neon-title">>> LIVE CVE VULNERABILITIES (REAL-TIME FEED)</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> LIVE CVE VULNERABILITIES (REAL-TIME FEED)</div>', unsafe_allow_html=True)
 col_sync, col_download, _ = st.columns([1, 2, 4])
 
 if "grc_stream" not in st.session_state:
@@ -322,18 +330,18 @@ with col_download:
 
 col_left, col_right = st.columns(2)
 with col_left:
-    st.markdown('<div class="neon-label">CRITICAL VULNERABILITIES (Top 10)</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">CRITICAL VULNERABILITIES (Top 10)</div>', unsafe_allow_html=True)
     df1 = pd.DataFrame(st.session_state.grc_stream[:10])
     render_terminal_table(df1[['ID', 'CVSS', 'SUMMARY']])
 with col_right:
-    st.markdown('<div class="neon-label">RECENT VULNERABILITIES (Next 10)</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">RECENT VULNERABILITIES (Next 10)</div>', unsafe_allow_html=True)
     df2 = pd.DataFrame(st.session_state.grc_stream[10:20])
     render_terminal_table(df2[['ID', 'CVSS', 'SUMMARY']])
 
 st.markdown("---")
 
 # --- INFRASTRUCTURE RISK LANDSCAPE (CURATED REAL INTEL) ---
-st.markdown('<div class="neon-title">>> INFRASTRUCTURE RISK LANDSCAPE</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> INFRASTRUCTURE RISK LANDSCAPE</div>', unsafe_allow_html=True)
 t1, t2, t3, t4 = st.columns(4)
 
 def gen_landscape_data(category):
@@ -354,16 +362,16 @@ def gen_landscape_data(category):
     return pd.DataFrame(data)
 
 with t1:
-    st.markdown('<div class="neon-label">💀 RANSOMWARE</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">💀 RANSOMWARE</div>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("RANSOMWARE"))
 with t2:
-    st.markdown('<div class="neon-label">🦠 MALWARE</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">🦠 MALWARE</div>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("MALWARE"))
 with t3:
-    st.markdown('<div class="neon-label">🎣 PHISHING</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">🎣 PHISHING</div>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("PHISHING"))
 with t4:
-    st.markdown('<div class="neon-label">🕵️ APT GROUPS</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}">🕵️ APT GROUPS</div>', unsafe_allow_html=True)
     render_terminal_table(gen_landscape_data("APT"))
 
 # DASHBOARD ENDS HERE
