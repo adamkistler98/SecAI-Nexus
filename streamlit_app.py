@@ -12,86 +12,100 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- INLINE CSS CONSTANTS (NEON GREEN & DEEP NEON BLUE) ---
-GREEN_SUBTITLE = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-top: 20px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;"
-GREEN_LABEL = "font-size: 0.85rem; font-weight: bold; color: #00ff41; margin-bottom: 5px; text-transform: uppercase;"
-BLUE_LABEL = "font-size: 0.85rem; font-weight: bold; color: #0055ff; margin-bottom: 5px; text-transform: uppercase;"
-BLUE_LABEL_MT = "font-size: 0.85rem; font-weight: bold; color: #0055ff; margin-top: 15px; margin-bottom: 5px; text-transform: uppercase;"
+# --- INLINE CSS CONSTANTS (NEON GREEN & MEDIAN CYBER BLUE) ---
+# Calculated midpoint color: #008aff
+GREEN_SUBTITLE = "font-size: 1.1rem; font-weight: bold; color: #00ff41; margin-top: 25px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.2px;"
+GREEN_LABEL = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-bottom: 8px; text-transform: uppercase;"
+BLUE_LABEL = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-bottom: 8px; text-transform: uppercase;"
+BLUE_LABEL_MT = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-top: 20px; margin-bottom: 8px; text-transform: uppercase;"
+
+# Base style for all readable sentences/descriptions
+SENTENCE_STYLE_GREEN = "color: #00ff41; font-size: 1.15rem; line-height: 1.6; font-family: 'Courier New', monospace; font-weight: normal; text-transform: none; letter-spacing: normal;"
+LINK_STYLE_BLUE = "color: #008aff; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #008aff;"
 
 # --- ADVANCED GRC CSS ---
-st.markdown("""
+st.markdown(f"""
 <style>
     /* GLOBAL DARK THEME */
-    .stApp { background-color: #050505 !important; font-family: 'Courier New', Courier, monospace !important; }
+    .stApp {{ background-color: #050505 !important; font-family: 'Courier New', Courier, monospace !important; }}
     
-    /* TARGETED GREEN TEXT */
-    h1, h2, h3, h4, h5, h6, div[data-testid="stMarkdownContainer"] > p, label { color: #00ff41 !important; }
+    /* UNIVERSAL SENTENCE READABILITY FOR PARAGRAPHS */
+    div[data-testid="stMarkdownContainer"] > p {{
+        {SENTENCE_STYLE_GREEN}
+    }}
+
+    /* TARGETED GREEN TEXT FOR HEADERS */
+    h1, h2, h3, h4, h5, h6, label {{ color: #00ff41 !important; }}
     
     /* REMOVE WHITE ELEMENTS */
-    header, footer { visibility: hidden; }
-    .stDeployButton { display: none; }
+    header, footer {{ visibility: hidden; }}
+    .stDeployButton {{ display: none; }}
     
     /* METRICS BOXES */
-    div[data-testid="stMetric"] {
+    div[data-testid="stMetric"] {{
         background-color: #0a0a0a !important;
         border: 1px solid #333;
-        border-left: 3px solid #0055ff !important;
-        padding: 5px 10px;
-    }
-    div[data-testid="stMetricValue"] { color: #00ff41 !important; font-size: 1.2rem !important; }
-    div[data-testid="stMetricLabel"] { color: #0055ff !important; }
+        border-left: 4px solid #008aff !important;
+        padding: 8px 12px;
+    }}
+    div[data-testid="stMetricValue"] {{ color: #00ff41 !important; font-size: 1.4rem !important; font-weight: bold; }}
+    div[data-testid="stMetricLabel"] {{ color: #008aff !important; font-size: 0.95rem; text-transform: uppercase; font-weight: bold;}}
     
     /* TERMINAL TABLE STYLING */
-    .terminal-table {
+    .terminal-table {{
         width: 100%;
         border-collapse: collapse;
         color: #00ff41;
         font-family: 'Courier New', monospace;
-        font-size: 0.85rem;
+        font-size: 1.1rem; /* Increased table data readability */
         margin-bottom: 15px;
         border: 1px solid #222;
         background-color: #050505;
-    }
-    .terminal-table th {
-        border-bottom: 1px solid #0055ff;
+    }}
+    .terminal-table th {{
+        border-bottom: 2px solid #008aff;
         text-align: left;
-        padding: 8px 10px;
-        color: #0055ff;
+        padding: 10px 12px;
+        color: #008aff;
         background-color: #111;
         text-transform: uppercase;
-    }
-    .terminal-table td { 
+        font-size: 1.0rem;
+    }}
+    .terminal-table td {{ 
         border-bottom: 1px solid #1a1a1a; 
-        padding: 8px 10px; 
+        padding: 10px 12px; 
         background-color: #050505; 
-    }
+        line-height: 1.4;
+    }}
     
     /* STATUS COLORS */
-    .crit { color: #ff3333 !important; font-weight: bold; text-shadow: 0 0 5px #ff3333; }
-    .high { color: #ffaa00 !important; }
-    .med { color: #00ff41 !important; }
+    .crit {{ color: #ff3333 !important; font-weight: bold; text-shadow: 0 0 5px #ff3333; }}
+    .high {{ color: #ffaa00 !important; }}
+    .med {{ color: #00ff41 !important; }}
     
     /* BUTTON STYLING */
-    .stButton>button {
-        background-color: #000000; color: #0055ff; border: 1px solid #333;
-        font-size: 0.75rem; font-weight: bold; text-transform: uppercase; 
+    .stButton>button {{
+        background-color: #000000; color: #008aff; border: 2px solid #333;
+        font-size: 0.9rem; font-weight: bold; text-transform: uppercase; 
         width: 100%;
-    }
-    .stButton>button:hover { 
+        padding: 10px;
+    }}
+    .stButton>button:hover {{ 
         border-color: #00ff41; 
-        box-shadow: 0 0 8px #00ff41; 
+        box-shadow: 0 0 10px #00ff41; 
         color: #00ff41;
-    }
+    }}
     
     /* DOWNLOAD BUTTON */
-    div[data-testid="stDownloadButton"]>button {
+    div[data-testid="stDownloadButton"]>button {{
         background-color: #111 !important;
-        color: #0055ff !important;
-        border: 1px solid #0055ff !important;
+        color: #008aff !important;
+        border: 2px solid #008aff !important;
         font-family: 'Courier New', monospace !important;
         text-transform: uppercase;
         width: 100%;
-    }
+        font-size: 0.9rem;
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -106,6 +120,7 @@ def render_terminal_table(df):
         html += '<tr>'
         for col in df.columns:
             val = str(row[col])
+            # Intelligent Color Logic
             if any(k in val.upper() for k in ["CRITICAL", "9.", "ACTIVE_EXPLOIT", "BREACH"]):
                 html += f'<td class="crit">{val}</td>'
             elif any(k in val.upper() for k in ["HIGH", "8.", "7.", "ELEVATED", "PATCHING"]):
@@ -129,12 +144,12 @@ def render_muted_iframe(url, height=480):
     st.markdown(iframe_html, unsafe_allow_html=True)
 
 def render_simple_link(num, title, url, desc):
-    """Helper function to guarantee the links render perfectly with DEEP BLUE links and NEON GREEN descriptions."""
+    """Helper function to guarantee the links render perfectly with LARGER, Consistent fonts."""
     return f"""
-    <div style="margin-bottom: 24px; font-family: 'Courier New', monospace;">
+    <div style="margin-bottom: 25px; font-family: 'Courier New', monospace;">
         <span style="color: #00ff41; font-weight: bold; font-size: 1.4rem;">{num}.</span> 
-        <a href="{url}" target="_blank" style="color: #0055ff; font-weight: bold; font-size: 1.35rem; text-decoration: none; border-bottom: 1px dashed #0055ff;">{title}</a>
-        <div style="color: #00ff41; font-size: 1.15rem; margin-top: 8px; padding-left: 45px; line-height: 1.4;">{desc}</div>
+        <a href="{url}" target="_blank" style="color: #008aff; font-weight: bold; font-size: 1.35rem; text-decoration: none; border-bottom: 2px dashed #008aff;">{title}</a>
+        <div style="color: #00ff41; font-size: 1.15rem; margin-top: 8px; padding-left: 45px; line-height: 1.6;">{desc}</div>
     </div>
     """
 
@@ -174,18 +189,18 @@ def generate_high_fidelity_sim():
 
 # --- HEADER SECTION ---
 compact_header = f"""
-<div style="border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; margin-top: -50px;">
+<div style="border-bottom: 2px solid #333; padding-bottom: 12px; margin-bottom: 18px; margin-top: -50px;">
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
         <div>
-            <span style="font-size: 1.2rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
-            <span style="font-size: 0.85rem; color: #0055ff; margin-left: 8px;">// GLOBAL THREAT VISIBILITY</span>
+            <span style="font-size: 1.3rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
+            <span style="font-size: 0.95rem; color: #008aff; margin-left: 10px; font-weight: bold;">// GLOBAL THREAT VISIBILITY</span>
         </div>
-        <div style="font-size: 0.85rem; font-weight: bold; color: #0055ff; text-shadow: 0 0 5px #0055ff;">
+        <div style="font-size: 1.0rem; font-weight: bold; color: #008aff; text-shadow: 0 0 5px #008aff;">
             SYS_TIME: {datetime.now().strftime("%H:%M:%S")} UTC
         </div>
     </div>
-    <div style="font-size: 0.6rem; color: #00ff41; margin-top: 4px; text-transform: uppercase;">
-        Worldwide | Real-time | Enc: AES-256 | Status: <span style="color: #0055ff; font-weight: bold;">SECURE</span>
+    <div style="font-size: 0.75rem; color: #00ff41; margin-top: 6px; text-transform: uppercase;">
+        Worldwide | Real-time | Enc: AES-256 | Status: <span style="color: #008aff; font-weight: bold;">SECURE</span>
     </div>
 </div>
 """
@@ -193,7 +208,8 @@ st.markdown(compact_header, unsafe_allow_html=True)
 
 # === LIVE CYBER THREAT MAPS (SMALL GRID) ===
 st.markdown(f'<div style="{GREEN_SUBTITLE}">>> LIVE CYBER THREAT MAPS</div>', unsafe_allow_html=True)
-st.markdown(f'<div style="{GREEN_LABEL}">REAL-TIME GLOBAL ATTACK ACTIVITY FROM TRUSTED SOURCES</div>', unsafe_allow_html=True)
+# Base typography from CSS applies to the description below automatically because it's in a <p> tag inside st.markdown
+st.markdown('Real-time global attack activity from trusted sources')
 
 map_row1 = st.columns(4)
 map_row2 = st.columns(4)
@@ -229,9 +245,9 @@ st.markdown("---")
 # === LARGE MAP SECTION (SINGLE GREYNOISE TODAY VIEW) ===
 st.markdown(f'''
 <div style="{GREEN_SUBTITLE}">
-    <span style="color: #0055ff;">>> GREYNOISE INTELLIGENCE 
-    (<a href="https://viz.greynoise.io/" target="_blank" style="color: #0055ff; text-decoration: none; border-bottom: 1px dashed #0055ff;">https://viz.greynoise.io/</a>)</span> 
-    - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious. (TODAY VIEW)</span>
+    <span style="color: #008aff;">>> GREYNOISE INTELLIGENCE 
+    (<a href="https://viz.greynoise.io/" target="_blank" style="{LINK_STYLE_BLUE}">https://viz.greynoise.io/</a>)</span> 
+    - <span style="{SENTENCE_STYLE_GREEN}">A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious. (TODAY VIEW)</span>
 </div>
 ''', unsafe_allow_html=True)
 
@@ -249,8 +265,8 @@ with osint_col1:
     st.markdown(f'''
     <div style="{BLUE_LABEL}">
         MITRE ATT&CK NAVIGATOR 
-        (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="color: #0055ff; text-decoration: none; border-bottom: 1px dashed #0055ff;">https://mitre-attack.github.io/attack-navigator/</a>) 
-        - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">The industry-standard matrix for mapping adversary tactics, techniques, and procedures.</span>
+        (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="{LINK_STYLE_BLUE}">https://mitre-attack.github.io/attack-navigator/</a>) 
+        - <span style="{SENTENCE_STYLE_GREEN}">The industry-standard matrix for mapping adversary tactics, techniques, and procedures.</span>
     </div>
     ''', unsafe_allow_html=True)
     render_muted_iframe("https://mitre-attack.github.io/attack-navigator/", height=700)
@@ -258,8 +274,8 @@ with osint_col1:
     st.markdown(f'''
     <div style="{BLUE_LABEL_MT}">
         CRT.SH (CERT SEARCH) 
-        (<a href="https://crt.sh/" target="_blank" style="color: #0055ff; text-decoration: none; border-bottom: 1px dashed #0055ff;">https://crt.sh/</a>) 
-        - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">Certificate Transparency log search for mapping external attack surfaces and subdomains.</span>
+        (<a href="https://crt.sh/" target="_blank" style="{LINK_STYLE_BLUE}">https://crt.sh/</a>) 
+        - <span style="{SENTENCE_STYLE_GREEN}">Certificate Transparency log search for mapping external attack surfaces and subdomains.</span>
     </div>
     ''', unsafe_allow_html=True)
     render_muted_iframe("https://crt.sh/", height=650)
@@ -268,8 +284,8 @@ with osint_col2:
     st.markdown(f'''
     <div style="{BLUE_LABEL}">
         SHODAN 
-        (<a href="https://www.shodan.io/" target="_blank" style="color: #0055ff; text-decoration: none; border-bottom: 1px dashed #0055ff;">https://www.shodan.io/</a>) 
-        - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">The search engine for exposed internet-connected devices, open ports, and vulnerable services.</span>
+        (<a href="https://www.shodan.io/" target="_blank" style="{LINK_STYLE_BLUE}">https://www.shodan.io/</a>) 
+        - <span style="{SENTENCE_STYLE_GREEN}">The search engine for exposed internet-connected devices, open ports, and vulnerable services.</span>
     </div>
     ''', unsafe_allow_html=True)
     render_muted_iframe("https://www.shodan.io/", height=700)
@@ -277,8 +293,8 @@ with osint_col2:
     st.markdown(f'''
     <div style="{BLUE_LABEL_MT}">
         CYBERCHEF 
-        (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #0055ff; text-decoration: none; border-bottom: 1px dashed #0055ff;">https://gchq.github.io/CyberChef/</a>) 
-        - <span style="color: #00ff41; font-weight: normal; text-transform: none; letter-spacing: normal;">The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</span>
+        (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="{LINK_STYLE_BLUE}">https://gchq.github.io/CyberChef/</a>) 
+        - <span style="{SENTENCE_STYLE_GREEN}">The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</span>
     </div>
     ''', unsafe_allow_html=True)
     render_muted_iframe("https://gchq.github.io/CyberChef/", height=650)
