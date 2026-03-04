@@ -57,7 +57,7 @@ st.markdown(f"""
         border-collapse: collapse;
         color: #00ff41;
         font-family: 'Courier New', monospace;
-        font-size: 1.1rem; /* Increased table data readability */
+        font-size: 1.1rem; 
         margin-bottom: 15px;
         border: 1px solid #222;
         background-color: #050505;
@@ -120,7 +120,6 @@ def render_terminal_table(df):
         html += '<tr>'
         for col in df.columns:
             val = str(row[col])
-            # Intelligent Color Logic
             if any(k in val.upper() for k in ["CRITICAL", "9.", "ACTIVE_EXPLOIT", "BREACH"]):
                 html += f'<td class="crit">{val}</td>'
             elif any(k in val.upper() for k in ["HIGH", "8.", "7.", "ELEVATED", "PATCHING"]):
@@ -144,7 +143,6 @@ def render_muted_iframe(url, height=480):
     st.markdown(iframe_html, unsafe_allow_html=True)
 
 def render_simple_link(num, title, url, desc):
-    """Helper function to guarantee the links render perfectly with LARGER, Consistent fonts."""
     return f"""
     <div style="margin-bottom: 25px; font-family: 'Courier New', monospace;">
         <span style="color: #00ff41; font-weight: bold; font-size: 1.4rem;">{num}.</span> 
@@ -208,7 +206,6 @@ st.markdown(compact_header, unsafe_allow_html=True)
 
 # === LIVE CYBER THREAT MAPS (SMALL GRID) ===
 st.markdown(f'<div style="{GREEN_SUBTITLE}">>> LIVE CYBER THREAT MAPS</div>', unsafe_allow_html=True)
-# Base typography from CSS applies to the description below automatically because it's in a <p> tag inside st.markdown
 st.markdown('Real-time global attack activity from trusted sources')
 
 map_row1 = st.columns(4)
@@ -308,15 +305,15 @@ link_col1, link_col2 = st.columns(2)
 
 with link_col1:
     st.markdown(render_simple_link("01", "VirusTotal", "https://www.virustotal.com/", "The global standard for analyzing suspicious files, domains, IPs, and URLs for malware."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("02", "CISA KEV Catalog", "https://www.cisa.gov/known-exploited-vulnerabilities-catalog", "The authoritative source for vulnerabilities currently being actively exploited in the wild."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("03", "NIST National Vulnerability Database (NVD)", "https://nvd.nist.gov/", "The US Government repository of standards-based vulnerability management data."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("04", "MITRE CVE Dictionary", "https://cve.mitre.org/", "The primary dictionary and international standard for publicly known cybersecurity vulnerabilities."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("05", "Abuse.ch URLhaus", "https://urlhaus.abuse.ch/", "An excellent open project for sharing and tracking malware distribution sites and payloads."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("02", "NIST National Vulnerability Database (NVD)", "https://nvd.nist.gov/", "The US Government repository of standards-based vulnerability management data."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("03", "CISA KEV Catalog", "https://www.cisa.gov/known-exploited-vulnerabilities-catalog", "The authoritative source for vulnerabilities currently being actively exploited in the wild."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("04", "Exploit Database (Exploit-DB)", "https://www.exploit-db.com/", "The ultimate archive of public exploits and corresponding vulnerable software validations."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("05", "AlienVault OTX", "https://otx.alienvault.com/", "The largest open threat exchange community for gathering crowdsourced Indicators of Compromise (IOCs)."), unsafe_allow_html=True)
 
 with link_col2:
-    st.markdown(render_simple_link("06", "SANS Internet Storm Center (ISC)", "https://isc.sans.edu/", "A global cooperative cyber threat monitor and alert system tracking emerging network anomalies."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("07", "FIRST CVSS 4.0 Calculator", "https://www.first.org/cvss/calculator/4.0", "The official home of the Common Vulnerability Scoring System to calculate risk severity."), unsafe_allow_html=True)
-    st.markdown(render_simple_link("08", "BleepingComputer", "https://www.bleepingcomputer.com/", "A premier, trusted news source for tracking ransomware attacks, data breaches, and daily cyber events."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("06", "BleepingComputer", "https://www.bleepingcomputer.com/", "A premier, trusted news source for tracking ransomware attacks, data breaches, and daily cyber events."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("07", "Abuse.ch URLhaus", "https://urlhaus.abuse.ch/", "An excellent open project for sharing and tracking malware distribution sites and payloads."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("08", "FIRST CVSS 4.0 Calculator", "https://www.first.org/cvss/calculator/4.0", "The official home of the Common Vulnerability Scoring System to calculate exact risk severity."), unsafe_allow_html=True)
     st.markdown(render_simple_link("09", "NIST Cybersecurity Framework (CSF)", "https://www.nist.gov/cyberframework", "Voluntary guidance based on existing standards and practices to better manage and reduce cybersecurity risk."), unsafe_allow_html=True)
     st.markdown(render_simple_link("10", "ISO/IEC 27000 Family", "https://www.iso.org/isoiec-27001-information-security.html", "The official international standard for establishing Information Security Management Systems (ISMS)."), unsafe_allow_html=True)
 
