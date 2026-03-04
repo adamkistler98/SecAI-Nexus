@@ -12,11 +12,11 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- INLINE CSS CONSTANTS (LIGHT GREY ADJUSTMENT) ---
+# --- INLINE CSS CONSTANTS (LIGHTER GREY ADJUSTMENT) ---
 GREEN_SUBTITLE = "font-size: 0.9rem !important; font-weight: bold !important; color: #00ff41 !important; margin-top: 20px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;"
-GREY_SUBTITLE = "font-size: 0.8rem !important; font-weight: bold !important; color: #cccccc !important; margin-top: 20px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;"
-GREY_LABEL = "font-size: 0.8rem !important; font-weight: bold !important; color: #cccccc !important; margin-bottom: 5px; text-transform: uppercase;"
-GREY_LABEL_MT = "font-size: 0.8rem !important; font-weight: bold !important; color: #cccccc !important; margin-top: 15px; margin-bottom: 5px; text-transform: uppercase;"
+GREY_SUBTITLE = "font-size: 0.8rem !important; font-weight: bold !important; color: #e0e0e0 !important; margin-top: 20px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;"
+GREY_LABEL = "font-size: 0.8rem !important; font-weight: bold !important; color: #e0e0e0 !important; margin-bottom: 5px; text-transform: uppercase;"
+GREY_LABEL_MT = "font-size: 0.8rem !important; font-weight: bold !important; color: #e0e0e0 !important; margin-top: 15px; margin-bottom: 5px; text-transform: uppercase;"
 
 # --- ADVANCED GRC CSS ---
 st.markdown("""
@@ -45,7 +45,7 @@ st.markdown("""
     .terminal-table {
         width: 100%;
         border-collapse: collapse;
-        color: #cccccc;
+        color: #e0e0e0;
         font-family: 'Courier New', monospace;
         font-size: 0.82rem;
         margin-bottom: 15px;
@@ -92,14 +92,6 @@ st.markdown("""
         text-transform: uppercase;
         width: 100%;
     }
-    
-    /* CUSTOM LINK SECTION STYLING */
-    .link-list { color: #cccccc; font-family: 'Courier New', monospace; font-size: 0.85rem; line-height: 1.4; }
-    .link-list a { color: #cccccc; text-decoration: none; font-weight: bold; }
-    .link-list a:hover { color: #00ff41; text-decoration: underline; text-shadow: 0 0 5px #00ff41; }
-    .link-desc { color: #777777; font-size: 0.75rem; margin-bottom: 12px; display: block; margin-left: 18px; }
-    .link-num { color: #00ff41; font-weight: bold; }
-
 </style>
 """, unsafe_allow_html=True)
 
@@ -114,7 +106,6 @@ def render_terminal_table(df):
         html += '<tr>'
         for col in df.columns:
             val = str(row[col])
-            # Intelligent Color Logic
             if any(k in val.upper() for k in ["CRITICAL", "9.", "ACTIVE_EXPLOIT", "BREACH"]):
                 html += f'<td class="crit">{val}</td>'
             elif any(k in val.upper() for k in ["HIGH", "8.", "7.", "ELEVATED", "PATCHING"]):
@@ -136,6 +127,16 @@ def render_muted_iframe(url, height=480):
     </iframe>
     """
     st.markdown(iframe_html, unsafe_allow_html=True)
+
+def render_simple_link(num, title, url, desc):
+    """Helper function to guarantee the links render perfectly without Streamlit interference."""
+    return f"""
+    <div style="margin-bottom: 15px; font-family: 'Courier New', monospace;">
+        <span style="color: #00ff41; font-weight: bold;">{num}.</span> 
+        <a href="{url}" target="_blank" style="color: #e0e0e0; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #e0e0e0;">{title}</a>
+        <div style="color: #a0a0a0; font-size: 0.8rem; margin-top: 4px; padding-left: 25px;">{desc}</div>
+    </div>
+    """
 
 def fetch_real_cves():
     url = "https://cve.circl.lu/api/last/30"
@@ -226,10 +227,10 @@ with map_row2[3]:
 st.markdown("---")
 
 # === LARGE MAP SECTION (SINGLE GREYNOISE TODAY VIEW) ===
-st.markdown(f'<div style="{GREY_SUBTITLE}">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="color: #cccccc !important; text-decoration: none; border-bottom: 1px dashed #cccccc;">https://viz.greynoise.io/</a>) - A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious. (TODAY VIEW)</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="{GREY_SUBTITLE}">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="color: #e0e0e0 !important; text-decoration: none; border-bottom: 1px dashed #e0e0e0;">https://viz.greynoise.io/</a>) - A threat intelligence platform that provides insights into cyberattacks, who is scanning the internet, and whether they are malicious. (TODAY VIEW)</div>', unsafe_allow_html=True)
 
-# Single, massive iframe for the GreyNoise Today feed (Height increased to 1100).
-render_muted_iframe("https://viz.greynoise.io/query/last_seen:1d", height=1100)
+# Single, massive iframe for the GreyNoise Today feed (Height increased to 1400).
+render_muted_iframe("https://viz.greynoise.io/query/last_seen:1d", height=1400)
 
 st.markdown("---")
 
@@ -239,17 +240,17 @@ st.markdown(f'<div style="{GREY_SUBTITLE}">>> OSINT, EXPOSURE & ANALYSIS FRAMEWO
 osint_col1, osint_col2 = st.columns(2)
 
 with osint_col1:
-    st.markdown(f'<div style="{GREY_LABEL}">MITRE ATT&CK NAVIGATOR (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="color: #cccccc !important; text-decoration: none; border-bottom: 1px dashed #cccccc;">https://mitre-attack.github.io/attack-navigator/</a>) - The industry-standard matrix for mapping adversary tactics, techniques, and procedures.</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{GREY_LABEL}">MITRE ATT&CK NAVIGATOR (<a href="https://mitre-attack.github.io/attack-navigator/" target="_blank" style="color: #e0e0e0 !important; text-decoration: none; border-bottom: 1px dashed #e0e0e0;">https://mitre-attack.github.io/attack-navigator/</a>) - The industry-standard matrix for mapping adversary tactics, techniques, and procedures.</div>', unsafe_allow_html=True)
     render_muted_iframe("https://mitre-attack.github.io/attack-navigator/", height=700)
     
-    st.markdown(f'<div style="{GREY_LABEL_MT}">CRT.SH (CERT SEARCH) (<a href="https://crt.sh/" target="_blank" style="color: #cccccc !important; text-decoration: none; border-bottom: 1px dashed #cccccc;">https://crt.sh/</a>) - Certificate Transparency log search for mapping external attack surfaces and subdomains.</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{GREY_LABEL_MT}">CRT.SH (CERT SEARCH) (<a href="https://crt.sh/" target="_blank" style="color: #e0e0e0 !important; text-decoration: none; border-bottom: 1px dashed #e0e0e0;">https://crt.sh/</a>) - Certificate Transparency log search for mapping external attack surfaces and subdomains.</div>', unsafe_allow_html=True)
     render_muted_iframe("https://crt.sh/", height=650)
 
 with osint_col2:
-    st.markdown(f'<div style="{GREY_LABEL}">SHODAN (<a href="https://www.shodan.io/" target="_blank" style="color: #cccccc !important; text-decoration: none; border-bottom: 1px dashed #cccccc;">https://www.shodan.io/</a>) - The search engine for exposed internet-connected devices, open ports, and vulnerable services.</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{GREY_LABEL}">SHODAN (<a href="https://www.shodan.io/" target="_blank" style="color: #e0e0e0 !important; text-decoration: none; border-bottom: 1px dashed #e0e0e0;">https://www.shodan.io/</a>) - The search engine for exposed internet-connected devices, open ports, and vulnerable services.</div>', unsafe_allow_html=True)
     render_muted_iframe("https://www.shodan.io/", height=700)
     
-    st.markdown(f'<div style="{GREY_LABEL_MT}">CYBERCHEF (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #cccccc !important; text-decoration: none; border-bottom: 1px dashed #cccccc;">https://gchq.github.io/CyberChef/</a>) - The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{GREY_LABEL_MT}">CYBERCHEF (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #e0e0e0 !important; text-decoration: none; border-bottom: 1px dashed #e0e0e0;">https://gchq.github.io/CyberChef/</a>) - The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</div>', unsafe_allow_html=True)
     render_muted_iframe("https://gchq.github.io/CyberChef/", height=650)
 
 st.markdown("---")
@@ -260,44 +261,18 @@ st.markdown(f'<div style="{GREY_SUBTITLE}">>> TOP 10 ESSENTIAL GRC & THREAT INTE
 link_col1, link_col2 = st.columns(2)
 
 with link_col1:
-    st.markdown("""
-    <div class="link-list">
-        <span class="link-num">01.</span> <a href="https://nvd.nist.gov/" target="_blank">NIST National Vulnerability Database (NVD)</a>
-        <span class="link-desc">The US Government repository of standards-based vulnerability management data.</span>
-        
-        <span class="link-num">02.</span> <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank">CISA KEV Catalog</a>
-        <span class="link-desc">The authoritative source for vulnerabilities currently being actively exploited in the wild.</span>
-        
-        <span class="link-num">03.</span> <a href="https://cve.mitre.org/" target="_blank">MITRE CVE Dictionary</a>
-        <span class="link-desc">The primary dictionary and international standard for publicly known cybersecurity vulnerabilities.</span>
-        
-        <span class="link-num">04.</span> <a href="https://www.first.org/cvss/calculator/4.0" target="_blank">FIRST CVSS 4.0 Calculator</a>
-        <span class="link-desc">The official home of the Common Vulnerability Scoring System to calculate risk severity.</span>
-        
-        <span class="link-num">05.</span> <a href="https://www.virustotal.com/" target="_blank">VirusTotal</a>
-        <span class="link-desc">The global standard for analyzing suspicious files, domains, IPs, and URLs for malware.</span>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(render_simple_link("01", "NIST National Vulnerability Database (NVD)", "https://nvd.nist.gov/", "The US Government repository of standards-based vulnerability management data."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("02", "CISA KEV Catalog", "https://www.cisa.gov/known-exploited-vulnerabilities-catalog", "The authoritative source for vulnerabilities currently being actively exploited in the wild."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("03", "MITRE CVE Dictionary", "https://cve.mitre.org/", "The primary dictionary and international standard for publicly known cybersecurity vulnerabilities."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("04", "FIRST CVSS 4.0 Calculator", "https://www.first.org/cvss/calculator/4.0", "The official home of the Common Vulnerability Scoring System to calculate risk severity."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("05", "VirusTotal", "https://www.virustotal.com/", "The global standard for analyzing suspicious files, domains, IPs, and URLs for malware."), unsafe_allow_html=True)
 
 with link_col2:
-    st.markdown("""
-    <div class="link-list">
-        <span class="link-num">06.</span> <a href="https://urlhaus.abuse.ch/" target="_blank">Abuse.ch URLhaus</a>
-        <span class="link-desc">An excellent open project for sharing and tracking malware distribution sites and payloads.</span>
-        
-        <span class="link-num">07.</span> <a href="https://isc.sans.edu/" target="_blank">SANS Internet Storm Center (ISC)</a>
-        <span class="link-desc">A global cooperative cyber threat monitor and alert system tracking emerging network anomalies.</span>
-        
-        <span class="link-num">08.</span> <a href="https://www.bleepingcomputer.com/" target="_blank">BleepingComputer</a>
-        <span class="link-desc">A premier, trusted news source for tracking ransomware attacks, data breaches, and daily cyber events.</span>
-        
-        <span class="link-num">09.</span> <a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank">ISO/IEC 27000 Family</a>
-        <span class="link-desc">The official international standard for establishing Information Security Management Systems (ISMS).</span>
-        
-        <span class="link-num">10.</span> <a href="https://www.nist.gov/cyberframework" target="_blank">NIST Cybersecurity Framework (CSF)</a>
-        <span class="link-desc">Voluntary guidance based on existing standards and practices to better manage and reduce cybersecurity risk.</span>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(render_simple_link("06", "Abuse.ch URLhaus", "https://urlhaus.abuse.ch/", "An excellent open project for sharing and tracking malware distribution sites and payloads."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("07", "SANS Internet Storm Center (ISC)", "https://isc.sans.edu/", "A global cooperative cyber threat monitor and alert system tracking emerging network anomalies."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("08", "BleepingComputer", "https://www.bleepingcomputer.com/", "A premier, trusted news source for tracking ransomware attacks, data breaches, and daily cyber events."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("09", "ISO/IEC 27000 Family", "https://www.iso.org/isoiec-27001-information-security.html", "The official international standard for establishing Information Security Management Systems (ISMS)."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("10", "NIST Cybersecurity Framework (CSF)", "https://www.nist.gov/cyberframework", "Voluntary guidance based on existing standards and practices to better manage and reduce cybersecurity risk."), unsafe_allow_html=True)
 
 st.markdown("---")
 
