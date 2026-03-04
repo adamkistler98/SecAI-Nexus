@@ -252,28 +252,25 @@ with map_row2[3]:
 
 st.markdown("---")
 
-# === LARGE MAP SECTION (GREYNOISE ENHANCED) ===
-# GreyNoise Main Search with Direct Link
+# === LARGE MAP SECTION (GREYNOISE GRID) ===
 st.markdown('<div class="stealth-subtitle">>> GREYNOISE INTELLIGENCE (<a href="https://viz.greynoise.io/" target="_blank" style="color: #00ff41; text-decoration: none;">https://viz.greynoise.io/</a>)</div>', unsafe_allow_html=True)
-render_muted_iframe("https://viz.greynoise.io/", height=800)
 
-st.markdown("---")
+# Create a 2x2 grid using Streamlit columns
+gn_col1, gn_col2 = st.columns(2)
 
-# GreyNoise Today Embed
-st.markdown('<div class="stealth-subtitle">>> GREYNOISE TODAY</div>', unsafe_allow_html=True)
-render_muted_iframe("https://viz.greynoise.io/query/last_seen:1d", height=800)
+with gn_col1:
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #888;">MAIN SEARCH</div>', unsafe_allow_html=True)
+    render_muted_iframe("https://viz.greynoise.io/", height=650)
+    
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; margin-top: 15px; color: #888;">TRENDS</div>', unsafe_allow_html=True)
+    render_muted_iframe("https://viz.greynoise.io/trends/trending", height=650)
 
-st.markdown("---")
-
-# GreyNoise Trends Embed
-st.markdown('<div class="stealth-subtitle">>> GREYNOISE TRENDS</div>', unsafe_allow_html=True)
-render_muted_iframe("https://viz.greynoise.io/trends/trending", height=800)
-
-st.markdown("---")
-
-# GreyNoise Tags Embed
-st.markdown('<div class="stealth-subtitle">>> GREYNOISE TAGS</div>', unsafe_allow_html=True)
-render_muted_iframe("https://viz.greynoise.io/tags", height=800)
+with gn_col2:
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #888;">TODAY (LAST 24H)</div>', unsafe_allow_html=True)
+    render_muted_iframe("https://viz.greynoise.io/query/last_seen:1d", height=650)
+    
+    st.markdown('<div style="font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; margin-top: 15px; color: #888;">TAGS</div>', unsafe_allow_html=True)
+    render_muted_iframe("https://viz.greynoise.io/tags", height=650)
 
 st.markdown("---")
 
