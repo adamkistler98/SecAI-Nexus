@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import requests
-import random
 from datetime import datetime, timedelta
 
 # --- STEALTH CONFIGURATION ---
@@ -16,7 +15,6 @@ st.set_page_config(
 GREEN_SUBTITLE = "font-size: 1.1rem; font-weight: bold; color: #00ff41; margin-top: 25px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.2px;"
 GREEN_LABEL = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-bottom: 8px; text-transform: uppercase;"
 BLUE_LABEL = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-bottom: 8px; text-transform: uppercase;"
-BLUE_LABEL_MT = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-top: 20px; margin-bottom: 8px; text-transform: uppercase;"
 
 # Base style for all readable sentences/descriptions
 SENTENCE_STYLE_GREEN = "color: #00ff41; font-size: 1.15rem; line-height: 1.6; font-family: 'Courier New', monospace; font-weight: normal; text-transform: none; letter-spacing: normal;"
@@ -44,7 +42,7 @@ st.markdown(f"""
     }}
     .metric-title {{ color: #008aff; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px; }}
     .metric-value {{ color: #00ff41; font-size: 1.8rem; font-weight: bold; margin-bottom: 10px; text-shadow: 0 0 5px #00ff41; line-height: 1.1; }}
-    .metric-deltas {{ font-size: 0.85rem; border-top: 1px dashed #333; padding-top: 8px; line-height: 1.6; }}
+    .metric-deltas {{ font-size: 0.85rem; border-top: 1px dashed #333; padding-top: 8px; line-height: 1.4; }}
     
     /* DELTA COLORS */
     .d-bad {{ color: #ff3333; font-weight: bold; text-shadow: 0 0 3px #ff3333; }}
@@ -168,7 +166,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 
-# === GLOBAL THREAT METRICS (INDUSTRY ACCURATE) ===
+# === GLOBAL THREAT METRICS (INDUSTRY ACCURATE 20-TRACKER DASHBOARD) ===
 st.markdown(f'''
 <div style="margin-top: 10px; margin-bottom: 15px; line-height: 1.3;">
     <span style="font-size: 1.1rem; font-weight: bold; color: #00ff41; text-transform: uppercase; letter-spacing: 1.2px;">>> GLOBAL THREAT METRICS & TELEMETRY</span><br>
@@ -178,10 +176,10 @@ st.markdown(f'''
 
 # Row 1
 m1, m2, m3, m4 = st.columns(4)
-with m1: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Unchanged", "d-neu", "Unchanged", "d-neu", "Elevated", "d-bad", "Elevated", "d-bad")
-with m2: render_multi_metric("ACTIVE ZERO-DAYS", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad", "+94", "d-bad")
-with m3: render_multi_metric("RANSOMWARE ATTACKS", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad", "+5,120", "d-bad")
-with m4: render_multi_metric("PHISHING VOLUME", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad", "+48.5M", "d-bad")
+with m1: render_multi_metric("ACTIVE ZERO-DAYS", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad", "+94", "d-bad")
+with m2: render_multi_metric("RANSOMWARE ATTACKS", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad", "+5,120", "d-bad")
+with m3: render_multi_metric("PHISHING VOLUME", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad", "+48.5M", "d-bad")
+with m4: render_multi_metric("BUSINESS EMAIL COMPROMISE", "28.4k", "+150", "d-bad", "+850", "d-bad", "+3.2k", "d-bad", "+21k", "d-bad")
 
 # Row 2
 m5, m6, m7, m8 = st.columns(4)
@@ -203,6 +201,13 @@ with m13: render_multi_metric("DATA RECORDS BREACHED", "12.8M", "+450k", "d-bad"
 with m14: render_multi_metric("NEW CVEs PUBLISHED", "114", "+14", "d-bad", "+92", "d-bad", "+480", "d-bad", "+29,840", "d-bad")
 with m15: render_multi_metric("MALICIOUS DOMAINS", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad", "+2.1M", "d-bad")
 with m16: render_multi_metric("ICS/SCADA ALERTS", "18", "0", "d-neu", "+3", "d-bad", "+12", "d-bad", "+184", "d-bad")
+
+# Row 5 (With DEFCON anchor)
+m17, m18, m19, m20 = st.columns(4)
+with m17: render_multi_metric("BOTNET C2 SERVERS", "14.2k", "+45", "d-bad", "+310", "d-bad", "-120", "d-good", "+1.4k", "d-bad")
+with m18: render_multi_metric("SUPPLY CHAIN ATTACKS", "142", "0", "d-neu", "+2", "d-bad", "+8", "d-bad", "+45", "d-bad")
+with m19: render_multi_metric("OPEN CLOUD DATABASES", "18.5k", "-50", "d-good", "-320", "d-good", "+1.2k", "d-bad", "-4.5k", "d-good")
+with m20: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Level 3", "d-neu", "Level 3", "d-neu", "Level 4", "d-neu", "Level 3", "d-neu")
 
 st.markdown(f"""
 <div style="font-size: 0.85rem; color: #888; font-family: 'Courier New', monospace; text-align: left; margin-bottom: 25px; margin-top: -5px;">
