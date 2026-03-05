@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import requests
-import random
 from datetime import datetime, timedelta
 
 # --- STEALTH CONFIGURATION ---
@@ -14,10 +13,7 @@ st.set_page_config(
 
 # --- INLINE CSS CONSTANTS (NEON GREEN & MEDIAN CYBER BLUE) ---
 GREEN_SUBTITLE = "font-size: 1.1rem; font-weight: bold; color: #00ff41; margin-top: 25px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.2px;"
-GREEN_LABEL = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-bottom: 8px; text-transform: uppercase;"
 BLUE_LABEL = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-bottom: 8px; text-transform: uppercase;"
-
-# Base style for all readable sentences/descriptions
 SENTENCE_STYLE_GREEN = "color: #00ff41; font-size: 1.15rem; line-height: 1.6; font-family: 'Courier New', monospace; font-weight: normal; text-transform: none; letter-spacing: normal;"
 LINK_STYLE_BLUE = "color: #008aff; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #008aff;"
 
@@ -43,12 +39,9 @@ st.markdown(f"""
     }}
     .metric-title {{ color: #008aff; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px; }}
     .metric-value {{ color: #00ff41; font-size: 1.8rem; font-weight: bold; margin-bottom: 10px; text-shadow: 0 0 5px #00ff41; line-height: 1.1; }}
-    .metric-deltas {{ font-size: 0.85rem; border-top: 1px dashed #333; padding-top: 8px; line-height: 1.6; }}
-    
-    /* DELTA COLORS */
-    .d-bad {{ color: #ff3333; font-weight: bold; text-shadow: 0 0 3px #ff3333; }}
-    .d-good {{ color: #00ff41; font-weight: bold; }}
-    .d-neu {{ color: #008aff; font-weight: bold; }}
+    .metric-deltas {{ font-size: 0.85rem; border-top: 1px dashed #333; padding-top: 8px; line-height: 1.4; }}
+    .num-val {{ color: #ffaa00; font-weight: bold; text-shadow: 0 0 3px #ffaa00; }}
+    .num-zero {{ color: #00ff41; font-weight: bold; }}
     
     /* TERMINAL TABLE STYLING */
     .terminal-table {{
@@ -77,18 +70,59 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-# --- HELPER FUNCTIONS ---
+# --- REAL DATA FETCHING & PARSING ---
 
-def render_multi_metric(title, value, d1, d1_class, d7, d7_class, d30, d30_class):
-    """Generates the advanced, multi-timeframe metric box."""
+@st.cache_data(ttl=3600)
+def fetch_real_cisa_kev():
+    """Pulls live stats from the US Gov CISA KEV JSON feed."""
+    url = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+    try:
+        response = requests.get(url, timeout=5)
+        if response.status_code == 200:
+            return response.json().get("vulnerabilities", [])
+    except Exception:
+        pass
+    return []
+
+def calc_kev_stats(v_list, filter_key=None, filter_val=None):
+    """Calculates pure numeric stats based on real dates."""
+    now = datetime.utcnow()
+    d1 = (now - timedelta(days=1)).strftime("%Y-%m-%d")
+    d7 = (now - timedelta(days=7)).strftime("%Y-%m-%d")
+    d30 = (now - timedelta(days=30)).strftime("%Y-%m-%d")
+    d365 = (now - timedelta(days=365)).strftime("%Y-%m-%d")
+    
+    if filter_key == "vendor":
+        subset = [v for v in v_list if filter_val.lower() in v.get("vendorProject", "").lower()]
+    elif filter_key == "ransomware":
+        subset = [v for v in v_list if v.get("knownRansomwareCampaignUse") == "Known"]
+    else:
+        subset = v_list
+        
+    tot = len(subset)
+    c1 = sum(1 for v in subset if v.get("dateAdded", "") >= d1)
+    c7 = sum(1 for v in subset if v.get("dateAdded", "") >= d7)
+    c30 = sum(1 for v in subset if v.get("dateAdded", "") >= d30)
+    c365 = sum(1 for v in subset if v.get("dateAdded", "") >= d365)
+    
+    return str(tot), str(c1), str(c7), str(c30), str(c365)
+
+def render_multi_metric(title, value, d1, d7, d30, d365):
+    """Generates the advanced, multi-timeframe metric box (Numbers Only)."""
+    c1_class = "num-val" if int(d1) > 0 else "num-zero"
+    c7_class = "num-val" if int(d7) > 0 else "num-zero"
+    c30_class = "num-val" if int(d30) > 0 else "num-zero"
+    c365_class = "num-val" if int(d365) > 0 else "num-zero"
+    
     html = f"""
     <div class="custom-metric">
         <div class="metric-title">{title}</div>
         <div class="metric-value">{value}</div>
         <div class="metric-deltas">
-            <div style="margin-bottom: 2px;"><span style="color: #888;">Past Day:</span> <span class="{d1_class}">{d1}</span></div>
-            <div style="margin-bottom: 2px;"><span style="color: #888;">Past Week:</span> <span class="{d7_class}">{d7}</span></div>
-            <div><span style="color: #888;">Past Month:</span> <span class="{d30_class}">{d30}</span></div>
+            <div style="margin-bottom: 2px;"><span style="color: #888;">Past Day:</span> <span class="{c1_class}">{d1}</span></div>
+            <div style="margin-bottom: 2px;"><span style="color: #888;">Past Week:</span> <span class="{c7_class}">{d7}</span></div>
+            <div style="margin-bottom: 2px;"><span style="color: #888;">Past Month:</span> <span class="{c30_class}">{d30}</span></div>
+            <div><span style="color: #888;">Past Year:</span> <span class="{c365_class}">{d365}</span></div>
         </div>
     </div>
     """
@@ -96,7 +130,7 @@ def render_multi_metric(title, value, d1, d1_class, d7, d7_class, d30, d30_class
 
 def render_terminal_table(df):
     if df is None or df.empty:
-        st.info("NO DATA AVAILABLE.")
+        st.info("NO VULNERABILITIES FOUND.")
         return
     html = '<table class="terminal-table"><thead><tr>' + ''.join(f'<th>{col}</th>' for col in df.columns) + '</tr></thead><tbody>'
     for _, row in df.iterrows():
@@ -122,8 +156,6 @@ def render_simple_link(num, title, url, desc):
         <div style="color: #00ff41; font-size: 0.85rem; margin-top: 4px; padding-left: 32px; line-height: 1.4;">{desc}</div>
     </div>
     """
-
-# --- REAL API FETCHERS ---
 
 @st.cache_data(ttl=3600)
 def fetch_real_cves():
@@ -156,7 +188,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 
-# === GLOBAL THREAT METRICS (TOP POSITION) ===
+# === GLOBAL THREAT METRICS (REAL 100% LIVE DATA ENGINE) ===
 st.markdown(f'''
 <div style="margin-top: 10px; margin-bottom: 15px; line-height: 1.3;">
     <span style="font-size: 1.1rem; font-weight: bold; color: #00ff41; text-transform: uppercase; letter-spacing: 1.2px;">>> GLOBAL THREAT METRICS & TELEMETRY</span><br>
@@ -164,37 +196,39 @@ st.markdown(f'''
 </div>
 ''', unsafe_allow_html=True)
 
+live_kev_data = fetch_real_cisa_kev()
+
 # Row 1
 m1, m2, m3, m4 = st.columns(4)
-with m1: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Unchanged", "d-neu", "Unchanged", "d-neu", "Elevated", "d-bad")
-with m2: render_multi_metric("ACTIVE ZERO-DAYS", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad")
-with m3: render_multi_metric("RANSOMWARE ATTACKS", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad")
-with m4: render_multi_metric("PHISHING VOLUME", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad")
+with m1: render_multi_metric("TOTAL KEV CATALOG", *calc_kev_stats(live_kev_data))
+with m2: render_multi_metric("RANSOMWARE ASSOCIATED", *calc_kev_stats(live_kev_data, "ransomware"))
+with m3: render_multi_metric("MICROSOFT VULNS", *calc_kev_stats(live_kev_data, "vendor", "microsoft"))
+with m4: render_multi_metric("CISCO VULNS", *calc_kev_stats(live_kev_data, "vendor", "cisco"))
 
 # Row 2
 m5, m6, m7, m8 = st.columns(4)
-with m5: render_multi_metric("GLOBAL AVG MTTD", "15.8 Days", "-0.2 Days", "d-good", "-1.5 Days", "d-good", "-3.4 Days", "d-good")
-with m6: render_multi_metric("AVG TIME TO EXPLOIT", "4.8 Days", "-0.1 Days", "d-bad", "-0.8 Days", "d-bad", "-2.1 Days", "d-bad")
-with m7: render_multi_metric("EXPOSED RDP ENDPOINTS", "3.2M", "-12k", "d-good", "-55k", "d-good", "+140k", "d-bad")
-with m8: render_multi_metric("COMPROMISED CREDS", "15.4M", "+18k", "d-bad", "+112k", "d-bad", "+1.8M", "d-bad")
+with m5: render_multi_metric("APPLE VULNS", *calc_kev_stats(live_kev_data, "vendor", "apple"))
+with m6: render_multi_metric("LINUX VULNS", *calc_kev_stats(live_kev_data, "vendor", "linux"))
+with m7: render_multi_metric("ADOBE VULNS", *calc_kev_stats(live_kev_data, "vendor", "adobe"))
+with m8: render_multi_metric("ORACLE VULNS", *calc_kev_stats(live_kev_data, "vendor", "oracle"))
 
 # Row 3
 m9, m10, m11, m12 = st.columns(4)
-with m9: render_multi_metric("ACTIVE APT CAMPAIGNS", "14", "0", "d-neu", "+2", "d-bad", "+3", "d-bad")
-with m10: render_multi_metric("GLOBAL SCAN VOLUME", "4.8 Tbps", "+0.2", "d-bad", "+1.1", "d-bad", "+2.4", "d-bad")
-with m11: render_multi_metric("PEAK DDoS VOLUME", "3.4 Tbps", "-0.2", "d-good", "+0.5", "d-bad", "+1.4", "d-bad")
-with m12: render_multi_metric("NEW MALWARE VARIANTS", "48k", "+1.4k", "d-bad", "+9.2k", "d-bad", "+38k", "d-bad")
+with m9: render_multi_metric("FORTINET VULNS", *calc_kev_stats(live_kev_data, "vendor", "fortinet"))
+with m10: render_multi_metric("VMWARE VULNS", *calc_kev_stats(live_kev_data, "vendor", "vmware"))
+with m11: render_multi_metric("GOOGLE VULNS", *calc_kev_stats(live_kev_data, "vendor", "google"))
+with m12: render_multi_metric("JUNIPER VULNS", *calc_kev_stats(live_kev_data, "vendor", "juniper"))
 
 # Row 4
 m13, m14, m15, m16 = st.columns(4)
-with m13: render_multi_metric("DATA RECORDS BREACHED", "12.8M", "+450k", "d-bad", "+2.1M", "d-bad", "+8.5M", "d-bad")
-with m14: render_multi_metric("NEW CVEs PUBLISHED", "114", "+14", "d-bad", "+92", "d-bad", "+480", "d-bad")
-with m15: render_multi_metric("MALICIOUS DOMAINS", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad")
-with m16: render_multi_metric("ICS/SCADA ALERTS", "18", "0", "d-neu", "+3", "d-bad", "+12", "d-bad")
+with m13: render_multi_metric("APACHE VULNS", *calc_kev_stats(live_kev_data, "vendor", "apache"))
+with m14: render_multi_metric("IVANTI VULNS", *calc_kev_stats(live_kev_data, "vendor", "ivanti"))
+with m15: render_multi_metric("CITRIX VULNS", *calc_kev_stats(live_kev_data, "vendor", "citrix"))
+with m16: render_multi_metric("ATLASSIAN VULNS", *calc_kev_stats(live_kev_data, "vendor", "atlassian"))
 
 st.markdown(f"""
 <div style="font-size: 0.85rem; color: #888; font-family: 'Courier New', monospace; text-align: left; margin-bottom: 25px; margin-top: -5px;">
-    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> LIVE CVE API (CIRCL) | CISA KEV | SHODAN OSINT | ABUSE.CH THREAT INTEL
+    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> CISA KNOWN EXPLOITED VULNERABILITIES (KEV) LIVE JSON FEED | CIRCL CVE API | ABUSE.CH | SHODAN
 </div>
 """, unsafe_allow_html=True)
 
@@ -242,7 +276,7 @@ st.markdown("---")
 st.markdown(f'''
 <div style="margin-top: 25px; margin-bottom: 8px;">
     <span style="font-size: 0.95rem; font-weight: bold; color: #008aff; text-transform: uppercase; letter-spacing: 1.0px;">>> GREYNOISE INTELLIGENCE 
-    (<a href="https://viz.greynoise.io/trends/trending" target="_blank" style="color: #008aff; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #008aff; font-size: 0.95rem;">TRENDS VIEW</a>)</span><br>
+    (<a href="https://viz.greynoise.io/trends/trending" target="_blank" style="{LINK_STYLE_BLUE} font-size: 0.95rem;">TRENDS VIEW</a>)</span><br>
     <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">Live insights into cyberattacks and malicious internet scanning activity.</span>
 </div>
 ''', unsafe_allow_html=True)
@@ -254,7 +288,7 @@ st.markdown("---")
 st.markdown(f'''
 <div style="margin-top: 25px; margin-bottom: 8px;">
     <span style="font-size: 0.95rem; font-weight: bold; color: #008aff; text-transform: uppercase; letter-spacing: 1.0px;">>> CYBERCHEF ANALYSIS TOOL 
-    (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="color: #008aff; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #008aff; font-size: 0.95rem;">LOCAL SECURE VIEW</a>)</span><br>
+    (<a href="https://gchq.github.io/CyberChef/" target="_blank" style="{LINK_STYLE_BLUE} font-size: 0.95rem;">LOCAL SECURE VIEW</a>)</span><br>
     <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">The Cyber Swiss Army Knife. Analyze suspicious payloads, decode malware, and manipulate data.</span>
 </div>
 ''', unsafe_allow_html=True)
@@ -329,44 +363,46 @@ with col_right:
 
 st.markdown("---")
 
-# --- INFRASTRUCTURE RISK LANDSCAPE ---
-st.markdown(f'<div style="{GREEN_SUBTITLE}">>> INFRASTRUCTURE RISK LANDSCAPE</div>', unsafe_allow_html=True)
+# --- REAL CISA KEV INFRASTRUCTURE RISK LANDSCAPE ---
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> LIVE INFRASTRUCTURE EXPLOITATION LANDSCAPE (CISA KEV)</div>', unsafe_allow_html=True)
 t1, t2, t3, t4 = st.columns(4)
 
-def gen_landscape_data(category):
-    risks = ["CRITICAL", "HIGH", "MEDIUM"]
-    statuses = ["ACTIVE_EXPLOIT", "PATCHING", "MONITORING", "CONTAINED"]
-    data = []
-    for i in range(10): 
-        risk = random.choice(risks)
-        status = "ACTIVE_EXPLOIT" if risk == "CRITICAL" else random.choice(statuses)
-        if category == "RANSOMWARE":
-            data.append({"GROUP": random.choice(["BlackCat/ALPHV", "LockBit 3.0", "Akira", "Cl0p", "Royal", "Play", "8Base"]), "SECTOR": random.choice(["Healthcare", "Finance", "Mfg", "Retail", "Gov", "Edu"]), "RISK": risk, "STATUS": status})
-        elif category == "MALWARE":
-            data.append({"FAMILY": random.choice(["Emotet", "Cobalt Strike", "Qakbot", "AgentTesla", "FormBook", "RedLine"]), "VECTOR": random.choice(["Email", "Drive-by", "USB", "RDP"]), "RISK": risk, "STATUS": status})
-        elif category == "PHISHING":
-            data.append({"TYPE": random.choice(["Spear Phishing", "Whaling", "AiTM (MFA Bypass)", "Smishing", "QR-Phish"]), "TARGET": random.choice(["Execs", "HR Dept", "IT Admins", "Sales", "DevOps"]), "RISK": risk, "STATUS": status})
-        elif category == "APT":
-            data.append({"ACTOR": random.choice(["APT29 (Cozy Bear)", "APT41 (Double Dragon)", "Lazarus (Hidden Cobra)", "Volt Typhoon", "Sandworm"]), "METHOD": random.choice(["Supply Chain", "Zero-Day", "Social Eng.", "Valid Accts", "Living-off-Land"]), "RISK": risk, "STATUS": status})
-    return pd.DataFrame(data)
+def extract_real_kev_table(v_list, filter_key, filter_val=None):
+    extracted = []
+    if filter_key == "ransomware":
+        subset = [v for v in v_list if v.get("knownRansomwareCampaignUse") == "Known"]
+    else:
+        subset = [v for v in v_list if filter_val.lower() in v.get("vendorProject", "").lower()]
+    
+    subset = sorted(subset, key=lambda x: x.get("dateAdded", ""), reverse=True)[:8]
+    
+    for v in subset:
+        name = v.get("vulnerabilityName", "")
+        if len(name) > 35: name = name[:32] + "..."
+        extracted.append({
+            "CVE": v.get("cveID", ""),
+            "VENDOR": v.get("vendorProject", ""),
+            "VULNERABILITY": name
+        })
+    return pd.DataFrame(extracted)
 
 with t1:
-    st.markdown(f'<div style="{BLUE_LABEL}">💀 RANSOMWARE</div>', unsafe_allow_html=True)
-    render_terminal_table(gen_landscape_data("RANSOMWARE"))
+    st.markdown(f'<div style="{BLUE_LABEL}">🚨 RANSOMWARE KEVs</div>', unsafe_allow_html=True)
+    render_terminal_table(extract_real_kev_table(live_kev_data, "ransomware"))
 with t2:
-    st.markdown(f'<div style="{BLUE_LABEL}">🦠 MALWARE</div>', unsafe_allow_html=True)
-    render_terminal_table(gen_landscape_data("MALWARE"))
+    st.markdown(f'<div style="{BLUE_LABEL}">🪟 MICROSOFT KEVs</div>', unsafe_allow_html=True)
+    render_terminal_table(extract_real_kev_table(live_kev_data, "vendor", "microsoft"))
 with t3:
-    st.markdown(f'<div style="{BLUE_LABEL}">🎣 PHISHING</div>', unsafe_allow_html=True)
-    render_terminal_table(gen_landscape_data("PHISHING"))
+    st.markdown(f'<div style="{BLUE_LABEL}">🌐 CISCO KEVs</div>', unsafe_allow_html=True)
+    render_terminal_table(extract_real_kev_table(live_kev_data, "vendor", "cisco"))
 with t4:
-    st.markdown(f'<div style="{BLUE_LABEL}">🕵️ APT GROUPS</div>', unsafe_allow_html=True)
-    render_terminal_table(gen_landscape_data("APT"))
+    st.markdown(f'<div style="{BLUE_LABEL}">🍎 APPLE KEVs</div>', unsafe_allow_html=True)
+    render_terminal_table(extract_real_kev_table(live_kev_data, "vendor", "apple"))
 
 # --- FOOTER ---
 st.markdown(f"""
 <div style="border-top: 1px solid #333; padding-top: 15px; margin-top: 30px; text-align: center; font-family: 'Courier New', monospace;">
-    <span style="color: #008aff; font-size: 0.8rem;">SecAI-Nexus GRC v3.1 | TERMINAL SESSION END</span><br>
+    <span style="color: #008aff; font-size: 0.8rem;">SecAI-Nexus GRC v3.1 | REAL-TIME DATA FUSION | TERMINAL SESSION END</span><br>
     <span style="color: #00ff41; font-size: 0.7rem;">CONNECTION SECURE</span>
 </div>
 """, unsafe_allow_html=True)
