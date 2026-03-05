@@ -1,7 +1,4 @@
 import streamlit as st
-import pandas as pd
-import requests
-from datetime import datetime, timedelta
 
 # --- STEALTH CONFIGURATION ---
 st.set_page_config(
@@ -236,9 +233,8 @@ st.markdown(f"""
         Questions, Comments, or Recommendations?
     </div>
     <div style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">
-        Developed by <b>Adam Kistler</b> | <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" style="color: #00ff41; text-decoration: none; border-bottom: 1px dashed #00ff41;">LinkedIn Profile</a>
+        Developed by <b>Adam Kistler</b> | <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" style="color: #008aff; text-decoration: none; border-bottom: 1px dashed #008aff;">LinkedIn</a>
     </div>
-    <span style="color: #555; font-size: 0.8rem;">SecAI-Nexus GRC [Version 13.1] | Global Threat Fusion Matrix</span><br>
-    <span style="color: #008aff; font-size: 0.7rem; text-transform: uppercase;">Status: Encrypted Session Active</span>
+    <span style="color: #555; font-size: 0.8rem;">SecAI-Nexus GRC [Version 13.1] | Global Threat Fusion Matrix</span>
 </div>
 """, unsafe_allow_html=True)
