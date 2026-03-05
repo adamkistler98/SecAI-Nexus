@@ -206,7 +206,7 @@ with m16: render_multi_metric("ICS/SCADA ALERTS", "18", "0", "d-neu", "+3", "d-b
 
 st.markdown(f"""
 <div style="font-size: 0.85rem; color: #888; font-family: 'Courier New', monospace; text-align: left; margin-bottom: 25px; margin-top: -5px;">
-    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> LIVE CVE API (CIRCL) | CISA KEV | SHODAN OSINT | ABUSE.CH THREAT INTEL
+    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> LIVE CVE API (CIRCL) | CISA KEV | SHODAN OSINT | ABUSE.CH THREAT INTEL | VERIZON DBIR | MANDIANT M-TRENDS | CROWDSTRIKE
 </div>
 """, unsafe_allow_html=True)
 
