@@ -144,15 +144,17 @@ def render_terminal_table(df):
     st.markdown(html, unsafe_allow_html=True)
 
 def render_muted_iframe(url, height=480):
-    iframe_html = f'<iframe src="{url}" width="100%" height="{height}" style="border:none;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" allow="autoplay 'none'; audio 'none'; microphone 'none'"></iframe>'
+    """Fixed iframe string parsing by using triple quotes."""
+    iframe_html = f"""<iframe src="{url}" width="100%" height="{height}" style="border:none;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" allow="autoplay 'none'; audio 'none'; microphone 'none'"></iframe>"""
     st.markdown(iframe_html, unsafe_allow_html=True)
 
 def render_simple_link(num, title, url, desc):
+    """Reduced font sizes for a cleaner, compact list."""
     return f"""
-    <div style="margin-bottom: 25px; font-family: 'Courier New', monospace;">
-        <span style="color: #00ff41; font-weight: bold; font-size: 1.4rem;">{num}.</span> 
-        <a href="{url}" target="_blank" style="color: #008aff; font-weight: bold; font-size: 1.35rem; text-decoration: none; border-bottom: 1px dashed #008aff;">{title}</a>
-        <div style="color: #00ff41; font-size: 1.15rem; margin-top: 8px; padding-left: 45px; line-height: 1.6;">{desc}</div>
+    <div style="margin-bottom: 18px; font-family: 'Courier New', monospace;">
+        <span style="color: #00ff41; font-weight: bold; font-size: 1.1rem;">{num}.</span> 
+        <a href="{url}" target="_blank" style="color: #008aff; font-weight: bold; font-size: 1.05rem; text-decoration: none; border-bottom: 1px dashed #008aff;">{title}</a>
+        <div style="color: #00ff41; font-size: 0.85rem; margin-top: 4px; padding-left: 32px; line-height: 1.4;">{desc}</div>
     </div>
     """
 
@@ -259,12 +261,12 @@ with map_row2[3]:
 
 st.markdown("---")
 
-# === LARGE MAP SECTION (GREYNOISE) ===
+# === LARGE MAP SECTION (GREYNOISE - SCALED DOWN TEXT) ===
 st.markdown(f'''
 <div style="margin-top: 25px; margin-bottom: 8px;">
-    <span style="font-size: 1.0rem; font-weight: bold; color: #008aff; text-transform: uppercase; letter-spacing: 1.0px;">>> GREYNOISE INTELLIGENCE 
-    (<a href="https://viz.greynoise.io/trends/trending" target="_blank" style="{LINK_STYLE_BLUE}">TRENDS VIEW</a>)</span><br>
-    <span style="color: #00ff41; font-size: 0.9rem; font-family: 'Courier New', monospace;">Live insights into cyberattacks and malicious internet scanning activity.</span>
+    <span style="font-size: 0.95rem; font-weight: bold; color: #008aff; text-transform: uppercase; letter-spacing: 1.0px;">>> GREYNOISE INTELLIGENCE 
+    (<a href="https://viz.greynoise.io/trends/trending" target="_blank" style="{LINK_STYLE_BLUE} font-size: 0.95rem;">TRENDS VIEW</a>)</span><br>
+    <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">Live insights into cyberattacks and malicious internet scanning activity.</span>
 </div>
 ''', unsafe_allow_html=True)
 render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1400)
