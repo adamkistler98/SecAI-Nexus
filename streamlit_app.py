@@ -1,7 +1,4 @@
 import streamlit as st
-import pandas as pd
-import requests
-from datetime import datetime, timedelta
 
 # --- STEALTH CONFIGURATION ---
 st.set_page_config(
@@ -38,35 +35,13 @@ st.markdown(f"""
         font-family: 'Courier New', monospace;
     }}
     .metric-title {{ color: #008aff; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px; }}
-    .metric-value {{ color: #00ff41; font-size: 1.8rem; font-weight: bold; margin-bottom: 10px; text-shadow: 0 0 5px #00ff41; line-height: 1.1; }}
-    .metric-deltas {{ font-size: 0.85rem; border-top: 1px dashed #333; padding-top: 8px; line-height: 1.4; }}
-    .num-val {{ color: #ffaa00; font-weight: bold; text-shadow: 0 0 3px #ffaa00; }}
-    .num-zero {{ color: #00ff41; font-weight: bold; }}
+    .metric-value {{ color: #00ff41; font-size: 1.8rem; font-weight: bold; margin-bottom: 8px; }}
+    .metric-deltas {{ font-size: 0.85rem; border-top: 1px dashed #333; padding-top: 8px; line-height: 1.5; }}
     
-    /* TERMINAL TABLE STYLING */
-    .terminal-table {{
-        width: 100%; border-collapse: collapse; color: #00ff41;
-        font-family: 'Courier New', monospace; font-size: 1.0rem; 
-        margin-bottom: 15px; border: 1px solid #222; background-color: #050505;
-    }}
-    .terminal-table th {{ border-bottom: 2px solid #008aff; text-align: left; padding: 8px 10px; color: #008aff; background-color: #111; text-transform: uppercase; font-size: 0.9rem; }}
-    .terminal-table td {{ border-bottom: 1px solid #1a1a1a; padding: 8px 10px; background-color: #050505; line-height: 1.3; }}
-    
-    .crit {{ color: #ff3333 !important; font-weight: bold; text-shadow: 0 0 5px #ff3333; }}
-    .high {{ color: #ffaa00 !important; }}
-    .med {{ color: #00ff41 !important; }}
-    
-    /* SYNC & DOWNLOAD BUTTONS */
-    div[data-testid="stButton"] > button, div[data-testid="stDownloadButton"] > button {{
-        background-color: #050505 !important; border: 2px solid #008aff !important; width: 100% !important; transition: 0.3s;
-    }}
-    div[data-testid="stButton"] > button p, div[data-testid="stDownloadButton"] > button p {{
-        color: #008aff !important; font-family: 'Courier New', monospace !important; font-size: 0.9rem !important; font-weight: bold !important; text-transform: uppercase !important; 
-    }}
-    div[data-testid="stButton"] > button:hover, div[data-testid="stDownloadButton"] > button:hover {{
-        background-color: #008aff !important; box-shadow: 0 0 10px #008aff !important;
-    }}
-    div[data-testid="stButton"] > button:hover p, div[data-testid="stDownloadButton"] > button:hover p {{ color: #050505 !important; }}
+    /* CLEAN DELTA COLORS */
+    .d-bad {{ color: #ff4b4b; font-weight: bold; }}
+    .d-good {{ color: #00ff41; font-weight: bold; }}
+    .d-neu {{ color: #008aff; font-weight: bold; }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -88,22 +63,6 @@ def render_multi_metric(title, value, d1, d1_class, d7, d7_class, d30, d30_class
     """
     st.markdown(html, unsafe_allow_html=True)
 
-def render_terminal_table(df):
-    if df is None or df.empty:
-        st.info("NO DATA AVAILABLE.")
-        return
-    html = '<table class="terminal-table"><thead><tr>' + ''.join(f'<th>{col}</th>' for col in df.columns) + '</tr></thead><tbody>'
-    for _, row in df.iterrows():
-        html += '<tr>'
-        for col in df.columns:
-            val = str(row[col])
-            if any(k in val.upper() for k in ["CRITICAL", "9.", "KNOWN"]): html += f'<td class="crit">{val}</td>'
-            elif any(k in val.upper() for k in ["HIGH", "8.", "7."]): html += f'<td class="high">{val}</td>'
-            else: html += f'<td class="med">{val}</td>'
-        html += '</tr>'
-    html += '</tbody></table>'
-    st.markdown(html, unsafe_allow_html=True)
-
 def render_muted_iframe(url, height=480):
     iframe_html = f"""<iframe src="{url}" width="100%" height="{height}" style="border:none;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" allow="autoplay 'none'; audio 'none'; microphone 'none'"></iframe>"""
     st.markdown(iframe_html, unsafe_allow_html=True)
@@ -117,26 +76,6 @@ def render_simple_link(num, title, url, desc):
     </div>
     """
 
-# --- REAL API FETCHERS ---
-
-@st.cache_data(ttl=3600)
-def fetch_real_cves():
-    """Pulls live CVEs from CIRCL."""
-    try:
-        response = requests.get("https://cve.circl.lu/api/last/30", timeout=3)
-        if response.status_code == 200:
-            cve_list = []
-            for item in response.json():
-                cve_id = item.get("id")
-                summary = item.get("summary")
-                if not cve_id or not summary or "Unknown" in cve_id: continue
-                cvss = item.get("cvss") or item.get("cvss3", 0.0)
-                if len(summary) > 90: summary = summary[:87] + "..."
-                cve_list.append({"ID": cve_id, "CVSS": float(cvss) if cvss else 0.0, "SUMMARY": summary})
-            return sorted(cve_list, key=lambda x: x['CVSS'], reverse=True)
-    except Exception: pass 
-    return []
-
 # --- HEADER SECTION ---
 st.markdown(f"""
 <div style="border-bottom: 2px solid #333; padding-bottom: 12px; margin-bottom: 18px; margin-top: -50px;">
@@ -145,13 +84,12 @@ st.markdown(f"""
             <span style="font-size: 1.3rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
             <span style="font-size: 0.95rem; color: #008aff; margin-left: 10px; font-weight: bold;">// GLOBAL THREAT VISIBILITY</span>
         </div>
-        <div style="font-size: 1.0rem; font-weight: bold; color: #008aff; text-shadow: 0 0 5px #008aff;">SYS_TIME: {datetime.now().strftime("%H:%M:%S")} UTC</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
 
-# === GLOBAL THREAT METRICS (INDUSTRY ACCURATE 20-TRACKER DASHBOARD) ===
+# === GLOBAL THREAT METRICS ===
 st.markdown(f'''
 <div style="margin-top: 10px; margin-bottom: 15px; line-height: 1.3;">
     <span style="font-size: 1.1rem; font-weight: bold; color: #00ff41; text-transform: uppercase; letter-spacing: 1.2px;">>> GLOBAL THREAT METRICS & TELEMETRY</span><br>
@@ -161,10 +99,10 @@ st.markdown(f'''
 
 # Row 1
 m1, m2, m3, m4 = st.columns(4)
-with m1: render_multi_metric("ACTIVE ZERO-DAYS", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad", "+94", "d-bad")
-with m2: render_multi_metric("RANSOMWARE ATTACKS", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad", "+5,120", "d-bad")
-with m3: render_multi_metric("PHISHING VOLUME", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad", "+48.5M", "d-bad")
-with m4: render_multi_metric("BUSINESS EMAIL COMPROMISE", "28.4k", "+150", "d-bad", "+850", "d-bad", "+3.2k", "d-bad", "+21k", "d-bad")
+with m1: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Unchanged", "d-neu", "Unchanged", "d-neu", "Elevated", "d-bad", "Elevated", "d-bad")
+with m2: render_multi_metric("ACTIVE ZERO-DAYS", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad", "+94", "d-bad")
+with m3: render_multi_metric("RANSOMWARE ATTACKS", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad", "+5,120", "d-bad")
+with m4: render_multi_metric("PHISHING VOLUME", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad", "+48.5M", "d-bad")
 
 # Row 2
 m5, m6, m7, m8 = st.columns(4)
@@ -187,16 +125,9 @@ with m14: render_multi_metric("NEW CVEs PUBLISHED", "114", "+14", "d-bad", "+92"
 with m15: render_multi_metric("MALICIOUS DOMAINS", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad", "+2.1M", "d-bad")
 with m16: render_multi_metric("ICS/SCADA ALERTS", "18", "0", "d-neu", "+3", "d-bad", "+12", "d-bad", "+184", "d-bad")
 
-# Row 5 (With DEFCON anchor)
-m17, m18, m19, m20 = st.columns(4)
-with m17: render_multi_metric("BOTNET C2 SERVERS", "14.2k", "+45", "d-bad", "+310", "d-bad", "-120", "d-good", "+1.4k", "d-bad")
-with m18: render_multi_metric("SUPPLY CHAIN ATTACKS", "142", "0", "d-neu", "+2", "d-bad", "+8", "d-bad", "+45", "d-bad")
-with m19: render_multi_metric("OPEN CLOUD DATABASES", "18.5k", "-50", "d-good", "-320", "d-good", "+1.2k", "d-bad", "-4.5k", "d-good")
-with m20: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Level 3", "d-neu", "Level 3", "d-neu", "Level 4", "d-neu", "Level 3", "d-neu")
-
 st.markdown(f"""
 <div style="font-size: 0.85rem; color: #888; font-family: 'Courier New', monospace; text-align: left; margin-bottom: 25px; margin-top: -5px;">
-    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> LIVE CVE API (CIRCL) | CISA KEV | SHODAN OSINT | ABUSE.CH THREAT INTEL | VERIZON DBIR | MANDIANT M-TRENDS | CROWDSTRIKE
+    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> CISA KEV | SHODAN OSINT | ABUSE.CH THREAT INTEL | VERIZON DBIR | MANDIANT M-TRENDS | CROWDSTRIKE
 </div>
 """, unsafe_allow_html=True)
 
@@ -286,16 +217,20 @@ with link_col2:
     st.markdown(render_simple_link("24", "GTFOBins", "https://gtfobins.github.io/", "A curated list of Unix binaries used to bypass local security restrictions."), unsafe_allow_html=True)
     st.markdown(render_simple_link("25", "MalwareBazaar", "https://bazaar.abuse.ch/", "A massive open-source repository of malware samples for research and analysis."), unsafe_allow_html=True)
 
+
 # --- FOOTER ---
 st.markdown(f"""
-<div style="border-top: 1px solid #333; padding-top: 20px; margin-top: 40px; text-align: center; font-family: 'Courier New', monospace;">
-    <div style="color: #00ff41; font-size: 0.95rem; margin-bottom: 8px;">
-        >_ QUESTIONS? COMMENTS? RECOMMENDATIONS?
+<div style="border-top: 1px solid #333; padding-top: 25px; margin-top: 40px; text-align: center; font-family: 'Courier New', monospace;">
+    <div style="color: #008aff; font-size: 1.0rem; margin-bottom: 8px; font-weight: bold; letter-spacing: 1px;">
+        // INITIATE FEEDBACK PROTOCOL
+    </div>
+    <div style="color: #888; font-size: 0.9rem; margin-bottom: 5px;">
+        Questions, Comments, or Recommendations?
     </div>
     <div style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">
-        CREATED BY: <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" style="color: #008aff; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #008aff;">ADAM KISTLER // ESTABLISH SECURE COMMS (LINKEDIN)</a>
+        Developed by <b>Adam Kistler</b> | <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" style="color: #00ff41; text-decoration: none; border-bottom: 1px dashed #00ff41;">Establish Secure Comms (LinkedIn)</a>
     </div>
-    <span style="color: #008aff; font-size: 0.75rem;">SecAI-Nexus GRC v3.1 | REAL-TIME DATA FUSION | TERMINAL SESSION END</span><br>
-    <span style="color: #00ff41; font-size: 0.65rem;">CONNECTION SECURE</span>
+    <span style="color: #555; font-size: 0.8rem;">SecAI-Nexus GRC [Build 1.0.0] | Global Threat Fusion Matrix</span><br>
+    <span style="color: #008aff; font-size: 0.7rem; text-transform: uppercase;">Status: Encrypted Session Active</span>
 </div>
 """, unsafe_allow_html=True)
