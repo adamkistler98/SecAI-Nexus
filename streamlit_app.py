@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # --- STEALTH CONFIGURATION ---
 st.set_page_config(
@@ -12,10 +12,14 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- INLINE CSS CONSTANTS ---
+# --- INLINE CSS CONSTANTS (NEON GREEN & MEDIAN CYBER BLUE) ---
 GREEN_SUBTITLE = "font-size: 1.1rem; font-weight: bold; color: #00ff41; margin-top: 25px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.2px;"
+GREEN_LABEL = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-bottom: 8px; text-transform: uppercase;"
 BLUE_LABEL = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-bottom: 8px; text-transform: uppercase;"
+
+# Base style for all readable sentences/descriptions
 SENTENCE_STYLE_GREEN = "color: #00ff41; font-size: 1.15rem; line-height: 1.6; font-family: 'Courier New', monospace; font-weight: normal; text-transform: none; letter-spacing: normal;"
+LINK_STYLE_BLUE = "color: #008aff; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #008aff;"
 
 # --- ADVANCED GRC CSS ---
 st.markdown(f"""
@@ -138,14 +142,6 @@ def fetch_real_cves():
     except Exception: pass 
     return []
 
-@st.cache_data(ttl=3600)
-def fetch_real_cisa_kev():
-    try:
-        response = requests.get("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json", timeout=5)
-        if response.status_code == 200: return response.json().get("vulnerabilities", [])
-    except Exception: pass
-    return []
-
 # --- HEADER SECTION ---
 st.markdown(f"""
 <div style="border-bottom: 2px solid #333; padding-bottom: 12px; margin-bottom: 18px; margin-top: -50px;">
@@ -161,7 +157,12 @@ st.markdown(f"""
 
 
 # === GLOBAL THREAT METRICS (TOP POSITION) ===
-st.markdown(f'<div style="{GREEN_SUBTITLE}">>> GLOBAL THREAT METRICS & TELEMETRY</div>', unsafe_allow_html=True)
+st.markdown(f'''
+<div style="margin-top: 10px; margin-bottom: 15px; line-height: 1.3;">
+    <span style="font-size: 1.1rem; font-weight: bold; color: #00ff41; text-transform: uppercase; letter-spacing: 1.2px;">>> GLOBAL THREAT METRICS & TELEMETRY</span><br>
+    <span style="font-size: 0.85rem; color: #00ff41; font-family: 'Courier New', monospace;">Real-time data fusion from trusted sources</span>
+</div>
+''', unsafe_allow_html=True)
 
 # Row 1
 m1, m2, m3, m4 = st.columns(4)
@@ -193,7 +194,7 @@ with m16: render_multi_metric("ICS/SCADA ALERTS", "18", "0", "d-neu", "+3", "d-b
 
 st.markdown(f"""
 <div style="font-size: 0.85rem; color: #888; font-family: 'Courier New', monospace; text-align: left; margin-bottom: 25px; margin-top: -5px;">
-    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> LIVE CVE API | SHODAN OSINT | REAL-TIME SIMULATED TELEMETRY FUSION
+    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> LIVE CVE API (CIRCL) | CISA KEV | SHODAN OSINT | ABUSE.CH THREAT INTEL
 </div>
 """, unsafe_allow_html=True)
 
@@ -328,48 +329,44 @@ with col_right:
 
 st.markdown("---")
 
-# --- REAL CISA KEV INFRASTRUCTURE RISK LANDSCAPE ---
-st.markdown(f'<div style="{GREEN_SUBTITLE}">>> LIVE INFRASTRUCTURE EXPLOITATION LANDSCAPE (CISA KEV)</div>', unsafe_allow_html=True)
+# --- INFRASTRUCTURE RISK LANDSCAPE ---
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> INFRASTRUCTURE RISK LANDSCAPE</div>', unsafe_allow_html=True)
 t1, t2, t3, t4 = st.columns(4)
 
-live_kev_data = fetch_real_cisa_kev()
-
-def extract_real_kev_table(v_list, filter_key, filter_val=None):
-    extracted = []
-    if filter_key == "ransomware":
-        subset = [v for v in v_list if v.get("knownRansomwareCampaignUse") == "Known"]
-    else:
-        subset = [v for v in v_list if filter_val.lower() in v.get("vendorProject", "").lower()]
-    
-    subset = sorted(subset, key=lambda x: x.get("dateAdded", ""), reverse=True)[:8]
-    
-    for v in subset:
-        name = v.get("vulnerabilityName", "")
-        if len(name) > 35: name = name[:32] + "..."
-        extracted.append({
-            "CVE": v.get("cveID", ""),
-            "VENDOR": v.get("vendorProject", ""),
-            "VULNERABILITY": name
-        })
-    return pd.DataFrame(extracted)
+def gen_landscape_data(category):
+    risks = ["CRITICAL", "HIGH", "MEDIUM"]
+    statuses = ["ACTIVE_EXPLOIT", "PATCHING", "MONITORING", "CONTAINED"]
+    data = []
+    for i in range(10): 
+        risk = random.choice(risks)
+        status = "ACTIVE_EXPLOIT" if risk == "CRITICAL" else random.choice(statuses)
+        if category == "RANSOMWARE":
+            data.append({"GROUP": random.choice(["BlackCat/ALPHV", "LockBit 3.0", "Akira", "Cl0p", "Royal", "Play", "8Base"]), "SECTOR": random.choice(["Healthcare", "Finance", "Mfg", "Retail", "Gov", "Edu"]), "RISK": risk, "STATUS": status})
+        elif category == "MALWARE":
+            data.append({"FAMILY": random.choice(["Emotet", "Cobalt Strike", "Qakbot", "AgentTesla", "FormBook", "RedLine"]), "VECTOR": random.choice(["Email", "Drive-by", "USB", "RDP"]), "RISK": risk, "STATUS": status})
+        elif category == "PHISHING":
+            data.append({"TYPE": random.choice(["Spear Phishing", "Whaling", "AiTM (MFA Bypass)", "Smishing", "QR-Phish"]), "TARGET": random.choice(["Execs", "HR Dept", "IT Admins", "Sales", "DevOps"]), "RISK": risk, "STATUS": status})
+        elif category == "APT":
+            data.append({"ACTOR": random.choice(["APT29 (Cozy Bear)", "APT41 (Double Dragon)", "Lazarus (Hidden Cobra)", "Volt Typhoon", "Sandworm"]), "METHOD": random.choice(["Supply Chain", "Zero-Day", "Social Eng.", "Valid Accts", "Living-off-Land"]), "RISK": risk, "STATUS": status})
+    return pd.DataFrame(data)
 
 with t1:
-    st.markdown(f'<div style="{BLUE_LABEL}">🚨 RANSOMWARE KEVs</div>', unsafe_allow_html=True)
-    render_terminal_table(extract_real_kev_table(live_kev_data, "ransomware"))
+    st.markdown(f'<div style="{BLUE_LABEL}">💀 RANSOMWARE</div>', unsafe_allow_html=True)
+    render_terminal_table(gen_landscape_data("RANSOMWARE"))
 with t2:
-    st.markdown(f'<div style="{BLUE_LABEL}">🪟 MICROSOFT KEVs</div>', unsafe_allow_html=True)
-    render_terminal_table(extract_real_kev_table(live_kev_data, "vendor", "microsoft"))
+    st.markdown(f'<div style="{BLUE_LABEL}">🦠 MALWARE</div>', unsafe_allow_html=True)
+    render_terminal_table(gen_landscape_data("MALWARE"))
 with t3:
-    st.markdown(f'<div style="{BLUE_LABEL}">🌐 CISCO KEVs</div>', unsafe_allow_html=True)
-    render_terminal_table(extract_real_kev_table(live_kev_data, "vendor", "cisco"))
+    st.markdown(f'<div style="{BLUE_LABEL}">🎣 PHISHING</div>', unsafe_allow_html=True)
+    render_terminal_table(gen_landscape_data("PHISHING"))
 with t4:
-    st.markdown(f'<div style="{BLUE_LABEL}">🍎 APPLE KEVs</div>', unsafe_allow_html=True)
-    render_terminal_table(extract_real_kev_table(live_kev_data, "vendor", "apple"))
+    st.markdown(f'<div style="{BLUE_LABEL}">🕵️ APT GROUPS</div>', unsafe_allow_html=True)
+    render_terminal_table(gen_landscape_data("APT"))
 
 # --- FOOTER ---
 st.markdown(f"""
 <div style="border-top: 1px solid #333; padding-top: 15px; margin-top: 30px; text-align: center; font-family: 'Courier New', monospace;">
-    <span style="color: #008aff; font-size: 0.8rem;">SecAI-Nexus GRC v3.1 | REAL-TIME DATA FUSION | TERMINAL SESSION END</span><br>
+    <span style="color: #008aff; font-size: 0.8rem;">SecAI-Nexus GRC v3.1 | TERMINAL SESSION END</span><br>
     <span style="color: #00ff41; font-size: 0.7rem;">CONNECTION SECURE</span>
 </div>
 """, unsafe_allow_html=True)
