@@ -1,4 +1,5 @@
 import streamlit as st
+from datetime import datetime
 
 # --- STEALTH CONFIGURATION ---
 st.set_page_config(
@@ -82,7 +83,7 @@ st.markdown(f"""
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
         <div>
             <span style="font-size: 1.3rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
-            <span style="font-size: 0.95rem; color: #008aff; margin-left: 10px; font-weight: bold;">// CYBER THREAT FUSION MATRIX</span>
+            <span style="font-size: 0.95rem; color: #008aff; margin-left: 10px; font-weight: bold;">// GLOBAL THREAT FUSION MATRIX</span>
         </div>
         <div style="font-size: 1.0rem; font-weight: bold; color: #008aff; text-shadow: 0 0 5px #008aff;">SYS_TIME: {datetime.now().strftime("%H:%M:%S")} UTC</div>
     </div>
@@ -176,18 +177,6 @@ with map_row2[2]:
 with map_row2[3]:
     st.markdown(f'<div style="{BLUE_LABEL}">Threatbutt Attack Map</div>', unsafe_allow_html=True)
     render_muted_iframe("https://threatbutt.com/map/", height=450)
-
-st.markdown("---")
-
-# === LARGE MAP SECTION (GREYNOISE) ===
-st.markdown(f'''
-<div style="margin-top: 25px; margin-bottom: 8px;">
-    <span style="font-size: 0.95rem; font-weight: bold; color: #008aff; text-transform: uppercase; letter-spacing: 1.0px;">>> GREYNOISE INTELLIGENCE 
-    (<a href="https://viz.greynoise.io/trends/trending" target="_blank" style="color: #008aff; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #008aff; font-size: 0.95rem;">TRENDS VIEW</a>)</span><br>
-    <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">Live insights into cyberattacks and malicious internet scanning activity.</span>
-</div>
-''', unsafe_allow_html=True)
-render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1400)
 
 st.markdown("---")
 
