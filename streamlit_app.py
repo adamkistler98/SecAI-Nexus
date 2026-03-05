@@ -16,7 +16,6 @@ st.set_page_config(
 GREEN_SUBTITLE = "font-size: 1.1rem; font-weight: bold; color: #00ff41; margin-top: 25px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.2px;"
 GREEN_LABEL = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-bottom: 8px; text-transform: uppercase;"
 BLUE_LABEL = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-bottom: 8px; text-transform: uppercase;"
-BLUE_LABEL_MT = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-top: 20px; margin-bottom: 8px; text-transform: uppercase;"
 
 # Base style for all readable sentences/descriptions
 SENTENCE_STYLE_GREEN = "color: #00ff41; font-size: 1.15rem; line-height: 1.6; font-family: 'Courier New', monospace; font-weight: normal; text-transform: none; letter-spacing: normal;"
@@ -266,11 +265,55 @@ compact_header = f"""
 """
 st.markdown(compact_header, unsafe_allow_html=True)
 
-# === LIVE CYBER THREAT MAPS (COMPACT TEXT) ===
+
+# === GLOBAL THREAT METRICS (MOVED TO TOP - 20 TRACKER DASHBOARD) ===
+st.markdown(f'<div style="{GREEN_SUBTITLE}">>> GLOBAL THREAT METRICS & DELTAS</div>', unsafe_allow_html=True)
+
+# Fetch REAL CISA KEV Data
+kev_total, kev_d1, kev_d7, kev_d30 = fetch_real_cisa_kev()
+
+r1_col1, r1_col2, r1_col3, r1_col4 = st.columns(4)
+with r1_col1: render_multi_metric("LIVE CISA KEV CATALOG", kev_total, kev_d1, "d-bad", kev_d7, "d-bad", kev_d30, "d-bad")
+with r1_col2: render_multi_metric("ACTIVE ZERO-DAYS", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad")
+with r1_col3: render_multi_metric("RANSOMWARE ATTACKS", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad")
+with r1_col4: render_multi_metric("PHISHING VOLUME", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad")
+
+r2_col1, r2_col2, r2_col3, r2_col4 = st.columns(4)
+with r2_col1: render_multi_metric("GLOBAL AVG MTTD", "15.8 Days", "-0.2", "d-good", "-1.5", "d-good", "-3.4", "d-good")
+with r2_col2: render_multi_metric("AVG TIME TO EXPLOIT", "4.8 Days", "-0.1", "d-bad", "-0.8", "d-bad", "-2.1", "d-bad")
+with r2_col3: render_multi_metric("EXPOSED RDP ENDPOINTS", "3.2M", "-12k", "d-good", "-55k", "d-good", "+140k", "d-bad")
+with r2_col4: render_multi_metric("COMPROMISED CREDS", "15.4M", "+18k", "d-bad", "+112k", "d-bad", "+1.8M", "d-bad")
+
+r3_col1, r3_col2, r3_col3, r3_col4 = st.columns(4)
+with r3_col1: render_multi_metric("ACTIVE APT CAMPAIGNS", "14", "0", "d-neu", "+2", "d-bad", "+3", "d-bad")
+with r3_col2: render_multi_metric("GLOBAL SCAN VOLUME", "4.8 Tbps", "+0.2", "d-bad", "+1.1", "d-bad", "+2.4", "d-bad")
+with r3_col3: render_multi_metric("PEAK DDoS VOLUME", "3.4 Tbps", "-0.2", "d-good", "+0.5", "d-bad", "+1.4", "d-bad")
+with r3_col4: render_multi_metric("NEW MALWARE VARIANTS", "48k", "+1.4k", "d-bad", "+9.2k", "d-bad", "+38k", "d-bad")
+
+r4_col1, r4_col2, r4_col3, r4_col4 = st.columns(4)
+with r4_col1: render_multi_metric("DATA RECORDS BREACHED", "12.8M", "+450k", "d-bad", "+2.1M", "d-bad", "+8.5M", "d-bad")
+with r4_col2: render_multi_metric("NEW CVEs PUBLISHED", "114", "+14", "d-bad", "+92", "d-bad", "+480", "d-bad")
+with r4_col3: render_multi_metric("MALICIOUS DOMAINS", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad")
+with r4_col4: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Unchanged", "d-neu", "Unchanged", "d-neu", "Elevated", "d-bad")
+
+r5_col1, r5_col2, r5_col3, r5_col4 = st.columns(4)
+with r5_col1: render_multi_metric("IOT EXPOSURES (CRIT)", "4.1M", "+25k", "d-bad", "+110k", "d-bad", "-50k", "d-good")
+with r5_col2: render_multi_metric("CLOUD MISCONFIG LEAKS", "82", "-2", "d-good", "+15", "d-bad", "+42", "d-bad")
+with r5_col3: render_multi_metric("SUPPLY CHAIN THREATS", "ELEVATED", "Up", "d-bad", "Up", "d-bad", "Stable", "d-neu")
+with r5_col4: render_multi_metric("ICS/SCADA ALERTS", "14", "0", "d-neu", "+3", "d-bad", "+12", "d-bad")
+
+st.markdown(f"""
+<div style="font-size: 0.8rem; color: #888; font-family: 'Courier New', monospace; text-align: right; margin-bottom: 25px; margin-top: 5px;">
+    <span style="color: #008aff; font-weight: bold;">DATA SOURCES FUSION:</span> CISA KEV (LIVE FEED) | SHODAN | NVD | ISC SANS | SIMULATED TELEMETRY
+</div>
+""", unsafe_allow_html=True)
+
+
+# === LIVE CYBER THREAT MAPS ===
 st.markdown(f'''
 <div style="margin-top: 10px; margin-bottom: 15px; line-height: 1.3;">
-    <span style="font-size: 0.85rem; font-weight: bold; color: #00ff41; text-transform: uppercase;">>> LIVE CYBER THREAT MAPS</span><br>
-    <span style="font-size: 0.75rem; color: #00ff41; font-family: 'Courier New', monospace;">Real-time global attack activity from trusted sources</span>
+    <span style="font-size: 1.1rem; font-weight: bold; color: #00ff41; text-transform: uppercase; letter-spacing: 1.2px;">>> LIVE CYBER THREAT MAPS</span><br>
+    <span style="font-size: 0.85rem; color: #00ff41; font-family: 'Courier New', monospace;">Real-time global attack activity from trusted sources</span>
 </div>
 ''', unsafe_allow_html=True)
 
@@ -305,37 +348,6 @@ with map_row2[3]:
 
 st.markdown("---")
 
-# === GLOBAL THREAT METRICS (16-TRACKER DASHBOARD) ===
-st.markdown(f'<div style="{GREEN_SUBTITLE}">>> GLOBAL THREAT METRICS & DELTAS</div>', unsafe_allow_html=True)
-
-kev_total, kev_d1, kev_d7, kev_d30 = fetch_real_cisa_kev()
-
-r1_col1, r1_col2, r1_col3, r1_col4 = st.columns(4)
-with r1_col1: render_multi_metric("LIVE CISA KEV CATALOG", kev_total, kev_d1, "d-bad", kev_d7, "d-bad", kev_d30, "d-bad")
-with r1_col2: render_multi_metric("ACTIVE ZERO-DAYS", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad")
-with r1_col3: render_multi_metric("RANSOMWARE ATTACKS", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad")
-with r1_col4: render_multi_metric("PHISHING VOLUME", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad")
-
-r2_col1, r2_col2, r2_col3, r2_col4 = st.columns(4)
-with r2_col1: render_multi_metric("GLOBAL AVG MTTD", "15.8 Days", "-0.2", "d-good", "-1.5", "d-good", "-3.4", "d-good")
-with r2_col2: render_multi_metric("AVG TIME TO EXPLOIT", "4.8 Days", "-0.1", "d-bad", "-0.8", "d-bad", "-2.1", "d-bad")
-with r2_col3: render_multi_metric("EXPOSED RDP ENDPOINTS", "3.2M", "-12k", "d-good", "-55k", "d-good", "+140k", "d-bad")
-with r2_col4: render_multi_metric("COMPROMISED CREDS", "15.4M", "+18k", "d-bad", "+112k", "d-bad", "+1.8M", "d-bad")
-
-r3_col1, r3_col2, r3_col3, r3_col4 = st.columns(4)
-with r3_col1: render_multi_metric("ACTIVE APT CAMPAIGNS", "14", "0", "d-neu", "+2", "d-bad", "+3", "d-bad")
-with r3_col2: render_multi_metric("GLOBAL SCAN VOLUME", "4.8 Tbps", "+0.2", "d-bad", "+1.1", "d-bad", "+2.4", "d-bad")
-with r3_col3: render_multi_metric("PEAK DDoS VOLUME", "3.4 Tbps", "-0.2", "d-good", "+0.5", "d-bad", "+1.4", "d-bad")
-with r3_col4: render_multi_metric("NEW MALWARE VARIANTS", "48k", "+1.4k", "d-bad", "+9.2k", "d-bad", "+38k", "d-bad")
-
-r4_col1, r4_col2, r4_col3, r4_col4 = st.columns(4)
-with r4_col1: render_multi_metric("DATA RECORDS BREACHED", "12.8M", "+450k", "d-bad", "+2.1M", "d-bad", "+8.5M", "d-bad")
-with r4_col2: render_multi_metric("NEW CVEs PUBLISHED", "114", "+14", "d-bad", "+92", "d-bad", "+480", "d-bad")
-with r4_col3: render_multi_metric("MALICIOUS DOMAINS", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad")
-with r4_col4: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Unchanged", "d-neu", "Unchanged", "d-neu", "Elevated", "d-bad")
-
-st.markdown("---")
-
 # === LARGE MAP SECTION (GREYNOISE TRENDS VIEW) ===
 st.markdown(f'''
 <div style="{GREEN_SUBTITLE}">
@@ -360,7 +372,7 @@ render_muted_iframe("https://gchq.github.io/CyberChef/", height=1000)
 
 st.markdown("---")
 
-# === ADDITIONAL GRC RESOURCES (TOP 25) ===
+# === ADDITIONAL GRC RESOURCES (TOP 25 - REFINED FOR MAXIMUM UTILITY) ===
 st.markdown(f'<div style="{GREEN_SUBTITLE}">>> ADDITIONAL GRC RESOURCES</div>', unsafe_allow_html=True)
 
 link_col1, link_col2 = st.columns(2)
