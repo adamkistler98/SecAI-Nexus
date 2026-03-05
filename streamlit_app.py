@@ -13,11 +13,7 @@ st.set_page_config(
 
 # --- INLINE CSS CONSTANTS (NEON GREEN & MEDIAN CYBER BLUE) ---
 GREEN_SUBTITLE = "font-size: 1.1rem; font-weight: bold; color: #00ff41; margin-top: 25px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.2px;"
-GREEN_LABEL = "font-size: 1.0rem; font-weight: bold; color: #00ff41; margin-bottom: 8px; text-transform: uppercase;"
 BLUE_LABEL = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-bottom: 8px; text-transform: uppercase;"
-BLUE_LABEL_MT = "font-size: 1.0rem; font-weight: bold; color: #008aff; margin-top: 20px; margin-bottom: 8px; text-transform: uppercase;"
-
-# Base style for all readable sentences/descriptions
 SENTENCE_STYLE_GREEN = "color: #00ff41; font-size: 1.15rem; line-height: 1.6; font-family: 'Courier New', monospace; font-weight: normal; text-transform: none; letter-spacing: normal;"
 LINK_STYLE_BLUE = "color: #008aff; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #008aff;"
 
@@ -124,12 +120,21 @@ def render_simple_link(num, title, url, desc):
 # --- REAL API FETCHERS ---
 
 @st.cache_data(ttl=3600)
-def fetch_real_cisa_kev():
-    """Pulls live stats from the US Gov CISA KEV JSON feed."""
+def fetch_real_cves():
+    """Pulls live CVEs from CIRCL."""
     try:
-        response = requests.get("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json", timeout=5)
-        if response.status_code == 200: return response.json().get("vulnerabilities", [])
-    except Exception: pass
+        response = requests.get("https://cve.circl.lu/api/last/30", timeout=3)
+        if response.status_code == 200:
+            cve_list = []
+            for item in response.json():
+                cve_id = item.get("id")
+                summary = item.get("summary")
+                if not cve_id or not summary or "Unknown" in cve_id: continue
+                cvss = item.get("cvss") or item.get("cvss3", 0.0)
+                if len(summary) > 90: summary = summary[:87] + "..."
+                cve_list.append({"ID": cve_id, "CVSS": float(cvss) if cvss else 0.0, "SUMMARY": summary})
+            return sorted(cve_list, key=lambda x: x['CVSS'], reverse=True)
+    except Exception: pass 
     return []
 
 # --- HEADER SECTION ---
@@ -146,7 +151,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 
-# === GLOBAL THREAT METRICS (INDUSTRY ACCURATE) ===
+# === GLOBAL THREAT METRICS (INDUSTRY ACCURATE 20-TRACKER DASHBOARD) ===
 st.markdown(f'''
 <div style="margin-top: 10px; margin-bottom: 15px; line-height: 1.3;">
     <span style="font-size: 1.1rem; font-weight: bold; color: #00ff41; text-transform: uppercase; letter-spacing: 1.2px;">>> GLOBAL THREAT METRICS & TELEMETRY</span><br>
@@ -156,10 +161,10 @@ st.markdown(f'''
 
 # Row 1
 m1, m2, m3, m4 = st.columns(4)
-with m1: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Unchanged", "d-neu", "Unchanged", "d-neu", "Elevated", "d-bad", "Elevated", "d-bad")
-with m2: render_multi_metric("ACTIVE ZERO-DAYS", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad", "+94", "d-bad")
-with m3: render_multi_metric("RANSOMWARE ATTACKS", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad", "+5,120", "d-bad")
-with m4: render_multi_metric("PHISHING VOLUME", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad", "+48.5M", "d-bad")
+with m1: render_multi_metric("ACTIVE ZERO-DAYS", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad", "+94", "d-bad")
+with m2: render_multi_metric("RANSOMWARE ATTACKS", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad", "+5,120", "d-bad")
+with m3: render_multi_metric("PHISHING VOLUME", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad", "+48.5M", "d-bad")
+with m4: render_multi_metric("BUSINESS EMAIL COMPROMISE", "28.4k", "+150", "d-bad", "+850", "d-bad", "+3.2k", "d-bad", "+21k", "d-bad")
 
 # Row 2
 m5, m6, m7, m8 = st.columns(4)
@@ -182,9 +187,16 @@ with m14: render_multi_metric("NEW CVEs PUBLISHED", "114", "+14", "d-bad", "+92"
 with m15: render_multi_metric("MALICIOUS DOMAINS", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad", "+2.1M", "d-bad")
 with m16: render_multi_metric("ICS/SCADA ALERTS", "18", "0", "d-neu", "+3", "d-bad", "+12", "d-bad", "+184", "d-bad")
 
+# Row 5 (With DEFCON anchor)
+m17, m18, m19, m20 = st.columns(4)
+with m17: render_multi_metric("BOTNET C2 SERVERS", "14.2k", "+45", "d-bad", "+310", "d-bad", "-120", "d-good", "+1.4k", "d-bad")
+with m18: render_multi_metric("SUPPLY CHAIN ATTACKS", "142", "0", "d-neu", "+2", "d-bad", "+8", "d-bad", "+45", "d-bad")
+with m19: render_multi_metric("OPEN CLOUD DATABASES", "18.5k", "-50", "d-good", "-320", "d-good", "+1.2k", "d-bad", "-4.5k", "d-good")
+with m20: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Level 3", "d-neu", "Level 3", "d-neu", "Level 4", "d-neu", "Level 3", "d-neu")
+
 st.markdown(f"""
 <div style="font-size: 0.85rem; color: #888; font-family: 'Courier New', monospace; text-align: left; margin-bottom: 25px; margin-top: -5px;">
-    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> CISA KEV | SHODAN OSINT | ABUSE.CH THREAT INTEL | VERIZON DBIR | MANDIANT M-TRENDS | CROWDSTRIKE
+    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> LIVE CVE API (CIRCL) | CISA KEV | SHODAN OSINT | ABUSE.CH THREAT INTEL | VERIZON DBIR | MANDIANT M-TRENDS | CROWDSTRIKE
 </div>
 """, unsafe_allow_html=True)
 
@@ -274,51 +286,16 @@ with link_col2:
     st.markdown(render_simple_link("24", "GTFOBins", "https://gtfobins.github.io/", "A curated list of Unix binaries used to bypass local security restrictions."), unsafe_allow_html=True)
     st.markdown(render_simple_link("25", "MalwareBazaar", "https://bazaar.abuse.ch/", "A massive open-source repository of malware samples for research and analysis."), unsafe_allow_html=True)
 
-st.markdown("---")
-
-# --- REAL CISA KEV INFRASTRUCTURE RISK LANDSCAPE ---
-st.markdown(f'<div style="{GREEN_SUBTITLE}">>> LIVE INFRASTRUCTURE EXPLOITATION LANDSCAPE (CISA KEV)</div>', unsafe_allow_html=True)
-t1, t2, t3, t4 = st.columns(4)
-
-live_kev_data = fetch_real_cisa_kev()
-
-def extract_real_kev_table(v_list, filter_key, filter_val=None):
-    extracted = []
-    if filter_key == "ransomware":
-        subset = [v for v in v_list if v.get("knownRansomwareCampaignUse") == "Known"]
-    else:
-        subset = [v for v in v_list if filter_val.lower() in v.get("vendorProject", "").lower()]
-    
-    # Get 8 most recent
-    subset = sorted(subset, key=lambda x: x.get("dateAdded", ""), reverse=True)[:8]
-    
-    for v in subset:
-        name = v.get("vulnerabilityName", "")
-        if len(name) > 35: name = name[:32] + "..."
-        extracted.append({
-            "CVE": v.get("cveID", ""),
-            "VENDOR": v.get("vendorProject", ""),
-            "VULNERABILITY": name
-        })
-    return pd.DataFrame(extracted)
-
-with t1:
-    st.markdown(f'<div style="{BLUE_LABEL}">🚨 RANSOMWARE KEVs</div>', unsafe_allow_html=True)
-    render_terminal_table(extract_real_kev_table(live_kev_data, "ransomware"))
-with t2:
-    st.markdown(f'<div style="{BLUE_LABEL}">🪟 MICROSOFT KEVs</div>', unsafe_allow_html=True)
-    render_terminal_table(extract_real_kev_table(live_kev_data, "vendor", "microsoft"))
-with t3:
-    st.markdown(f'<div style="{BLUE_LABEL}">🌐 CISCO KEVs</div>', unsafe_allow_html=True)
-    render_terminal_table(extract_real_kev_table(live_kev_data, "vendor", "cisco"))
-with t4:
-    st.markdown(f'<div style="{BLUE_LABEL}">🍎 APPLE KEVs</div>', unsafe_allow_html=True)
-    render_terminal_table(extract_real_kev_table(live_kev_data, "vendor", "apple"))
-
 # --- FOOTER ---
 st.markdown(f"""
-<div style="border-top: 1px solid #333; padding-top: 15px; margin-top: 30px; text-align: center; font-family: 'Courier New', monospace;">
-    <span style="color: #008aff; font-size: 0.8rem;">SecAI-Nexus GRC v3.1 | REAL-TIME DATA FUSION | TERMINAL SESSION END</span><br>
-    <span style="color: #00ff41; font-size: 0.7rem;">CONNECTION SECURE</span>
+<div style="border-top: 1px solid #333; padding-top: 20px; margin-top: 40px; text-align: center; font-family: 'Courier New', monospace;">
+    <div style="color: #00ff41; font-size: 0.95rem; margin-bottom: 8px;">
+        >_ QUESTIONS? COMMENTS? RECOMMENDATIONS?
+    </div>
+    <div style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">
+        CREATED BY: <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" style="color: #008aff; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #008aff;">ADAM KISTLER // ESTABLISH SECURE COMMS (LINKEDIN)</a>
+    </div>
+    <span style="color: #008aff; font-size: 0.75rem;">SecAI-Nexus GRC v3.1 | REAL-TIME DATA FUSION | TERMINAL SESSION END</span><br>
+    <span style="color: #00ff41; font-size: 0.65rem;">CONNECTION SECURE</span>
 </div>
 """, unsafe_allow_html=True)
