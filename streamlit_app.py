@@ -1,4 +1,7 @@
 import streamlit as st
+import pandas as pd
+import requests
+from datetime import datetime, timedelta
 
 # --- STEALTH CONFIGURATION ---
 st.set_page_config(
@@ -82,8 +85,9 @@ st.markdown(f"""
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
         <div>
             <span style="font-size: 1.3rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
-            <span style="font-size: 0.95rem; color: #008aff; margin-left: 10px; font-weight: bold;">// GLOBAL THREAT VISIBILITY</span>
+            <span style="font-size: 0.95rem; color: #008aff; margin-left: 10px; font-weight: bold;">// GLOBAL THREAT FUSION MATRIX</span>
         </div>
+        <div style="font-size: 1.0rem; font-weight: bold; color: #008aff; text-shadow: 0 0 5px #008aff;">SYS_TIME: {datetime.now().strftime("%H:%M:%S")} UTC</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -99,10 +103,10 @@ st.markdown(f'''
 
 # Row 1
 m1, m2, m3, m4 = st.columns(4)
-with m1: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Unchanged", "d-neu", "Unchanged", "d-neu", "Elevated", "d-bad", "Elevated", "d-bad")
-with m2: render_multi_metric("ACTIVE ZERO-DAYS", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad", "+94", "d-bad")
-with m3: render_multi_metric("RANSOMWARE ATTACKS", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad", "+5,120", "d-bad")
-with m4: render_multi_metric("PHISHING VOLUME", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad", "+48.5M", "d-bad")
+with m1: render_multi_metric("ACTIVE ZERO-DAYS", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad", "+94", "d-bad")
+with m2: render_multi_metric("RANSOMWARE ATTACKS", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad", "+5,120", "d-bad")
+with m3: render_multi_metric("PHISHING VOLUME", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad", "+48.5M", "d-bad")
+with m4: render_multi_metric("BUSINESS EMAIL COMPROMISE", "28.4k", "+150", "d-bad", "+850", "d-bad", "+3.2k", "d-bad", "+21k", "d-bad")
 
 # Row 2
 m5, m6, m7, m8 = st.columns(4)
@@ -124,6 +128,13 @@ with m13: render_multi_metric("DATA RECORDS BREACHED", "12.8M", "+450k", "d-bad"
 with m14: render_multi_metric("NEW CVEs PUBLISHED", "114", "+14", "d-bad", "+92", "d-bad", "+480", "d-bad", "+29,840", "d-bad")
 with m15: render_multi_metric("MALICIOUS DOMAINS", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad", "+2.1M", "d-bad")
 with m16: render_multi_metric("ICS/SCADA ALERTS", "18", "0", "d-neu", "+3", "d-bad", "+12", "d-bad", "+184", "d-bad")
+
+# Row 5 (With DEFCON anchor)
+m17, m18, m19, m20 = st.columns(4)
+with m17: render_multi_metric("BOTNET C2 SERVERS", "14.2k", "+45", "d-bad", "+310", "d-bad", "-120", "d-good", "+1.4k", "d-bad")
+with m18: render_multi_metric("SUPPLY CHAIN ATTACKS", "142", "0", "d-neu", "+2", "d-bad", "+8", "d-bad", "+45", "d-bad")
+with m19: render_multi_metric("OPEN CLOUD DATABASES", "18.5k", "-50", "d-good", "-320", "d-good", "+1.2k", "d-bad", "-4.5k", "d-good")
+with m20: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Level 3", "d-neu", "Level 3", "d-neu", "Level 4", "d-neu", "Level 3", "d-neu")
 
 st.markdown(f"""
 <div style="font-size: 0.85rem; color: #888; font-family: 'Courier New', monospace; text-align: left; margin-bottom: 25px; margin-top: -5px;">
@@ -221,16 +232,13 @@ with link_col2:
 # --- FOOTER ---
 st.markdown(f"""
 <div style="border-top: 1px solid #333; padding-top: 25px; margin-top: 40px; text-align: center; font-family: 'Courier New', monospace;">
-    <div style="color: #008aff; font-size: 1.0rem; margin-bottom: 8px; font-weight: bold; letter-spacing: 1px;">
-        // INITIATE FEEDBACK PROTOCOL
-    </div>
     <div style="color: #888; font-size: 0.9rem; margin-bottom: 5px;">
         Questions, Comments, or Recommendations?
     </div>
     <div style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">
-        Developed by <b>Adam Kistler</b> | <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" style="color: #00ff41; text-decoration: none; border-bottom: 1px dashed #00ff41;">Establish Secure Comms (LinkedIn)</a>
+        Developed by <b>Adam Kistler</b> | <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" style="color: #00ff41; text-decoration: none; border-bottom: 1px dashed #00ff41;">LinkedIn Profile</a>
     </div>
-    <span style="color: #555; font-size: 0.8rem;">SecAI-Nexus GRC [Build 1.0.0] | Global Threat Fusion Matrix</span><br>
+    <span style="color: #555; font-size: 0.8rem;">SecAI-Nexus GRC [Version 13.1] | Global Threat Fusion Matrix</span><br>
     <span style="color: #008aff; font-size: 0.7rem; text-transform: uppercase;">Status: Encrypted Session Active</span>
 </div>
 """, unsafe_allow_html=True)
