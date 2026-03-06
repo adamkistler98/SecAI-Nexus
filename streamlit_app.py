@@ -49,6 +49,10 @@ st.markdown(f"""
     .source-link:hover {{ color: #00ff41; border-bottom: 1px dashed #00ff41; text-shadow: 0 0 5px #00ff41; }}
     .map-title-link {{ color: #008aff; font-size: 1.0rem; font-weight: bold; text-transform: uppercase; text-decoration: none; transition: 0.3s; display: inline-block; margin-bottom: 8px; }}
     .map-title-link:hover {{ color: #00ff41; text-shadow: 0 0 5px #00ff41; }}
+    
+    /* FOOTER DISCLAIMER HOVER EFFECT */
+    .footer-license-link {{ color: #555; text-decoration: none; border-bottom: 1px dashed #555; transition: 0.3s; }}
+    .footer-license-link:hover {{ color: #00ff41; border-bottom: 1px dashed #00ff41; }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -263,7 +267,7 @@ with l3:
 
 
 # --- FOOTER & LEGAL DISCLAIMER ---
-st.markdown(f"""
+st.markdown("""
 <div style="border-top: 1px solid #333; padding-top: 25px; margin-top: 40px; text-align: center; font-family: 'Courier New', monospace;">
     <div style="color: #888; font-size: 0.9rem; margin-bottom: 5px;">
         Questions, Comments, or Recommendations?
@@ -276,10 +280,10 @@ st.markdown(f"""
     <div style="color: #555; font-size: 0.75rem; margin-top: 20px; padding: 0 10%; line-height: 1.6;">
         <b>LEGAL DISCLAIMER:</b> This dashboard is strictly for <b>educational and portfolio purposes</b>. All embedded threat maps and data sources are the property of their respective owners. SecAI-Nexus does not host, process, or claim ownership of third-party threat maps or data.
         <br><br>
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" style="color: #555; text-decoration: none; border-bottom: 1px dashed #555; transition: 0.3s;" onMouseOver="this.style.color='#00ff41'" onMouseOut="this.style.color='#555'">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="footer-license-link">
         This project's code, layout, and compilation are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
         </a> 
-        Third-party content remains under the copyright of its original providers.
+        <br>Third-party content remains under the copyright of its original providers.
     </div>
 </div>
 """, unsafe_allow_html=True)
