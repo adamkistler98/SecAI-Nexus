@@ -135,7 +135,7 @@ with m14: render_multi_metric("NEW CVEs PUBLISHED", "https://nvd.nist.gov/", "11
 with m15: render_multi_metric("MALICIOUS DOMAINS", "https://urlhaus.abuse.ch/", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad", "+2.1M", "d-bad")
 with m16: render_multi_metric("ICS/SCADA ALERTS", "https://www.cisa.gov/ics", "18", "0", "d-neu", "+3", "d-bad", "+12", "d-bad", "+184", "d-bad")
 
-# Row 5 
+# Row 5 (With DEFCON anchor)
 m17, m18, m19, m20 = st.columns(4)
 with m17: render_multi_metric("BOTNET C2 SERVERS", "https://feodotracker.abuse.ch/", "14.2k", "+45", "d-bad", "+310", "d-bad", "-120", "d-good", "+1.4k", "d-bad")
 with m18: render_multi_metric("SUPPLY CHAIN ATTACKS", "https://www.crowdstrike.com/global-threat-report/", "142", "0", "d-neu", "+2", "d-bad", "+8", "d-bad", "+45", "d-bad")
@@ -200,7 +200,7 @@ st.markdown(f'''
     <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">Real-time global visualization of malicious network activity.</span>
 </div>
 ''', unsafe_allow_html=True)
-render_muted_iframe("https://threatmap.fortiguard.com/", height=1400)
+render_muted_iframe("https://threatmap.fortiguard.com/", height=1100)
 
 st.markdown("---")
 
@@ -213,7 +213,7 @@ st.markdown(f'''
     <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">Global threat telemetry and live attack traffic visualization.</span>
 </div>
 ''', unsafe_allow_html=True)
-render_muted_iframe("https://www.sicherheitstacho.eu/?lang=en", height=1400)
+render_muted_iframe("https://www.sicherheitstacho.eu/?lang=en", height=900)
 
 st.markdown("---")
 
