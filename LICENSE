@@ -1,21 +1,25 @@
-MIT License
+# License and Copyright Notice
 
-Copyright (c) 2026 Adam Kistler
+Copyright (c) 2026 [Adam Kistler] / SecAI-Nexus
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This project and its contents are licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)**.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## 1. Permissions (What others CAN do)
+Under this license, you are free to:
+* **Share:** Copy and redistribute the material in any medium or format.
+* **Adapt:** Remix, transform, and build upon the material.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## 2. Conditions (What others CANNOT do)
+You may exercise the above permissions under the following terms:
+* **NonCommercial:** You may NOT use the material for commercial purposes. You cannot sell this software, use it in a paid product, or use it to generate financial gain.
+* **Attribution:** You must give appropriate credit, provide a link to the license, and indicate if changes were made.
+
+## 3. Exclusive Commercial Rights Reserve
+As the original creator and copyright holder, **[Adam Kistler]** is not bound by the NonCommercial restriction and retains all exclusive rights to commercialize, sell, or monetize this software, its logic, and its layout. 
+
+Any commercial use of this dashboard, its source code, or its architecture by a third party requires explicit prior written consent and a separate commercial licensing agreement from the author.
+
+---
+
+To view a copy of the full legal code for this license, visit: 
+https://creativecommons.org/licenses/by-nc/4.0/legalcode
