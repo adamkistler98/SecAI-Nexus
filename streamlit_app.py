@@ -42,7 +42,7 @@ st.markdown(f"""
     .d-good {{ color: #00ff41; font-weight: bold; }}
     .d-neu {{ color: #008aff; font-weight: bold; }}
     
-    /* HYPERLINK HOVER EFFECTS */
+    /* HYPERLINK HOVER EFFECTS FOR TITLES & SOURCES */
     .section-header-link {{ color: #00ff41; text-decoration: none; transition: 0.3s; }}
     .section-header-link:hover {{ color: #008aff; text-shadow: 0 0 5px #008aff; }}
     .source-link {{ color: #008aff; font-weight: bold; text-decoration: none; transition: 0.3s; border-bottom: 1px dashed #333; padding-bottom: 1px; }}
@@ -55,7 +55,7 @@ st.markdown(f"""
 # --- HELPER FUNCTIONS ---
 
 def render_multi_metric(title, title_url, value, d1, d1_class, d7, d7_class, d30, d30_class, d365, d365_class):
-    """Generates the advanced, multi-timeframe metric box."""
+    """Generates the advanced, multi-timeframe metric box including 1-Year data and hyperlinked titles."""
     html = f"""
     <div class="custom-metric">
         <div class="metric-title"><a href="{title_url}" target="_blank">{title}</a></div>
@@ -107,31 +107,35 @@ st.markdown(f'''
 </div>
 ''', unsafe_allow_html=True)
 
-# Rows of Metrics...
+# Row 1
 m1, m2, m3, m4 = st.columns(4)
 with m1: render_multi_metric("ACTIVE ZERO-DAYS", "https://www.mandiant.com/m-trends", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad", "+94", "d-bad")
 with m2: render_multi_metric("RANSOMWARE ATTACKS", "https://www.cisa.gov/stopransomware", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad", "+5,120", "d-bad")
 with m3: render_multi_metric("PHISHING VOLUME", "https://www.verizon.com/business/resources/reports/dbir/", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad", "+48.5M", "d-bad")
 with m4: render_multi_metric("BUSINESS EMAIL COMPROMISE", "https://www.verizon.com/business/resources/reports/dbir/", "28.4k", "+150", "d-bad", "+850", "d-bad", "+3.2k", "d-bad", "+21k", "d-bad")
 
+# Row 2
 m5, m6, m7, m8 = st.columns(4)
 with m5: render_multi_metric("GLOBAL AVG MTTD", "https://www.mandiant.com/m-trends", "15.8 Days", "-0.2 Days", "d-good", "-1.5 Days", "d-good", "-3.4 Days", "d-good", "-8.2 Days", "d-good")
 with m6: render_multi_metric("AVG TIME TO EXPLOIT", "https://www.crowdstrike.com/global-threat-report/", "4.8 Days", "-0.1 Days", "d-bad", "-0.8 Days", "d-bad", "-2.1 Days", "d-bad", "-5.5 Days", "d-bad")
 with m7: render_multi_metric("EXPOSED RDP ENDPOINTS", "https://www.shodan.io/", "3.2M", "-12k", "d-good", "-55k", "d-good", "+140k", "d-bad", "-450k", "d-good")
 with m8: render_multi_metric("COMPROMISED CREDS", "https://www.verizon.com/business/resources/reports/dbir/", "15.4M", "+18k", "d-bad", "+112k", "d-bad", "+1.8M", "d-bad", "+2.4B", "d-bad")
 
+# Row 3
 m9, m10, m11, m12 = st.columns(4)
 with m9: render_multi_metric("ACTIVE APT CAMPAIGNS", "https://www.mandiant.com/m-trends", "14", "0", "d-neu", "+2", "d-bad", "+3", "d-bad", "+24", "d-bad")
 with m10: render_multi_metric("GLOBAL SCAN VOLUME", "https://abuse.ch/", "4.8 Tbps", "+0.2 Tbps", "d-bad", "+1.1 Tbps", "d-bad", "+2.4 Tbps", "d-bad", "+14.2 Tbps", "d-bad")
 with m11: render_multi_metric("PEAK DDoS VOLUME", "https://www.cisa.gov/news-events/cybersecurity-advisories", "3.4 Tbps", "-0.2 Tbps", "d-good", "+0.5 Tbps", "d-bad", "+1.4 Tbps", "d-bad", "+2.8 Tbps", "d-bad")
 with m12: render_multi_metric("NEW MALWARE VARIANTS", "https://bazaar.abuse.ch/", "48k", "+1.4k", "d-bad", "+9.2k", "d-bad", "+38k", "d-bad", "+4.2M", "d-bad")
 
+# Row 4
 m13, m14, m15, m16 = st.columns(4)
 with m13: render_multi_metric("DATA RECORDS BREACHED", "https://www.verizon.com/business/resources/reports/dbir/", "12.8M", "+450k", "d-bad", "+2.1M", "d-bad", "+8.5M", "d-bad", "+3.2B", "d-bad")
 with m14: render_multi_metric("NEW CVEs PUBLISHED", "https://nvd.nist.gov/", "114", "+14", "d-bad", "+92", "d-bad", "+480", "d-bad", "+29,840", "d-bad")
 with m15: render_multi_metric("MALICIOUS DOMAINS", "https://urlhaus.abuse.ch/", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad", "+2.1M", "d-bad")
 with m16: render_multi_metric("ICS/SCADA ALERTS", "https://www.cisa.gov/ics", "18", "0", "d-neu", "+3", "d-bad", "+12", "d-bad", "+184", "d-bad")
 
+# Row 5 (With DEFCON anchor)
 m17, m18, m19, m20 = st.columns(4)
 with m17: render_multi_metric("BOTNET C2 SERVERS", "https://feodotracker.abuse.ch/", "14.2k", "+45", "d-bad", "+310", "d-bad", "-120", "d-good", "+1.4k", "d-bad")
 with m18: render_multi_metric("SUPPLY CHAIN ATTACKS", "https://www.crowdstrike.com/global-threat-report/", "142", "0", "d-neu", "+2", "d-bad", "+8", "d-bad", "+45", "d-bad")
@@ -258,7 +262,7 @@ with l3:
     st.markdown(render_simple_link("39", "VulnHub", "https://www.vulnhub.com/", "Hands-on experience in digital security."), unsafe_allow_html=True)
 
 
-# --- FOOTER ---
+# --- FOOTER & LEGAL DISCLAIMER ---
 st.markdown(f"""
 <div style="border-top: 1px solid #333; padding-top: 25px; margin-top: 40px; text-align: center; font-family: 'Courier New', monospace;">
     <div style="color: #888; font-size: 0.9rem; margin-bottom: 5px;">
@@ -268,8 +272,14 @@ st.markdown(f"""
         Developed by <b>Adam Kistler</b> | <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" style="color: #008aff; text-decoration: none; border-bottom: 1px dashed #008aff;">LinkedIn</a>
     </div>
     <span style="color: #555; font-size: 0.8rem;">SecAI-Nexus GRC [Version 13.1] | Cyber Threat Observability</span><br>
-    <div style="color: #444; font-size: 0.7rem; margin-top: 15px; padding: 0 15%;">
-        <b>DISCLAIMER:</b> This dashboard is for educational and portfolio purposes only. All embedded threat maps and data sources are the property of their respective owners. SecAI-Nexus does not host or claim ownership of third-party telemetry.
+    
+    <div style="color: #555; font-size: 0.75rem; margin-top: 20px; padding: 0 10%; line-height: 1.6;">
+        <b>LEGAL DISCLAIMER:</b> This dashboard is strictly for <b>educational and portfolio purposes</b>. All embedded threat maps and data sources are the property of their respective owners. SecAI-Nexus does not host, process, or claim ownership of third-party threat maps or data.
+        <br><br>
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" style="color: #555; text-decoration: none; border-bottom: 1px dashed #555; transition: 0.3s;" onMouseOver="this.style.color='#00ff41'" onMouseOut="this.style.color='#555'">
+        This project's code, layout, and compilation are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
+        </a> 
+        Third-party content remains under the copyright of its original providers.
     </div>
 </div>
 """, unsafe_allow_html=True)
