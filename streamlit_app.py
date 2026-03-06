@@ -1,5 +1,4 @@
 import streamlit as st
-from datetime import datetime
 
 # --- STEALTH CONFIGURATION ---
 st.set_page_config(
@@ -43,6 +42,12 @@ st.markdown(f"""
     .d-bad {{ color: #ff4b4b; font-weight: bold; }}
     .d-good {{ color: #00ff41; font-weight: bold; }}
     .d-neu {{ color: #008aff; font-weight: bold; }}
+    
+    /* CUSTOM LINK HOVER EFFECTS */
+    .source-link {{ color: #888; text-decoration: none; transition: 0.3s; }}
+    .source-link:hover {{ color: #00ff41; text-decoration: none; text-shadow: 0 0 3px #00ff41; }}
+    .map-title-link {{ color: #008aff; text-decoration: none; transition: 0.3s; display: inline-block; }}
+    .map-title-link:hover {{ color: #00ff41; text-shadow: 0 0 5px #00ff41; }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -83,7 +88,7 @@ st.markdown(f"""
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
         <div>
             <span style="font-size: 1.3rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
-            <span style="font-size: 0.95rem; color: #008aff; margin-left: 10px; font-weight: bold;">// Cyber Threat Fusion Matrix</span>
+            <span style="font-size: 0.95rem; color: #008aff; margin-left: 10px; font-weight: bold;">// CYBER THREAT OBSERVABILITY</span>
         </div>
         <div style="font-size: 1.0rem; font-weight: bold; color: #008aff; text-shadow: 0 0 5px #008aff;">SYS_TIME: {datetime.now().strftime("%H:%M:%S")} UTC</div>
     </div>
@@ -134,9 +139,16 @@ with m18: render_multi_metric("SUPPLY CHAIN ATTACKS", "142", "0", "d-neu", "+2",
 with m19: render_multi_metric("OPEN CLOUD DATABASES", "18.5k", "-50", "d-good", "-320", "d-good", "+1.2k", "d-bad", "-4.5k", "d-good")
 with m20: render_multi_metric("DEFCON THREAT LEVEL", "LEVEL 3", "Level 3", "d-neu", "Level 3", "d-neu", "Level 4", "d-neu", "Level 3", "d-neu")
 
+# Hyperlinked Data Sources
 st.markdown(f"""
-<div style="font-size: 0.85rem; color: #888; font-family: 'Courier New', monospace; text-align: left; margin-bottom: 25px; margin-top: -5px;">
-    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> CISA KEV | SHODAN OSINT | ABUSE.CH THREAT INTEL | VERIZON DBIR | MANDIANT M-TRENDS | CROWDSTRIKE
+<div style="font-size: 0.85rem; font-family: 'Courier New', monospace; text-align: left; margin-bottom: 25px; margin-top: -5px;">
+    <span style="color: #008aff; font-weight: bold;">DATA SOURCES:</span> 
+    <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="source-link">CISA KEV</a> | 
+    <a href="https://www.shodan.io/" target="_blank" class="source-link">SHODAN OSINT</a> | 
+    <a href="https://abuse.ch/" target="_blank" class="source-link">ABUSE.CH THREAT INTEL</a> | 
+    <a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" class="source-link">VERIZON DBIR</a> | 
+    <a href="https://www.mandiant.com/m-trends" target="_blank" class="source-link">MANDIANT M-TRENDS</a> | 
+    <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="source-link">CROWDSTRIKE</a>
 </div>
 """, unsafe_allow_html=True)
 
@@ -153,42 +165,30 @@ map_row1 = st.columns(4)
 map_row2 = st.columns(4)
 
 with map_row1[0]:
-    st.markdown(f'<div style="{BLUE_LABEL}">Bitdefender</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}"><a href="https://threatmap.bitdefender.com/" target="_blank" class="map-title-link">Bitdefender</a></div>', unsafe_allow_html=True)
     render_muted_iframe("https://threatmap.bitdefender.com/", height=450)
 with map_row1[1]:
-    st.markdown(f'<div style="{BLUE_LABEL}">Sicherheitstacho (DT)</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}"><a href="https://www.sicherheitstacho.eu/?lang=en" target="_blank" class="map-title-link">Sicherheitstacho (DT)</a></div>', unsafe_allow_html=True)
     render_muted_iframe("https://www.sicherheitstacho.eu/?lang=en", height=450)
 with map_row1[2]:
-    st.markdown(f'<div style="{BLUE_LABEL}">Check Point ThreatCloud</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}"><a href="https://threatmap.checkpoint.com/" target="_blank" class="map-title-link">Check Point ThreatCloud</a></div>', unsafe_allow_html=True)
     render_muted_iframe("https://threatmap.checkpoint.com/", height=450)
 with map_row1[3]:
-    st.markdown(f'<div style="{BLUE_LABEL}">Radware Live Threat Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}"><a href="https://livethreatmap.radware.com/" target="_blank" class="map-title-link">Radware Live Threat Map</a></div>', unsafe_allow_html=True)
     render_muted_iframe("https://livethreatmap.radware.com/", height=450)
 
 with map_row2[0]:
-    st.markdown(f'<div style="{BLUE_LABEL}">Fortinet Threat Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}"><a href="https://threatmap.fortiguard.com/" target="_blank" class="map-title-link">Fortinet Threat Map</a></div>', unsafe_allow_html=True)
     render_muted_iframe("https://threatmap.fortiguard.com/", height=450)
 with map_row2[1]:
-    st.markdown(f'<div style="{BLUE_LABEL}">Kaspersky Cybermap</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}"><a href="https://cybermap.kaspersky.com/en/widget/dynamic/dark" target="_blank" class="map-title-link">Kaspersky Cybermap</a></div>', unsafe_allow_html=True)
     render_muted_iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=450)
 with map_row2[2]:
-    st.markdown(f'<div style="{BLUE_LABEL}">SonicWall Live Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}"><a href="https://attackmap.sonicwall.com/live-attack-map/" target="_blank" class="map-title-link">SonicWall Live Map</a></div>', unsafe_allow_html=True)
     render_muted_iframe("https://attackmap.sonicwall.com/live-attack-map/", height=450)
 with map_row2[3]:
-    st.markdown(f'<div style="{BLUE_LABEL}">Threatbutt Attack Map</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="{BLUE_LABEL}"><a href="https://threatbutt.com/map/" target="_blank" class="map-title-link">Threatbutt Attack Map</a></div>', unsafe_allow_html=True)
     render_muted_iframe("https://threatbutt.com/map/", height=450)
-
-st.markdown("---")
-
-# === LARGE MAP SECTION (GREYNOISE) ===
-st.markdown(f'''
-<div style="margin-top: 25px; margin-bottom: 8px;">
-    <span style="font-size: 0.95rem; font-weight: bold; color: #008aff; text-transform: uppercase; letter-spacing: 1.0px;">>> GREYNOISE INTELLIGENCE 
-    (<a href="https://viz.greynoise.io/trends/trending" target="_blank" style="color: #008aff; font-weight: bold; text-decoration: none; border-bottom: 1px dashed #008aff; font-size: 0.95rem;">TRENDS VIEW</a>)</span><br>
-    <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">Live insights into cyberattacks and malicious internet scanning activity.</span>
-</div>
-''', unsafe_allow_html=True)
-render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1400)
 
 st.markdown("---")
 
@@ -236,6 +236,6 @@ st.markdown(f"""
     <div style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">
         Developed by <b>Adam Kistler</b> | <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" style="color: #008aff; text-decoration: none; border-bottom: 1px dashed #008aff;">LinkedIn</a>
     </div>
-    <span style="color: #555; font-size: 0.8rem;">SecAI-Nexus GRC [Version 13.1] | Cyber Threat Fusion Matrix</span>
+    <span style="color: #555; font-size: 0.8rem;">SecAI-Nexus GRC [Version 13.1] | Cyber Threat Observability</span>
 </div>
 """, unsafe_allow_html=True)
