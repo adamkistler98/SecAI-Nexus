@@ -278,22 +278,19 @@ render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1400)
 st.markdown("---")
 
 
-# === ADDITIONAL GRC RESOURCES (CENTERED / INDENTED) ===
+# === ADDITIONAL GRC RESOURCES (CENTERED / INDENTED 3-COLUMN) ===
 
-# Header Section (Centered to match the column indents)
-spacer_head_l, head_col, spacer_head_r = st.columns([1, 8, 1])
+# Centered Header
+st.markdown(f'''
+<div style="margin-top: 35px; margin-bottom: 25px; text-align: center;">
+    <span style="font-size: 1.2rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px;">
+        <a href="https://www.nist.gov/cyberframework" target="_blank" class="section-header-link">>> ADDITIONAL GRC RESOURCES <<</a>
+    </span>
+</div>
+''', unsafe_allow_html=True)
 
-with head_col:
-    st.markdown(f'''
-    <div style="margin-top: 25px; margin-bottom: 20px;">
-        <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
-            <a href="https://www.nist.gov/cyberframework" target="_blank" class="section-header-link">>> ADDITIONAL GRC RESOURCES</a>
-        </span>
-    </div>
-    ''', unsafe_allow_html=True)
-
-# Link Section (Indented by ratio 1 left, 8 middle, 1 right to create margins)
-spacer_link_l, link_col1, link_col2, spacer_link_r = st.columns([1, 4, 4, 1])
+# Link Section (Indented by ratio 0.5 left, 3/3/3 middle, 0.5 right to create perfectly balanced margins)
+spacer_link_l, link_col1, link_col2, link_col3, spacer_link_r = st.columns([0.5, 3, 3, 3, 0.5])
 
 with link_col1:
     st.markdown(render_simple_link("01", "NIST AI Risk Management Framework", "https://www.nist.gov/itl/ai-risk-management-framework", "Voluntary framework to better manage risks to individuals, organizations, and society associated with AI."), unsafe_allow_html=True)
@@ -323,6 +320,22 @@ with link_col2:
     st.markdown(render_simple_link("23", "URLScan.io", "https://urlscan.io/", "A free service to scan and analyze websites to see what a site is actually executing in the background."), unsafe_allow_html=True)
     st.markdown(render_simple_link("24", "GTFOBins", "https://gtfobins.github.io/", "A curated list of Unix binaries used to bypass local security restrictions."), unsafe_allow_html=True)
     st.markdown(render_simple_link("25", "MalwareBazaar", "https://bazaar.abuse.ch/", "A massive open-source repository of malware samples for research and analysis."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("26", "HackTheBox", "https://www.hackthebox.com/", "Massive hacking playground and advanced gamified cybersecurity training platform."), unsafe_allow_html=True)
+
+with link_col3:
+    st.markdown(render_simple_link("27", "HackerOne", "https://www.hackerone.com/", "Top bug bounty platform connecting businesses with elite penetration testers."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("28", "Bugcrowd", "https://www.bugcrowd.com/", "Crowdsourced cybersecurity platform for vulnerability disclosure and bounties."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("29", "TryHackMe", "https://tryhackme.com/", "Interactive cybersecurity training platform with hands-on virtual browser labs."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("30", "CyberChef", "https://gchq.github.io/CyberChef/", "The Cyber Swiss Army Knife for data encryption, decoding, and algorithmic analysis."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("31", "CISA Shields Up", "https://www.cisa.gov/shields-up", "Provides crucial recommendations to build corporate resilience against cyberattacks."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("32", "NIST CSRC", "https://csrc.nist.gov/", "Computer Security Resource Center offering standard framework guidelines and research."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("33", "SANS Reading Room", "https://www.sans.org/white-papers/", "Vast library of original cybersecurity research documents and technical whitepapers."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("34", "DEF CON Archives", "https://defcon.org/html/links/dc-archives.html", "Presentations, talks, and instructional materials from the legendary hacking conference."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("35", "OSINT Framework", "https://osintframework.com/", "The ultimate interactive collection of various open-source intelligence gathering tools."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("36", "Talos Threat Intel", "https://talosintelligence.com/", "Cisco's premier intelligence group providing industry-leading threat research."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("37", "PayloadsAllTheThings", "https://github.com/swisskyrepo/PayloadsAllTheThings", "A list of useful payloads and bypasses for advanced Web Application Security."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("38", "Web Security Academy", "https://portswigger.net/web-security", "Free, interactive vulnerability training from the creators of Burp Suite."), unsafe_allow_html=True)
+    st.markdown(render_simple_link("39", "VulnHub", "https://www.vulnhub.com/", "Free materials allowing anyone to gain practical hands-on experience in digital security."), unsafe_allow_html=True)
 
 
 # --- FOOTER ---
