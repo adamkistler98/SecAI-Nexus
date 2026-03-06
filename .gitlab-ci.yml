@@ -1,0 +1,14 @@
+# SecAI-Nexus DevSecOps Pipeline
+# Automatically scans Python code for vulnerabilities on every commit
+
+stages:
+  - test
+
+# Include GitLab's official, pre-built SAST template
+include:
+  - template: Security/SAST.gitlab-ci.yml
+
+sast:
+  stage: test
+  variables:
+    SAST_EXCLUDED_ANALYZERS: "" # Run all available analyzers for Python (e.g., Semgrep/Bandit)
