@@ -135,7 +135,7 @@ with m14: render_multi_metric("NEW CVEs PUBLISHED", "https://nvd.nist.gov/", "11
 with m15: render_multi_metric("MALICIOUS DOMAINS", "https://urlhaus.abuse.ch/", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad", "+2.1M", "d-bad")
 with m16: render_multi_metric("ICS/SCADA ALERTS", "https://www.cisa.gov/ics", "18", "0", "d-neu", "+3", "d-bad", "+12", "d-bad", "+184", "d-bad")
 
-# Row 5 
+# Row 5 (With DEFCON anchor)
 m17, m18, m19, m20 = st.columns(4)
 with m17: render_multi_metric("BOTNET C2 SERVERS", "https://feodotracker.abuse.ch/", "14.2k", "+45", "d-bad", "+310", "d-bad", "-120", "d-good", "+1.4k", "d-bad")
 with m18: render_multi_metric("SUPPLY CHAIN ATTACKS", "https://www.crowdstrike.com/global-threat-report/", "142", "0", "d-neu", "+2", "d-bad", "+8", "d-bad", "+45", "d-bad")
@@ -166,7 +166,7 @@ st.markdown(f'''
 ''', unsafe_allow_html=True)
 
 map_row1 = st.columns(4)
-map_row2 = st.columns(4)
+map_row2 = st.columns(3) # Adjusted to 3 columns to center the bottom row
 
 with map_row1[0]:
     st.markdown(f'<div><a href="https://threatmap.bitdefender.com/" target="_blank" class="map-title-link">Bitdefender</a></div>', unsafe_allow_html=True)
@@ -182,17 +182,27 @@ with map_row1[3]:
     render_muted_iframe("https://livethreatmap.radware.com/", height=450)
 
 with map_row2[0]:
-    st.markdown(f'<div><a href="https://threatmap.fortiguard.com/" target="_blank" class="map-title-link">Fortinet Threat Map</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatmap.fortiguard.com/", height=450)
-with map_row2[1]:
     st.markdown(f'<div><a href="https://cybermap.kaspersky.com/en/widget/dynamic/dark" target="_blank" class="map-title-link">Kaspersky Cybermap</a></div>', unsafe_allow_html=True)
     render_muted_iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=450)
-with map_row2[2]:
+with map_row2[1]:
     st.markdown(f'<div><a href="https://attackmap.sonicwall.com/live-attack-map/" target="_blank" class="map-title-link">SonicWall Live Map</a></div>', unsafe_allow_html=True)
     render_muted_iframe("https://attackmap.sonicwall.com/live-attack-map/", height=450)
-with map_row2[3]:
+with map_row2[2]:
     st.markdown(f'<div><a href="https://threatbutt.com/map/" target="_blank" class="map-title-link">Threatbutt Attack Map</a></div>', unsafe_allow_html=True)
     render_muted_iframe("https://threatbutt.com/map/", height=450)
+
+st.markdown("---")
+
+# === LARGE MAP SECTION (FORTINET) ===
+st.markdown(f'''
+<div style="margin-top: 25px; margin-bottom: 8px;">
+    <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
+        <a href="https://threatmap.fortiguard.com/" target="_blank" class="section-header-link">>> FORTINET THREAT MAP</a> 
+    </span><br>
+    <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">Real-time global visualization of malicious network activity.</span>
+</div>
+''', unsafe_allow_html=True)
+render_muted_iframe("https://threatmap.fortiguard.com/", height=1400)
 
 st.markdown("---")
 
