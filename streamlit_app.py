@@ -89,7 +89,7 @@ def render_simple_link(num, title, url, desc):
 
 # --- HEADER SECTION ---
 st.markdown(f"""
-<div style="border-bottom: 2px solid #333; padding-bottom: 12px; margin-bottom: 18px; margin-top: -50px;">
+<div style="border-bottom: 2px solid #333; padding-bottom: 12px; margin-bottom: 25px; margin-top: -50px;">
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap;">
         <div>
             <span style="font-size: 1.3rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 5px #00ff41;">🔒 SecAI-Nexus</span>
@@ -99,65 +99,6 @@ st.markdown(f"""
     </div>
 </div>
 """, unsafe_allow_html=True)
-
-
-# === GLOBAL THREAT METRICS ===
-st.markdown(f'''
-<div style="margin-top: 10px; margin-bottom: 15px; line-height: 1.3;">
-    <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
-        <a href="https://www.cisa.gov/" target="_blank" class="section-header-link">>> GLOBAL THREAT METRICS</a>
-    </span><br>
-    <span style="font-size: 0.85rem; color: #00ff41; font-family: 'Courier New', monospace;">Real-time data fusion from trusted sources</span>
-</div>
-''', unsafe_allow_html=True)
-
-# Row 1
-m1, m2, m3, m4 = st.columns(4)
-with m1: render_multi_metric("ACTIVE ZERO-DAYS", "https://www.mandiant.com/m-trends", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad", "+94", "d-bad")
-with m2: render_multi_metric("RANSOMWARE ATTACKS", "https://www.cisa.gov/stopransomware", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad", "+5,120", "d-bad")
-with m3: render_multi_metric("PHISHING VOLUME", "https://www.verizon.com/business/resources/reports/dbir/", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad", "+48.5M", "d-bad")
-with m4: render_multi_metric("BUSINESS EMAIL COMPROMISE", "https://www.verizon.com/business/resources/reports/dbir/", "28.4k", "+150", "d-bad", "+850", "d-bad", "+3.2k", "d-bad", "+21k", "d-bad")
-
-# Row 2
-m5, m6, m7, m8 = st.columns(4)
-with m5: render_multi_metric("GLOBAL AVG MTTD", "https://www.mandiant.com/m-trends", "15.8 Days", "-0.2 Days", "d-good", "-1.5 Days", "d-good", "-3.4 Days", "d-good", "-8.2 Days", "d-good")
-with m6: render_multi_metric("AVG TIME TO EXPLOIT", "https://www.crowdstrike.com/global-threat-report/", "4.8 Days", "-0.1 Days", "d-bad", "-0.8 Days", "d-bad", "-2.1 Days", "d-bad", "-5.5 Days", "d-bad")
-with m7: render_multi_metric("EXPOSED RDP ENDPOINTS", "https://www.shodan.io/", "3.2M", "-12k", "d-good", "-55k", "d-good", "+140k", "d-bad", "-450k", "d-good")
-with m8: render_multi_metric("COMPROMISED CREDS", "https://www.verizon.com/business/resources/reports/dbir/", "15.4M", "+18k", "d-bad", "+112k", "d-bad", "+1.8M", "d-bad", "+2.4B", "d-bad")
-
-# Row 3
-m9, m10, m11, m12 = st.columns(4)
-with m9: render_multi_metric("ACTIVE APT CAMPAIGNS", "https://www.mandiant.com/m-trends", "14", "0", "d-neu", "+2", "d-bad", "+3", "d-bad", "+24", "d-bad")
-with m10: render_multi_metric("GLOBAL SCAN VOLUME", "https://abuse.ch/", "4.8 Tbps", "+0.2 Tbps", "d-bad", "+1.1 Tbps", "d-bad", "+2.4 Tbps", "d-bad", "+14.2 Tbps", "d-bad")
-with m11: render_multi_metric("PEAK DDoS VOLUME", "https://www.cisa.gov/news-events/cybersecurity-advisories", "3.4 Tbps", "-0.2 Tbps", "d-good", "+0.5 Tbps", "d-bad", "+1.4 Tbps", "d-bad", "+2.8 Tbps", "d-bad")
-with m12: render_multi_metric("NEW MALWARE VARIANTS", "https://bazaar.abuse.ch/", "48k", "+1.4k", "d-bad", "+9.2k", "d-bad", "+38k", "d-bad", "+4.2M", "d-bad")
-
-# Row 4
-m13, m14, m15, m16 = st.columns(4)
-with m13: render_multi_metric("DATA RECORDS BREACHED", "https://www.verizon.com/business/resources/reports/dbir/", "12.8M", "+450k", "d-bad", "+2.1M", "d-bad", "+8.5M", "d-bad", "+3.2B", "d-bad")
-with m14: render_multi_metric("NEW CVEs PUBLISHED", "https://nvd.nist.gov/", "114", "+14", "d-bad", "+92", "d-bad", "+480", "d-bad", "+29,840", "d-bad")
-with m15: render_multi_metric("MALICIOUS DOMAINS", "https://urlhaus.abuse.ch/", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad", "+2.1M", "d-bad")
-with m16: render_multi_metric("ICS/SCADA ALERTS", "https://www.cisa.gov/ics", "18", "0", "d-neu", "+3", "d-bad", "+12", "d-bad", "+184", "d-bad")
-
-# Row 5 (With DEFCON anchor)
-m17, m18, m19, m20 = st.columns(4)
-with m17: render_multi_metric("BOTNET C2 SERVERS", "https://feodotracker.abuse.ch/", "14.2k", "+45", "d-bad", "+310", "d-bad", "-120", "d-good", "+1.4k", "d-bad")
-with m18: render_multi_metric("SUPPLY CHAIN ATTACKS", "https://www.crowdstrike.com/global-threat-report/", "142", "0", "d-neu", "+2", "d-bad", "+8", "d-bad", "+45", "d-bad")
-with m19: render_multi_metric("OPEN CLOUD DATABASES", "https://www.shodan.io/", "18.5k", "-50", "d-good", "-320", "d-good", "+1.2k", "d-bad", "-4.5k", "d-good")
-with m20: render_multi_metric("DEFCON THREAT LEVEL", "https://www.defconlevel.com/", "LEVEL 3", "Level 3", "d-neu", "Level 3", "d-neu", "Level 4", "d-neu", "Level 3", "d-neu")
-
-st.markdown(f"""
-<div style="font-size: 0.85rem; font-family: 'Courier New', monospace; text-align: left; margin-bottom: 25px; margin-top: -5px;">
-    <span style="color: #888; font-weight: bold;">DATA SOURCES:</span> 
-    <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="source-link">CISA KEV</a> | 
-    <a href="https://www.shodan.io/" target="_blank" class="source-link">SHODAN OSINT</a> | 
-    <a href="https://abuse.ch/" target="_blank" class="source-link">ABUSE.CH THREAT INTEL</a> | 
-    <a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" class="source-link">VERIZON DBIR</a> | 
-    <a href="https://www.mandiant.com/m-trends" target="_blank" class="source-link">MANDIANT M-TRENDS</a> | 
-    <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="source-link">CROWDSTRIKE</a>
-</div>
-""", unsafe_allow_html=True)
-
 
 # === RADWARE & FORTINET (SIDE-BY-SIDE) ===
 col_rad, col_fort = st.columns(2)
@@ -208,7 +149,6 @@ st.markdown(f'<div><a href="https://viz.greynoise.io/trends/trending" target="_b
 render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1400)
 
 st.markdown("---")
-
 
 # === ADDITIONAL GRC RESOURCES (CENTERED / INDENTED 3-COLUMN) ===
 st.markdown(f'''
@@ -264,6 +204,67 @@ with l3:
     st.markdown(render_simple_link("37", "PayloadsAllThings", "https://github.com/swisskyrepo/PayloadsAllTheThings", "List of useful payloads and bypasses."), unsafe_allow_html=True)
     st.markdown(render_simple_link("38", "Web Sec Academy", "https://portswigger.net/web-security", "Vulnerability training from Burp Suite creators."), unsafe_allow_html=True)
     st.markdown(render_simple_link("39", "VulnHub", "https://www.vulnhub.com/", "Hands-on experience in digital security."), unsafe_allow_html=True)
+
+st.markdown("---")
+
+# === GLOBAL THREAT METRICS (UI/UX PROTOTYPE SECTION) ===
+st.markdown(f'''
+<div style="margin-top: 35px; margin-bottom: 25px; text-align: center; line-height: 1.4;">
+    <span style="font-size: 1.2rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px;">
+        <a href="https://www.cisa.gov/" target="_blank" class="section-header-link">>> GLOBAL THREAT METRICS <<</a>
+    </span><br>
+    <span style="font-size: 0.9rem; color: #ffb800; font-family: 'Courier New', monospace; font-weight: bold;">
+        [ UI/UX PROTOTYPE ] — Simulated data for demonstration and conceptual purposes only. <br>To be connected to live APIs in future builds.
+    </span>
+</div>
+''', unsafe_allow_html=True)
+
+# Row 1
+m1, m2, m3, m4 = st.columns(4)
+with m1: render_multi_metric("ACTIVE ZERO-DAYS", "https://www.mandiant.com/m-trends", "11", "+2", "d-bad", "+4", "d-bad", "+7", "d-bad", "+94", "d-bad")
+with m2: render_multi_metric("RANSOMWARE ATTACKS", "https://www.cisa.gov/stopransomware", "1,420", "+18", "d-bad", "+104", "d-bad", "+450", "d-bad", "+5,120", "d-bad")
+with m3: render_multi_metric("PHISHING VOLUME", "https://www.verizon.com/business/resources/reports/dbir/", "4.2M", "+150k", "d-bad", "+890k", "d-bad", "+3.4M", "d-bad", "+48.5M", "d-bad")
+with m4: render_multi_metric("BUSINESS EMAIL COMPROMISE", "https://www.verizon.com/business/resources/reports/dbir/", "28.4k", "+150", "d-bad", "+850", "d-bad", "+3.2k", "d-bad", "+21k", "d-bad")
+
+# Row 2
+m5, m6, m7, m8 = st.columns(4)
+with m5: render_multi_metric("GLOBAL AVG MTTD", "https://www.mandiant.com/m-trends", "15.8 Days", "-0.2 Days", "d-good", "-1.5 Days", "d-good", "-3.4 Days", "d-good", "-8.2 Days", "d-good")
+with m6: render_multi_metric("AVG TIME TO EXPLOIT", "https://www.crowdstrike.com/global-threat-report/", "4.8 Days", "-0.1 Days", "d-bad", "-0.8 Days", "d-bad", "-2.1 Days", "d-bad", "-5.5 Days", "d-bad")
+with m7: render_multi_metric("EXPOSED RDP ENDPOINTS", "https://www.shodan.io/", "3.2M", "-12k", "d-good", "-55k", "d-good", "+140k", "d-bad", "-450k", "d-good")
+with m8: render_multi_metric("COMPROMISED CREDS", "https://www.verizon.com/business/resources/reports/dbir/", "15.4M", "+18k", "d-bad", "+112k", "d-bad", "+1.8M", "d-bad", "+2.4B", "d-bad")
+
+# Row 3
+m9, m10, m11, m12 = st.columns(4)
+with m9: render_multi_metric("ACTIVE APT CAMPAIGNS", "https://www.mandiant.com/m-trends", "14", "0", "d-neu", "+2", "d-bad", "+3", "d-bad", "+24", "d-bad")
+with m10: render_multi_metric("GLOBAL SCAN VOLUME", "https://abuse.ch/", "4.8 Tbps", "+0.2 Tbps", "d-bad", "+1.1 Tbps", "d-bad", "+2.4 Tbps", "d-bad", "+14.2 Tbps", "d-bad")
+with m11: render_multi_metric("PEAK DDoS VOLUME", "https://www.cisa.gov/news-events/cybersecurity-advisories", "3.4 Tbps", "-0.2 Tbps", "d-good", "+0.5 Tbps", "d-bad", "+1.4 Tbps", "d-bad", "+2.8 Tbps", "d-bad")
+with m12: render_multi_metric("NEW MALWARE VARIANTS", "https://bazaar.abuse.ch/", "48k", "+1.4k", "d-bad", "+9.2k", "d-bad", "+38k", "d-bad", "+4.2M", "d-bad")
+
+# Row 4
+m13, m14, m15, m16 = st.columns(4)
+with m13: render_multi_metric("DATA RECORDS BREACHED", "https://www.verizon.com/business/resources/reports/dbir/", "12.8M", "+450k", "d-bad", "+2.1M", "d-bad", "+8.5M", "d-bad", "+3.2B", "d-bad")
+with m14: render_multi_metric("NEW CVEs PUBLISHED", "https://nvd.nist.gov/", "114", "+14", "d-bad", "+92", "d-bad", "+480", "d-bad", "+29,840", "d-bad")
+with m15: render_multi_metric("MALICIOUS DOMAINS", "https://urlhaus.abuse.ch/", "84k", "+2.1k", "d-bad", "+14k", "d-bad", "+62k", "d-bad", "+2.1M", "d-bad")
+with m16: render_multi_metric("ICS/SCADA ALERTS", "https://www.cisa.gov/ics", "18", "0", "d-neu", "+3", "d-bad", "+12", "d-bad", "+184", "d-bad")
+
+# Row 5 (With DEFCON anchor)
+m17, m18, m19, m20 = st.columns(4)
+with m17: render_multi_metric("BOTNET C2 SERVERS", "https://feodotracker.abuse.ch/", "14.2k", "+45", "d-bad", "+310", "d-bad", "-120", "d-good", "+1.4k", "d-bad")
+with m18: render_multi_metric("SUPPLY CHAIN ATTACKS", "https://www.crowdstrike.com/global-threat-report/", "142", "0", "d-neu", "+2", "d-bad", "+8", "d-bad", "+45", "d-bad")
+with m19: render_multi_metric("OPEN CLOUD DATABASES", "https://www.shodan.io/", "18.5k", "-50", "d-good", "-320", "d-good", "+1.2k", "d-bad", "-4.5k", "d-good")
+with m20: render_multi_metric("DEFCON THREAT LEVEL", "https://www.defconlevel.com/", "LEVEL 3", "Level 3", "d-neu", "Level 3", "d-neu", "Level 4", "d-neu", "Level 3", "d-neu")
+
+st.markdown(f"""
+<div style="font-size: 0.85rem; font-family: 'Courier New', monospace; text-align: center; margin-bottom: 25px; margin-top: -5px;">
+    <span style="color: #888; font-weight: bold;">DATA SOURCES (CONCEPTUAL):</span> 
+    <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="source-link">CISA KEV</a> | 
+    <a href="https://www.shodan.io/" target="_blank" class="source-link">SHODAN OSINT</a> | 
+    <a href="https://abuse.ch/" target="_blank" class="source-link">ABUSE.CH THREAT INTEL</a> | 
+    <a href="https://www.verizon.com/business/resources/reports/dbir/" target="_blank" class="source-link">VERIZON DBIR</a> | 
+    <a href="https://www.mandiant.com/m-trends" target="_blank" class="source-link">MANDIANT M-TRENDS</a> | 
+    <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="source-link">CROWDSTRIKE</a>
+</div>
+""", unsafe_allow_html=True)
 
 
 # --- FOOTER & LEGAL DISCLAIMER ---
