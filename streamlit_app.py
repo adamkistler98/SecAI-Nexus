@@ -207,37 +207,6 @@ render_muted_iframe("https://www.sicherheitstacho.eu/?lang=en", height=900)
 
 st.markdown("---")
 
-# === LIVE CYBER THREAT MAPS (SMALL GRID SECTION) ===
-st.markdown(f'''
-<div style="margin-top: 25px; margin-bottom: 15px; line-height: 1.3;">
-    <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
-        <a href="https://www.cisa.gov/shields-up" target="_blank" class="section-header-link" style="cursor: default;">>> ADDITIONAL THREAT VISUALIZATIONS</a>
-    </span>
-</div>
-''', unsafe_allow_html=True)
-
-# 2x2 Grid for the remaining 4 small maps
-grid_row1 = st.columns(2)
-grid_row2 = st.columns(2)
-
-with grid_row1[0]:
-    st.markdown(f'<div><a href="https://threatmap.bitdefender.com/" target="_blank" class="map-title-link">Bitdefender</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatmap.bitdefender.com/", height=450)
-    
-with grid_row1[1]:
-    st.markdown(f'<div><a href="https://threatmap.checkpoint.com/" target="_blank" class="map-title-link">Check Point ThreatCloud</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatmap.checkpoint.com/", height=450)
-    
-with grid_row2[0]:
-    st.markdown(f'<div><a href="https://cybermap.kaspersky.com/en/widget/dynamic/dark" target="_blank" class="map-title-link">Kaspersky Cybermap</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=450)
-    
-with grid_row2[1]:
-    st.markdown(f'<div><a href="https://threatbutt.com/map/" target="_blank" class="map-title-link">Threatbutt Attack Map</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatbutt.com/map/", height=450)
-
-st.markdown("---")
-
 # === LARGE MAP SECTION (GREYNOISE) ===
 st.markdown(f'''
 <div style="margin-top: 25px; margin-bottom: 8px;">
@@ -248,6 +217,37 @@ st.markdown(f'''
 </div>
 ''', unsafe_allow_html=True)
 render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1400)
+
+st.markdown("---")
+
+# === LIVE CYBER THREAT MAPS (BOTTOM SECTION) ===
+st.markdown(f'''
+<div style="margin-top: 25px; margin-bottom: 15px; line-height: 1.3;">
+    <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
+        <a href="https://www.cisa.gov/shields-up" target="_blank" class="section-header-link" style="cursor: default;">>> ADDITIONAL THREAT VISUALIZATIONS</a>
+    </span>
+</div>
+''', unsafe_allow_html=True)
+
+# 2x2 Grid for the remaining 4 small maps (increased height to 700)
+grid_row1 = st.columns(2)
+grid_row2 = st.columns(2)
+
+with grid_row1[0]:
+    st.markdown(f'<div><a href="https://cybermap.kaspersky.com/en/widget/dynamic/dark" target="_blank" class="map-title-link">Kaspersky Cybermap</a></div>', unsafe_allow_html=True)
+    render_muted_iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=700)
+    
+with grid_row1[1]:
+    st.markdown(f'<div><a href="https://threatmap.bitdefender.com/" target="_blank" class="map-title-link">Bitdefender</a></div>', unsafe_allow_html=True)
+    render_muted_iframe("https://threatmap.bitdefender.com/", height=700)
+    
+with grid_row2[0]:
+    st.markdown(f'<div><a href="https://threatbutt.com/map/" target="_blank" class="map-title-link">Threatbutt Attack Map</a></div>', unsafe_allow_html=True)
+    render_muted_iframe("https://threatbutt.com/map/", height=700)
+    
+with grid_row2[1]:
+    st.markdown(f'<div><a href="https://threatmap.checkpoint.com/" target="_blank" class="map-title-link">Check Point ThreatCloud</a></div>', unsafe_allow_html=True)
+    render_muted_iframe("https://threatmap.checkpoint.com/", height=700)
 
 st.markdown("---")
 
