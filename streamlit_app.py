@@ -267,23 +267,11 @@ with l3:
 
 
 # --- FOOTER & LEGAL DISCLAIMER ---
-st.markdown("""
-<div style="border-top: 1px solid #333; padding-top: 25px; margin-top: 40px; text-align: center; font-family: 'Courier New', monospace;">
-    <div style="color: #888; font-size: 0.9rem; margin-bottom: 5px;">
-        Questions, Comments, or Recommendations?
-    </div>
-    <div style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">
-        Developed by <b>Adam Kistler</b> | <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" style="color: #008aff; text-decoration: none; border-bottom: 1px dashed #008aff;">LinkedIn</a>
-    </div>
-    <span style="color: #555; font-size: 0.8rem;">SecAI-Nexus GRC [Version 13.1] | Cyber Threat Observability</span><br>
-    
-    <div style="color: #555; font-size: 0.75rem; margin-top: 20px; padding: 0 10%; line-height: 1.6;">
-        <b>LEGAL DISCLAIMER:</b> This dashboard is strictly for <b>educational and portfolio purposes</b>. All embedded threat maps and data sources are the property of their respective owners. SecAI-Nexus does not host, process, or claim ownership of third-party threat maps or data.
-        <br><br>
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="footer-license-link">
-        This project's code, layout, and compilation are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
-        </a> 
-        <br>Third-party content remains under the copyright of its original providers.
-    </div>
-</div>
-""", unsafe_allow_html=True)
+footer_html = """<div style="border-top: 1px solid #333; padding-top: 25px; margin-top: 40px; text-align: center; font-family: 'Courier New', monospace;">
+<div style="color: #888; font-size: 0.9rem; margin-bottom: 5px;">Questions, Comments, or Recommendations?</div>
+<div style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">Developed by <b>Adam Kistler</b> | <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" style="color: #008aff; text-decoration: none; border-bottom: 1px dashed #008aff;">LinkedIn</a></div>
+<span style="color: #555; font-size: 0.8rem;">SecAI-Nexus GRC [Version 13.1] | Cyber Threat Observability</span><br>
+<div style="color: #555; font-size: 0.75rem; margin-top: 20px; padding: 0 10%; line-height: 1.6;"><b>LEGAL DISCLAIMER:</b> This dashboard is strictly for <b>educational and portfolio purposes</b>. All embedded threat maps and data sources are the property of their respective owners. SecAI-Nexus does not host, process, or claim ownership of third-party threat maps or data.<br><br><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="footer-license-link">This project's code, layout, and compilation are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).</a><br>Third-party content remains under the copyright of its original providers.</div>
+</div>"""
+
+st.markdown(footer_html, unsafe_allow_html=True)
