@@ -155,29 +155,30 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 
-# === LARGE MAP SECTION (RADWARE) ===
-st.markdown(f'''
-<div style="margin-top: 15px; margin-bottom: 8px;">
-    <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
-        <a href="https://livethreatmap.radware.com/" target="_blank" class="section-header-link">>> RADWARE LIVE THREAT MAP</a> 
-    </span><br>
-    <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">Real-time global DDoS and attack traffic visualization.</span>
-</div>
-''', unsafe_allow_html=True)
-render_muted_iframe("https://livethreatmap.radware.com/", height=1100)
+# === RADWARE & FORTINET (SIDE-BY-SIDE) ===
+col_rad, col_fort = st.columns(2)
 
-st.markdown("---")
+with col_rad:
+    st.markdown(f'''
+    <div style="margin-top: 15px; margin-bottom: 8px;">
+        <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
+            <a href="https://livethreatmap.radware.com/" target="_blank" class="section-header-link">>> RADWARE LIVE THREAT MAP</a> 
+        </span><br>
+        <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">Real-time global DDoS and attack traffic visualization.</span>
+    </div>
+    ''', unsafe_allow_html=True)
+    render_muted_iframe("https://livethreatmap.radware.com/", height=1100)
 
-# === LARGE MAP SECTION (FORTINET) ===
-st.markdown(f'''
-<div style="margin-top: 25px; margin-bottom: 8px;">
-    <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
-        <a href="https://threatmap.fortiguard.com/" target="_blank" class="section-header-link">>> FORTINET THREAT MAP</a> 
-    </span><br>
-    <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">Real-time global visualization of malicious network activity.</span>
-</div>
-''', unsafe_allow_html=True)
-render_muted_iframe("https://threatmap.fortiguard.com/", height=1100)
+with col_fort:
+    st.markdown(f'''
+    <div style="margin-top: 15px; margin-bottom: 8px;">
+        <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
+            <a href="https://threatmap.fortiguard.com/" target="_blank" class="section-header-link">>> FORTINET THREAT MAP</a> 
+        </span><br>
+        <span style="color: #00ff41; font-size: 0.85rem; font-family: 'Courier New', monospace;">Real-time global visualization of malicious network activity.</span>
+    </div>
+    ''', unsafe_allow_html=True)
+    render_muted_iframe("https://threatmap.fortiguard.com/", height=1100)
 
 st.markdown("---")
 
@@ -186,7 +187,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.markdown(f'''
-    <div style="margin-top: 25px; margin-bottom: 8px;">
+    <div style="margin-top: 15px; margin-bottom: 8px;">
         <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
             <a href="https://attackmap.sonicwall.com/live-attack-map/" target="_blank" class="section-header-link">>> SONICWALL LIVE MAP</a> 
         </span><br>
@@ -197,7 +198,7 @@ with col1:
 
 with col2:
     st.markdown(f'''
-    <div style="margin-top: 25px; margin-bottom: 8px;">
+    <div style="margin-top: 15px; margin-bottom: 8px;">
         <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
             <a href="https://threatmap.bitdefender.com/" target="_blank" class="section-header-link">>> BITDEFENDER THREAT MAP</a> 
         </span><br>
@@ -213,7 +214,7 @@ col3, col4 = st.columns(2)
 
 with col3:
     st.markdown(f'''
-    <div style="margin-top: 25px; margin-bottom: 8px;">
+    <div style="margin-top: 15px; margin-bottom: 8px;">
         <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
             <a href="https://www.sicherheitstacho.eu/?lang=en" target="_blank" class="section-header-link">>> SICHERHEITSTACHO (DEUTSCHE TELEKOM)</a> 
         </span><br>
@@ -224,7 +225,7 @@ with col3:
 
 with col4:
     st.markdown(f'''
-    <div style="margin-top: 25px; margin-bottom: 8px;">
+    <div style="margin-top: 15px; margin-bottom: 8px;">
         <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
             <a href="https://cybermap.kaspersky.com/en/widget/dynamic/dark" target="_blank" class="section-header-link">>> KASPERSKY CYBERMAP</a> 
         </span><br>
@@ -237,7 +238,7 @@ st.markdown("---")
 
 # === LARGE MAP SECTION (GREYNOISE) ===
 st.markdown(f'''
-<div style="margin-top: 25px; margin-bottom: 8px;">
+<div style="margin-top: 15px; margin-bottom: 8px;">
     <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
         <a href="https://viz.greynoise.io/trends/trending" target="_blank" class="section-header-link">>> GREYNOISE INTELLIGENCE</a> 
     </span><br>
@@ -248,25 +249,25 @@ render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1400)
 
 st.markdown("---")
 
-# === LIVE CYBER THREAT MAPS (SMALL GRID SECTION) ===
+# === LIVE CYBER THREAT MAPS (BOTTOM SECTION) ===
 st.markdown(f'''
-<div style="margin-top: 25px; margin-bottom: 15px; line-height: 1.3;">
+<div style="margin-top: 15px; margin-bottom: 15px; line-height: 1.3;">
     <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
         <a href="https://www.cisa.gov/shields-up" target="_blank" class="section-header-link" style="cursor: default;">>> ADDITIONAL THREAT VISUALIZATIONS</a>
     </span>
 </div>
 ''', unsafe_allow_html=True)
 
-# 2-column Grid for the remaining 2 small maps
+# 2-column Grid for the remaining 2 small maps (Height increased to 800)
 grid_row1 = st.columns(2)
 
 with grid_row1[0]:
     st.markdown(f'<div><a href="https://threatmap.checkpoint.com/" target="_blank" class="map-title-link">Check Point ThreatCloud</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatmap.checkpoint.com/", height=600)
+    render_muted_iframe("https://threatmap.checkpoint.com/", height=800)
     
 with grid_row1[1]:
     st.markdown(f'<div><a href="https://threatbutt.com/map/" target="_blank" class="map-title-link">Threatbutt Attack Map</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatbutt.com/map/", height=600)
+    render_muted_iframe("https://threatbutt.com/map/", height=800)
 
 st.markdown("---")
 
