@@ -10,7 +10,7 @@ Currently, only the latest active branch of the SecAI-Nexus GRC dashboard receiv
 ## Reporting a Vulnerability
 We take the security of SecAI-Nexus seriously. If you discover a security vulnerability within this project, please do NOT disclose it publicly on the issue tracker or social media. 
 
-Instead, please report it directly and privately to the project maintainer, **Adam Kistler**, via LinkedIn direct message.
+Instead, please report it directly and privately to the project maintainer, **Adam Kistler**, via LinkedIn direct message. https://www.linkedin.com/in/adam-kistler-441a31192/
 
 **Please include the following details in your confidential report:**
 * A clear description of the vulnerability and its potential impact.
