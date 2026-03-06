@@ -8,4 +8,4 @@ requests
 # SecAI-Nexus Dependency Lockdown
 # Pinning versions to prevent Supply Chain Attacks
 
-streamlit==1.32.0
+streamlit==1.37.0
