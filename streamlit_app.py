@@ -278,16 +278,22 @@ render_muted_iframe("https://viz.greynoise.io/trends/trending", height=1400)
 st.markdown("---")
 
 
-# === ADDITIONAL GRC RESOURCES (TOP 25) ===
-st.markdown(f'''
-<div style="margin-top: 25px; margin-bottom: 20px;">
-    <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
-        <a href="https://www.nist.gov/cyberframework" target="_blank" class="section-header-link">>> ADDITIONAL GRC RESOURCES</a>
-    </span>
-</div>
-''', unsafe_allow_html=True)
+# === ADDITIONAL GRC RESOURCES (CENTERED / INDENTED) ===
 
-link_col1, link_col2 = st.columns(2)
+# Header Section (Centered to match the column indents)
+spacer_head_l, head_col, spacer_head_r = st.columns([1, 8, 1])
+
+with head_col:
+    st.markdown(f'''
+    <div style="margin-top: 25px; margin-bottom: 20px;">
+        <span style="font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">
+            <a href="https://www.nist.gov/cyberframework" target="_blank" class="section-header-link">>> ADDITIONAL GRC RESOURCES</a>
+        </span>
+    </div>
+    ''', unsafe_allow_html=True)
+
+# Link Section (Indented by ratio 1 left, 8 middle, 1 right to create margins)
+spacer_link_l, link_col1, link_col2, spacer_link_r = st.columns([1, 4, 4, 1])
 
 with link_col1:
     st.markdown(render_simple_link("01", "NIST AI Risk Management Framework", "https://www.nist.gov/itl/ai-risk-management-framework", "Voluntary framework to better manage risks to individuals, organizations, and society associated with AI."), unsafe_allow_html=True)
