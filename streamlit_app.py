@@ -165,20 +165,16 @@ st.markdown(f'''
 </div>
 ''', unsafe_allow_html=True)
 
-# Rebalanced 3-column Grid for top small maps
-map_row1 = st.columns(3)
+# 2-column Grid for top small maps
+top_map_row = st.columns(2)
 
-with map_row1[0]:
+with top_map_row[0]:
     st.markdown(f'<div><a href="https://livethreatmap.radware.com/" target="_blank" class="map-title-link">Radware Live Threat Map</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://livethreatmap.radware.com/", height=450)
+    render_muted_iframe("https://livethreatmap.radware.com/", height=600)
 
-with map_row1[1]:
-    st.markdown(f'<div><a href="https://cybermap.kaspersky.com/en/widget/dynamic/dark" target="_blank" class="map-title-link">Kaspersky Cybermap</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=450)
-
-with map_row1[2]:
+with top_map_row[1]:
     st.markdown(f'<div><a href="https://attackmap.sonicwall.com/live-attack-map/" target="_blank" class="map-title-link">SonicWall Live Map</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://attackmap.sonicwall.com/live-attack-map/", height=450)
+    render_muted_iframe("https://attackmap.sonicwall.com/live-attack-map/", height=600)
 
 st.markdown("---")
 
@@ -230,19 +226,25 @@ st.markdown(f'''
 </div>
 ''', unsafe_allow_html=True)
 
-bottom_map_row = st.columns(3)
+# 2x2 Grid for bottom small maps
+bottom_row1 = st.columns(2)
+bottom_row2 = st.columns(2)
 
-with bottom_map_row[0]:
+with bottom_row1[0]:
+    st.markdown(f'<div><a href="https://cybermap.kaspersky.com/en/widget/dynamic/dark" target="_blank" class="map-title-link">Kaspersky Cybermap</a></div>', unsafe_allow_html=True)
+    render_muted_iframe("https://cybermap.kaspersky.com/en/widget/dynamic/dark", height=550)
+
+with bottom_row1[1]:
     st.markdown(f'<div><a href="https://threatmap.bitdefender.com/" target="_blank" class="map-title-link">Bitdefender</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatmap.bitdefender.com/", height=450)
+    render_muted_iframe("https://threatmap.bitdefender.com/", height=550)
     
-with bottom_map_row[1]:
+with bottom_row2[0]:
     st.markdown(f'<div><a href="https://threatbutt.com/map/" target="_blank" class="map-title-link">Threatbutt Attack Map</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatbutt.com/map/", height=450)
+    render_muted_iframe("https://threatbutt.com/map/", height=550)
 
-with bottom_map_row[2]:
+with bottom_row2[1]:
     st.markdown(f'<div><a href="https://threatmap.checkpoint.com/" target="_blank" class="map-title-link">Check Point ThreatCloud</a></div>', unsafe_allow_html=True)
-    render_muted_iframe("https://threatmap.checkpoint.com/", height=450)
+    render_muted_iframe("https://threatmap.checkpoint.com/", height=550)
 
 st.markdown("---")
 
