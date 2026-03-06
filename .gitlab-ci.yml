@@ -12,3 +12,4 @@ sast:
   stage: test
   variables:
     SAST_EXCLUDED_ANALYZERS: "" # Run all available analyzers for Python (e.g., Semgrep/Bandit)
+
