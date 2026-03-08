@@ -3,8 +3,137 @@ import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 
+# ====================== SECURITY CONFIG (ADDED) ======================
+# Force XSRF protection and disable CORS
+st.config.set_option("server.enableXsrfProtection", True)
+st.config.set_option("server.enableCORS", False)
+
+# Strict CSP + security headers (must be first markdown call)
+csp_meta = """
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
+script-src 'self' 'unsafe-inline'; 
+style-src 'self' 'unsafe-inline'; 
+img-src 'self' data: https:; 
+frame-src https://livethreatmap.radware.com https://threatmap.fortiguard.com; 
+connect-src 'self' https://www.cisa.gov https://*.abuse.ch https://isc.sans.edu https://check.torproject.org;">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+"""
+st.markdown(csp_meta, unsafe_allow_html=True)
+# ===================================================================
+
 st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🤖",
                    initial_sidebar_state="collapsed")
+
+MONO  = "'Courier New', Courier, monospace"
+GREEN = "#00ff41"; BLUE = "#008aff"; RED = "#ff4b4b"
+AMBER = "#ffaa00"; CYAN = "#00e5ff"; BG = "#050505"; CARD = "#0a0a0a"
+GREY  = "#6a6a7a"  # lighter subtitle grey
+DGREY = "#4a4a5a"  # delta label grey
+
+st.markdown(f"""
+<style>
+  @keyframes pglow {{ 0%,100%{{text-shadow:0 0 4px {GREEN}30;}} 50%{{text-shadow:0 0 10px {GREEN}70;}} }}
+  @keyframes cpulse {{ 0%,100%{{text-shadow:0 0 4px {CYAN}30;}} 50%{{text-shadow:0 0 12px {CYAN}80;}} }}
+  .stApp {{background:{BG}!important;font-family:{MONO}!important;}}
+  div[data-testid="stMarkdownContainer"]>p {{color:{GREEN};font-size:1.05rem;line-height:1.6;font-family:{MONO};}}
+  h1,h2,h3,h4,h5,h6,label {{color:{GREEN}!important;}}
+  header,footer {{visibility:hidden;}} .stDeployButton {{display:none;}}
+  div[data-testid="stSpinner"]>div>p {{color:{GREEN}!important;}}
+
+  .cm {{background:linear-gradient(135deg,{CARD},#0d0d12);border:1px solid #1a1a2e;
+    border-left:3px solid {BLUE};padding:8px 9px 7px;margin-bottom:6px;
+    font-family:{MONO};transition:all .3s;min-height:115px;}}
+  .cm:hover {{border-left-color:{GREEN};box-shadow:0 0 10px {GREEN}0d;}}
+  .cm-t a {{color:{BLUE};font-size:.64rem;font-weight:bold;text-transform:uppercase;
+    letter-spacing:.4px;text-decoration:none;transition:.2s;}}
+  .cm-t a:hover {{color:{GREEN};text-shadow:0 0 4px {GREEN};}}
+  .cm-l {{font-size:.48rem;color:{GREEN};border:1px solid {GREEN};padding:0 3px;
+    margin-left:3px;vertical-align:middle;animation:pglow 3s ease-in-out infinite;}}
+  .cm-e {{font-size:.48rem;color:{AMBER};border:1px solid {AMBER}80;padding:0 3px;
+    margin-left:3px;vertical-align:middle;}}
+  .cm-v {{color:{GREEN};font-size:1.15rem;font-weight:bold;margin:3px 0 1px;line-height:1.05;
+    text-shadow:0 0 4px {GREEN}20;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
+  .cm-s {{font-size:.6rem;color:{GREY};margin-bottom:2px;line-height:1.15;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
+  .cm-x {{font-size:.6rem;color:#555;margin-bottom:1px;line-height:1.15;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic;}}
+  .cm-f {{font-size:.55rem;color:#556;line-height:1.3;margin-bottom:2px;}}
+  .cm-f span {{color:#3a6a4a;}}
+  .cm-d {{font-size:.66rem;border-top:1px dashed #1a1a2e;padding-top:3px;line-height:1.55;}}
+  .d-b {{color:{RED};font-weight:bold;}} .d-g {{color:{GREEN};font-weight:bold;}}
+  .d-n {{color:{BLUE};font-weight:bold;}} .d-a {{color:{AMBER};font-weight:bold;}}
+
+  .pulse {{background:linear-gradient(135deg,#0a0a14,#0d0d1a);border:1px solid #1a1a30;
+    border-left:4px solid {CYAN};padding:10px 12px 8px;margin-bottom:8px;
+    font-family:{MONO};transition:all .3s;min-height:130px;}}
+  .pulse:hover {{border-left-color:{GREEN};box-shadow:0 0 14px {GREEN}12;}}
+  .pulse .cm-t a {{font-size:.68rem;color:{CYAN};}}
+  .pulse .cm-v {{font-size:1.3rem;color:{CYAN};text-shadow:0 0 6px {CYAN}30;}}
+  .pulse .cm-s {{font-size:.64rem;color:{GREY};}}
+  .pulse .cm-x {{font-size:.64rem;}}
+  .pulse .cm-f {{font-size:.6rem;}}
+  .pulse .cm-d {{font-size:.68rem;}}
+
+  .rl {{font-size:.6rem;color:#505060;text-transform:uppercase;letter-spacing:1px;
+    border-left:3px solid {BLUE}50;padding-left:6px;margin:10px 0 5px;
+    background:linear-gradient(90deg,{BLUE}06,transparent 35%);padding-top:2px;padding-bottom:2px;}}
+  .rl-p {{font-size:.64rem;color:{CYAN};text-transform:uppercase;letter-spacing:1.2px;
+    border-left:4px solid {CYAN};padding-left:8px;margin:14px 0 6px;
+    background:linear-gradient(90deg,{CYAN}08,transparent 40%);padding-top:3px;padding-bottom:3px;
+    text-shadow:0 0 6px {CYAN}30;}}
+
+  .sh {{color:{GREEN};text-decoration:none;transition:.25s;text-shadow:0 0 6px {GREEN}25;}}
+  .sh:hover {{color:{BLUE};text-shadow:0 0 10px {BLUE};}}
+  .sl {{color:{BLUE};font-weight:bold;text-decoration:none;border-bottom:1px dashed #2a2a3a;transition:.2s;}}
+  .sl:hover {{color:{GREEN};border-bottom-color:{GREEN};text-shadow:0 0 4px {GREEN};}}
+  .ml {{color:{BLUE};font-size:.85rem;font-weight:bold;text-transform:uppercase;
+    text-decoration:none;transition:.2s;display:inline-block;margin-bottom:4px;letter-spacing:.4px;}}
+  .ml:hover {{color:{GREEN};text-shadow:0 0 6px {GREEN};}}
+  .rl2 {{color:{BLUE};font-weight:bold;font-size:.85rem;text-decoration:none;
+    border-bottom:1px dashed {BLUE}50;transition:.2s;}}
+  .rl2:hover {{color:{GREEN};border-bottom-color:{GREEN};text-shadow:0 0 4px {GREEN};}}
+  .sb {{font-size:.64rem;font-family:{MONO};margin:2px 0 20px;padding:8px 12px;
+    background:linear-gradient(135deg,#070709,#0a0a10);
+    border:1px solid #181828;border-left:3px solid {BLUE}40;line-height:1.8;}}
+  .mw {{border:1px solid #1a1a2e;background:#080810;padding:2px;margin-bottom:5px;}}
+  .fl {{color:#383848;text-decoration:none;border-bottom:1px dashed #383848;transition:.2s;}}
+  .fl:hover {{color:{GREEN};border-bottom-color:{GREEN};}}
+  hr {{border-color:#141420!important;}}
+  .sd {{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:3px;vertical-align:middle;}}
+  .sg {{background:{GREEN};box-shadow:0 0 4px {GREEN};}} .sa {{background:{AMBER};box-shadow:0 0 4px {AMBER};}}
+  .sc {{background:{CYAN};box-shadow:0 0 4px {CYAN};}}
+</style>
+""", unsafe_allow_html=True)
+S = requests.Session()
+S.headers.update({"User-Agent":"SecAI-Nexus-GRC/5.0 (educational; admin@secai-nexus.dev)"})
+def _g(url, t=14, **k):
+    try: r = S.get(url, timeout=t, **k); r.raise_for_status(); return r
+    except: return None
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def fetch_kev():
+    r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
+    if not r: return None
+    try:
+        vulns = r.json().get("vulnerabilities",[]); now = datetime.now(timezone.utc)
+        cnt={1:0,7:0,30:0,365:0}; rw=0; vd={}; prods={}
+        for v in vulns:
+            try:
+                age=(now-datetime.strptime(v["dateAdded"],"%Y-%m-%d").replace(tzinfo=timezone.utc)).days
+                for d in cnt:
+                    if age<=d: cnt[d]+=1
+            except: pass
+            if v.get("knownRansomwareCampaignUse","").lower()=="known": rw+=1
+            vn=v.get("vendorProject","?"); vd[vn]=vd.get(vn,0)+1
+            pn=v.get("product","?"); prods[pn]=prods.get(pn,0)+1
+        tv=max(vd,key=vd.get) if vd else "N/A"
+        tp=max(prods,key=prods.get) if prods else "N/A"
+        top3v=sorted(vd,key=vd.get,reverse=True)[:3]
+        return {"total":len(vulns),"d1":cnt[1],"d7":cnt[7],"d30":cnt[30],"d365":cnt[365],
+                "rw":rw,"tv":tv,"tvc":vd.get(tv,0),"vendors":len(vd),
+                "tp":tp,"tpc":prods.get(tp,0),"top3v":top3v,"prods":len(prods)}
+    except: return None
 
 MONO  = "'Courier New', Courier, monospace"
 GREEN = "#00ff41"; BLUE = "#008aff"; RED = "#ff4b4b"
