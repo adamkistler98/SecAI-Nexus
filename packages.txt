@@ -1,2 +1,0 @@
-build-essential
-openjdk-17-jdk
