@@ -1,25 +1,135 @@
-# License and Copyright Notice
+# License
 
-Copyright (c) 2026 [Adam Kistler] / SecAI-Nexus
+Copyright (c) 2025-2026 Adam Kistler / SecAI-Nexus
 
-This project and its contents are licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)**.
+This project uses a **dual-license** structure to balance open-source
+accessibility with creative protection.
 
-## 1. Permissions (What others CAN do)
-Under this license, you are free to:
-* **Share:** Copy and redistribute the material in any medium or format.
-* **Adapt:** Remix, transform, and build upon the material.
 
-## 2. Conditions (What others CANNOT do)
-You may exercise the above permissions under the following terms:
-* **NonCommercial:** You may NOT use the material for commercial purposes. You cannot sell this software, use it in a paid product, or use it to generate financial gain.
-* **Attribution:** You must give appropriate credit, provide a link to the license, and indicate if changes were made.
+## 1. Source Code — MIT License
+
+The Python source code (`app.py`) and configuration files are licensed
+under the MIT License.
+
+```
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
+
+
+## 2. Dashboard Design & Layout — CC BY-NC 4.0
+
+The visual design, CSS theme, dashboard layout, card structure,
+section architecture, color scheme, metric organization, and overall
+creative presentation of the SecAI-Nexus GRC dashboard are licensed
+under the Creative Commons Attribution-NonCommercial 4.0 International
+License (CC BY-NC 4.0).
+
+You are free to:
+- **Share** — Copy and redistribute the material in any medium or format.
+- **Adapt** — Remix, transform, and build upon the material.
+
+Under the following terms:
+- **Attribution** — You must give appropriate credit, provide a link
+  to the license, and indicate if changes were made.
+- **NonCommercial** — You may not use the dashboard design, layout, or
+  creative presentation for commercial purposes without explicit
+  written permission from the author.
+
+Full legal code: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
 
 ## 3. Exclusive Commercial Rights Reserve
-As the original creator and copyright holder, **[Adam Kistler]** is not bound by the NonCommercial restriction and retains all exclusive rights to commercialize, sell, or monetize this software, its logic, and its layout. 
 
-Any commercial use of this dashboard, its source code, or its architecture by a third party requires explicit prior written consent and a separate commercial licensing agreement from the author.
+As the original creator and copyright holder, Adam Kistler retains all
+exclusive rights to commercialize, sell, license, or monetize the
+SecAI-Nexus dashboard, its design, architecture, and brand. The MIT
+license applies to the code; the creative work (design, layout, and
+presentation) requires separate written permission for commercial use.
 
----
 
-To view a copy of the full legal code for this license, visit: 
-https://creativecommons.org/licenses/by-nc/4.0/legalcode
+## 4. Third-Party Content
+
+All embedded threat maps, data feeds, APIs, metrics, frameworks, and
+external resources referenced or displayed by SecAI-Nexus are the
+property of their respective owners. This project does not host, cache,
+store, process, or redistribute any third-party content. All external
+content is accessed via read-only public endpoints or iframe embeds and
+remains subject to the terms of service of the originating provider.
+
+Third-party content includes but is not limited to data and services
+provided by: CISA, abuse.ch (MalwareBazaar, URLhaus, Feodo Tracker),
+SANS Internet Storm Center, Tor Project, Radware, Fortinet/FortiGuard,
+IBM, CrowdStrike, Mandiant/Google, Verizon, Sophos, Chainalysis, OWASP,
+MITRE, and others credited within the dashboard.
+
+
+## 5. Comprehensive Legal Disclaimer
+
+THIS PROJECT IS PROVIDED FOR EDUCATIONAL, INFORMATIONAL, PORTFOLIO
+DEMONSTRATION, AND PERSONAL USE PURPOSES ONLY.
+
+IT IS NOT INTENDED FOR USE IN PRODUCTION ENVIRONMENTS, AS A COMPLIANCE
+TOOL, AS PROFESSIONAL SECURITY ADVICE, OR AS A BASIS FOR BUSINESS,
+LEGAL, FINANCIAL, OR REGULATORY DECISIONS.
+
+ALL THREAT INTELLIGENCE, METRICS, STATISTICS, ESTIMATES, AND DATA
+PRESENTED ARE SOURCED FROM PUBLICLY AVAILABLE THIRD-PARTY REPORTS AND
+APIS. THE AUTHOR MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR
+IMPLIED, REGARDING THE ACCURACY, COMPLETENESS, TIMELINESS, RELIABILITY,
+OR FITNESS FOR ANY PARTICULAR PURPOSE OF ANY DATA DISPLAYED.
+
+THE AUTHOR SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED
+TO PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, LOSS OF USE, DATA, OR
+PROFITS, BUSINESS INTERRUPTION, REPUTATIONAL HARM, OR REGULATORY
+PENALTIES) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE OR
+RELIANCE ON ITS OUTPUT, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES.
+
+ESTIMATED METRICS (LABELED "EST") ARE DERIVED FROM ANNUALLY PUBLISHED
+INDUSTRY REPORTS AND MAY NOT REFLECT CURRENT CONDITIONS. LIVE METRICS
+ARE DEPENDENT ON THE AVAILABILITY AND ACCURACY OF UPSTREAM API
+PROVIDERS, WHICH MAY EXPERIENCE OUTAGES, RATE LIMITING, DATA QUALITY
+ISSUES, OR CHANGES TO THEIR TERMS OF SERVICE WITHOUT NOTICE.
+
+THIS SOFTWARE DOES NOT COLLECT, STORE, PROCESS, OR TRANSMIT ANY USER
+DATA. NO AUTHENTICATION, COOKIES, TRACKING, TELEMETRY, OR ANALYTICS
+ARE IMPLEMENTED.
+
+THE AUTHOR IS NOT AFFILIATED WITH, ENDORSED BY, OR SPONSORED BY ANY
+THIRD-PARTY DATA PROVIDER, THREAT INTELLIGENCE VENDOR, OR CYBERSECURITY
+COMPANY REFERENCED WITHIN THIS PROJECT.
+
+USE OF THIS SOFTWARE IS ENTIRELY AT YOUR OWN RISK.
+
+BY USING THIS SOFTWARE, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD,
+AND AGREE TO THE TERMS OF THIS DISCLAIMER.
+
+
+## 6. Summary
+
+| Component | License | Commercial Use |
+|-----------|---------|---------------|
+| Python source code | MIT | ✅ Allowed with attribution |
+| Dashboard design & layout | CC BY-NC 4.0 | ❌ Requires written permission |
+| Third-party data & maps | Respective owners | Subject to their terms |
+| Documentation | CC BY-NC 4.0 | ❌ Requires written permission |
