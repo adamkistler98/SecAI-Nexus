@@ -298,15 +298,19 @@ def gl(n,t,u,d):
 # ══════════════════════════════════════════════════════════════════════════════
 now_utc = datetime.now(timezone.utc)
 st.markdown(f"""
-<div style="border-bottom:2px solid #141420;padding-bottom:8px;margin-bottom:14px;margin-top:-50px;">
-  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;">
-    <div><span style="font-size:1.4rem;font-weight:bold;color:{GREEN};text-shadow:0 0 12px {GREEN}80;letter-spacing:1px;"><span style="color:{BLUE};">⚔</span> SecAI-Nexus</span>
-      <span style="font-size:.8rem;color:{BLUE};margin-left:8px;font-weight:bold;">// CYBER THREAT OBSERVABILITY PLATFORM</span>
-      <span style="font-size:.48rem;color:#4a4a5a;border:1px solid #2a2a3a;padding:1px 4px;margin-left:5px;vertical-align:middle;">v20.0</span></div>
-    <div style="text-align:right;"><div style="font-size:.8rem;font-weight:bold;color:{BLUE};text-shadow:0 0 4px {BLUE};">
-        SYS_TIME: {now_utc.strftime("%H:%M:%S")} UTC · {now_utc.strftime("%Y-%m-%d")}</div>
-      <div style="font-size:.55rem;color:#505060;margin-top:1px;">
-        <span class="sd sg"></span>FEEDS NOMINAL · 75 INDICATORS · 23 FRAMEWORKS · 2 MAPS · 60 RESOURCES</div></div></div></div>""", unsafe_allow_html=True)
+<div style="border-bottom:2px solid #141420;padding-bottom:6px;margin-bottom:10px;margin-top:-50px;">
+  <div style="text-align:center;">
+    <span style="font-size:1.3rem;font-weight:bold;color:{GREEN};text-shadow:0 0 12px {GREEN}80;letter-spacing:1px;">🤖 SecAI-Nexus</span>
+    <span style="font-size:.72rem;color:{BLUE};margin-left:6px;font-weight:bold;">// CYBER THREAT OBSERVABILITY</span>
+    <span style="font-size:.42rem;color:#4a4a5a;border:1px solid #2a2a3a;padding:1px 4px;margin-left:4px;vertical-align:middle;">v27</span>
+  </div>
+  <div style="text-align:center;margin-top:2px;">
+    <span style="font-size:.7rem;font-weight:bold;color:{BLUE};text-shadow:0 0 4px {BLUE};">
+      {now_utc.strftime("%H:%M:%S")} UTC · {now_utc.strftime("%Y-%m-%d")}</span>
+    <span style="font-size:.5rem;color:#505060;margin-left:8px;">
+      <span class="sd sg"></span>NOMINAL · 87 METRICS · 8 INTEL TABLES · 3 CHARTS · 80 LINKS</span>
+  </div>
+</div>""", unsafe_allow_html=True)
 
 with st.spinner("Syncing threat intelligence feeds…"):
     kev=fetch_kev(); baz=fetch_bazaar(); uhaus=fetch_urlhaus()
@@ -910,32 +914,78 @@ st.markdown(f"""<div class="sb">
   <a href="https://www.qualys.com/research/threat-landscape-report/" target="_blank" class="sl">Qualys</a>
   <span style="float:right;color:#1a1a2a;">↻ {ts}</span></div>""", unsafe_allow_html=True)
 
-# ══════════════════════════════════════════════════════════════════════════════
-#  LIVE THREAT MAPS
-# ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin:4px 0 10px;text-align:center;">
-  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
-    <a href="https://livethreatmap.radware.com/" target="_blank" class="sh">
-      &gt;&gt; LIVE THREAT MAP FEEDS &lt;&lt;</a></span>
-  <div style="font-size:.55rem;color:#505060;margin-top:2px;">2 REAL-TIME GLOBAL ATTACK VISUALIZATION SOURCES</div></div>""", unsafe_allow_html=True)
-m1,m2=st.columns(2)
-with m1:
-    st.markdown('<a href="https://livethreatmap.radware.com/" target="_blank" class="ml">&gt;&gt; RADWARE LIVE THREAT MAP</a>', unsafe_allow_html=True)
-    iframe("https://livethreatmap.radware.com/", 1100)
-with m2:
-    st.markdown('<a href="https://threatmap.fortiguard.com/" target="_blank" class="ml">&gt;&gt; FORTINET FORTIGUARD MAP</a>', unsafe_allow_html=True)
-    iframe("https://threatmap.fortiguard.com/", 1100)
-st.markdown("---")
+
+# ─── ROW 6: CLOUD, IDENTITY & AI GOVERNANCE METRICS [EST] ────────────────────
+st.markdown(f'<div class="rl-p">🔐 CLOUD, IDENTITY & AI GOVERNANCE METRICS</div>', unsafe_allow_html=True)
+c = st.columns(6)
+with c[0]:
+    pcard("MALWARE-FREE ATTACKS","https://www.crowdstrike.com/global-threat-report/",
+        "79%", "No malware used · CS GTR 2025",
+        "▸ Up from 71% in 2023",
+        "–","d-n", "+8% YoY", "d-b", False,
+        facts=["82% in 2026 GTR (latest)","Valid credentials primary vector","Access brokers up 50% YoY","Hands-on-keyboard intrusions","EDR evasion via LOLBins"])
+with c[1]:
+    pcard("CLOUD INTRUSIONS","https://www.crowdstrike.com/global-threat-report/",
+        "+26% YoY", "Cloud-focused attacks · CS",
+        "▸ Valid accounts 35% of cloud access",
+        "–","d-n", "+37% in 2026", "d-b", False,
+        facts=["Cloud-conscious actors growing","API key theft primary vector","S3/Azure Blob misconfig exploited","Cloud control plane attacks rising","266% surge from nation-states"])
+with c[2]:
+    pcard("SHADOW AI BREACHES","https://www.ibm.com/reports/data-breach",
+        "20%", "of breaches involve shadow AI",
+        "▸ Adds $670k to avg breach cost",
+        "–","d-n", "$4.63M avg", "d-b", False,
+        facts=["97% lacked AI access controls","63% have no AI governance policy","Only 34% audit for rogue AI","PII exposed in 65% of shadow AI","1,200 avg unauthorized apps/org"])
+with c[3]:
+    pcard("AI GOVERNANCE GAP","https://www.ibm.com/reports/data-breach",
+        "63%", "orgs lack AI governance · IBM",
+        "▸ Only 37% have approval processes",
+        "–","d-n", "63% ungoverned", "d-b", False,
+        facts=["13% had AI model/app breach","61% lack AI governance tech","CAIO role emerging in C-suite","EU AI Act enforcement began 2024","NIST AI RMF adoption growing"])
+with c[4]:
+    pcard("IDENTITY ATTACKS","https://www.crowdstrike.com/global-threat-report/",
+        "79%", "initial access via credentials",
+        "▸ Kerberoasting up 583% · CS GTR",
+        "–","d-n", "79% of attacks", "d-b", False,
+        facts=["DPRK placed 304 insider operatives","40% were insider threat ops","Access broker ads +50% YoY","Phishing-resistant MFA critical","FIDO2 hardware keys recommended"])
+with c[5]:
+    pcard("BREAKOUT TIME 2026","https://www.crowdstrike.com/global-threat-report/",
+        "29 Min Avg", "CS GTR 2026 · down 65%",
+        "▸ Fastest: 27 seconds",
+        "–","d-n", "was 48 min", "d-g", False,
+        facts=["Sub-minute breakouts recorded","Automated tooling enables speed","29 min avg in 2025 (from 48)","Detection must be real-time","MDR/XDR essential for response"])
+
+# ── TREND CHARTS ──────────────────────────────────────────────────────────────
+import json
+st.markdown(f"""<div style="margin:12px 0 8px;text-align:center;">
+  <span style="font-size:.82rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;color:{GREEN};">
+    ▸ TREND ANALYSIS</span></div>""", unsafe_allow_html=True)
+ch1,ch2,ch3 = st.columns(3)
+with ch1:
+    import pandas as pd
+    df_cost = pd.DataFrame({"Year":["2020","2021","2022","2023","2024","2025"],"Cost":[3.86,4.24,4.35,4.45,4.88,4.44]})
+    st.markdown(f'<div style="font-size:.58rem;color:{CYAN};text-transform:uppercase;text-align:center;margin-bottom:2px;">Avg Global Breach Cost ($M) · IBM</div>', unsafe_allow_html=True)
+    st.bar_chart(df_cost.set_index("Year"), color="#00ff41", height=180, use_container_width=True)
+with ch2:
+    df_break = pd.DataFrame({"Year":["2022","2023","2024","2025"],"Minutes":[84,62,48,29]})
+    st.markdown(f'<div style="font-size:.58rem;color:{CYAN};text-transform:uppercase;text-align:center;margin-bottom:2px;">Avg Breakout Time (Min) · CrowdStrike</div>', unsafe_allow_html=True)
+    st.bar_chart(df_break.set_index("Year"), color="#ff4b4b", height=180, use_container_width=True)
+with ch3:
+    df_mf = pd.DataFrame({"Year":["2021","2022","2023","2024","2025"],"Pct":[62,71,75,79,82]})
+    st.markdown(f'<div style="font-size:.58rem;color:{CYAN};text-transform:uppercase;text-align:center;margin-bottom:2px;">Malware-Free Attacks (%) · CrowdStrike</div>', unsafe_allow_html=True)
+    st.bar_chart(df_mf.set_index("Year"), color="#008aff", height=180, use_container_width=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  LATEST CISA KEV ADDITIONS
+#  COMBINED THREAT INTEL SECTION
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin:10px 0 12px;text-align:center;">
+st.markdown(f"""<div style="margin:12px 0 10px;text-align:center;">
   <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
-    <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sh">
-      &gt;&gt; LATEST CISA KEV ADDITIONS &lt;&lt;</a></span>
-  <div style="font-size:.55rem;color:#505060;margin-top:2px;">MOST RECENTLY ADDED EXPLOITED VULNERABILITIES · LIVE FROM CISA JSON FEED</div></div>""", unsafe_allow_html=True)
+    <a href="https://www.cisa.gov/" target="_blank" class="sh">
+      &gt;&gt; THREAT INTELLIGENCE &amp; AI SECURITY REFERENCE &lt;&lt;</a></span>
+  <div style="font-size:.55rem;color:#505060;margin-top:2px;">CISA KEV · ATT&CK · RANSOMWARE · APTs · CVEs · OWASP LLM · AI THREATS · BREACH COSTS</div>
+</div>""", unsafe_allow_html=True)
 
+# ── CISA KEV TABLE ────────────────────────────────────────────────────────────
 @st.cache_data(ttl=3600, show_spinner=False)
 def fetch_kev_recent():
     r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
@@ -952,91 +1002,60 @@ if kev_recent:
         rw="🔴" if v.get("knownRansomwareCampaignUse","").lower()=="known" else "—"
         sn = nm[:55]+"…" if len(nm)>55 else nm
         rh+=f'<tr><td style="color:{RED};font-weight:bold;white-space:nowrap;"><a href="https://nvd.nist.gov/vuln/detail/{cve}" target="_blank" style="color:{RED};text-decoration:none;border-bottom:1px dashed {RED}40;">{cve}</a></td><td style="color:{CYAN};font-weight:bold;">{vn}</td><td style="color:{GREY};">{pr}</td><td style="color:#888;font-size:.56rem;">{sn}</td><td style="color:{GREEN};white-space:nowrap;">{ad}</td><td style="text-align:center;">{rw}</td><td style="color:{AMBER};white-space:nowrap;">{du}</td></tr>'
-    st.markdown(f'<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.6rem;"><thead><tr style="border-bottom:2px solid {BLUE}30;background:#0a0a14;"><th style="padding:7px 5px;text-align:left;color:{BLUE};font-size:.56rem;text-transform:uppercase;">CVE</th><th style="padding:7px 5px;text-align:left;color:{BLUE};font-size:.56rem;text-transform:uppercase;">Vendor</th><th style="padding:7px 5px;text-align:left;color:{BLUE};font-size:.56rem;text-transform:uppercase;">Product</th><th style="padding:7px 5px;text-align:left;color:{BLUE};font-size:.56rem;text-transform:uppercase;">Vulnerability</th><th style="padding:7px 5px;text-align:left;color:{BLUE};font-size:.56rem;text-transform:uppercase;">Added</th><th style="padding:7px 5px;text-align:center;color:{BLUE};font-size:.56rem;text-transform:uppercase;">RW</th><th style="padding:7px 5px;text-align:left;color:{BLUE};font-size:.56rem;text-transform:uppercase;">Due</th></tr></thead><tbody style="line-height:1.5;">{rh}</tbody></table></div><div style="font-size:.48rem;color:#505060;margin:3px 0 0 4px;">RW = Ransomware (🔴 confirmed) · Source: CISA KEV JSON · Due = federal remediation deadline</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="font-size:.68rem;font-weight:bold;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {BLUE}20;padding-bottom:3px;">📋 LATEST CISA KEV ADDITIONS (LIVE)</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;margin-bottom:10px;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.6rem;"><thead><tr style="border-bottom:2px solid {BLUE}30;background:#0a0a14;"><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">CVE</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Vendor</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Product</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Vulnerability</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Added</th><th style="padding:6px 4px;text-align:center;color:{BLUE};font-size:.52rem;text-transform:uppercase;">RW</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Due</th></tr></thead><tbody style="line-height:1.5;">{rh}</tbody></table></div>', unsafe_allow_html=True)
 else:
-    st.markdown(f'<div style="padding:18px;border:1px solid #1a1a2e;background:#080810;text-align:center;"><span style="color:{GREY};font-size:.75rem;">KEV table populates on Streamlit Cloud deployment</span></div>', unsafe_allow_html=True)
-st.markdown("---")
+    st.markdown(f'<div style="padding:14px;border:1px solid #1a1a2e;background:#080810;text-align:center;margin-bottom:10px;"><span style="color:{GREY};font-size:.7rem;">📋 CISA KEV · Populates on Streamlit Cloud deployment</span></div>', unsafe_allow_html=True)
 
-
-# ══════════════════════════════════════════════════════════════════════════════
-#  3×2 INTEL GRID
-# ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin:10px 0 12px;text-align:center;">
-  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
-    <a href="https://attack.mitre.org/" target="_blank" class="sh">
-      &gt;&gt; THREAT INTELLIGENCE REFERENCE GRID &lt;&lt;</a></span>
-  <div style="font-size:.55rem;color:#505060;margin-top:2px;">ATT&CK · RANSOMWARE · APTs · ATTACK VECTORS · BREACH COSTS · TOP CVEs</div></div>""", unsafe_allow_html=True)
-
+# ── INTEL GRID (4×2) ──────────────────────────────────────────────────────────
 def _tbl(title, hdrs, rows_data, hdr_color):
-    hh = "".join(f'<th style="padding:5px 4px;text-align:left;color:{hdr_color};font-size:.5rem;text-transform:uppercase;">{h}</th>' for h in hdrs)
+    hh = "".join(f'<th style="padding:4px 3px;text-align:left;color:{hdr_color};font-size:.48rem;text-transform:uppercase;">{h}</th>' for h in hdrs)
     rh = ""
     for r in rows_data:
-        rh += '<tr style="border-bottom:1px solid #141420;">' + "".join(f'<td style="padding:4px;{s}">{v}</td>' for v,s in r) + '</tr>'
-    return f'<div style="margin-bottom:6px;"><div style="font-size:.68rem;font-weight:bold;color:{hdr_color};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {hdr_color}20;padding-bottom:3px;">{title}</div><div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.54rem;"><thead><tr style="background:#0a0a14;border-bottom:1px solid {hdr_color}20;">{hh}</tr></thead><tbody>{rh}</tbody></table></div></div>'
+        rh += '<tr style="border-bottom:1px solid #141420;">' + "".join(f'<td style="padding:3px;{s}">{v}</td>' for v,s in r) + '</tr>'
+    return f'<div style="margin-bottom:5px;"><div style="font-size:.64rem;font-weight:bold;color:{hdr_color};text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;border-bottom:1px solid {hdr_color}20;padding-bottom:2px;">{title}</div><div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.52rem;"><thead><tr style="background:#0a0a14;border-bottom:1px solid {hdr_color}20;">{hh}</tr></thead><tbody>{rh}</tbody></table></div></div>'
 
-attck = [[("T1059",f"color:{BLUE};font-weight:bold;"),("Cmd & Scripting",f"color:{CYAN};"),("Execution",f"color:{GREY};font-size:.48rem;"),("85%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1078",f"color:{BLUE};font-weight:bold;"),("Valid Accounts",f"color:{CYAN};"),("Persistence",f"color:{GREY};font-size:.48rem;"),("75%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1486",f"color:{BLUE};font-weight:bold;"),("Data Encrypted",f"color:{CYAN};"),("Impact",f"color:{GREY};font-size:.48rem;"),("52%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1566",f"color:{BLUE};font-weight:bold;"),("Phishing",f"color:{CYAN};"),("Initial Access",f"color:{GREY};font-size:.48rem;"),("44%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1190",f"color:{BLUE};font-weight:bold;"),("Exploit Public App",f"color:{CYAN};"),("Initial Access",f"color:{GREY};font-size:.48rem;"),("38%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1003",f"color:{BLUE};font-weight:bold;"),("Cred Dumping",f"color:{CYAN};"),("Cred Access",f"color:{GREY};font-size:.48rem;"),("36%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1021",f"color:{BLUE};font-weight:bold;"),("Remote Services",f"color:{CYAN};"),("Lateral Mvmt",f"color:{GREY};font-size:.48rem;"),("55%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1055",f"color:{BLUE};font-weight:bold;"),("Process Injection",f"color:{CYAN};"),("Def Evasion",f"color:{GREY};font-size:.48rem;"),("48%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")]]
-rwg = [[("LockBit 3.0",f"color:{CYAN};font-weight:bold;"),("~25%",f"color:{GREEN};font-weight:bold;"),("1,000+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("FBI disrupted Feb 2024",f"color:#888;font-size:.46rem;")],[("ALPHV/BlackCat",f"color:{CYAN};font-weight:bold;"),("~12%",f"color:{GREEN};font-weight:bold;"),("400+",f"color:{AMBER};"),("⚫ Defunct",f"color:#555;font-size:.48rem;"),("$22M Change Healthcare",f"color:#888;font-size:.46rem;")],[("Cl0p",f"color:{CYAN};font-weight:bold;"),("~10%",f"color:{GREEN};font-weight:bold;"),("2,700+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("MOVEit mass exploit",f"color:#888;font-size:.46rem;")],[("Play",f"color:{CYAN};font-weight:bold;"),("~8%",f"color:{GREEN};font-weight:bold;"),("300+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("Govt & infra",f"color:#888;font-size:.46rem;")],[("Black Basta",f"color:{CYAN};font-weight:bold;"),("~7%",f"color:{GREEN};font-weight:bold;"),("250+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("QakBot successor",f"color:#888;font-size:.46rem;")],[("Akira",f"color:{CYAN};font-weight:bold;"),("~5%",f"color:{GREEN};font-weight:bold;"),("180+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("VPN exploiter",f"color:#888;font-size:.46rem;")],[("Rhysida",f"color:{CYAN};font-weight:bold;"),("~3%",f"color:{GREEN};font-weight:bold;"),("100+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("Healthcare focus",f"color:#888;font-size:.46rem;")],[("Medusa",f"color:{CYAN};font-weight:bold;"),("~3%",f"color:{GREEN};font-weight:bold;"),("120+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("Triple extortion",f"color:#888;font-size:.46rem;")]]
-apts = [[("DPRK/Lazarus",f"color:{CYAN};font-weight:bold;"),("🇰🇵",f""),("Crypto theft",f"color:#888;font-size:.46rem;"),("$1.34B stolen",f"color:{RED};font-weight:bold;")],[("APT28/Fancy Bear",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("NATO espionage",f"color:#888;font-size:.46rem;"),("GRU 26165",f"color:{AMBER};")],[("APT29/Cozy Bear",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("SolarWinds, MS365",f"color:#888;font-size:.46rem;"),("SVR intel",f"color:{AMBER};")],[("Volt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("US critical infra",f"color:#888;font-size:.46rem;"),("LOTL attacks",f"color:{RED};font-weight:bold;")],[("Salt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("US telecoms 2024",f"color:#888;font-size:.46rem;"),("9 ISPs hit",f"color:{RED};font-weight:bold;")],[("APT41",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Espionage+crime",f"color:#888;font-size:.46rem;"),("Dual-purpose",f"color:{AMBER};")],[("Charming Kitten",f"color:{CYAN};font-weight:bold;"),("🇮🇷",f""),("Academic targets",f"color:#888;font-size:.46rem;"),("Social eng",f"color:{AMBER};")],[("Sandworm",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("Ukraine grid",f"color:#888;font-size:.46rem;"),("GRU 74455",f"color:{RED};font-weight:bold;")]]
-vectors = [[("Exploited Vulns",f"color:{CYAN};font-weight:bold;"),("32%",f"color:{RED};font-weight:bold;font-size:.6rem;"),("#1 root cause",f"color:#888;font-size:.46rem;")],[("Phishing/Social Eng",f"color:{CYAN};font-weight:bold;"),("21%",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("Email + voice + SMS",f"color:#888;font-size:.46rem;")],[("Stolen Credentials",f"color:{CYAN};font-weight:bold;"),("21%",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("Infostealers + dark web",f"color:#888;font-size:.46rem;")],[("Brute Force",f"color:{CYAN};font-weight:bold;"),("10%",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("RDP, SSH, VPN",f"color:#888;font-size:.46rem;")],[("Supply Chain",f"color:{CYAN};font-weight:bold;"),("8%",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("3rd party + software",f"color:#888;font-size:.46rem;")],[("Insider Threat",f"color:{CYAN};font-weight:bold;"),("5%",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("Privilege misuse + error",f"color:#888;font-size:.46rem;")],[("Zero-Day",f"color:{CYAN};font-weight:bold;"),("2%",f"color:{GREEN};font-weight:bold;font-size:.6rem;"),("Unknown vulns (rare)",f"color:#888;font-size:.46rem;")],[("Other/Unknown",f"color:{CYAN};font-weight:bold;"),("1%",f"color:{GREEN};font-weight:bold;font-size:.6rem;"),("Physical + misc",f"color:#888;font-size:.46rem;")]]
-topcves = [[("CVE-2024-3400",f"color:{CYAN};font-weight:bold;"),("Palo Alto PAN-OS",f"color:#888;font-size:.48rem;"),("10.0",f"color:{RED};font-weight:bold;"),("RCE · actively exploited",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-21887",f"color:{CYAN};font-weight:bold;"),("Ivanti Connect Secure",f"color:#888;font-size:.48rem;"),("9.1",f"color:{RED};font-weight:bold;"),("Auth bypass · mass exploit",f"color:{GREY};font-size:.46rem;")],[("CVE-2023-46805",f"color:{CYAN};font-weight:bold;"),("Ivanti Connect Secure",f"color:#888;font-size:.48rem;"),("8.2",f"color:{AMBER};font-weight:bold;"),("Chained with 21887",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-1709",f"color:{CYAN};font-weight:bold;"),("ConnectWise ScreenConnect",f"color:#888;font-size:.48rem;"),("10.0",f"color:{RED};font-weight:bold;"),("Auth bypass · trivial",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-24576",f"color:{CYAN};font-weight:bold;"),("Rust std::process (Win)",f"color:#888;font-size:.48rem;"),("10.0",f"color:{RED};font-weight:bold;"),("Cmd injection · BatBadBut",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-23897",f"color:{CYAN};font-weight:bold;"),("Jenkins CLI",f"color:#888;font-size:.48rem;"),("9.8",f"color:{RED};font-weight:bold;"),("Arbitrary file read",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-47575",f"color:{CYAN};font-weight:bold;"),("FortiManager",f"color:#888;font-size:.48rem;"),("9.8",f"color:{RED};font-weight:bold;"),("FortiJump · mass exploit",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-0012",f"color:{CYAN};font-weight:bold;"),("Palo Alto PAN-OS",f"color:#888;font-size:.48rem;"),("9.8",f"color:{RED};font-weight:bold;"),("Auth bypass · mgmt iface",f"color:{GREY};font-size:.46rem;")]]
-costs = [[("Healthcare",f"color:{CYAN};font-weight:bold;"),("$7.42M",f"color:{RED};font-weight:bold;font-size:.6rem;"),("#1 for 14 yrs",f"color:#888;font-size:.46rem;")],[("Financial",f"color:{CYAN};font-weight:bold;"),("$5.68M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("BEC & wire fraud",f"color:#888;font-size:.46rem;")],[("Industrial",f"color:{CYAN};font-weight:bold;"),("$5.21M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("OT convergence",f"color:#888;font-size:.46rem;")],[("Energy",f"color:{CYAN};font-weight:bold;"),("$4.89M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("Grid targeting",f"color:#888;font-size:.46rem;")],[("Technology",f"color:{CYAN};font-weight:bold;"),("$5.15M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("Supply chain",f"color:#888;font-size:.46rem;")],[("Pharma",f"color:{CYAN};font-weight:bold;"),("$4.97M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("IP espionage",f"color:#888;font-size:.46rem;")],[("Government",f"color:{CYAN};font-weight:bold;"),("$4.43M",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("APT targeting",f"color:#888;font-size:.46rem;")],[("Retail",f"color:{CYAN};font-weight:bold;"),("$3.75M",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("POS & e-comm",f"color:#888;font-size:.46rem;")]]
+attck = [[("T1059",f"color:{BLUE};font-weight:bold;"),("Cmd & Scripting",f"color:{CYAN};"),("Execution",f"color:{GREY};font-size:.46rem;"),("85%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1078",f"color:{BLUE};font-weight:bold;"),("Valid Accounts",f"color:{CYAN};"),("Persistence",f"color:{GREY};font-size:.46rem;"),("75%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1486",f"color:{BLUE};font-weight:bold;"),("Data Encrypted",f"color:{CYAN};"),("Impact",f"color:{GREY};font-size:.46rem;"),("52%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1566",f"color:{BLUE};font-weight:bold;"),("Phishing",f"color:{CYAN};"),("Init Access",f"color:{GREY};font-size:.46rem;"),("44%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1190",f"color:{BLUE};font-weight:bold;"),("Exploit Public App",f"color:{CYAN};"),("Init Access",f"color:{GREY};font-size:.46rem;"),("38%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1003",f"color:{BLUE};font-weight:bold;"),("Cred Dumping",f"color:{CYAN};"),("Cred Access",f"color:{GREY};font-size:.46rem;"),("36%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1021",f"color:{BLUE};font-weight:bold;"),("Remote Services",f"color:{CYAN};"),("Lateral Mvmt",f"color:{GREY};font-size:.46rem;"),("55%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1055",f"color:{BLUE};font-weight:bold;"),("Process Injection",f"color:{CYAN};"),("Def Evasion",f"color:{GREY};font-size:.46rem;"),("48%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")]]
+rwg = [[("LockBit 3.0",f"color:{CYAN};font-weight:bold;"),("~25%",f"color:{GREEN};font-weight:bold;"),("1,000+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.46rem;"),("FBI disrupted",f"color:#888;font-size:.44rem;")],[("ALPHV/BlackCat",f"color:{CYAN};font-weight:bold;"),("~12%",f"color:{GREEN};font-weight:bold;"),("400+",f"color:{AMBER};"),("⚫ Defunct",f"color:#555;font-size:.46rem;"),("$22M exit scam",f"color:#888;font-size:.44rem;")],[("Cl0p",f"color:{CYAN};font-weight:bold;"),("~10%",f"color:{GREEN};font-weight:bold;"),("2,700+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.46rem;"),("MOVEit mass",f"color:#888;font-size:.44rem;")],[("Play",f"color:{CYAN};font-weight:bold;"),("~8%",f"color:{GREEN};font-weight:bold;"),("300+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.46rem;"),("Govt & infra",f"color:#888;font-size:.44rem;")],[("Black Basta",f"color:{CYAN};font-weight:bold;"),("~7%",f"color:{GREEN};font-weight:bold;"),("250+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.46rem;"),("QakBot heir",f"color:#888;font-size:.44rem;")],[("Akira",f"color:{CYAN};font-weight:bold;"),("~5%",f"color:{GREEN};font-weight:bold;"),("180+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.46rem;"),("VPN exploiter",f"color:#888;font-size:.44rem;")],[("Rhysida",f"color:{CYAN};font-weight:bold;"),("~3%",f"color:{GREEN};font-weight:bold;"),("100+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.46rem;"),("Healthcare",f"color:#888;font-size:.44rem;")],[("Medusa",f"color:{CYAN};font-weight:bold;"),("~3%",f"color:{GREEN};font-weight:bold;"),("120+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.46rem;"),("Triple extort",f"color:#888;font-size:.44rem;")]]
+apts = [[("DPRK/Lazarus",f"color:{CYAN};font-weight:bold;"),("🇰🇵",f""),("Crypto theft",f"color:#888;font-size:.44rem;"),("$1.34B",f"color:{RED};font-weight:bold;")],[("APT28",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("NATO espionage",f"color:#888;font-size:.44rem;"),("GRU 26165",f"color:{AMBER};")],[("APT29",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("SolarWinds",f"color:#888;font-size:.44rem;"),("SVR",f"color:{AMBER};")],[("Volt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("US crit infra",f"color:#888;font-size:.44rem;"),("LOTL",f"color:{RED};font-weight:bold;")],[("Salt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("US telecoms",f"color:#888;font-size:.44rem;"),("9 ISPs",f"color:{RED};font-weight:bold;")],[("APT41",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Espionage+crime",f"color:#888;font-size:.44rem;"),("Dual",f"color:{AMBER};")],[("Charming Kitten",f"color:{CYAN};font-weight:bold;"),("🇮🇷",f""),("Academic",f"color:#888;font-size:.44rem;"),("Social eng",f"color:{AMBER};")],[("Sandworm",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("Ukraine grid",f"color:#888;font-size:.44rem;"),("GRU 74455",f"color:{RED};font-weight:bold;")]]
+vectors = [[("Phishing",f"color:{CYAN};font-weight:bold;"),("16%",f"color:{RED};font-weight:bold;font-size:.58rem;"),("#1 initial access (IBM 2025)",f"color:#888;font-size:.44rem;")],[("Supply Chain",f"color:{CYAN};font-weight:bold;"),("15%",f"color:{RED};font-weight:bold;font-size:.58rem;"),("#2 attack vector (IBM 2025)",f"color:#888;font-size:.44rem;")],[("Denial of Service",f"color:{CYAN};font-weight:bold;"),("13%",f"color:{AMBER};font-weight:bold;font-size:.58rem;"),("#3 (IBM 2025)",f"color:#888;font-size:.44rem;")],[("Stolen Credentials",f"color:{CYAN};font-weight:bold;"),("12%",f"color:{AMBER};font-weight:bold;font-size:.58rem;"),("Infostealers + dark web",f"color:#888;font-size:.44rem;")],[("Business Email",f"color:{CYAN};font-weight:bold;"),("9%",f"color:{BLUE};font-weight:bold;font-size:.58rem;"),("BEC wire fraud",f"color:#888;font-size:.44rem;")],[("Malicious Insider",f"color:{CYAN};font-weight:bold;"),("$4.92M",f"color:{RED};font-weight:bold;font-size:.58rem;"),("Costliest per incident",f"color:#888;font-size:.44rem;")],[("Human Error",f"color:{CYAN};font-weight:bold;"),("26%",f"color:{BLUE};font-weight:bold;font-size:.58rem;"),("Non-malicious cause",f"color:#888;font-size:.44rem;")],[("IT Failure",f"color:{CYAN};font-weight:bold;"),("23%",f"color:{BLUE};font-weight:bold;font-size:.58rem;"),("System/process failure",f"color:#888;font-size:.44rem;")]]
+topcves = [[("CVE-2024-3400",f"color:{CYAN};font-weight:bold;"),("PAN-OS",f"color:#888;font-size:.46rem;"),("10.0",f"color:{RED};font-weight:bold;"),("RCE · mass exploit",f"color:{GREY};font-size:.44rem;")],[("CVE-2024-21887",f"color:{CYAN};font-weight:bold;"),("Ivanti CS",f"color:#888;font-size:.46rem;"),("9.1",f"color:{RED};font-weight:bold;"),("Auth bypass",f"color:{GREY};font-size:.44rem;")],[("CVE-2024-1709",f"color:{CYAN};font-weight:bold;"),("ScreenConnect",f"color:#888;font-size:.46rem;"),("10.0",f"color:{RED};font-weight:bold;"),("Trivial auth bypass",f"color:{GREY};font-size:.44rem;")],[("CVE-2024-47575",f"color:{CYAN};font-weight:bold;"),("FortiManager",f"color:#888;font-size:.46rem;"),("9.8",f"color:{RED};font-weight:bold;"),("FortiJump",f"color:{GREY};font-size:.44rem;")],[("CVE-2024-0012",f"color:{CYAN};font-weight:bold;"),("PAN-OS",f"color:#888;font-size:.46rem;"),("9.8",f"color:{RED};font-weight:bold;"),("Mgmt auth bypass",f"color:{GREY};font-size:.44rem;")],[("CVE-2024-23897",f"color:{CYAN};font-weight:bold;"),("Jenkins",f"color:#888;font-size:.46rem;"),("9.8",f"color:{RED};font-weight:bold;"),("File read RCE",f"color:{GREY};font-size:.44rem;")],[("CVE-2024-24576",f"color:{CYAN};font-weight:bold;"),("Rust stdlib",f"color:#888;font-size:.46rem;"),("10.0",f"color:{RED};font-weight:bold;"),("BatBadBut",f"color:{GREY};font-size:.44rem;")],[("CVE-2023-46805",f"color:{CYAN};font-weight:bold;"),("Ivanti CS",f"color:#888;font-size:.46rem;"),("8.2",f"color:{AMBER};font-weight:bold;"),("Chain w/21887",f"color:{GREY};font-size:.44rem;")]]
+costs = [[("Healthcare",f"color:{CYAN};font-weight:bold;"),("$7.42M",f"color:{RED};font-weight:bold;font-size:.58rem;"),("#1 · 14yr streak",f"color:#888;font-size:.44rem;")],[("Financial",f"color:{CYAN};font-weight:bold;"),("$5.68M",f"color:{AMBER};font-weight:bold;font-size:.58rem;"),("BEC & wire fraud",f"color:#888;font-size:.44rem;")],[("Industrial",f"color:{CYAN};font-weight:bold;"),("$5.21M",f"color:{AMBER};font-weight:bold;font-size:.58rem;"),("OT convergence",f"color:#888;font-size:.44rem;")],[("Technology",f"color:{CYAN};font-weight:bold;"),("$5.15M",f"color:{AMBER};font-weight:bold;font-size:.58rem;"),("Supply chain",f"color:#888;font-size:.44rem;")],[("Energy",f"color:{CYAN};font-weight:bold;"),("$4.89M",f"color:{AMBER};font-weight:bold;font-size:.58rem;"),("Grid targeting",f"color:#888;font-size:.44rem;")],[("Pharma",f"color:{CYAN};font-weight:bold;"),("$4.97M",f"color:{AMBER};font-weight:bold;font-size:.58rem;"),("IP theft",f"color:#888;font-size:.44rem;")],[("Government",f"color:{CYAN};font-weight:bold;"),("$4.43M",f"color:{BLUE};font-weight:bold;font-size:.58rem;"),("APT targeting",f"color:#888;font-size:.44rem;")],[("US Average",f"color:{CYAN};font-weight:bold;"),("$10.22M",f"color:{RED};font-weight:bold;font-size:.58rem;"),("Record high 2025",f"color:#888;font-size:.44rem;")]]
+owasp_llm = [[("LLM01",f"color:{RED};font-weight:bold;"),("Prompt Injection",f"color:{CYAN};font-weight:bold;"),("Craft input to bypass safety/exfil data",f"color:#888;font-size:.44rem;"),("🔴",f"text-align:center;")],[("LLM02",f"color:{RED};font-weight:bold;"),("Insecure Output",f"color:{CYAN};font-weight:bold;"),("Unsanitized LLM output → XSS/SQLi/RCE",f"color:#888;font-size:.44rem;"),("🔴",f"text-align:center;")],[("LLM03",f"color:{AMBER};font-weight:bold;"),("Training Poisoning",f"color:{CYAN};font-weight:bold;"),("Corrupted data → backdoors/bias",f"color:#888;font-size:.44rem;"),("🟡",f"text-align:center;")],[("LLM04",f"color:{AMBER};font-weight:bold;"),("Model DoS",f"color:{CYAN};font-weight:bold;"),("Resource exhaust via complex prompts",f"color:#888;font-size:.44rem;"),("🟡",f"text-align:center;")],[("LLM05",f"color:{RED};font-weight:bold;"),("Supply Chain",f"color:{CYAN};font-weight:bold;"),("Compromised weights/plugins/pipelines",f"color:#888;font-size:.44rem;"),("🔴",f"text-align:center;")],[("LLM06",f"color:{RED};font-weight:bold;"),("Info Disclosure",f"color:{CYAN};font-weight:bold;"),("LLM leaks PII/creds in responses",f"color:#888;font-size:.44rem;"),("🔴",f"text-align:center;")],[("LLM07",f"color:{AMBER};font-weight:bold;"),("Plugin Insecurity",f"color:{CYAN};font-weight:bold;"),("Excessive perms, no input validation",f"color:#888;font-size:.44rem;"),("🟡",f"text-align:center;")],[("LLM08",f"color:{AMBER};font-weight:bold;"),("Excessive Agency",f"color:{CYAN};font-weight:bold;"),("Agents w/too many perms, autonomous",f"color:#888;font-size:.44rem;"),("🟡",f"text-align:center;")]]
+ai_crime = [[("Deepfake Vishing",f"color:{CYAN};font-weight:bold;"),("442% ↑",f"color:{RED};font-weight:bold;"),("3-sec voice clone for BEC wire fraud",f"color:#888;font-size:.44rem;")],[("LLM Phishing",f"color:{CYAN};font-weight:bold;"),("Scaling",f"color:{RED};font-weight:bold;"),("Perfect grammar, zero typos, at scale",f"color:#888;font-size:.44rem;")],[("WormGPT/FraudGPT",f"color:{CYAN};font-weight:bold;"),("Dark web",f"color:{RED};font-weight:bold;"),("Uncensored LLMs for malware & phish",f"color:#888;font-size:.44rem;")],[("Deepfake Video",f"color:{CYAN};font-weight:bold;"),("$25M scam",f"color:{RED};font-weight:bold;"),("Real-time face swap in video calls",f"color:#888;font-size:.44rem;")],[("PassGAN Cracking",f"color:{CYAN};font-weight:bold;"),("51% <60s",f"color:{AMBER};font-weight:bold;"),("AI cracks common passwords instantly",f"color:#888;font-size:.44rem;")],[("Polymorphic Malware",f"color:{CYAN};font-weight:bold;"),("Evasive",f"color:{AMBER};font-weight:bold;"),("BlackMamba: AI mutates code per exec",f"color:#888;font-size:.44rem;")],[("AI Recon/OSINT",f"color:{CYAN};font-weight:bold;"),("Automated",f"color:{AMBER};font-weight:bold;"),("Target profiling in minutes via LLM",f"color:#888;font-size:.44rem;")],[("Adversarial ML",f"color:{CYAN};font-weight:bold;"),("Evasion",f"color:{AMBER};font-weight:bold;"),("Pixel perturbation fools classifiers",f"color:#888;font-size:.44rem;")]]
 
-g1, g2 = st.columns(2)
-with g1: st.markdown(_tbl("⚔ MITRE ATT&CK TOP TECHNIQUES", ["ID","Technique","Tactic","Freq","Sev"], attck, BLUE), unsafe_allow_html=True)
-with g2: st.markdown(_tbl("💀 TOP RANSOMWARE GROUPS", ["Group","Share","Victims","Status","Intel"], rwg, RED), unsafe_allow_html=True)
-g3, g4 = st.columns(2)
-with g3: st.markdown(_tbl("🌐 NATION-STATE APT GROUPS", ["Group","","Focus","Key Intel"], apts, AMBER), unsafe_allow_html=True)
-with g4: st.markdown(_tbl("📊 ATTACK VECTOR BREAKDOWN (DBIR 2025)", ["Vector","Share","Details"], vectors, GREEN), unsafe_allow_html=True)
-g5, g6 = st.columns(2)
-with g5: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (IBM 2025)", ["Industry","Avg Cost","Key Factor"], costs, GREEN), unsafe_allow_html=True)
-with g6: st.markdown(_tbl("🔥 TOP EXPLOITED CVEs 2024", ["CVE","Product","CVSS","Impact"], topcves, RED), unsafe_allow_html=True)
+g1,g2=st.columns(2)
+with g1: st.markdown(_tbl("⚔ MITRE ATT&CK TOP TECHNIQUES",["ID","Technique","Tactic","Freq","Sev"],attck,BLUE),unsafe_allow_html=True)
+with g2: st.markdown(_tbl("💀 TOP RANSOMWARE GROUPS",["Group","Share","Victims","Status","Intel"],rwg,RED),unsafe_allow_html=True)
+g3,g4=st.columns(2)
+with g3: st.markdown(_tbl("🌐 NATION-STATE APT GROUPS",["Group","","Focus","Intel"],apts,AMBER),unsafe_allow_html=True)
+with g4: st.markdown(_tbl("📊 ATTACK VECTOR BREAKDOWN (IBM 2025)",["Vector","Share","Details"],vectors,GREEN),unsafe_allow_html=True)
+g5,g6=st.columns(2)
+with g5: st.markdown(_tbl("🔥 TOP EXPLOITED CVEs 2024",["CVE","Product","CVSS","Impact"],topcves,RED),unsafe_allow_html=True)
+with g6: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (IBM 2025)",["Industry","Avg Cost","Detail"],costs,GREEN),unsafe_allow_html=True)
+g7,g8=st.columns(2)
+with g7: st.markdown(_tbl("🛡 OWASP LLM TOP 10 (2025)",["#","Vulnerability","Description",""],owasp_llm,CYAN),unsafe_allow_html=True)
+with g8: st.markdown(_tbl("🤖 AI-POWERED CYBERCRIME",["Attack","Status","Details"],ai_crime,RED),unsafe_allow_html=True)
 
-st.markdown(f'<div style="font-size:.46rem;color:#505060;margin:2px 0 0 4px;">Sources: CrowdStrike GTR · Mandiant · Red Canary · IBM Cost of Breach 2025 · GDPR Enforcement Tracker · Chainalysis · Public disclosures</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="font-size:.44rem;color:#505060;margin:2px 0 0 4px;">Sources: IBM Cost of Breach 2025 · CrowdStrike GTR 2025/2026 · OWASP LLM Top 10 · MITRE ATT&CK/ATLAS · Mandiant · Red Canary · Chainalysis · Sophos · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  AI & LLM SECURITY — DEDICATED SECTION
+#  LIVE THREAT MAPS
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin:10px 0 12px;text-align:center;">
+st.markdown(f"""<div style="margin:4px 0 10px;text-align:center;">
   <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
-    <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" class="sh">
-      &gt;&gt; AI &amp; LLM SECURITY INTELLIGENCE &lt;&lt;</a></span>
-  <div style="font-size:.55rem;color:#505060;margin-top:2px;">OWASP LLM TOP 10 · AI-POWERED THREATS · LLM ATTACK SURFACE · MITRE ATLAS</div></div>""", unsafe_allow_html=True)
-
-owasp_llm = [
-    [("LLM01",f"color:{RED};font-weight:bold;"),("Prompt Injection",f"color:{CYAN};font-weight:bold;"),("Manipulate LLM via crafted input to bypass safety or exfiltrate data",f"color:#888;font-size:.46rem;"),("🔴 Critical",f"color:{RED};font-size:.48rem;")],
-    [("LLM02",f"color:{RED};font-weight:bold;"),("Insecure Output",f"color:{CYAN};font-weight:bold;"),("LLM output used unsanitized in downstream systems (XSS, SQLi, RCE)",f"color:#888;font-size:.46rem;"),("🔴 Critical",f"color:{RED};font-size:.48rem;")],
-    [("LLM03",f"color:{AMBER};font-weight:bold;"),("Training Data Poisoning",f"color:{CYAN};font-weight:bold;"),("Corrupted training data introduces backdoors or biased outputs",f"color:#888;font-size:.46rem;"),("🟡 High",f"color:{AMBER};font-size:.48rem;")],
-    [("LLM04",f"color:{AMBER};font-weight:bold;"),("Model Denial of Service",f"color:{CYAN};font-weight:bold;"),("Resource-exhaustion attacks via complex or recursive prompts",f"color:#888;font-size:.46rem;"),("🟡 High",f"color:{AMBER};font-size:.48rem;")],
-    [("LLM05",f"color:{RED};font-weight:bold;"),("Supply Chain Vulns",f"color:{CYAN};font-weight:bold;"),("Compromised model weights, plugins, or training pipelines",f"color:#888;font-size:.46rem;"),("🔴 Critical",f"color:{RED};font-size:.48rem;")],
-    [("LLM06",f"color:{RED};font-weight:bold;"),("Sensitive Info Disclosure",f"color:{CYAN};font-weight:bold;"),("LLM leaks PII, credentials, or proprietary data in responses",f"color:#888;font-size:.46rem;"),("🔴 Critical",f"color:{RED};font-size:.48rem;")],
-    [("LLM07",f"color:{AMBER};font-weight:bold;"),("Insecure Plugin Design",f"color:{CYAN};font-weight:bold;"),("LLM plugins grant excessive permissions or lack input validation",f"color:#888;font-size:.46rem;"),("🟡 High",f"color:{AMBER};font-size:.48rem;")],
-    [("LLM08",f"color:{AMBER};font-weight:bold;"),("Excessive Agency",f"color:{CYAN};font-weight:bold;"),("LLM agents granted too many permissions; autonomous actions cause harm",f"color:#888;font-size:.46rem;"),("🟡 High",f"color:{AMBER};font-size:.48rem;")],
-    [("LLM09",f"color:{AMBER};font-weight:bold;"),("Overreliance",f"color:{CYAN};font-weight:bold;"),("Trusting LLM output without verification; hallucinations cause errors",f"color:#888;font-size:.46rem;"),("🟡 High",f"color:{AMBER};font-size:.48rem;")],
-    [("LLM10",f"color:{AMBER};font-weight:bold;"),("Model Theft",f"color:{CYAN};font-weight:bold;"),("Extraction of proprietary model weights, architecture, or training data",f"color:#888;font-size:.46rem;"),("🟡 High",f"color:{AMBER};font-size:.48rem;")],
-]
-ai_crime = [
-    [("Deepfake Voice Scams",f"color:{CYAN};font-weight:bold;"),("442% ↑",f"color:{RED};font-weight:bold;"),("CEO voice cloned for wire transfers; 3 sec of audio sufficient",f"color:#888;font-size:.46rem;")],
-    [("AI-Generated Phishing",f"color:{CYAN};font-weight:bold;"),("Scaling",f"color:{RED};font-weight:bold;"),("LLMs craft perfect grammar, personalized lures at massive scale",f"color:#888;font-size:.46rem;")],
-    [("WormGPT / FraudGPT",f"color:{CYAN};font-weight:bold;"),("Dark Web",f"color:{RED};font-weight:bold;"),("Uncensored LLMs sold as a service for malware & phishing gen",f"color:#888;font-size:.46rem;")],
-    [("Deepfake Video",f"color:{CYAN};font-weight:bold;"),("$25M Scam",f"color:{RED};font-weight:bold;"),("Real-time face swap in video calls; Hong Kong finance exec scammed",f"color:#888;font-size:.46rem;")],
-    [("AI Password Cracking",f"color:{CYAN};font-weight:bold;"),("PassGAN",f"color:{AMBER};font-weight:bold;"),("51% of common passwords cracked in under 60 seconds by AI",f"color:#888;font-size:.46rem;")],
-    [("Automated Vuln Discovery",f"color:{CYAN};font-weight:bold;"),("AI Fuzzing",f"color:{AMBER};font-weight:bold;"),("LLMs identify & exploit 0-days faster than human researchers",f"color:#888;font-size:.46rem;")],
-    [("Polymorphic AI Malware",f"color:{CYAN};font-weight:bold;"),("Evasive",f"color:{AMBER};font-weight:bold;"),("BlackMamba: AI mutates code every execution to evade AV/EDR",f"color:#888;font-size:.46rem;")],
-    [("AI-Powered Recon",f"color:{CYAN};font-weight:bold;"),("OSINT",f"color:{AMBER};font-weight:bold;"),("Target profiling in minutes; social graph analysis automated",f"color:#888;font-size:.46rem;")],
-    [("Adversarial ML Attacks",f"color:{CYAN};font-weight:bold;"),("Evasion",f"color:{AMBER};font-weight:bold;"),("Pixel perturbation fools image classifiers; adversarial patches",f"color:#888;font-size:.46rem;")],
-    [("AI-Assisted Social Eng",f"color:{CYAN};font-weight:bold;"),("Scaling",f"color:{RED};font-weight:bold;"),("Personality profiling + LLM = hyper-personalized manipulation",f"color:#888;font-size:.46rem;")],
-]
-
-a1, a2 = st.columns(2)
-with a1:
-    st.markdown(_tbl("🛡 OWASP LLM TOP 10 (2025 REVISION)", ["#","Vulnerability","Description","Severity"], owasp_llm, CYAN), unsafe_allow_html=True)
-with a2:
-    st.markdown(_tbl("🤖 AI-POWERED CYBERCRIME & THREATS", ["Attack","Status","Details"], ai_crime, RED), unsafe_allow_html=True)
-
-st.markdown(f'<div style="font-size:.46rem;color:#505060;margin:2px 0 0 4px;">Sources: OWASP LLM Top 10 (2025) · MITRE ATLAS · CrowdStrike GTR 2025 · IBM X-Force · Chainalysis · Mandiant · Academic research</div>', unsafe_allow_html=True)
+    <a href="https://livethreatmap.radware.com/" target="_blank" class="sh">
+      &gt;&gt; LIVE THREAT MAP FEEDS &lt;&lt;</a></span>
+  <div style="font-size:.55rem;color:#505060;margin-top:2px;">2 REAL-TIME GLOBAL ATTACK VISUALIZATION SOURCES</div></div>""", unsafe_allow_html=True)
+m1,m2=st.columns(2)
+with m1:
+    st.markdown('<a href="https://livethreatmap.radware.com/" target="_blank" class="ml">&gt;&gt; RADWARE LIVE THREAT MAP</a>', unsafe_allow_html=True)
+    iframe("https://livethreatmap.radware.com/", 1100)
+with m2:
+    st.markdown('<a href="https://threatmap.fortiguard.com/" target="_blank" class="ml">&gt;&gt; FORTINET FORTIGUARD MAP</a>', unsafe_allow_html=True)
+    iframe("https://threatmap.fortiguard.com/", 1100)
 st.markdown("---")
-
 # ══════════════════════════════════════════════════════════════════════════════
 #  GRC RESOURCES
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1076,5 +1095,5 @@ st.markdown(f"""
     <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="fl">
       Code and layout licensed CC BY-NC 4.0.</a></div>
   <div style="color:#2a2a3a;font-size:.65rem;">
-    SecAI-Nexus GRC [v26.0] · Live Data Engine ·
-    75 Indicators · 5 Facts Each · 2 Maps · 23 Frameworks · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
+    SecAI-Nexus GRC [v27.0] · Live Data Engine ·
+    87 Metrics · 3 Charts · 8 Intel Tables · 2 Maps · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
