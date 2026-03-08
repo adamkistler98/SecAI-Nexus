@@ -1,0 +1,15 @@
+# .streamlit/config.toml
+
+[server]
+# Security hardening
+enableXsrfProtection = true
+enableCORS = false
+enableWebsocketCompression = true          # reduces bandwidth, minor perf+sec benefit
+maxUploadSize = 10                         # very low since you have no uploads
+
+[browser]
+gatherUsageStats = false                   # disables telemetry
+
+[theme]
+# (optional - only if you want to enforce dark mode more strictly, but not needed for security)
+base = "dark"
