@@ -59,15 +59,15 @@ Every metric includes 5 contextual intel points sourced from the latest publishe
 ### Live APIs (No Keys Required)
 | Source | Data | Refresh |
 |--------|------|---------|
-| [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | Exploited vulnerabilities catalog | 60 min |
-| [MalwareBazaar](https://bazaar.abuse.ch/) | Recent malware samples | 30 min |
-| [URLhaus](https://urlhaus.abuse.ch/) | Live malicious URLs | 10 min |
-| [Feodo Tracker](https://feodotracker.abuse.ch/) | Botnet C2 infrastructure | 15 min |
-| [SANS ISC Infocon](https://isc.sans.edu/) | Internet threat level | 30 min |
-| [SANS DShield TopPorts](https://isc.sans.edu/) | Most attacked ports | 30 min |
-| [SANS DShield TopIPs](https://isc.sans.edu/) | Top attacking IPs | 30 min |
-| [SANS Honeypot](https://isc.sans.edu/) | Web honeypot telemetry | 60 min |
-| [Tor Project](https://metrics.torproject.org/) | Active exit node count | 60 min |
+| [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | Exploited vulnerabilities catalog | 12 hr |
+| [MalwareBazaar](https://bazaar.abuse.ch/) | Recent malware samples | 12 hr |
+| [URLhaus](https://urlhaus.abuse.ch/) | Live malicious URLs | 12 hr |
+| [Feodo Tracker](https://feodotracker.abuse.ch/) | Botnet C2 infrastructure | 12 hr |
+| [SANS ISC Infocon](https://isc.sans.edu/) | Internet threat level | 12 hr |
+| [SANS DShield TopPorts](https://isc.sans.edu/) | Most attacked ports | 12 hr |
+| [SANS DShield TopIPs](https://isc.sans.edu/) | Top attacking IPs | 12 hr |
+| [SANS Honeypot](https://isc.sans.edu/) | Web honeypot telemetry | 12 hr |
+| [Tor Project](https://metrics.torproject.org/) | Active exit node count | 12 hr |
 
 ### Estimated Metrics (Labeled `EST`)
 Sourced from the latest published reports, clearly labeled with "last verified 03/26":
@@ -98,7 +98,7 @@ IBM Cost of a Data Breach 2025 · CrowdStrike Global Threat Report 2025/2026 · 
 
 ### Local Development
 ```bash
-git clone https://gitlab.com/your-username/secai-nexus-grc.git
+git clone https://github.com/adamkistler98/SecAI-Nexus.git
 cd secai-nexus-grc
 
 python -m venv venv
