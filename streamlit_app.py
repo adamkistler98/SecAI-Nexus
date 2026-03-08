@@ -302,7 +302,7 @@ st.markdown(f"""
   <div style="text-align:center;">
     <span style="font-size:1.3rem;font-weight:bold;color:{GREEN};text-shadow:0 0 12px {GREEN}80;letter-spacing:1px;">🤖 SecAI-Nexus</span>
     <span style="font-size:.72rem;color:{BLUE};margin-left:6px;font-weight:bold;">// CYBER THREAT OBSERVABILITY</span>
-    <span style="font-size:.42rem;color:#4a4a5a;border:1px solid #2a2a3a;padding:1px 4px;margin-left:4px;vertical-align:middle;">v29</span>
+    <span style="font-size:.42rem;color:#4a4a5a;border:1px solid #2a2a3a;padding:1px 4px;margin-left:4px;vertical-align:middle;">v30</span>
   </div>
   <div style="text-align:center;margin-top:2px;">
     <span style="font-size:.7rem;font-weight:bold;color:{BLUE};text-shadow:0 0 4px {BLUE};">
@@ -349,46 +349,6 @@ st.markdown(f"""<div style="margin:2px 0 10px;text-align:center;">
     &ensp;<span class="sd sc"></span><span style="color:{CYAN};">PULSE</span> = DShield sensors
     &ensp;112 indicators · 7 pulse rows × 6 + 7 standard rows × 9</span></div>""", unsafe_allow_html=True)
 
-
-# ─── PULSE ROW 3 ─────────────────────────────────────────────────────────────
-st.markdown(f'<div class="rl-p">⚡ SECTOR RISK & ADVERSARY INTELLIGENCE</div>', unsafe_allow_html=True)
-c = st.columns(6)
-with c[0]:
-    pcard("#1 TARGETED SECTOR","https://www.ibm.com/reports/data-breach",
-        "Healthcare", "$7.42M avg breach cost",
-        "▸ 67% hit by ransomware in 2024",
-        "–","d-n", "#1 for 14 yrs", "d-b", False,
-        facts=["PHI worth 10x credit card data","HIPAA fines add to breach cost","Change Healthcare: $22M ransom","Patient safety directly at risk","Legacy systems widespread"])
-with c[1]:
-    pcard("#2 TARGETED SECTOR","https://www.ibm.com/reports/data-breach",
-        "Financial", "$6.08M avg breach cost",
-        "▸ BEC & wire fraud primary vectors",
-        "–","d-n", "$6.08M avg", "d-b", False,
-        facts=["PCI DSS 4.0 compliance required","Real-time transaction fraud growing","SWIFT system attacks continue","Crypto exchanges targeted heavily","Regulatory fines compounding"])
-with c[2]:
-    pcard("#3 TARGETED SECTOR","https://www.ibm.com/reports/data-breach",
-        "Industrial/Mfg", "$5.56M avg breach cost",
-        "▸ OT/ICS convergence risk",
-        "–","d-n", "$5.56M avg", "d-b", False,
-        facts=["Ransomware: 62% pay the ransom","OT networks often unpatched","Air-gap myth increasingly false","Safety systems now IP-connected","Production downtime: $300k+/hour"])
-with c[3]:
-    pcard("#1 THREAT ACTOR","https://www.crowdstrike.com/global-threat-report/",
-        "DPRK / Lazarus", "$1.34B crypto stolen 2024",
-        "▸ 47 incidents · 61% of all theft",
-        "–","d-n", "$1.34B", "d-b", False,
-        facts=["Funds WMD & missile programs","IT workers infiltrate crypto firms","Social engineering campaigns","Tornado Cash for laundering","Active since 2009"])
-with c[4]:
-    pcard("eCRIME INDEX","https://www.crowdstrike.com/global-threat-report/",
-        "ECX: HIGH", "CrowdStrike eCrime Index",
-        "▸ Breakout time now 51 seconds",
-        "–","d-n", "48 min avg", "d-b", False,
-        facts=["Avg eCrime breakout: 48 min","Russia, China, Iran top sponsors","148 named threat actor groups","Access broker ecosystem thriving","RaaS lowering barrier to entry"])
-with c[5]:
-    pcard("TOP INITIAL ACCESS","https://www.sophos.com/en-us/content/state-of-ransomware",
-        "Exploited Vulns", "29% of ransomware entry",
-        "▸ Then: phishing 21% · creds 21%",
-        "–","d-n", "29% of attacks", "d-b", False,
-        facts=["VPN appliances: #1 target asset","Phishing: 21% of initial access","Stolen credentials: 21%","Brute force: 10%","Unknown/other: 19%"])
 
 # ─── PULSE ROW 6: AI & LLM THREAT INTELLIGENCE ───────────────────────────────
 st.markdown(f'<div class="rl-p">🤖 AI &amp; LLM THREAT INTELLIGENCE — EMERGING ATTACK LANDSCAPE</div>', unsafe_allow_html=True)
@@ -470,6 +430,86 @@ with c[5]:
         "▸ Fastest: 27 seconds",
         "–","d-n", "was 48 min", "d-g", False,
         facts=["Sub-minute breakouts recorded","Automated tooling enables speed","29 min avg in 2025 (from 48)","Detection must be real-time","MDR/XDR essential for response"])
+
+# ─── PULSE ROW 8: COMPLIANCE & THIRD-PARTY RISK ──────────────────────────────
+st.markdown(f'<div class="rl-p">📊 COMPLIANCE POSTURE &amp; THIRD-PARTY RISK</div>', unsafe_allow_html=True)
+c = st.columns(6)
+with c[0]:
+    pcard("SOC 2 FAILURE RATE","https://www.aicpa-cima.com/",
+        "42%", "fail first audit attempt",
+        "▸ Access controls #1 failure area",
+        "–","d-n", "42% fail rate", "d-b", False,
+        facts=["CC6.1 logical access most failed","Monitoring gaps #2 finding","Evidence collection biggest hurdle","Avg prep time: 6-12 months","Readiness assessment saves 40%"])
+with c[1]:
+    pcard("VENDOR BREACHES","https://www.verizon.com/business/resources/reports/dbir/",
+        "15%", "of breaches via 3rd party",
+        "▸ Supply chain now #2 vector (IBM 2025)",
+        "–","d-n", "+62% YoY", "d-b", False,
+        facts=["MOVEit hit 2,700+ orgs via vendor","Avg 3rd party breach: $5.05M","Only 34% audit vendors annually","SBOMs becoming contractual req","TPRM programs underfunded 70%"])
+with c[2]:
+    pcard("REGULATORY FINES","https://www.enforcementtracker.com/",
+        "€2.1B+ /yr", "GDPR · FTC · State AGs combined",
+        "▸ Meta: €1.2B single fine (record)",
+        "–","d-n", "€4.5B+ total since 2018", "d-b", False,
+        facts=["SEC cyber disclosure rules active","CCPA/CPRA enforcement expanding","NIS2 penalties now in effect","DORA financial sector Jan 2025","State privacy laws: 19 enacted"])
+with c[3]:
+    pcard("AUDIT READINESS","https://www.isaca.org/",
+        "31%", "orgs always audit-ready",
+        "▸ 69% scramble before audits",
+        "–","d-n", "31% ready", "d-b", False,
+        facts=["Continuous compliance trending","GRC platforms growing 14% CAGR","Manual evidence: 40hrs/audit avg","Automation cuts prep time 60%","Framework mapping reduces overlap"])
+with c[4]:
+    pcard("CYBER INSURANCE","https://www.ibm.com/reports/data-breach",
+        "70%", "of orgs carry cyber insurance",
+        "▸ Premiums stabilizing after 2023 spike",
+        "–","d-n", "+300% since 2020", "d-b", False,
+        facts=["MFA now required for coverage","Exclusions expanding (war/APT)","IR retainer often mandatory","Claims avg 44% of policy limit","31% denied claims in 2024"])
+with c[5]:
+    pcard("FRAMEWORK ADOPTION","https://www.nist.gov/cyberframework",
+        "NIST CSF #1", "Most adopted framework globally",
+        "▸ 73% of US orgs use NIST CSF",
+        "–","d-n", "ISO 27001 #1 intl", "d-b", False,
+        facts=["NIST CSF 2.0 added Govern function","ISO 27001:2022 transition complete","CIS Controls popular for SMBs","CMMC 2.0 rollout underway","Zero Trust adoption: 67%"])
+
+# ─── PULSE ROW 3 ─────────────────────────────────────────────────────────────
+st.markdown(f'<div class="rl-p">⚡ SECTOR RISK & ADVERSARY INTELLIGENCE</div>', unsafe_allow_html=True)
+c = st.columns(6)
+with c[0]:
+    pcard("#1 TARGETED SECTOR","https://www.ibm.com/reports/data-breach",
+        "Healthcare", "$7.42M avg breach cost",
+        "▸ 67% hit by ransomware in 2024",
+        "–","d-n", "#1 for 14 yrs", "d-b", False,
+        facts=["PHI worth 10x credit card data","HIPAA fines add to breach cost","Change Healthcare: $22M ransom","Patient safety directly at risk","Legacy systems widespread"])
+with c[1]:
+    pcard("#2 TARGETED SECTOR","https://www.ibm.com/reports/data-breach",
+        "Financial", "$6.08M avg breach cost",
+        "▸ BEC & wire fraud primary vectors",
+        "–","d-n", "$6.08M avg", "d-b", False,
+        facts=["PCI DSS 4.0 compliance required","Real-time transaction fraud growing","SWIFT system attacks continue","Crypto exchanges targeted heavily","Regulatory fines compounding"])
+with c[2]:
+    pcard("#3 TARGETED SECTOR","https://www.ibm.com/reports/data-breach",
+        "Industrial/Mfg", "$5.56M avg breach cost",
+        "▸ OT/ICS convergence risk",
+        "–","d-n", "$5.56M avg", "d-b", False,
+        facts=["Ransomware: 62% pay the ransom","OT networks often unpatched","Air-gap myth increasingly false","Safety systems now IP-connected","Production downtime: $300k+/hour"])
+with c[3]:
+    pcard("#1 THREAT ACTOR","https://www.crowdstrike.com/global-threat-report/",
+        "DPRK / Lazarus", "$1.34B crypto stolen 2024",
+        "▸ 47 incidents · 61% of all theft",
+        "–","d-n", "$1.34B", "d-b", False,
+        facts=["Funds WMD & missile programs","IT workers infiltrate crypto firms","Social engineering campaigns","Tornado Cash for laundering","Active since 2009"])
+with c[4]:
+    pcard("eCRIME INDEX","https://www.crowdstrike.com/global-threat-report/",
+        "ECX: HIGH", "CrowdStrike eCrime Index",
+        "▸ Breakout time now 51 seconds",
+        "–","d-n", "48 min avg", "d-b", False,
+        facts=["Avg eCrime breakout: 48 min","Russia, China, Iran top sponsors","148 named threat actor groups","Access broker ecosystem thriving","RaaS lowering barrier to entry"])
+with c[5]:
+    pcard("TOP INITIAL ACCESS","https://www.sophos.com/en-us/content/state-of-ransomware",
+        "Exploited Vulns", "29% of ransomware entry",
+        "▸ Then: phishing 21% · creds 21%",
+        "–","d-n", "29% of attacks", "d-b", False,
+        facts=["VPN appliances: #1 target asset","Phishing: 21% of initial access","Stolen credentials: 21%","Brute force: 10%","Unknown/other: 19%"])
 
 st.markdown(f'<div class="rl-p">⚡ RANSOMWARE LANDSCAPE & EXTORTION ECONOMICS</div>', unsafe_allow_html=True)
 c = st.columns(6)
@@ -644,45 +684,295 @@ with c[5]:
             "–","d-n", "~2.2M events/day", "d-b", False,
             facts=["SSH & Telnet dominate consistently","HTTP/HTTPS growing share","SMB persists despite patches","Port 5555 (ADB) emerging target","Seasonal variation in attack patterns"])
 
-# ─── PULSE ROW 8: COMPLIANCE & THIRD-PARTY RISK ──────────────────────────────
-st.markdown(f'<div class="rl-p">📊 COMPLIANCE POSTURE &amp; THIRD-PARTY RISK</div>', unsafe_allow_html=True)
-c = st.columns(6)
+# ─── ROW 7 ────────────────────────────────────────────────────────────────────
+rl("▸ AI GOVERNANCE, PRIVACY & DATA PROTECTION  [EST]")
+c = st.columns(9)
 with c[0]:
-    pcard("SOC 2 FAILURE RATE","https://www.aicpa-cima.com/",
-        "42%", "fail first audit attempt",
-        "▸ Access controls #1 failure area",
-        "–","d-n", "42% fail rate", "d-b", False,
-        facts=["CC6.1 logical access most failed","Monitoring gaps #2 finding","Evidence collection biggest hurdle","Avg prep time: 6-12 months","Readiness assessment saves 40%"])
+    card("SHADOW AI","https://www.ibm.com/reports/data-breach",
+        "20%", "of breaches · IBM 2025",
+        "▸ Adds $670k to avg breach cost",
+        "–","d-n", "20% of breaches","d-b", False,
+        facts=["1,200 avg unauthorized apps/org","86% blind to AI data flows","65% exposed PII via shadow AI","Only 17% have technical controls","83% rely on training only"])
 with c[1]:
-    pcard("VENDOR BREACHES","https://www.verizon.com/business/resources/reports/dbir/",
-        "15%", "of breaches via 3rd party",
-        "▸ Supply chain now #2 vector (IBM 2025)",
-        "–","d-n", "+62% YoY", "d-b", False,
-        facts=["MOVEit hit 2,700+ orgs via vendor","Avg 3rd party breach: $5.05M","Only 34% audit vendors annually","SBOMs becoming contractual req","TPRM programs underfunded 70%"])
+    card("AI ACCESS CONTROLS","https://www.ibm.com/reports/data-breach",
+        "3%", "of breached orgs had controls",
+        "▸ 97% lacked AI access controls (IBM)",
+        "–","d-n", "97% unprotected","d-b", False,
+        facts=["NHI (non-human identity) risk","API keys to AI systems exposed","Model access logs rarely kept","RBAC for AI barely exists","AI asset inventory: rare"])
 with c[2]:
-    pcard("REGULATORY FINES","https://www.enforcementtracker.com/",
-        "€2.1B+ /yr", "GDPR · FTC · State AGs combined",
-        "▸ Meta: €1.2B single fine (record)",
-        "–","d-n", "€4.5B+ total since 2018", "d-b", False,
-        facts=["SEC cyber disclosure rules active","CCPA/CPRA enforcement expanding","NIS2 penalties now in effect","DORA financial sector Jan 2025","State privacy laws: 19 enacted"])
+    card("AI GOVERNANCE","https://www.ibm.com/reports/data-breach",
+        "37%", "have policies · IBM 2025",
+        "▸ 63% have no AI governance policy",
+        "–","d-n", "63% ungoverned","d-b", False,
+        facts=["Only 34% audit for rogue AI","61% lack governance technology","EU AI Act enforcement active","NIST AI RMF adoption growing","CAIO role emerging in C-suite"])
 with c[3]:
-    pcard("AUDIT READINESS","https://www.isaca.org/",
-        "31%", "orgs always audit-ready",
-        "▸ 69% scramble before audits",
-        "–","d-n", "31% ready", "d-b", False,
-        facts=["Continuous compliance trending","GRC platforms growing 14% CAGR","Manual evidence: 40hrs/audit avg","Automation cuts prep time 60%","Framework mapping reduces overlap"])
+    card("AI-USED IN ATTACKS","https://www.ibm.com/reports/data-breach",
+        "16%", "of breaches · IBM 2025",
+        "▸ Phishing (37%) & deepfakes (35%)",
+        "–","d-n", "16% of attacks","d-b", False,
+        facts=["LLM-crafted phishing at scale","Deepfake CEO fraud: $25M case","Polymorphic malware via AI","AI recon automates targeting","Voice cloning in 3 seconds"])
 with c[4]:
-    pcard("CYBER INSURANCE","https://www.ibm.com/reports/data-breach",
-        "70%", "of orgs carry cyber insurance",
-        "▸ Premiums stabilizing after 2023 spike",
-        "–","d-n", "+300% since 2020", "d-b", False,
-        facts=["MFA now required for coverage","Exclusions expanding (war/APT)","IR retainer often mandatory","Claims avg 44% of policy limit","31% denied claims in 2024"])
+    card("DATA PRIVACY LAWS","https://www.enforcementtracker.com/",
+        "19 States", "US state privacy laws enacted",
+        "▸ GDPR · CCPA · DORA · NIS2 active",
+        "–","d-n", "+7 states in 2024","d-b", False,
+        facts=["Federal privacy law still pending","CPRA enforcement expanding","Children's privacy bills surging","Health data privacy standalone","Cross-border transfer rules tighten"])
 with c[5]:
-    pcard("FRAMEWORK ADOPTION","https://www.nist.gov/cyberframework",
-        "NIST CSF #1", "Most adopted framework globally",
-        "▸ 73% of US orgs use NIST CSF",
-        "–","d-n", "ISO 27001 #1 intl", "d-b", False,
-        facts=["NIST CSF 2.0 added Govern function","ISO 27001:2022 transition complete","CIS Controls popular for SMBs","CMMC 2.0 rollout underway","Zero Trust adoption: 67%"])
+    card("DSAR VOLUME","https://www.cisco.com/c/en/us/about/trust-center/data-privacy-benchmark-study.html",
+        "+34% YoY", "data subject requests",
+        "▸ Avg 9.5 DSARs per 1,000 employees",
+        "–","d-n", "+34% YoY","d-b", False,
+        facts=["Right to delete: most common","Avg cost per DSAR: $1,524","30-day response deadline (GDPR)","Automation essential at scale","AI-assisted DSAR triage emerging"])
+with c[6]:
+    card("DATA CLASSIFICATION","https://www.ibm.com/reports/data-breach",
+        "35%", "of breach data was shadow data",
+        "▸ Unclassified data in 33% of orgs",
+        "–","d-n", "+35% shadow data","d-b", False,
+        facts=["Can't protect what you can't see","DLP tools catch only 35%","Cloud migration created blind spots","AI training data often unclassified","Data lineage tracking rare"])
+with c[7]:
+    card("ENCRYPTION RATE","https://www.ibm.com/reports/data-breach",
+        "28%", "of breaches had encrypted data",
+        "▸ Encryption reduces cost by $273k avg",
+        "–","d-n", "28% encrypted","d-g", False,
+        facts=["Only 28% of breached data encrypted","Key management biggest challenge","TLS 1.3 adoption growing","Post-quantum crypto prep starting","FHE still mostly experimental"])
+with c[8]:
+    card("AI INCIDENT RATE","https://www.ibm.com/reports/data-breach",
+        "13%", "had AI model/app breach · IBM",
+        "▸ 8% unsure if they were compromised",
+        "–","d-n", "13% breached","d-b", False,
+        facts=["60% led to data compromise","31% caused operational disruption","Model theft emerging risk","Training data poisoning growing","AI red-teaming still rare"])
+
+# ─── ROW 3 ────────────────────────────────────────────────────────────────────
+rl("▸ BREACH, INCIDENT & COST IMPACT  [EST]")
+c = st.columns(9)
+with c[0]:
+    card("RANSOMWARE","https://www.cisa.gov/stopransomware",
+        _f(ytd(RANSOM)), f"YTD · ~{RANSOM:,}/yr",
+        "▸ CrowdStrike GTR 2025 baseline",
+        f"+{per(RANSOM,30):,}","d-b", f"~{RANSOM:,}","d-b", False,
+        facts=["LockBit 3.0 most prolific group","Double extortion now standard","$1.1B total payments in 2024","Healthcare & mfg most targeted","Avg recovery: $2.73M excl. ransom"])
+with c[1]:
+    card("RECORDS BREACHED","https://www.verizon.com/business/resources/reports/dbir/",
+        f"{ytd(BREACH)//1_000_000}M", "YTD · DBIR 2025",
+        "▸ ~8 billion records per year",
+        f"+{per(BREACH,30)//1_000_000}M","d-b", "~8B/yr","d-b", False,
+        facts=["Credentials most breached data type","PII exposed in 62% of breaches","External actors cause 83% of breaches","Financial motive: 95% of attacks","Cloud breaches avg $5.17M cost"])
+with c[2]:
+    card("BEC (IC3)","https://www.ic3.gov/AnnualReport",
+        _f(ytd(BEC)), f"YTD · {BEC:,}/yr",
+        "▸ FBI Internet Crime Complaint Center",
+        f"+{per(BEC,30):,}","d-b", f"~{BEC:,}","d-b", False,
+        facts=["$2.9B in BEC losses in 2023","CEO impersonation most common","Real estate closings heavily targeted","AI deepfake voice used in BEC","Wire transfer avg loss: $137k"])
+with c[3]:
+    card("PHISHING","https://apwg.org/trendsreports/",
+        f"{ytd(PHISH)//1_000}k YTD", "APWG eCrime 2025",
+        "▸ ~5,397 campaigns per day",
+        f"+{per(PHISH,30):,}","d-b", f"~{PHISH//1_000}k","d-b", False,
+        facts=["Financial sector #1 target","QR code phishing (quishing) surging","AI-generated phish harder to detect","Avg click rate: 3.4% (KnowBe4)","Mobile phishing up 40% YoY"])
+with c[4]:
+    card("AVG BREACH COST","https://www.ibm.com/reports/data-breach",
+        "$4.44M", "global avg · IBM 2025",
+        "▸ Down 9% from $4.88M · IBM 2025",
+        "+$407k","d-b", "$4.44M","d-b", False,
+        facts=["US avg highest: $9.36M","AI-assisted defense saves $2.2M","Shadow data in 35% of breaches","Breach lifecycle: 258 days avg","IR plan saves avg $2.66M per breach"])
+with c[5]:
+    card("HEALTHCARE","https://www.ibm.com/reports/data-breach",
+        "$7.42M", "#1 sector avg · IBM 2025",
+        "▸ Down 24% but still #1 sector",
+        "+$814k","d-b", "$7.42M","d-b", False,
+        facts=["PHI most valuable on dark web","67% hit by ransomware (Sophos)","HIPAA fines compounding costs","Change Healthcare: $22M ransom","Patient safety directly impacted"])
+with c[6]:
+    card("RECOVERY COST","https://www.sophos.com/en-us/content/state-of-ransomware",
+        "$2.73M", "excl. ransom · Sophos",
+        "▸ Recovery cost excl. ransom paid",
+        "+$227k","d-b", "$2.73M","d-b", False,
+        facts=["Downtime: avg 24 days to recover","IT overtime & contractor costs surge","Reputational damage hard to quantify","Cyber insurance premiums up 30%","Legal & regulatory fees included"])
+with c[7]:
+    card("BREACH LIFECYCLE","https://www.ibm.com/reports/data-breach",
+        "241 Days", "ID+contain · IBM 2025",
+        "▸ IBM 2025 · 9-year low",
+        "-2d","d-g", "-19d","d-g", False,
+        facts=["AI/ML detection cuts 100+ days","Stolen creds: longest at 292 days","Phishing vectors: 261 days avg","IR team cuts lifecycle by 54 days","DevSecOps saves 68 days avg"])
+with c[8]:
+    card("AI-ENHANCED ATTKS","https://www.crowdstrike.com/global-threat-report/",
+        "+150% YoY", "vishing/deepfake · CS",
+        "▸ Voice phishing via AI up 442%",
+        "–","d-n", "+150%","d-b", False,
+        facts=["Deepfake video used in $25M scam","LLMs draft phishing at scale","AI voice cloning in 3 sec of audio","WormGPT/FraudGPT on dark web","AI detection tools still lagging"])
+
+# ─── ROW 6 ────────────────────────────────────────────────────────────────────
+rl("▸ INCIDENT RESPONSE & SOC OPERATIONS  [EST]")
+c = st.columns(9)
+with c[0]:
+    card("MEAN TIME DETECT","https://www.ibm.com/reports/data-breach",
+        "194 Days", "to identify · IBM 2025",
+        "▸ Down from 204 days in 2024",
+        "-2d","d-g", "-10d","d-g", False,
+        facts=["AI/automation cuts 80+ days","Stolen creds: longest at 247d","Internal detect: faster than ext","Ransomware detected fastest: 5d","MDR reduces to under 30 min"])
+with c[1]:
+    card("MEAN TIME CONTAIN","https://www.ibm.com/reports/data-breach",
+        "47 Days", "to contain · IBM 2025",
+        "▸ Down from 54 days in 2024",
+        "-1d","d-g", "-7d","d-g", False,
+        facts=["IR plan saves avg $2.66M","Tabletop exercises cut 14 days","Automated playbooks essential","SOAR adoption growing 25%/yr","Cross-team comms biggest delay"])
+with c[2]:
+    card("SOC ALERT VOLUME","https://www.crowdstrike.com/global-threat-report/",
+        "11,000/day", "avg enterprise SOC",
+        "▸ 45% are false positives",
+        "–","d-n", "+15% YoY","d-b", False,
+        facts=["Analyst fatigue: #1 SOC issue","SIEM generates 70% of alerts","AI triage reduces noise 80%","Avg response: 4.4 hrs per alert","Only 56% of alerts investigated"])
+with c[3]:
+    card("IR PLAN TESTED","https://www.ibm.com/reports/data-breach",
+        "56%", "test IR plans regularly",
+        "▸ Saves $2.66M per breach (IBM)",
+        "–","d-n", "+8% YoY","d-g", False,
+        facts=["44% never test IR plans","Tabletop exercises most common","Avg org: 1-2 exercises per year","Regulatory pressure increasing","Board reporting now expected"])
+with c[4]:
+    card("BACKUPS USED","https://www.sophos.com/en-us/content/state-of-ransomware",
+        "68%", "restore from backup · Sophos",
+        "▸ Up from 56% in 2023",
+        "–","d-n", "+12% YoY","d-g", False,
+        facts=["Immutable backups critical","Backup encryption by attackers","Air-gapped copies recommended","3-2-1-1-0 rule gaining traction","Avg restore time: 7-14 days"])
+with c[5]:
+    card("RANSOM REFUSED","https://www.ibm.com/reports/data-breach",
+        "63%", "refuse to pay · IBM 2025",
+        "▸ Up from 59% in 2024",
+        "–","d-n", "+4% YoY","d-g", False,
+        facts=["Law enforcement involvement saves $1M","FBI recovery success improving","Insurance less likely to cover","Public pressure to not pay","Fewer orgs involving law enforcement"])
+with c[6]:
+    card("DWELL TIME","https://www.mandiant.com/m-trends",
+        "10 Days", "median dwell · Mandiant 2025",
+        "▸ Down from 14 days in 2024",
+        "-0.8d","d-g", "-4d","d-g", False,
+        facts=["External notification: 13 days","Internal detection: 9 days","APAC longest dwell times","Ransomware forces faster detect","MDR services cut to <1 day"])
+with c[7]:
+    card("TOOL SPRAWL","https://www.ibm.com/reports/data-breach",
+        "76 Tools", "avg enterprise security stack",
+        "▸ Consolidation trend accelerating",
+        "–","d-n", "-12% YoY","d-g", False,
+        facts=["Complexity increases risk","Integration gaps exploited","XDR driving consolidation","Avg org: 6.7 vendors for security","Tool fatigue impacts SOC"])
+with c[8]:
+    card("RECOVERY TIME","https://www.ibm.com/reports/data-breach",
+        "100+ Days", "avg full recovery · IBM 2025",
+        "▸ 64% still recovering post-contain",
+        "–","d-n", "100+ avg","d-b", False,
+        facts=["25% recover in 101-125 days","25% take 126-150 days","Operational disruption in 31%","Customer notification delays","Reputational recovery: 6-12 months"])
+
+# ─── ROW 5 ────────────────────────────────────────────────────────────────────
+rl("▸ SECURITY POSTURE, DETECTION & WORKFORCE  [EST / LIVE]")
+c = st.columns(9)
+with c[0]:
+    card("ID-BASED ATTACKS","https://www.crowdstrike.com/global-threat-report/",
+        "75%", "use valid creds · CS",
+        "▸ Credential theft replaces exploits",
+        "–","d-n", "+75% YoY","d-b", False,
+        facts=["Kerberoasting up 583%","Access brokers sell for $10–$10k","Phishing-as-a-service growing","MFA fatigue attacks effective","Infostealers primary credential source"])
+with c[1]:
+    card("CLOUD MISCONFIG","https://www.verizon.com/business/resources/reports/dbir/",
+        "21%", "of breaches · DBIR",
+        "▸ S3 buckets, IAM, open ports",
+        "–","d-n", "+3% YoY","d-b", False,
+        facts=["Public S3 buckets still common","IAM over-provisioning endemic","Exposed API keys on GitHub","Multi-cloud complexity increasing","CSPM tools adoption growing"])
+with c[2]:
+    card("ZERO-TRUST","https://www.crowdstrike.com/global-threat-report/",
+        "67%", "orgs implementing",
+        "▸ Up from 55% in 2023",
+        "–","d-n", "+12% YoY","d-g", False,
+        facts=["NIST SP 800-207 defines framework","Identity-centric model dominant","Micro-segmentation adoption rising","US EO 14028 mandates ZTA for govt","Reduces breach cost by $1.76M (IBM)"])
+with c[3]:
+    card("AVG MTTD","https://www.mandiant.com/m-trends",
+        "10 Days", "dwell · Mandiant",
+        "▸ Down from 14 days in 2023",
+        "-0.8d","d-g", "-4d","d-g", False,
+        facts=["External notification: 13 days","Internal detection: 9 days","Ransomware detected fastest: 5 days","MDR services cut MTTD by 80%","APAC has longest dwell times"])
+with c[4]:
+    card("WORKFORCE GAP","https://www.isc2.org/Insights/2024/09/Workforce-Study",
+        "4.0M", "unfilled · ISC2 2024",
+        "▸ Global shortage worsening",
+        "–","d-n", "+12% YoY","d-b", False,
+        facts=["5.5M professionals worldwide","67% report staffing shortages","CISO burnout rate: 50%+","Avg US security analyst: $112k","AI expected to augment not replace"])
+with c[5]:
+    card("MFA ADOPTION","https://www.crowdstrike.com/global-threat-report/",
+        "64%", "enterprise coverage",
+        "▸ SMS-based MFA still vulnerable",
+        "–","d-n", "+8% YoY","d-g", False,
+        facts=["Phishing-resistant FIDO2 growing","SIM-swap bypasses SMS MFA","Push notification fatigue exploited","Hardware keys most secure option","Microsoft mandating MFA for Azure"])
+with c[6]:
+    card("PATCH LAG","https://www.qualys.com/research/threat-landscape-report/",
+        "30.6 Days", "avg patch · Qualys",
+        "▸ Critical vulns patched in 17.5d avg",
+        "-1.2d","d-g", "-5d","d-g", False,
+        facts=["25% of critical CVEs never patched","Weaponized vulns patched 3x faster","Edge devices slowest to patch","Windows patches fastest on avg","Auto-patching adoption increasing"])
+with c[7]:
+    card("SHADOW IT","https://www.ibm.com/reports/data-breach",
+        "30%", "of breaches · IBM",
+        "▸ Unmanaged assets, SaaS sprawl",
+        "–","d-n", "+5% YoY","d-b", False,
+        facts=["Avg org has 1,000+ SaaS apps","Only 30% are IT-sanctioned","Shadow AI becoming new risk","BYOD expands attack surface","SaaS misconfigs cause 43% of leaks"])
+with c[8]:
+    lcard("KEV VENDORS","https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        kev, lambda d:f'{d["vendors"]} total', lambda d:f'Unique vendors in KEV',
+        lambda d:f'▸ Top product: {d["tp"]} ({d["tpc"]})',
+        lambda d:"–", lambda d:f'{d["vendors"]}', d30c="d-n", d1yc="d-b", fsub="KEV vendors",
+        facts=["Microsoft leads with 300+ CVEs","Apple second-most represented","Fortinet/Cisco/Citrix VPN surge","Open-source libs increasingly added","IoT vendors now appearing in KEV"])
+
+# ─── ROW 4 ────────────────────────────────────────────────────────────────────
+rl("▸ FINANCIAL, REGULATORY & EMERGING THREATS  [EST]")
+c = st.columns(9)
+with c[0]:
+    card("GDPR FINES","https://www.enforcementtracker.com/",
+        f"€{ytd(GDPR)//1_000_000}M YTD", "~€2.1B/yr · DLA Piper",
+        "▸ Meta: largest single fine €1.2B",
+        f"+€{per(GDPR,30)//1_000_000}M","d-b", "~€2.1B","d-b", False,
+        facts=["Meta fined €1.2B (record single fine)","Ireland DPC issues most fines","72-hour breach notification required","€20M or 4% revenue cap per violation","2,000+ fines issued since 2018"])
+with c[1]:
+    card("IC3 LOSSES","https://www.ic3.gov/AnnualReport",
+        f"${ytd(IC3LOSS)//1_000_000_000:.1f}B YTD", "FBI · $12.5B/yr",
+        "▸ Investment fraud #1 loss category",
+        f"+${per(IC3LOSS,30)//1_000_000}M","d-b", "~$12.5B","d-b", False,
+        facts=["Investment scams: $4.57B in 2023","BEC: $2.9B in losses","Over 60+ age group: $3.4B lost","Crypto fraud surging globally","880,418 complaints filed in 2023"])
+with c[2]:
+    card("CRYPTO THEFT","https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2025/",
+        f"${ytd(CRYPTO)//1_000_000}M YTD", "Chainalysis · $2.2B/yr",
+        "▸ DPRK stole $1.34B (61% of total)",
+        f"+${per(CRYPTO,30)//1_000_000}M","d-b", "~$2.2B","d-b", False,
+        facts=["303 hacking incidents in 2024","Private key compromise: 43.8%","DMM Bitcoin: $305M single theft","DeFi platforms most targeted Q1","Centralized exchanges targeted Q2-Q3"])
+with c[3]:
+    card("DDoS ATTACKS","https://radar.cloudflare.com/",
+        f"{ytd(DDOS)//1_000_000:.1f}M YTD", "Cloudflare · 15.4M/yr",
+        "▸ 65% increase YoY",
+        f"+{per(DDOS,30)//1_000}k","d-b", "~15.4M","d-b", False,
+        facts=["Largest: 5.6 Tbps attack mitigated","HTTP floods now dominate L7","Gaming & gambling #1 targeted","Ransom DDoS on the rise","DNS amplification still prevalent"])
+with c[4]:
+    card("IoT MALWARE","https://www.sonicwall.com/threat-report/",
+        f"{ytd(IOT_MAL)//1_000_000}M YTD", "SonicWall · 112M/yr",
+        "▸ Smart devices as entry vectors",
+        f"+{per(IOT_MAL,30)//1_000_000}M","d-b", "~112M","d-b", False,
+        facts=["Mirai variants still dominant","Default credentials exploited","Smart cameras & routers top targets","Telnet/SSH brute force primary vector","OT/IoT convergence expanding risk"])
+with c[5]:
+    card("SUPPLY CHAIN","https://www.crowdstrike.com/global-threat-report/",
+        "+45% YoY", f"~{ytd(SUPPLY):,} YTD",
+        "▸ SolarWinds-class risk persists",
+        f"+{per(SUPPLY,30)}","d-b", f"~{SUPPLY:,}","d-b", False,
+        facts=["MOVEit: 2,700+ orgs compromised","npm/PyPI packages weaponized","SBOMs becoming mandatory","3CX attack via cascading supply chain","Third-party risk mgmt now critical"])
+with c[6]:
+    card("INSIDER THREAT","https://www.verizon.com/business/resources/reports/dbir/",
+        _f(ytd(INSIDER)), f"DBIR · {INSIDER:,}/yr",
+        "▸ Privilege misuse + error combined",
+        f"+{per(INSIDER,30):,}","d-b", f"~{INSIDER:,}","d-b", False,
+        facts=["Misdelivery: #1 error type","68% involve human element (DBIR)","DPRK IT workers infiltrating orgs","DLP tools only catch 35% of leaks","Privileged accounts most dangerous"])
+with c[7]:
+    card("EXPOSED CREDS","https://spycloud.com/",
+        f"{ytd(IDENTITY)//1_000_000_000:.1f}B YTD", "SpyCloud · 17B/yr",
+        "▸ Infostealer malware primary source",
+        f"+{per(IDENTITY,30)//1_000_000}M","d-b", "~17B","d-b", False,
+        facts=["Lumma & RedLine top infostealers","53% of users reuse passwords","Darknet markets sell for $1–$10/set","Session cookies bypass MFA","Genesis Market seized 2023"])
+with c[8]:
+    card("ILLICIT CRYPTO","https://www.chainalysis.com/blog/2025-crypto-crime-report-introduction/",
+        "$40.1B", "total illicit · Chainalysis",
+        "▸ 0.14% of on-chain volume",
+        "–","d-n", "$40.1B","d-b", False,
+        facts=["Ransomware payments: $1.1B","Stablecoins now dominant in crime","Huione Guarantee: crime marketplace","Sanctions evasion via crypto rising","Tornado Cash mixer OFAC-sanctioned"])
 
 # ─── ROW 1 ────────────────────────────────────────────────────────────────────
 rl("▸ VULNERABILITY & EXPLOIT INTELLIGENCE")
@@ -799,296 +1089,6 @@ with c[8]:
         "▸ Median payment · Sophos 2025",
         "+$133k","d-b", "+$1.6M","d-b", False,
         facts=["30% of demands exceed $5M","Only 24% pay the original ask","44% negotiated lower payments","Insurance covers avg 23% of cost","Govt sector paid highest: $2.2M"])
-
-# ─── ROW 3 ────────────────────────────────────────────────────────────────────
-rl("▸ BREACH, INCIDENT & COST IMPACT  [EST]")
-c = st.columns(9)
-with c[0]:
-    card("RANSOMWARE","https://www.cisa.gov/stopransomware",
-        _f(ytd(RANSOM)), f"YTD · ~{RANSOM:,}/yr",
-        "▸ CrowdStrike GTR 2025 baseline",
-        f"+{per(RANSOM,30):,}","d-b", f"~{RANSOM:,}","d-b", False,
-        facts=["LockBit 3.0 most prolific group","Double extortion now standard","$1.1B total payments in 2024","Healthcare & mfg most targeted","Avg recovery: $2.73M excl. ransom"])
-with c[1]:
-    card("RECORDS BREACHED","https://www.verizon.com/business/resources/reports/dbir/",
-        f"{ytd(BREACH)//1_000_000}M", "YTD · DBIR 2025",
-        "▸ ~8 billion records per year",
-        f"+{per(BREACH,30)//1_000_000}M","d-b", "~8B/yr","d-b", False,
-        facts=["Credentials most breached data type","PII exposed in 62% of breaches","External actors cause 83% of breaches","Financial motive: 95% of attacks","Cloud breaches avg $5.17M cost"])
-with c[2]:
-    card("BEC (IC3)","https://www.ic3.gov/AnnualReport",
-        _f(ytd(BEC)), f"YTD · {BEC:,}/yr",
-        "▸ FBI Internet Crime Complaint Center",
-        f"+{per(BEC,30):,}","d-b", f"~{BEC:,}","d-b", False,
-        facts=["$2.9B in BEC losses in 2023","CEO impersonation most common","Real estate closings heavily targeted","AI deepfake voice used in BEC","Wire transfer avg loss: $137k"])
-with c[3]:
-    card("PHISHING","https://apwg.org/trendsreports/",
-        f"{ytd(PHISH)//1_000}k YTD", "APWG eCrime 2025",
-        "▸ ~5,397 campaigns per day",
-        f"+{per(PHISH,30):,}","d-b", f"~{PHISH//1_000}k","d-b", False,
-        facts=["Financial sector #1 target","QR code phishing (quishing) surging","AI-generated phish harder to detect","Avg click rate: 3.4% (KnowBe4)","Mobile phishing up 40% YoY"])
-with c[4]:
-    card("AVG BREACH COST","https://www.ibm.com/reports/data-breach",
-        "$4.44M", "global avg · IBM 2025",
-        "▸ Down 9% from $4.88M · IBM 2025",
-        "+$407k","d-b", "$4.44M","d-b", False,
-        facts=["US avg highest: $9.36M","AI-assisted defense saves $2.2M","Shadow data in 35% of breaches","Breach lifecycle: 258 days avg","IR plan saves avg $2.66M per breach"])
-with c[5]:
-    card("HEALTHCARE","https://www.ibm.com/reports/data-breach",
-        "$7.42M", "#1 sector avg · IBM 2025",
-        "▸ Down 24% but still #1 sector",
-        "+$814k","d-b", "$7.42M","d-b", False,
-        facts=["PHI most valuable on dark web","67% hit by ransomware (Sophos)","HIPAA fines compounding costs","Change Healthcare: $22M ransom","Patient safety directly impacted"])
-with c[6]:
-    card("RECOVERY COST","https://www.sophos.com/en-us/content/state-of-ransomware",
-        "$2.73M", "excl. ransom · Sophos",
-        "▸ Recovery cost excl. ransom paid",
-        "+$227k","d-b", "$2.73M","d-b", False,
-        facts=["Downtime: avg 24 days to recover","IT overtime & contractor costs surge","Reputational damage hard to quantify","Cyber insurance premiums up 30%","Legal & regulatory fees included"])
-with c[7]:
-    card("BREACH LIFECYCLE","https://www.ibm.com/reports/data-breach",
-        "241 Days", "ID+contain · IBM 2025",
-        "▸ IBM 2025 · 9-year low",
-        "-2d","d-g", "-19d","d-g", False,
-        facts=["AI/ML detection cuts 100+ days","Stolen creds: longest at 292 days","Phishing vectors: 261 days avg","IR team cuts lifecycle by 54 days","DevSecOps saves 68 days avg"])
-with c[8]:
-    card("AI-ENHANCED ATTKS","https://www.crowdstrike.com/global-threat-report/",
-        "+150% YoY", "vishing/deepfake · CS",
-        "▸ Voice phishing via AI up 442%",
-        "–","d-n", "+150%","d-b", False,
-        facts=["Deepfake video used in $25M scam","LLMs draft phishing at scale","AI voice cloning in 3 sec of audio","WormGPT/FraudGPT on dark web","AI detection tools still lagging"])
-
-# ─── ROW 4 ────────────────────────────────────────────────────────────────────
-rl("▸ FINANCIAL, REGULATORY & EMERGING THREATS  [EST]")
-c = st.columns(9)
-with c[0]:
-    card("GDPR FINES","https://www.enforcementtracker.com/",
-        f"€{ytd(GDPR)//1_000_000}M YTD", "~€2.1B/yr · DLA Piper",
-        "▸ Meta: largest single fine €1.2B",
-        f"+€{per(GDPR,30)//1_000_000}M","d-b", "~€2.1B","d-b", False,
-        facts=["Meta fined €1.2B (record single fine)","Ireland DPC issues most fines","72-hour breach notification required","€20M or 4% revenue cap per violation","2,000+ fines issued since 2018"])
-with c[1]:
-    card("IC3 LOSSES","https://www.ic3.gov/AnnualReport",
-        f"${ytd(IC3LOSS)//1_000_000_000:.1f}B YTD", "FBI · $12.5B/yr",
-        "▸ Investment fraud #1 loss category",
-        f"+${per(IC3LOSS,30)//1_000_000}M","d-b", "~$12.5B","d-b", False,
-        facts=["Investment scams: $4.57B in 2023","BEC: $2.9B in losses","Over 60+ age group: $3.4B lost","Crypto fraud surging globally","880,418 complaints filed in 2023"])
-with c[2]:
-    card("CRYPTO THEFT","https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2025/",
-        f"${ytd(CRYPTO)//1_000_000}M YTD", "Chainalysis · $2.2B/yr",
-        "▸ DPRK stole $1.34B (61% of total)",
-        f"+${per(CRYPTO,30)//1_000_000}M","d-b", "~$2.2B","d-b", False,
-        facts=["303 hacking incidents in 2024","Private key compromise: 43.8%","DMM Bitcoin: $305M single theft","DeFi platforms most targeted Q1","Centralized exchanges targeted Q2-Q3"])
-with c[3]:
-    card("DDoS ATTACKS","https://radar.cloudflare.com/",
-        f"{ytd(DDOS)//1_000_000:.1f}M YTD", "Cloudflare · 15.4M/yr",
-        "▸ 65% increase YoY",
-        f"+{per(DDOS,30)//1_000}k","d-b", "~15.4M","d-b", False,
-        facts=["Largest: 5.6 Tbps attack mitigated","HTTP floods now dominate L7","Gaming & gambling #1 targeted","Ransom DDoS on the rise","DNS amplification still prevalent"])
-with c[4]:
-    card("IoT MALWARE","https://www.sonicwall.com/threat-report/",
-        f"{ytd(IOT_MAL)//1_000_000}M YTD", "SonicWall · 112M/yr",
-        "▸ Smart devices as entry vectors",
-        f"+{per(IOT_MAL,30)//1_000_000}M","d-b", "~112M","d-b", False,
-        facts=["Mirai variants still dominant","Default credentials exploited","Smart cameras & routers top targets","Telnet/SSH brute force primary vector","OT/IoT convergence expanding risk"])
-with c[5]:
-    card("SUPPLY CHAIN","https://www.crowdstrike.com/global-threat-report/",
-        "+45% YoY", f"~{ytd(SUPPLY):,} YTD",
-        "▸ SolarWinds-class risk persists",
-        f"+{per(SUPPLY,30)}","d-b", f"~{SUPPLY:,}","d-b", False,
-        facts=["MOVEit: 2,700+ orgs compromised","npm/PyPI packages weaponized","SBOMs becoming mandatory","3CX attack via cascading supply chain","Third-party risk mgmt now critical"])
-with c[6]:
-    card("INSIDER THREAT","https://www.verizon.com/business/resources/reports/dbir/",
-        _f(ytd(INSIDER)), f"DBIR · {INSIDER:,}/yr",
-        "▸ Privilege misuse + error combined",
-        f"+{per(INSIDER,30):,}","d-b", f"~{INSIDER:,}","d-b", False,
-        facts=["Misdelivery: #1 error type","68% involve human element (DBIR)","DPRK IT workers infiltrating orgs","DLP tools only catch 35% of leaks","Privileged accounts most dangerous"])
-with c[7]:
-    card("EXPOSED CREDS","https://spycloud.com/",
-        f"{ytd(IDENTITY)//1_000_000_000:.1f}B YTD", "SpyCloud · 17B/yr",
-        "▸ Infostealer malware primary source",
-        f"+{per(IDENTITY,30)//1_000_000}M","d-b", "~17B","d-b", False,
-        facts=["Lumma & RedLine top infostealers","53% of users reuse passwords","Darknet markets sell for $1–$10/set","Session cookies bypass MFA","Genesis Market seized 2023"])
-with c[8]:
-    card("ILLICIT CRYPTO","https://www.chainalysis.com/blog/2025-crypto-crime-report-introduction/",
-        "$40.1B", "total illicit · Chainalysis",
-        "▸ 0.14% of on-chain volume",
-        "–","d-n", "$40.1B","d-b", False,
-        facts=["Ransomware payments: $1.1B","Stablecoins now dominant in crime","Huione Guarantee: crime marketplace","Sanctions evasion via crypto rising","Tornado Cash mixer OFAC-sanctioned"])
-
-# ─── ROW 5 ────────────────────────────────────────────────────────────────────
-rl("▸ SECURITY POSTURE, DETECTION & WORKFORCE  [EST / LIVE]")
-c = st.columns(9)
-with c[0]:
-    card("ID-BASED ATTACKS","https://www.crowdstrike.com/global-threat-report/",
-        "75%", "use valid creds · CS",
-        "▸ Credential theft replaces exploits",
-        "–","d-n", "+75% YoY","d-b", False,
-        facts=["Kerberoasting up 583%","Access brokers sell for $10–$10k","Phishing-as-a-service growing","MFA fatigue attacks effective","Infostealers primary credential source"])
-with c[1]:
-    card("CLOUD MISCONFIG","https://www.verizon.com/business/resources/reports/dbir/",
-        "21%", "of breaches · DBIR",
-        "▸ S3 buckets, IAM, open ports",
-        "–","d-n", "+3% YoY","d-b", False,
-        facts=["Public S3 buckets still common","IAM over-provisioning endemic","Exposed API keys on GitHub","Multi-cloud complexity increasing","CSPM tools adoption growing"])
-with c[2]:
-    card("ZERO-TRUST","https://www.crowdstrike.com/global-threat-report/",
-        "67%", "orgs implementing",
-        "▸ Up from 55% in 2023",
-        "–","d-n", "+12% YoY","d-g", False,
-        facts=["NIST SP 800-207 defines framework","Identity-centric model dominant","Micro-segmentation adoption rising","US EO 14028 mandates ZTA for govt","Reduces breach cost by $1.76M (IBM)"])
-with c[3]:
-    card("AVG MTTD","https://www.mandiant.com/m-trends",
-        "10 Days", "dwell · Mandiant",
-        "▸ Down from 14 days in 2023",
-        "-0.8d","d-g", "-4d","d-g", False,
-        facts=["External notification: 13 days","Internal detection: 9 days","Ransomware detected fastest: 5 days","MDR services cut MTTD by 80%","APAC has longest dwell times"])
-with c[4]:
-    card("WORKFORCE GAP","https://www.isc2.org/Insights/2024/09/Workforce-Study",
-        "4.0M", "unfilled · ISC2 2024",
-        "▸ Global shortage worsening",
-        "–","d-n", "+12% YoY","d-b", False,
-        facts=["5.5M professionals worldwide","67% report staffing shortages","CISO burnout rate: 50%+","Avg US security analyst: $112k","AI expected to augment not replace"])
-with c[5]:
-    card("MFA ADOPTION","https://www.crowdstrike.com/global-threat-report/",
-        "64%", "enterprise coverage",
-        "▸ SMS-based MFA still vulnerable",
-        "–","d-n", "+8% YoY","d-g", False,
-        facts=["Phishing-resistant FIDO2 growing","SIM-swap bypasses SMS MFA","Push notification fatigue exploited","Hardware keys most secure option","Microsoft mandating MFA for Azure"])
-with c[6]:
-    card("PATCH LAG","https://www.qualys.com/research/threat-landscape-report/",
-        "30.6 Days", "avg patch · Qualys",
-        "▸ Critical vulns patched in 17.5d avg",
-        "-1.2d","d-g", "-5d","d-g", False,
-        facts=["25% of critical CVEs never patched","Weaponized vulns patched 3x faster","Edge devices slowest to patch","Windows patches fastest on avg","Auto-patching adoption increasing"])
-with c[7]:
-    card("SHADOW IT","https://www.ibm.com/reports/data-breach",
-        "30%", "of breaches · IBM",
-        "▸ Unmanaged assets, SaaS sprawl",
-        "–","d-n", "+5% YoY","d-b", False,
-        facts=["Avg org has 1,000+ SaaS apps","Only 30% are IT-sanctioned","Shadow AI becoming new risk","BYOD expands attack surface","SaaS misconfigs cause 43% of leaks"])
-with c[8]:
-    lcard("KEV VENDORS","https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
-        kev, lambda d:f'{d["vendors"]} total', lambda d:f'Unique vendors in KEV',
-        lambda d:f'▸ Top product: {d["tp"]} ({d["tpc"]})',
-        lambda d:"–", lambda d:f'{d["vendors"]}', d30c="d-n", d1yc="d-b", fsub="KEV vendors",
-        facts=["Microsoft leads with 300+ CVEs","Apple second-most represented","Fortinet/Cisco/Citrix VPN surge","Open-source libs increasingly added","IoT vendors now appearing in KEV"])
-
-# ─── ROW 6 ────────────────────────────────────────────────────────────────────
-rl("▸ INCIDENT RESPONSE & SOC OPERATIONS  [EST]")
-c = st.columns(9)
-with c[0]:
-    card("MEAN TIME DETECT","https://www.ibm.com/reports/data-breach",
-        "194 Days", "to identify · IBM 2025",
-        "▸ Down from 204 days in 2024",
-        "-2d","d-g", "-10d","d-g", False,
-        facts=["AI/automation cuts 80+ days","Stolen creds: longest at 247d","Internal detect: faster than ext","Ransomware detected fastest: 5d","MDR reduces to under 30 min"])
-with c[1]:
-    card("MEAN TIME CONTAIN","https://www.ibm.com/reports/data-breach",
-        "47 Days", "to contain · IBM 2025",
-        "▸ Down from 54 days in 2024",
-        "-1d","d-g", "-7d","d-g", False,
-        facts=["IR plan saves avg $2.66M","Tabletop exercises cut 14 days","Automated playbooks essential","SOAR adoption growing 25%/yr","Cross-team comms biggest delay"])
-with c[2]:
-    card("SOC ALERT VOLUME","https://www.crowdstrike.com/global-threat-report/",
-        "11,000/day", "avg enterprise SOC",
-        "▸ 45% are false positives",
-        "–","d-n", "+15% YoY","d-b", False,
-        facts=["Analyst fatigue: #1 SOC issue","SIEM generates 70% of alerts","AI triage reduces noise 80%","Avg response: 4.4 hrs per alert","Only 56% of alerts investigated"])
-with c[3]:
-    card("IR PLAN TESTED","https://www.ibm.com/reports/data-breach",
-        "56%", "test IR plans regularly",
-        "▸ Saves $2.66M per breach (IBM)",
-        "–","d-n", "+8% YoY","d-g", False,
-        facts=["44% never test IR plans","Tabletop exercises most common","Avg org: 1-2 exercises per year","Regulatory pressure increasing","Board reporting now expected"])
-with c[4]:
-    card("BACKUPS USED","https://www.sophos.com/en-us/content/state-of-ransomware",
-        "68%", "restore from backup · Sophos",
-        "▸ Up from 56% in 2023",
-        "–","d-n", "+12% YoY","d-g", False,
-        facts=["Immutable backups critical","Backup encryption by attackers","Air-gapped copies recommended","3-2-1-1-0 rule gaining traction","Avg restore time: 7-14 days"])
-with c[5]:
-    card("RANSOM REFUSED","https://www.ibm.com/reports/data-breach",
-        "63%", "refuse to pay · IBM 2025",
-        "▸ Up from 59% in 2024",
-        "–","d-n", "+4% YoY","d-g", False,
-        facts=["Law enforcement involvement saves $1M","FBI recovery success improving","Insurance less likely to cover","Public pressure to not pay","Fewer orgs involving law enforcement"])
-with c[6]:
-    card("DWELL TIME","https://www.mandiant.com/m-trends",
-        "10 Days", "median dwell · Mandiant 2025",
-        "▸ Down from 14 days in 2024",
-        "-0.8d","d-g", "-4d","d-g", False,
-        facts=["External notification: 13 days","Internal detection: 9 days","APAC longest dwell times","Ransomware forces faster detect","MDR services cut to <1 day"])
-with c[7]:
-    card("TOOL SPRAWL","https://www.ibm.com/reports/data-breach",
-        "76 Tools", "avg enterprise security stack",
-        "▸ Consolidation trend accelerating",
-        "–","d-n", "-12% YoY","d-g", False,
-        facts=["Complexity increases risk","Integration gaps exploited","XDR driving consolidation","Avg org: 6.7 vendors for security","Tool fatigue impacts SOC"])
-with c[8]:
-    card("RECOVERY TIME","https://www.ibm.com/reports/data-breach",
-        "100+ Days", "avg full recovery · IBM 2025",
-        "▸ 64% still recovering post-contain",
-        "–","d-n", "100+ avg","d-b", False,
-        facts=["25% recover in 101-125 days","25% take 126-150 days","Operational disruption in 31%","Customer notification delays","Reputational recovery: 6-12 months"])
-
-# ─── ROW 7 ────────────────────────────────────────────────────────────────────
-rl("▸ AI GOVERNANCE, PRIVACY & DATA PROTECTION  [EST]")
-c = st.columns(9)
-with c[0]:
-    card("SHADOW AI","https://www.ibm.com/reports/data-breach",
-        "20%", "of breaches · IBM 2025",
-        "▸ Adds $670k to avg breach cost",
-        "–","d-n", "20% of breaches","d-b", False,
-        facts=["1,200 avg unauthorized apps/org","86% blind to AI data flows","65% exposed PII via shadow AI","Only 17% have technical controls","83% rely on training only"])
-with c[1]:
-    card("AI ACCESS CONTROLS","https://www.ibm.com/reports/data-breach",
-        "3%", "of breached orgs had controls",
-        "▸ 97% lacked AI access controls (IBM)",
-        "–","d-n", "97% unprotected","d-b", False,
-        facts=["NHI (non-human identity) risk","API keys to AI systems exposed","Model access logs rarely kept","RBAC for AI barely exists","AI asset inventory: rare"])
-with c[2]:
-    card("AI GOVERNANCE","https://www.ibm.com/reports/data-breach",
-        "37%", "have policies · IBM 2025",
-        "▸ 63% have no AI governance policy",
-        "–","d-n", "63% ungoverned","d-b", False,
-        facts=["Only 34% audit for rogue AI","61% lack governance technology","EU AI Act enforcement active","NIST AI RMF adoption growing","CAIO role emerging in C-suite"])
-with c[3]:
-    card("AI-USED IN ATTACKS","https://www.ibm.com/reports/data-breach",
-        "16%", "of breaches · IBM 2025",
-        "▸ Phishing (37%) & deepfakes (35%)",
-        "–","d-n", "16% of attacks","d-b", False,
-        facts=["LLM-crafted phishing at scale","Deepfake CEO fraud: $25M case","Polymorphic malware via AI","AI recon automates targeting","Voice cloning in 3 seconds"])
-with c[4]:
-    card("DATA PRIVACY LAWS","https://www.enforcementtracker.com/",
-        "19 States", "US state privacy laws enacted",
-        "▸ GDPR · CCPA · DORA · NIS2 active",
-        "–","d-n", "+7 states in 2024","d-b", False,
-        facts=["Federal privacy law still pending","CPRA enforcement expanding","Children's privacy bills surging","Health data privacy standalone","Cross-border transfer rules tighten"])
-with c[5]:
-    card("DSAR VOLUME","https://www.cisco.com/c/en/us/about/trust-center/data-privacy-benchmark-study.html",
-        "+34% YoY", "data subject requests",
-        "▸ Avg 9.5 DSARs per 1,000 employees",
-        "–","d-n", "+34% YoY","d-b", False,
-        facts=["Right to delete: most common","Avg cost per DSAR: $1,524","30-day response deadline (GDPR)","Automation essential at scale","AI-assisted DSAR triage emerging"])
-with c[6]:
-    card("DATA CLASSIFICATION","https://www.ibm.com/reports/data-breach",
-        "35%", "of breach data was shadow data",
-        "▸ Unclassified data in 33% of orgs",
-        "–","d-n", "+35% shadow data","d-b", False,
-        facts=["Can't protect what you can't see","DLP tools catch only 35%","Cloud migration created blind spots","AI training data often unclassified","Data lineage tracking rare"])
-with c[7]:
-    card("ENCRYPTION RATE","https://www.ibm.com/reports/data-breach",
-        "28%", "of breaches had encrypted data",
-        "▸ Encryption reduces cost by $273k avg",
-        "–","d-n", "28% encrypted","d-g", False,
-        facts=["Only 28% of breached data encrypted","Key management biggest challenge","TLS 1.3 adoption growing","Post-quantum crypto prep starting","FHE still mostly experimental"])
-with c[8]:
-    card("AI INCIDENT RATE","https://www.ibm.com/reports/data-breach",
-        "13%", "had AI model/app breach · IBM",
-        "▸ 8% unsure if they were compromised",
-        "–","d-n", "13% breached","d-b", False,
-        facts=["60% led to data compromise","31% caused operational disruption","Model theft emerging risk","Training data poisoning growing","AI red-teaming still rare"])
 
 # ─── SOURCES BAR ──────────────────────────────────────────────────────────────
 ts = now_utc.strftime("%Y-%m-%d %H:%M UTC")
@@ -1246,5 +1246,5 @@ st.markdown(f"""
     <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="fl">
       Code and layout licensed CC BY-NC 4.0.</a></div>
   <div style="color:#2a2a3a;font-size:.65rem;">
-    SecAI-Nexus GRC [v29.0] · Live Data Engine ·
+    SecAI-Nexus GRC [v30.0] · Live Data Engine ·
     112 Metrics · 8 Intel Tables · 2 Maps · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
