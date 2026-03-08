@@ -354,7 +354,7 @@ with c[2]:
         facts=["Microsoft historically #1 in KEV","Apple & Google also top vendors","Edge devices increasingly targeted","Cisco/Fortinet VPN CVEs surging","Adobe & Oracle in top 10 vendors"])
 with c[3]:
     card("CVEs PUBLISHED","https://nvd.nist.gov/",
-        f"~{_f(CVE_TOT)}/yr", f"~{per(CVE_TOT,1)}/day · NVD 2024",
+        f"~{_f(CVE_TOT)}/yr", f"~{per(CVE_TOT,1)}/day · NVD 2025",
         f"▸ {_f(ytd(CVE_TOT))} YTD estimated",
         f"+{per(CVE_TOT,30):,}","d-b", f"~{_f(CVE_TOT)}","d-b", False,
         facts=["28% increase from 2023 volume","Only ~4% rated CVSS Critical","NVD backlog caused delays in 2024","CISA launched Vulnrichment program","Linux kernel #1 CVE source"])
@@ -373,7 +373,7 @@ with c[5]:
 with c[6]:
     card("TIME TO EXPLOIT","https://www.crowdstrike.com/global-threat-report/",
         "5 Days", "disclosure→exploit · CS GTR",
-        "▸ Down from 8 days in 2023",
+        "▸ Down from 8 days · accelerating",
         "-0.5d","d-g", "-3d","d-g", False,
         facts=["Some CVEs exploited same-day (0-day)","N-day exploitation accelerating","Automated scanners find vulns in hrs","Proof-of-concepts on GitHub in <24h","Edge devices exploited fastest"])
 with c[7]:
@@ -436,14 +436,14 @@ with c[6]:
         facts=["Siemens & Schneider top vendors","SCADA systems increasingly IP-connected","Purdue model zones blurring","IT/OT convergence expanding risk","Water & energy most targeted sectors"])
 with c[7]:
     card("RANSOMWARE HIT %","https://www.sophos.com/en-us/blog/the-state-of-ransomware-2024",
-        "59%", "of orgs hit · Sophos 2024",
-        "▸ Down from 66% in 2023",
+        "59%", "of orgs hit · Sophos 2025",
+        "▸ Sophos State of Ransomware 2025",
         "–","d-n", "-7% YoY","d-g", False,
         facts=["56% paid the ransom in 2024","Backups used in 68% of recoveries","49% of computers impacted on avg","Manufacturing: 62% payment rate","Exploited vulns: #1 root cause"])
 with c[8]:
     card("AVG RANSOM PAID","https://www.sophos.com/en-us/blog/the-state-of-ransomware-2024",
-        "$2.0M", "median · Sophos 2024",
-        "▸ 500% increase from $400k in 2023",
+        "$2.0M", "median · Sophos 2025",
+        "▸ Median payment · Sophos 2025",
         "+$133k","d-b", "+$1.6M","d-b", False,
         facts=["30% of demands exceed $5M","Only 24% pay the original ask","44% negotiated lower payments","Insurance covers avg 23% of cost","Govt sector paid highest: $2.2M"])
 
@@ -453,12 +453,12 @@ c = st.columns(9)
 with c[0]:
     card("RANSOMWARE","https://www.cisa.gov/stopransomware",
         _f(ytd(RANSOM)), f"YTD · ~{RANSOM:,}/yr",
-        "▸ CrowdStrike GTR 2024 baseline",
+        "▸ CrowdStrike GTR 2025 baseline",
         f"+{per(RANSOM,30):,}","d-b", f"~{RANSOM:,}","d-b", False,
         facts=["LockBit 3.0 most prolific group","Double extortion now standard","$1.1B total payments in 2024","Healthcare & mfg most targeted","Avg recovery: $2.73M excl. ransom"])
 with c[1]:
     card("RECORDS BREACHED","https://www.verizon.com/business/resources/reports/dbir/",
-        f"{ytd(BREACH)//1_000_000}M", "YTD · DBIR 2024",
+        f"{ytd(BREACH)//1_000_000}M", "YTD · DBIR 2025",
         "▸ ~8 billion records per year",
         f"+{per(BREACH,30)//1_000_000}M","d-b", "~8B/yr","d-b", False,
         facts=["Credentials most breached data type","PII exposed in 62% of breaches","External actors cause 83% of breaches","Financial motive: 95% of attacks","Cloud breaches avg $5.17M cost"])
@@ -470,32 +470,32 @@ with c[2]:
         facts=["$2.9B in BEC losses in 2023","CEO impersonation most common","Real estate closings heavily targeted","AI deepfake voice used in BEC","Wire transfer avg loss: $137k"])
 with c[3]:
     card("PHISHING","https://apwg.org/trendsreports/",
-        f"{ytd(PHISH)//1_000}k YTD", "APWG eCrime 2024",
+        f"{ytd(PHISH)//1_000}k YTD", "APWG eCrime 2025",
         "▸ ~5,397 campaigns per day",
         f"+{per(PHISH,30):,}","d-b", f"~{PHISH//1_000}k","d-b", False,
         facts=["Financial sector #1 target","QR code phishing (quishing) surging","AI-generated phish harder to detect","Avg click rate: 3.4% (KnowBe4)","Mobile phishing up 40% YoY"])
 with c[4]:
     card("AVG BREACH COST","https://www.ibm.com/security/data-breach",
-        "$4.88M", "global avg · IBM 2024",
-        "▸ Up 10% from $4.45M in 2023",
-        "+$407k","d-b", "$4.88M","d-b", False,
+        "$4.44M", "global avg · IBM 2025",
+        "▸ Down 9% from $4.88M · IBM 2025",
+        "+$407k","d-b", "$4.44M","d-b", False,
         facts=["US avg highest: $9.36M","AI-assisted defense saves $2.2M","Shadow data in 35% of breaches","Breach lifecycle: 258 days avg","IR plan saves avg $2.66M per breach"])
 with c[5]:
     card("HEALTHCARE","https://www.ibm.com/security/data-breach",
-        "$9.77M", "#1 sector avg · IBM 2024",
-        "▸ 14th consecutive year as costliest",
-        "+$814k","d-b", "$9.77M","d-b", False,
+        "$7.42M", "#1 sector avg · IBM 2025",
+        "▸ Down 24% but still #1 sector",
+        "+$814k","d-b", "$7.42M","d-b", False,
         facts=["PHI most valuable on dark web","67% hit by ransomware (Sophos)","HIPAA fines compounding costs","Change Healthcare: $22M ransom","Patient safety directly impacted"])
 with c[6]:
     card("RECOVERY COST","https://www.sophos.com/en-us/blog/the-state-of-ransomware-2024",
         "$2.73M", "excl. ransom · Sophos",
-        "▸ Up 50% from $1.82M in 2023",
+        "▸ Recovery cost excl. ransom paid",
         "+$227k","d-b", "$2.73M","d-b", False,
         facts=["Downtime: avg 24 days to recover","IT overtime & contractor costs surge","Reputational damage hard to quantify","Cyber insurance premiums up 30%","Legal & regulatory fees included"])
 with c[7]:
     card("BREACH LIFECYCLE","https://www.ibm.com/security/data-breach",
-        "258 Days", "ID+contain · IBM 2024",
-        "▸ 204 to identify + 54 to contain",
+        "241 Days", "ID+contain · IBM 2025",
+        "▸ IBM 2025 · 9-year low",
         "-2d","d-g", "-19d","d-g", False,
         facts=["AI/ML detection cuts 100+ days","Stolen creds: longest at 292 days","Phishing vectors: 261 days avg","IR team cuts lifecycle by 54 days","DevSecOps saves 68 days avg"])
 with c[8]:
@@ -529,7 +529,7 @@ with c[2]:
 with c[3]:
     card("DDoS ATTACKS","https://radar.cloudflare.com/reports/ddos-2024-q4",
         f"{ytd(DDOS)//1_000_000:.1f}M YTD", "Cloudflare · 15.4M/yr",
-        "▸ 65% increase YoY in 2024",
+        "▸ 65% increase YoY",
         f"+{per(DDOS,30)//1_000}k","d-b", "~15.4M","d-b", False,
         facts=["Largest: 5.6 Tbps attack mitigated","HTTP floods now dominate L7","Gaming & gambling #1 targeted","Ransom DDoS on the rise","DNS amplification still prevalent"])
 with c[4]:
@@ -558,7 +558,7 @@ with c[7]:
         facts=["Lumma & RedLine top infostealers","53% of users reuse passwords","Darknet markets sell for $1–$10/set","Session cookies bypass MFA","Genesis Market seized 2023"])
 with c[8]:
     card("ILLICIT CRYPTO","https://www.chainalysis.com/blog/2025-crypto-crime-report-introduction/",
-        "$40.1B", "total illicit 2024",
+        "$40.1B", "total illicit · Chainalysis",
         "▸ 0.14% of on-chain volume",
         "–","d-n", "$40.1B","d-b", False,
         facts=["Ransomware payments: $1.1B","Stablecoins now dominant in crime","Huione Guarantee: crime marketplace","Sanctions evasion via crypto rising","Tornado Cash mixer OFAC-sanctioned"])
@@ -620,6 +620,166 @@ with c[8]:
         lambda d:f'▸ Top product: {d["tp"]} ({d["tpc"]})',
         lambda d:"–", lambda d:f'{d["vendors"]}', d30c="d-n", d1yc="d-b", fsub="KEV vendors",
         facts=["Microsoft leads with 300+ CVEs","Apple second-most represented","Fortinet/Cisco/Citrix VPN surge","Open-source libs increasingly added","IoT vendors now appearing in KEV"])
+
+# ─── PULSE ROW 3 ─────────────────────────────────────────────────────────────
+st.markdown(f'<div class="rl-p">⚡ SECTOR RISK & ADVERSARY INTELLIGENCE</div>', unsafe_allow_html=True)
+c = st.columns(6)
+with c[0]:
+    pcard("#1 TARGETED SECTOR","https://www.ibm.com/security/data-breach",
+        "Healthcare", "$7.42M avg breach cost",
+        "▸ 67% hit by ransomware in 2024",
+        "–","d-n", "#1 for 14 yrs", "d-b", False,
+        facts=["PHI worth 10x credit card data","HIPAA fines add to breach cost","Change Healthcare: $22M ransom","Patient safety directly at risk","Legacy systems widespread"])
+with c[1]:
+    pcard("#2 TARGETED SECTOR","https://www.ibm.com/security/data-breach",
+        "Financial", "$6.08M avg breach cost",
+        "▸ BEC & wire fraud primary vectors",
+        "–","d-n", "$6.08M avg", "d-b", False,
+        facts=["PCI DSS 4.0 compliance required","Real-time transaction fraud growing","SWIFT system attacks continue","Crypto exchanges targeted heavily","Regulatory fines compounding"])
+with c[2]:
+    pcard("#3 TARGETED SECTOR","https://www.ibm.com/security/data-breach",
+        "Industrial/Mfg", "$5.56M avg breach cost",
+        "▸ OT/ICS convergence risk",
+        "–","d-n", "$5.56M avg", "d-b", False,
+        facts=["Ransomware: 62% pay the ransom","OT networks often unpatched","Air-gap myth increasingly false","Safety systems now IP-connected","Production downtime: $300k+/hour"])
+with c[3]:
+    pcard("#1 THREAT ACTOR","https://www.crowdstrike.com/global-threat-report/",
+        "DPRK / Lazarus", "$1.34B crypto stolen 2024",
+        "▸ 47 incidents · 61% of all theft",
+        "–","d-n", "$1.34B", "d-b", False,
+        facts=["Funds WMD & missile programs","IT workers infiltrate crypto firms","Social engineering campaigns","Tornado Cash for laundering","Active since 2009"])
+with c[4]:
+    pcard("eCRIME INDEX","https://www.crowdstrike.com/global-threat-report/",
+        "ECX: HIGH", "CrowdStrike eCrime Index",
+        "▸ Breakout time now 51 seconds",
+        "–","d-n", "48 min avg", "d-b", False,
+        facts=["Avg eCrime breakout: 48 min","Russia, China, Iran top sponsors","148 named threat actor groups","Access broker ecosystem thriving","RaaS lowering barrier to entry"])
+with c[5]:
+    pcard("TOP INITIAL ACCESS","https://www.sophos.com/en-us/blog/the-state-of-ransomware-2024",
+        "Exploited Vulns", "29% of ransomware entry",
+        "▸ Then: phishing 21% · creds 21%",
+        "–","d-n", "29% of attacks", "d-b", False,
+        facts=["VPN appliances: #1 target asset","Phishing: 21% of initial access","Stolen credentials: 21%","Brute force: 10%","Unknown/other: 19%"])
+
+# ─── PULSE ROW 6: AI & LLM THREAT INTELLIGENCE ───────────────────────────────
+st.markdown(f'<div class="rl-p">🤖 AI &amp; LLM THREAT INTELLIGENCE — EMERGING ATTACK LANDSCAPE</div>', unsafe_allow_html=True)
+c = st.columns(6)
+with c[0]:
+    pcard("DEEPFAKE VISHING","https://www.crowdstrike.com/global-threat-report/",
+        "+442% YoY", "AI voice cloning attacks",
+        "▸ 3 seconds of audio to clone a voice",
+        "–","d-n", "+442%", "d-b", False,
+        facts=["$25M Hong Kong deepfake video scam","CEO voice cloned for wire transfers","Real-time voice changers available","Detection tools still lagging behind","Microsoft VALL-E: 3-sec voice clone"])
+with c[1]:
+    pcard("LLM PHISHING","https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "AI-Crafted", "Perfect grammar, personalized",
+        "▸ No more typos to detect",
+        "–","d-n", "Scaling fast", "d-b", False,
+        facts=["ChatGPT-quality phish at scale","Spear-phishing personalized via OSINT","Multi-language campaigns trivial","WormGPT/FraudGPT on dark web","Traditional email filters bypassed"])
+with c[2]:
+    pcard("PROMPT INJECTION","https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "OWASP LLM #1", "Top LLM vulnerability",
+        "▸ Data exfiltration via chat interfaces",
+        "–","d-n", "#1 LLM risk", "d-b", False,
+        facts=["Direct & indirect injection types","System prompt extraction attacks","Plugin/tool abuse via injection","Jailbreaking bypasses safety filters","No complete mitigation exists yet"])
+with c[3]:
+    pcard("AI MODEL POISONING","https://atlas.mitre.org/",
+        "Supply Chain", "Backdoored ML models",
+        "▸ Hugging Face: 100+ malicious models found",
+        "–","d-n", "Growing", "d-b", False,
+        facts=["Training data contamination","Trojan triggers in model weights","Hugging Face scanning for malware","MITRE ATLAS tracks AI TTPs","Pickle deserialization RCE in models"])
+with c[4]:
+    pcard("AI-POWERED MALWARE","https://www.crowdstrike.com/global-threat-report/",
+        "Polymorphic", "AI-generated evasive code",
+        "▸ Metamorphic malware bypasses AV",
+        "–","d-n", "Emerging", "d-b", False,
+        facts=["BlackMamba: AI-powered keylogger","Code mutation evades signatures","LLMs write exploit code on demand","Automated vulnerability discovery","AI fuzzing finds 0-days faster"])
+with c[5]:
+    pcard("AI DEFENSE GAP","https://www.ibm.com/security/data-breach",
+        "$2.2M Saved", "AI-assisted defense (IBM)",
+        "▸ But only 28% of orgs fully deployed",
+        "–","d-n", "28% adoption", "d-g", False,
+        facts=["AI cuts breach lifecycle 100+ days","SOC copilots reduce alert fatigue","Automated threat hunting emerging","SOAR + AI = faster response","Skills gap driving AI adoption"])
+
+# ─── PULSE ROW 4 ─────────────────────────────────────────────────────────────
+st.markdown(f'<div class="rl-p">⚡ RANSOMWARE LANDSCAPE & EXTORTION ECONOMICS</div>', unsafe_allow_html=True)
+c = st.columns(6)
+with c[0]:
+    pcard("#1 RANSOMWARE GROUP","https://www.crowdstrike.com/global-threat-report/",
+        "LockBit 3.0", "Most prolific RaaS 2024",
+        "▸ ~25% of all ransomware globally",
+        "–","d-n", "25% share", "d-b", False,
+        facts=["Disrupted by FBI Feb 2024","Rebuilt within weeks of takedown","Affiliates operate globally","Cross-platform: Win, Linux, ESXi","Bug bounty program for their code"])
+with c[1]:
+    pcard("#2 RANSOMWARE GROUP","https://www.crowdstrike.com/global-threat-report/",
+        "ALPHV/BlackCat", "Seized then resurfaced",
+        "▸ $22M Change Healthcare ransom",
+        "–","d-n", "$22M single hit", "d-b", False,
+        facts=["Exit-scammed affiliates in 2024","Rust-based ransomware binary","FBI unseized the leak site","Healthcare mega-breach resulted","Parent group likely rebranding"])
+with c[2]:
+    pcard("#3 RANSOMWARE GROUP","https://www.crowdstrike.com/global-threat-report/",
+        "Cl0p / TA505", "Mass exploitation specialist",
+        "▸ MOVEit: 2,700+ orgs hit",
+        "–","d-n", "2,700+ victims", "d-b", False,
+        facts=["Zero-day exploitation focus","GoAnywhere: 130+ orgs in 2023","Extortion-only (no encryption)","$100M+ estimated total take","Russian-speaking operation"])
+with c[3]:
+    pcard("DOUBLE EXTORTION","https://www.crowdstrike.com/global-threat-report/",
+        "93%", "of ransomware uses data theft",
+        "▸ Encrypt + exfil + leak pressure",
+        "–","d-n", "+7% YoY", "d-b", False,
+        facts=["Data posted on leak sites","Triple extortion adds DDoS","Victims named publicly for pressure","Regulatory reporting forced by leaks","Even after paying, data may leak"])
+with c[4]:
+    pcard("RANSOM ECONOMY","https://www.chainalysis.com/blog/2025-crypto-crime-report-introduction/",
+        "$1.1B Paid", "Total payments 2024",
+        "▸ Down 35% from $1.7B peak 2023",
+        "–","d-n", "-35% YoY", "d-g", False,
+        facts=["Payment rate declining (25% Q4)","Better backups reducing payments","Law enforcement seizures effective","Insurance covering less of cost","Negotiation cutting amounts 50%+"])
+with c[5]:
+    pcard("DWELL → DEPLOY","https://www.crowdstrike.com/global-threat-report/",
+        "51 Seconds", "Fastest observed breakout",
+        "▸ Avg eCrime breakout: 48 min",
+        "–","d-n", "48 min avg", "d-b", False,
+        facts=["Nation-state avg: 79 min breakout","Lateral movement accelerating","Automated tools enable speed","Detection must be sub-minute","MDR/XDR essential for response"])
+
+# ─── PULSE ROW 5 ─────────────────────────────────────────────────────────────
+st.markdown(f'<div class="rl-p">⚡ ATTACK SURFACE & GLOBAL EXPOSURE INTEL</div>', unsafe_allow_html=True)
+c = st.columns(6)
+with c[0]:
+    pcard("EXPOSED SMB/445","https://www.shodan.io/search?query=port%3A445",
+        "~1.2M", "Internet-facing SMB",
+        "▸ EternalBlue still exploited",
+        "–","d-n", "1.2M exposed", "d-b", False,
+        facts=["WannaCry worm still propagating","SMBv1 should be disabled globally","US & China most exposed","Lateral movement primary use","Patch MS17-010 still critical"])
+with c[1]:
+    pcard("EXPOSED RDP/3389","https://www.shodan.io/search?query=port%3A3389",
+        "~3.5M", "Internet-facing RDP",
+        "▸ #1 ransomware initial access",
+        "–","d-n", "3.5M exposed", "d-b", False,
+        facts=["70%+ ransomware uses RDP entry","BlueKeep CVE still unpatched widely","NLA + MFA required minimum","VPN gateway recommended instead","Lockout policies reduce brute force"])
+with c[2]:
+    pcard("EXPOSED DATABASES","https://www.shodan.io/",
+        "~1.8M", "MySQL+Postgres+MongoDB",
+        "▸ Ports 3306, 5432, 27017 open",
+        "–","d-n", "1.8M exposed", "d-b", False,
+        facts=["MongoDB ransomware campaigns active","Default creds: root with no password","Elasticsearch also widely exposed","Cloud migrations expose DB ports","Data exfil in minutes once found"])
+with c[3]:
+    pcard("TOP TARGET COUNTRY","https://www.crowdstrike.com/global-threat-report/",
+        "United States", "46% of all targeted attacks",
+        "▸ Then: UK 8% · Germany 7%",
+        "–","d-n", "46% of attacks", "d-b", False,
+        facts=["Largest digital economy globally","Most Fortune 500 headquarters","Critical infrastructure concentration","English-language phishing at scale","Richest ransomware targets"])
+with c[4]:
+    pcard("TOP SOURCE COUNTRY","https://isc.sans.edu/",
+        "China", "~28% of malicious traffic",
+        "▸ Then: US 14% · Russia 11%",
+        "–","d-n", "~28% of scans", "d-b", False,
+        facts=["Cloud hosting used as proxy","Attribution extremely difficult","Many attacks routed through VPS","Russia for targeted/APT attacks","Vietnam & India rising sources"])
+with c[5]:
+    pcard("OPEN S3 BUCKETS","https://www.trendmicro.com/",
+        "~12,000+", "Publicly accessible storage",
+        "▸ AWS, Azure, GCP misconfigs",
+        "–","d-n", "12k+ exposed", "d-b", False,
+        facts=["Automated scanners find in minutes","PII, PHI, credentials exposed","AWS Block Public Access helps","Terraform misconfigs common cause","GrayhatWarfare indexes open buckets"])
 
 # ─── PULSE ROW 1: TOP ATTACKED PORTS ─────────────────────────────────────────
 st.markdown(f'<div class="rl-p">⚡ LIVE THREAT PULSE — SANS DSHIELD SENSOR NETWORK</div>', unsafe_allow_html=True)
@@ -714,166 +874,6 @@ with c[5]:
             "▸ Based on DShield historical patterns",
             "–","d-n", "~2.2M events/day", "d-b", False,
             facts=["SSH & Telnet dominate consistently","HTTP/HTTPS growing share","SMB persists despite patches","Port 5555 (ADB) emerging target","Seasonal variation in attack patterns"])
-
-# ─── PULSE ROW 3 ─────────────────────────────────────────────────────────────
-st.markdown(f'<div class="rl-p">⚡ SECTOR RISK & ADVERSARY INTELLIGENCE</div>', unsafe_allow_html=True)
-c = st.columns(6)
-with c[0]:
-    pcard("#1 TARGETED SECTOR","https://www.ibm.com/security/data-breach",
-        "Healthcare", "$9.77M avg breach cost",
-        "▸ 67% hit by ransomware in 2024",
-        "–","d-n", "#1 for 14 yrs", "d-b", False,
-        facts=["PHI worth 10x credit card data","HIPAA fines add to breach cost","Change Healthcare: $22M ransom","Patient safety directly at risk","Legacy systems widespread"])
-with c[1]:
-    pcard("#2 TARGETED SECTOR","https://www.ibm.com/security/data-breach",
-        "Financial", "$6.08M avg breach cost",
-        "▸ BEC & wire fraud primary vectors",
-        "–","d-n", "$6.08M avg", "d-b", False,
-        facts=["PCI DSS 4.0 compliance required","Real-time transaction fraud growing","SWIFT system attacks continue","Crypto exchanges targeted heavily","Regulatory fines compounding"])
-with c[2]:
-    pcard("#3 TARGETED SECTOR","https://www.ibm.com/security/data-breach",
-        "Industrial/Mfg", "$5.56M avg breach cost",
-        "▸ OT/ICS convergence risk",
-        "–","d-n", "$5.56M avg", "d-b", False,
-        facts=["Ransomware: 62% pay the ransom","OT networks often unpatched","Air-gap myth increasingly false","Safety systems now IP-connected","Production downtime: $300k+/hour"])
-with c[3]:
-    pcard("#1 THREAT ACTOR","https://www.crowdstrike.com/global-threat-report/",
-        "DPRK / Lazarus", "$1.34B crypto stolen 2024",
-        "▸ 47 incidents · 61% of all theft",
-        "–","d-n", "$1.34B", "d-b", False,
-        facts=["Funds WMD & missile programs","IT workers infiltrate crypto firms","Social engineering campaigns","Tornado Cash for laundering","Active since 2009"])
-with c[4]:
-    pcard("eCRIME INDEX","https://www.crowdstrike.com/global-threat-report/",
-        "ECX: HIGH", "CrowdStrike eCrime Index",
-        "▸ Breakout time now 2 min 7 sec",
-        "–","d-n", "2m 7s breakout", "d-b", False,
-        facts=["Avg eCrime breakout: 62 min","Russia, China, Iran top sponsors","148 named threat actor groups","Access broker ecosystem thriving","RaaS lowering barrier to entry"])
-with c[5]:
-    pcard("TOP INITIAL ACCESS","https://www.sophos.com/en-us/blog/the-state-of-ransomware-2024",
-        "Exploited Vulns", "29% of ransomware entry",
-        "▸ Then: phishing 21% · creds 21%",
-        "–","d-n", "29% of attacks", "d-b", False,
-        facts=["VPN appliances: #1 target asset","Phishing: 21% of initial access","Stolen credentials: 21%","Brute force: 10%","Unknown/other: 19%"])
-
-# ─── PULSE ROW 4 ─────────────────────────────────────────────────────────────
-st.markdown(f'<div class="rl-p">⚡ RANSOMWARE LANDSCAPE & EXTORTION ECONOMICS</div>', unsafe_allow_html=True)
-c = st.columns(6)
-with c[0]:
-    pcard("#1 RANSOMWARE GROUP","https://www.crowdstrike.com/global-threat-report/",
-        "LockBit 3.0", "Most prolific RaaS 2024",
-        "▸ ~25% of all ransomware globally",
-        "–","d-n", "25% share", "d-b", False,
-        facts=["Disrupted by FBI Feb 2024","Rebuilt within weeks of takedown","Affiliates operate globally","Cross-platform: Win, Linux, ESXi","Bug bounty program for their code"])
-with c[1]:
-    pcard("#2 RANSOMWARE GROUP","https://www.crowdstrike.com/global-threat-report/",
-        "ALPHV/BlackCat", "Seized then resurfaced",
-        "▸ $22M Change Healthcare ransom",
-        "–","d-n", "$22M single hit", "d-b", False,
-        facts=["Exit-scammed affiliates in 2024","Rust-based ransomware binary","FBI unseized the leak site","Healthcare mega-breach resulted","Parent group likely rebranding"])
-with c[2]:
-    pcard("#3 RANSOMWARE GROUP","https://www.crowdstrike.com/global-threat-report/",
-        "Cl0p / TA505", "Mass exploitation specialist",
-        "▸ MOVEit: 2,700+ orgs hit",
-        "–","d-n", "2,700+ victims", "d-b", False,
-        facts=["Zero-day exploitation focus","GoAnywhere: 130+ orgs in 2023","Extortion-only (no encryption)","$100M+ estimated total take","Russian-speaking operation"])
-with c[3]:
-    pcard("DOUBLE EXTORTION","https://www.crowdstrike.com/global-threat-report/",
-        "93%", "of ransomware uses data theft",
-        "▸ Encrypt + exfil + leak pressure",
-        "–","d-n", "+7% YoY", "d-b", False,
-        facts=["Data posted on leak sites","Triple extortion adds DDoS","Victims named publicly for pressure","Regulatory reporting forced by leaks","Even after paying, data may leak"])
-with c[4]:
-    pcard("RANSOM ECONOMY","https://www.chainalysis.com/blog/2025-crypto-crime-report-introduction/",
-        "$1.1B Paid", "Total payments 2024",
-        "▸ Down 35% from $1.7B peak 2023",
-        "–","d-n", "-35% YoY", "d-g", False,
-        facts=["Payment rate declining (25% Q4)","Better backups reducing payments","Law enforcement seizures effective","Insurance covering less of cost","Negotiation cutting amounts 50%+"])
-with c[5]:
-    pcard("DWELL → DEPLOY","https://www.crowdstrike.com/global-threat-report/",
-        "2m 07s", "Fastest observed breakout",
-        "▸ Avg eCrime breakout: 62 min",
-        "–","d-n", "62 min avg", "d-b", False,
-        facts=["Nation-state avg: 79 min breakout","Lateral movement accelerating","Automated tools enable speed","Detection must be sub-minute","MDR/XDR essential for response"])
-
-# ─── PULSE ROW 5 ─────────────────────────────────────────────────────────────
-st.markdown(f'<div class="rl-p">⚡ ATTACK SURFACE & GLOBAL EXPOSURE INTEL</div>', unsafe_allow_html=True)
-c = st.columns(6)
-with c[0]:
-    pcard("EXPOSED SMB/445","https://www.shodan.io/search?query=port%3A445",
-        "~1.2M", "Internet-facing SMB",
-        "▸ EternalBlue still exploited",
-        "–","d-n", "1.2M exposed", "d-b", False,
-        facts=["WannaCry worm still propagating","SMBv1 should be disabled globally","US & China most exposed","Lateral movement primary use","Patch MS17-010 still critical"])
-with c[1]:
-    pcard("EXPOSED RDP/3389","https://www.shodan.io/search?query=port%3A3389",
-        "~3.5M", "Internet-facing RDP",
-        "▸ #1 ransomware initial access",
-        "–","d-n", "3.5M exposed", "d-b", False,
-        facts=["70%+ ransomware uses RDP entry","BlueKeep CVE still unpatched widely","NLA + MFA required minimum","VPN gateway recommended instead","Lockout policies reduce brute force"])
-with c[2]:
-    pcard("EXPOSED DATABASES","https://www.shodan.io/",
-        "~1.8M", "MySQL+Postgres+MongoDB",
-        "▸ Ports 3306, 5432, 27017 open",
-        "–","d-n", "1.8M exposed", "d-b", False,
-        facts=["MongoDB ransomware campaigns active","Default creds: root with no password","Elasticsearch also widely exposed","Cloud migrations expose DB ports","Data exfil in minutes once found"])
-with c[3]:
-    pcard("TOP TARGET COUNTRY","https://www.crowdstrike.com/global-threat-report/",
-        "United States", "46% of all targeted attacks",
-        "▸ Then: UK 8% · Germany 7%",
-        "–","d-n", "46% of attacks", "d-b", False,
-        facts=["Largest digital economy globally","Most Fortune 500 headquarters","Critical infrastructure concentration","English-language phishing at scale","Richest ransomware targets"])
-with c[4]:
-    pcard("TOP SOURCE COUNTRY","https://isc.sans.edu/",
-        "China", "~28% of malicious traffic",
-        "▸ Then: US 14% · Russia 11%",
-        "–","d-n", "~28% of scans", "d-b", False,
-        facts=["Cloud hosting used as proxy","Attribution extremely difficult","Many attacks routed through VPS","Russia for targeted/APT attacks","Vietnam & India rising sources"])
-with c[5]:
-    pcard("OPEN S3 BUCKETS","https://www.trendmicro.com/",
-        "~12,000+", "Publicly accessible storage",
-        "▸ AWS, Azure, GCP misconfigs",
-        "–","d-n", "12k+ exposed", "d-b", False,
-        facts=["Automated scanners find in minutes","PII, PHI, credentials exposed","AWS Block Public Access helps","Terraform misconfigs common cause","GrayhatWarfare indexes open buckets"])
-
-# ─── PULSE ROW 6: AI & LLM THREAT INTELLIGENCE ───────────────────────────────
-st.markdown(f'<div class="rl-p">🤖 AI &amp; LLM THREAT INTELLIGENCE — EMERGING ATTACK LANDSCAPE</div>', unsafe_allow_html=True)
-c = st.columns(6)
-with c[0]:
-    pcard("DEEPFAKE VISHING","https://www.crowdstrike.com/global-threat-report/",
-        "+442% YoY", "AI voice cloning attacks",
-        "▸ 3 seconds of audio to clone a voice",
-        "–","d-n", "+442%", "d-b", False,
-        facts=["$25M Hong Kong deepfake video scam","CEO voice cloned for wire transfers","Real-time voice changers available","Detection tools still lagging behind","Microsoft VALL-E: 3-sec voice clone"])
-with c[1]:
-    pcard("LLM PHISHING","https://owasp.org/www-project-top-10-for-large-language-model-applications/",
-        "AI-Crafted", "Perfect grammar, personalized",
-        "▸ No more typos to detect",
-        "–","d-n", "Scaling fast", "d-b", False,
-        facts=["ChatGPT-quality phish at scale","Spear-phishing personalized via OSINT","Multi-language campaigns trivial","WormGPT/FraudGPT on dark web","Traditional email filters bypassed"])
-with c[2]:
-    pcard("PROMPT INJECTION","https://owasp.org/www-project-top-10-for-large-language-model-applications/",
-        "OWASP LLM #1", "Top LLM vulnerability",
-        "▸ Data exfiltration via chat interfaces",
-        "–","d-n", "#1 LLM risk", "d-b", False,
-        facts=["Direct & indirect injection types","System prompt extraction attacks","Plugin/tool abuse via injection","Jailbreaking bypasses safety filters","No complete mitigation exists yet"])
-with c[3]:
-    pcard("AI MODEL POISONING","https://atlas.mitre.org/",
-        "Supply Chain", "Backdoored ML models",
-        "▸ Hugging Face: 100+ malicious models found",
-        "–","d-n", "Growing", "d-b", False,
-        facts=["Training data contamination","Trojan triggers in model weights","Hugging Face scanning for malware","MITRE ATLAS tracks AI TTPs","Pickle deserialization RCE in models"])
-with c[4]:
-    pcard("AI-POWERED MALWARE","https://www.crowdstrike.com/global-threat-report/",
-        "Polymorphic", "AI-generated evasive code",
-        "▸ Metamorphic malware bypasses AV",
-        "–","d-n", "Emerging", "d-b", False,
-        facts=["BlackMamba: AI-powered keylogger","Code mutation evades signatures","LLMs write exploit code on demand","Automated vulnerability discovery","AI fuzzing finds 0-days faster"])
-with c[5]:
-    pcard("AI DEFENSE GAP","https://www.ibm.com/security/data-breach",
-        "$2.2M Saved", "AI-assisted defense (IBM)",
-        "▸ But only 28% of orgs fully deployed",
-        "–","d-n", "28% adoption", "d-g", False,
-        facts=["AI cuts breach lifecycle 100+ days","SOC copilots reduce alert fatigue","Automated threat hunting emerging","SOAR + AI = faster response","Skills gap driving AI adoption"])
 
 # ─── SOURCES BAR ──────────────────────────────────────────────────────────────
 ts = now_utc.strftime("%Y-%m-%d %H:%M UTC")
@@ -979,19 +979,19 @@ rwg = [[("LockBit 3.0",f"color:{CYAN};font-weight:bold;"),("~25%",f"color:{GREEN
 apts = [[("DPRK/Lazarus",f"color:{CYAN};font-weight:bold;"),("🇰🇵",f""),("Crypto theft",f"color:#888;font-size:.46rem;"),("$1.34B stolen",f"color:{RED};font-weight:bold;")],[("APT28/Fancy Bear",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("NATO espionage",f"color:#888;font-size:.46rem;"),("GRU 26165",f"color:{AMBER};")],[("APT29/Cozy Bear",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("SolarWinds, MS365",f"color:#888;font-size:.46rem;"),("SVR intel",f"color:{AMBER};")],[("Volt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("US critical infra",f"color:#888;font-size:.46rem;"),("LOTL attacks",f"color:{RED};font-weight:bold;")],[("Salt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("US telecoms 2024",f"color:#888;font-size:.46rem;"),("9 ISPs hit",f"color:{RED};font-weight:bold;")],[("APT41",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Espionage+crime",f"color:#888;font-size:.46rem;"),("Dual-purpose",f"color:{AMBER};")],[("Charming Kitten",f"color:{CYAN};font-weight:bold;"),("🇮🇷",f""),("Academic targets",f"color:#888;font-size:.46rem;"),("Social eng",f"color:{AMBER};")],[("Sandworm",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("Ukraine grid",f"color:#888;font-size:.46rem;"),("GRU 74455",f"color:{RED};font-weight:bold;")]]
 vectors = [[("Exploited Vulns",f"color:{CYAN};font-weight:bold;"),("32%",f"color:{RED};font-weight:bold;font-size:.6rem;"),("#1 root cause",f"color:#888;font-size:.46rem;")],[("Phishing/Social Eng",f"color:{CYAN};font-weight:bold;"),("21%",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("Email + voice + SMS",f"color:#888;font-size:.46rem;")],[("Stolen Credentials",f"color:{CYAN};font-weight:bold;"),("21%",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("Infostealers + dark web",f"color:#888;font-size:.46rem;")],[("Brute Force",f"color:{CYAN};font-weight:bold;"),("10%",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("RDP, SSH, VPN",f"color:#888;font-size:.46rem;")],[("Supply Chain",f"color:{CYAN};font-weight:bold;"),("8%",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("3rd party + software",f"color:#888;font-size:.46rem;")],[("Insider Threat",f"color:{CYAN};font-weight:bold;"),("5%",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("Privilege misuse + error",f"color:#888;font-size:.46rem;")],[("Zero-Day",f"color:{CYAN};font-weight:bold;"),("2%",f"color:{GREEN};font-weight:bold;font-size:.6rem;"),("Unknown vulns (rare)",f"color:#888;font-size:.46rem;")],[("Other/Unknown",f"color:{CYAN};font-weight:bold;"),("1%",f"color:{GREEN};font-weight:bold;font-size:.6rem;"),("Physical + misc",f"color:#888;font-size:.46rem;")]]
 topcves = [[("CVE-2024-3400",f"color:{CYAN};font-weight:bold;"),("Palo Alto PAN-OS",f"color:#888;font-size:.48rem;"),("10.0",f"color:{RED};font-weight:bold;"),("RCE · actively exploited",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-21887",f"color:{CYAN};font-weight:bold;"),("Ivanti Connect Secure",f"color:#888;font-size:.48rem;"),("9.1",f"color:{RED};font-weight:bold;"),("Auth bypass · mass exploit",f"color:{GREY};font-size:.46rem;")],[("CVE-2023-46805",f"color:{CYAN};font-weight:bold;"),("Ivanti Connect Secure",f"color:#888;font-size:.48rem;"),("8.2",f"color:{AMBER};font-weight:bold;"),("Chained with 21887",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-1709",f"color:{CYAN};font-weight:bold;"),("ConnectWise ScreenConnect",f"color:#888;font-size:.48rem;"),("10.0",f"color:{RED};font-weight:bold;"),("Auth bypass · trivial",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-24576",f"color:{CYAN};font-weight:bold;"),("Rust std::process (Win)",f"color:#888;font-size:.48rem;"),("10.0",f"color:{RED};font-weight:bold;"),("Cmd injection · BatBadBut",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-23897",f"color:{CYAN};font-weight:bold;"),("Jenkins CLI",f"color:#888;font-size:.48rem;"),("9.8",f"color:{RED};font-weight:bold;"),("Arbitrary file read",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-47575",f"color:{CYAN};font-weight:bold;"),("FortiManager",f"color:#888;font-size:.48rem;"),("9.8",f"color:{RED};font-weight:bold;"),("FortiJump · mass exploit",f"color:{GREY};font-size:.46rem;")],[("CVE-2024-0012",f"color:{CYAN};font-weight:bold;"),("Palo Alto PAN-OS",f"color:#888;font-size:.48rem;"),("9.8",f"color:{RED};font-weight:bold;"),("Auth bypass · mgmt iface",f"color:{GREY};font-size:.46rem;")]]
-costs = [[("Healthcare",f"color:{CYAN};font-weight:bold;"),("$9.77M",f"color:{RED};font-weight:bold;font-size:.6rem;"),("#1 for 14 yrs",f"color:#888;font-size:.46rem;")],[("Financial",f"color:{CYAN};font-weight:bold;"),("$6.08M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("BEC & wire fraud",f"color:#888;font-size:.46rem;")],[("Industrial",f"color:{CYAN};font-weight:bold;"),("$5.56M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("62% pay ransom",f"color:#888;font-size:.46rem;")],[("Energy",f"color:{CYAN};font-weight:bold;"),("$5.29M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("OT/ICS risk",f"color:#888;font-size:.46rem;")],[("Technology",f"color:{CYAN};font-weight:bold;"),("$5.45M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("Supply chain",f"color:#888;font-size:.46rem;")],[("Pharma",f"color:{CYAN};font-weight:bold;"),("$5.10M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("IP espionage",f"color:#888;font-size:.46rem;")],[("Government",f"color:{CYAN};font-weight:bold;"),("$4.73M",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("APT targeting",f"color:#888;font-size:.46rem;")],[("Retail",f"color:{CYAN};font-weight:bold;"),("$3.91M",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("POS & e-comm",f"color:#888;font-size:.46rem;")]]
+costs = [[("Healthcare",f"color:{CYAN};font-weight:bold;"),("$7.42M",f"color:{RED};font-weight:bold;font-size:.6rem;"),("#1 for 14 yrs",f"color:#888;font-size:.46rem;")],[("Financial",f"color:{CYAN};font-weight:bold;"),("$5.68M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("BEC & wire fraud",f"color:#888;font-size:.46rem;")],[("Industrial",f"color:{CYAN};font-weight:bold;"),("$5.21M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("OT convergence",f"color:#888;font-size:.46rem;")],[("Energy",f"color:{CYAN};font-weight:bold;"),("$4.89M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("Grid targeting",f"color:#888;font-size:.46rem;")],[("Technology",f"color:{CYAN};font-weight:bold;"),("$5.15M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("Supply chain",f"color:#888;font-size:.46rem;")],[("Pharma",f"color:{CYAN};font-weight:bold;"),("$4.97M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("IP espionage",f"color:#888;font-size:.46rem;")],[("Government",f"color:{CYAN};font-weight:bold;"),("$4.43M",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("APT targeting",f"color:#888;font-size:.46rem;")],[("Retail",f"color:{CYAN};font-weight:bold;"),("$3.75M",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("POS & e-comm",f"color:#888;font-size:.46rem;")]]
 
 g1, g2 = st.columns(2)
 with g1: st.markdown(_tbl("⚔ MITRE ATT&CK TOP TECHNIQUES", ["ID","Technique","Tactic","Freq","Sev"], attck, BLUE), unsafe_allow_html=True)
 with g2: st.markdown(_tbl("💀 TOP RANSOMWARE GROUPS", ["Group","Share","Victims","Status","Intel"], rwg, RED), unsafe_allow_html=True)
 g3, g4 = st.columns(2)
 with g3: st.markdown(_tbl("🌐 NATION-STATE APT GROUPS", ["Group","","Focus","Key Intel"], apts, AMBER), unsafe_allow_html=True)
-with g4: st.markdown(_tbl("📊 ATTACK VECTOR BREAKDOWN (DBIR 2024)", ["Vector","Share","Details"], vectors, GREEN), unsafe_allow_html=True)
+with g4: st.markdown(_tbl("📊 ATTACK VECTOR BREAKDOWN (DBIR 2025)", ["Vector","Share","Details"], vectors, GREEN), unsafe_allow_html=True)
 g5, g6 = st.columns(2)
-with g5: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (IBM 2024)", ["Industry","Avg Cost","Key Factor"], costs, GREEN), unsafe_allow_html=True)
+with g5: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (IBM 2025)", ["Industry","Avg Cost","Key Factor"], costs, GREEN), unsafe_allow_html=True)
 with g6: st.markdown(_tbl("🔥 TOP EXPLOITED CVEs 2024", ["CVE","Product","CVSS","Impact"], topcves, RED), unsafe_allow_html=True)
 
-st.markdown(f'<div style="font-size:.46rem;color:#505060;margin:2px 0 0 4px;">Sources: CrowdStrike GTR · Mandiant · Red Canary · IBM Cost of Breach 2024 · GDPR Enforcement Tracker · Chainalysis · Public disclosures</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="font-size:.46rem;color:#505060;margin:2px 0 0 4px;">Sources: CrowdStrike GTR · Mandiant · Red Canary · IBM Cost of Breach 2025 · GDPR Enforcement Tracker · Chainalysis · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1034,7 +1034,7 @@ with a1:
 with a2:
     st.markdown(_tbl("🤖 AI-POWERED CYBERCRIME & THREATS", ["Attack","Status","Details"], ai_crime, RED), unsafe_allow_html=True)
 
-st.markdown(f'<div style="font-size:.46rem;color:#505060;margin:2px 0 0 4px;">Sources: OWASP LLM Top 10 (2025) · MITRE ATLAS · CrowdStrike GTR 2024 · IBM X-Force · Chainalysis · Mandiant · Academic research</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="font-size:.46rem;color:#505060;margin:2px 0 0 4px;">Sources: OWASP LLM Top 10 (2025) · MITRE ATLAS · CrowdStrike GTR 2025 · IBM X-Force · Chainalysis · Mandiant · Academic research</div>', unsafe_allow_html=True)
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1076,5 +1076,5 @@ st.markdown(f"""
     <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="fl">
       Code and layout licensed CC BY-NC 4.0.</a></div>
   <div style="color:#2a2a3a;font-size:.65rem;">
-    SecAI-Nexus GRC [v25.0] · Live Data Engine ·
+    SecAI-Nexus GRC [v26.0] · Live Data Engine ·
     75 Indicators · 5 Facts Each · 2 Maps · 23 Frameworks · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
