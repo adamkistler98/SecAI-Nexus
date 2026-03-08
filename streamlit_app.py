@@ -96,7 +96,7 @@ def _g(url, t=14, **k):
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def fetch_kev():
-    r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
+    r = _g("https://www.cisa.gov/known-exploited-vulnerabilities-catalog")
     if not r: return None
     try:
         vulns = r.json().get("vulnerabilities",[]); now = datetime.now(timezone.utc)
@@ -308,7 +308,7 @@ st.markdown(f"""
     <span style="font-size:.7rem;font-weight:bold;color:{BLUE};text-shadow:0 0 4px {BLUE};">
       {now_utc.strftime("%H:%M:%S")} UTC · {now_utc.strftime("%Y-%m-%d")}</span>
     <span style="font-size:.5rem;color:#505060;margin-left:8px;">
-      <span class="sd sg"></span>NOMINAL · 87 METRICS · 8 INTEL TABLES · 3 CHARTS · 80 LINKS</span>
+      <span class="sd sg"></span>NOMINAL · 87 METRICS · 8 INTEL TABLES · 2 MAPS · 80 LINKS</span>
   </div>
 </div>""", unsafe_allow_html=True)
 
@@ -439,13 +439,13 @@ with c[6]:
         f"+{per(CISA_ICS,30)}","d-b", f"~{CISA_ICS}","d-b", False,
         facts=["Siemens & Schneider top vendors","SCADA systems increasingly IP-connected","Purdue model zones blurring","IT/OT convergence expanding risk","Water & energy most targeted sectors"])
 with c[7]:
-    card("RANSOMWARE HIT %","https://www.sophos.com/en-us/blog/the-state-of-ransomware-2024",
+    card("RANSOMWARE HIT %","https://www.sophos.com/en-us/content/state-of-ransomware",
         "59%", "of orgs hit · Sophos 2025",
         "▸ Sophos State of Ransomware 2025",
         "–","d-n", "-7% YoY","d-g", False,
         facts=["56% paid the ransom in 2024","Backups used in 68% of recoveries","49% of computers impacted on avg","Manufacturing: 62% payment rate","Exploited vulns: #1 root cause"])
 with c[8]:
-    card("AVG RANSOM PAID","https://www.sophos.com/en-us/blog/the-state-of-ransomware-2024",
+    card("AVG RANSOM PAID","https://www.sophos.com/en-us/content/state-of-ransomware",
         "$2.0M", "median · Sophos 2025",
         "▸ Median payment · Sophos 2025",
         "+$133k","d-b", "+$1.6M","d-b", False,
@@ -479,25 +479,25 @@ with c[3]:
         f"+{per(PHISH,30):,}","d-b", f"~{PHISH//1_000}k","d-b", False,
         facts=["Financial sector #1 target","QR code phishing (quishing) surging","AI-generated phish harder to detect","Avg click rate: 3.4% (KnowBe4)","Mobile phishing up 40% YoY"])
 with c[4]:
-    card("AVG BREACH COST","https://www.ibm.com/security/data-breach",
+    card("AVG BREACH COST","https://www.ibm.com/reports/data-breach",
         "$4.44M", "global avg · IBM 2025",
         "▸ Down 9% from $4.88M · IBM 2025",
         "+$407k","d-b", "$4.44M","d-b", False,
         facts=["US avg highest: $9.36M","AI-assisted defense saves $2.2M","Shadow data in 35% of breaches","Breach lifecycle: 258 days avg","IR plan saves avg $2.66M per breach"])
 with c[5]:
-    card("HEALTHCARE","https://www.ibm.com/security/data-breach",
+    card("HEALTHCARE","https://www.ibm.com/reports/data-breach",
         "$7.42M", "#1 sector avg · IBM 2025",
         "▸ Down 24% but still #1 sector",
         "+$814k","d-b", "$7.42M","d-b", False,
         facts=["PHI most valuable on dark web","67% hit by ransomware (Sophos)","HIPAA fines compounding costs","Change Healthcare: $22M ransom","Patient safety directly impacted"])
 with c[6]:
-    card("RECOVERY COST","https://www.sophos.com/en-us/blog/the-state-of-ransomware-2024",
+    card("RECOVERY COST","https://www.sophos.com/en-us/content/state-of-ransomware",
         "$2.73M", "excl. ransom · Sophos",
         "▸ Recovery cost excl. ransom paid",
         "+$227k","d-b", "$2.73M","d-b", False,
         facts=["Downtime: avg 24 days to recover","IT overtime & contractor costs surge","Reputational damage hard to quantify","Cyber insurance premiums up 30%","Legal & regulatory fees included"])
 with c[7]:
-    card("BREACH LIFECYCLE","https://www.ibm.com/security/data-breach",
+    card("BREACH LIFECYCLE","https://www.ibm.com/reports/data-breach",
         "241 Days", "ID+contain · IBM 2025",
         "▸ IBM 2025 · 9-year low",
         "-2d","d-g", "-19d","d-g", False,
@@ -531,7 +531,7 @@ with c[2]:
         f"+${per(CRYPTO,30)//1_000_000}M","d-b", "~$2.2B","d-b", False,
         facts=["303 hacking incidents in 2024","Private key compromise: 43.8%","DMM Bitcoin: $305M single theft","DeFi platforms most targeted Q1","Centralized exchanges targeted Q2-Q3"])
 with c[3]:
-    card("DDoS ATTACKS","https://radar.cloudflare.com/reports/ddos-2024-q4",
+    card("DDoS ATTACKS","https://radar.cloudflare.com/",
         f"{ytd(DDOS)//1_000_000:.1f}M YTD", "Cloudflare · 15.4M/yr",
         "▸ 65% increase YoY",
         f"+{per(DDOS,30)//1_000}k","d-b", "~15.4M","d-b", False,
@@ -555,7 +555,7 @@ with c[6]:
         f"+{per(INSIDER,30):,}","d-b", f"~{INSIDER:,}","d-b", False,
         facts=["Misdelivery: #1 error type","68% involve human element (DBIR)","DPRK IT workers infiltrating orgs","DLP tools only catch 35% of leaks","Privileged accounts most dangerous"])
 with c[7]:
-    card("EXPOSED CREDS","https://spycloud.com/resource/2024-annual-identity-exposure-report/",
+    card("EXPOSED CREDS","https://spycloud.com/",
         f"{ytd(IDENTITY)//1_000_000_000:.1f}B YTD", "SpyCloud · 17B/yr",
         "▸ Infostealer malware primary source",
         f"+{per(IDENTITY,30)//1_000_000}M","d-b", "~17B","d-b", False,
@@ -613,7 +613,7 @@ with c[6]:
         "-1.2d","d-g", "-5d","d-g", False,
         facts=["25% of critical CVEs never patched","Weaponized vulns patched 3x faster","Edge devices slowest to patch","Windows patches fastest on avg","Auto-patching adoption increasing"])
 with c[7]:
-    card("SHADOW IT","https://www.ibm.com/security/data-breach",
+    card("SHADOW IT","https://www.ibm.com/reports/data-breach",
         "30%", "of breaches · IBM",
         "▸ Unmanaged assets, SaaS sprawl",
         "–","d-n", "+5% YoY","d-b", False,
@@ -629,19 +629,19 @@ with c[8]:
 st.markdown(f'<div class="rl-p">⚡ SECTOR RISK & ADVERSARY INTELLIGENCE</div>', unsafe_allow_html=True)
 c = st.columns(6)
 with c[0]:
-    pcard("#1 TARGETED SECTOR","https://www.ibm.com/security/data-breach",
+    pcard("#1 TARGETED SECTOR","https://www.ibm.com/reports/data-breach",
         "Healthcare", "$7.42M avg breach cost",
         "▸ 67% hit by ransomware in 2024",
         "–","d-n", "#1 for 14 yrs", "d-b", False,
         facts=["PHI worth 10x credit card data","HIPAA fines add to breach cost","Change Healthcare: $22M ransom","Patient safety directly at risk","Legacy systems widespread"])
 with c[1]:
-    pcard("#2 TARGETED SECTOR","https://www.ibm.com/security/data-breach",
+    pcard("#2 TARGETED SECTOR","https://www.ibm.com/reports/data-breach",
         "Financial", "$6.08M avg breach cost",
         "▸ BEC & wire fraud primary vectors",
         "–","d-n", "$6.08M avg", "d-b", False,
         facts=["PCI DSS 4.0 compliance required","Real-time transaction fraud growing","SWIFT system attacks continue","Crypto exchanges targeted heavily","Regulatory fines compounding"])
 with c[2]:
-    pcard("#3 TARGETED SECTOR","https://www.ibm.com/security/data-breach",
+    pcard("#3 TARGETED SECTOR","https://www.ibm.com/reports/data-breach",
         "Industrial/Mfg", "$5.56M avg breach cost",
         "▸ OT/ICS convergence risk",
         "–","d-n", "$5.56M avg", "d-b", False,
@@ -659,7 +659,7 @@ with c[4]:
         "–","d-n", "48 min avg", "d-b", False,
         facts=["Avg eCrime breakout: 48 min","Russia, China, Iran top sponsors","148 named threat actor groups","Access broker ecosystem thriving","RaaS lowering barrier to entry"])
 with c[5]:
-    pcard("TOP INITIAL ACCESS","https://www.sophos.com/en-us/blog/the-state-of-ransomware-2024",
+    pcard("TOP INITIAL ACCESS","https://www.sophos.com/en-us/content/state-of-ransomware",
         "Exploited Vulns", "29% of ransomware entry",
         "▸ Then: phishing 21% · creds 21%",
         "–","d-n", "29% of attacks", "d-b", False,
@@ -699,13 +699,53 @@ with c[4]:
         "–","d-n", "Emerging", "d-b", False,
         facts=["BlackMamba: AI-powered keylogger","Code mutation evades signatures","LLMs write exploit code on demand","Automated vulnerability discovery","AI fuzzing finds 0-days faster"])
 with c[5]:
-    pcard("AI DEFENSE GAP","https://www.ibm.com/security/data-breach",
+    pcard("AI DEFENSE GAP","https://www.ibm.com/reports/data-breach",
         "$2.2M Saved", "AI-assisted defense (IBM)",
         "▸ But only 28% of orgs fully deployed",
         "–","d-n", "28% adoption", "d-g", False,
         facts=["AI cuts breach lifecycle 100+ days","SOC copilots reduce alert fatigue","Automated threat hunting emerging","SOAR + AI = faster response","Skills gap driving AI adoption"])
 
 # ─── PULSE ROW 4 ─────────────────────────────────────────────────────────────
+# ─── ROW 6: CLOUD, IDENTITY & AI GOVERNANCE METRICS [EST] ────────────────────
+st.markdown(f'<div class="rl-p">🔐 CLOUD, IDENTITY & AI GOVERNANCE METRICS</div>', unsafe_allow_html=True)
+c = st.columns(6)
+with c[0]:
+    pcard("MALWARE-FREE ATTACKS","https://www.crowdstrike.com/global-threat-report/",
+        "79%", "No malware used · CS GTR 2025",
+        "▸ Up from 71% in 2023",
+        "–","d-n", "+8% YoY", "d-b", False,
+        facts=["82% in 2026 GTR (latest)","Valid credentials primary vector","Access brokers up 50% YoY","Hands-on-keyboard intrusions","EDR evasion via LOLBins"])
+with c[1]:
+    pcard("CLOUD INTRUSIONS","https://www.crowdstrike.com/global-threat-report/",
+        "+26% YoY", "Cloud-focused attacks · CS",
+        "▸ Valid accounts 35% of cloud access",
+        "–","d-n", "+37% in 2026", "d-b", False,
+        facts=["Cloud-conscious actors growing","API key theft primary vector","S3/Azure Blob misconfig exploited","Cloud control plane attacks rising","266% surge from nation-states"])
+with c[2]:
+    pcard("SHADOW AI BREACHES","https://www.ibm.com/reports/data-breach",
+        "20%", "of breaches involve shadow AI",
+        "▸ Adds $670k to avg breach cost",
+        "–","d-n", "$4.63M avg", "d-b", False,
+        facts=["97% lacked AI access controls","63% have no AI governance policy","Only 34% audit for rogue AI","PII exposed in 65% of shadow AI","1,200 avg unauthorized apps/org"])
+with c[3]:
+    pcard("AI GOVERNANCE GAP","https://www.ibm.com/reports/data-breach",
+        "63%", "orgs lack AI governance · IBM",
+        "▸ Only 37% have approval processes",
+        "–","d-n", "63% ungoverned", "d-b", False,
+        facts=["13% had AI model/app breach","61% lack AI governance tech","CAIO role emerging in C-suite","EU AI Act enforcement began 2024","NIST AI RMF adoption growing"])
+with c[4]:
+    pcard("IDENTITY ATTACKS","https://www.crowdstrike.com/global-threat-report/",
+        "79%", "initial access via credentials",
+        "▸ Kerberoasting up 583% · CS GTR",
+        "–","d-n", "79% of attacks", "d-b", False,
+        facts=["DPRK placed 304 insider operatives","40% were insider threat ops","Access broker ads +50% YoY","Phishing-resistant MFA critical","FIDO2 hardware keys recommended"])
+with c[5]:
+    pcard("BREAKOUT TIME 2026","https://www.crowdstrike.com/global-threat-report/",
+        "29 Min Avg", "CS GTR 2026 · down 65%",
+        "▸ Fastest: 27 seconds",
+        "–","d-n", "was 48 min", "d-g", False,
+        facts=["Sub-minute breakouts recorded","Automated tooling enables speed","29 min avg in 2025 (from 48)","Detection must be real-time","MDR/XDR essential for response"])
+
 st.markdown(f'<div class="rl-p">⚡ RANSOMWARE LANDSCAPE & EXTORTION ECONOMICS</div>', unsafe_allow_html=True)
 c = st.columns(6)
 with c[0]:
@@ -884,17 +924,17 @@ ts = now_utc.strftime("%Y-%m-%d %H:%M UTC")
 st.markdown(f"""<div class="sb">
   <span style="color:#505060;font-weight:bold;text-transform:uppercase;letter-spacing:.4px;">
     <span class="sd sg"></span>LIVE&nbsp;</span>
-  <a href="https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json" target="_blank" class="sl">CISA KEV</a> ·
-  <a href="https://bazaar.abuse.ch/export/csv/recent/" target="_blank" class="sl">MalwareBazaar</a> ·
-  <a href="https://urlhaus.abuse.ch/downloads/text_online/" target="_blank" class="sl">URLhaus</a> ·
-  <a href="https://feodotracker.abuse.ch/downloads/ipblocklist.csv" target="_blank" class="sl">Feodo</a> ·
-  <a href="https://isc.sans.edu/api/" target="_blank" class="sl">SANS ISC</a> ·
-  <a href="https://check.torproject.org/torbulkexitlist" target="_blank" class="sl">Tor Exits</a>
+  <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sl">CISA KEV</a> ·
+  <a href="https://bazaar.abuse.ch/" target="_blank" class="sl">MalwareBazaar</a> ·
+  <a href="https://urlhaus.abuse.ch/" target="_blank" class="sl">URLhaus</a> ·
+  <a href="https://feodotracker.abuse.ch/" target="_blank" class="sl">Feodo</a> ·
+  <a href="https://isc.sans.edu/" target="_blank" class="sl">SANS ISC</a> ·
+  <a href="https://metrics.torproject.org/" target="_blank" class="sl">Tor Exits</a>
   <br><span style="color:#505060;font-weight:bold;text-transform:uppercase;letter-spacing:.4px;">
     <span class="sd sc"></span>PULSE&nbsp;</span>
-  <a href="https://isc.sans.edu/api/topports/records/10?json" target="_blank" class="sl">DShield TopPorts</a> ·
-  <a href="https://isc.sans.edu/api/topips/records/5?json" target="_blank" class="sl">DShield TopIPs</a> ·
-  <a href="https://isc.sans.edu/api/webhoneypotsummary/?json" target="_blank" class="sl">Honeypot</a>
+  <a href="https://isc.sans.edu/portreport.html" target="_blank" class="sl">DShield TopPorts</a> ·
+  <a href="https://isc.sans.edu/ipdetails.html" target="_blank" class="sl">DShield TopIPs</a> ·
+  <a href="https://isc.sans.edu/honeypot.html" target="_blank" class="sl">Honeypot</a>
   <br><span style="color:#505060;font-weight:bold;text-transform:uppercase;letter-spacing:.4px;">
     <span class="sd sa"></span>EST&nbsp;</span>
   <a href="https://nvd.nist.gov/" target="_blank" class="sl">NVD</a> ·
@@ -902,78 +942,18 @@ st.markdown(f"""<div class="sb">
   <a href="https://www.mandiant.com/m-trends" target="_blank" class="sl">M-Trends</a> ·
   <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="sl">CS GTR</a> ·
   <a href="https://www.ic3.gov/AnnualReport" target="_blank" class="sl">IC3</a> ·
-  <a href="https://www.ibm.com/security/data-breach" target="_blank" class="sl">IBM</a> ·
+  <a href="https://www.ibm.com/reports/data-breach" target="_blank" class="sl">IBM</a> ·
   <a href="https://apwg.org/trendsreports/" target="_blank" class="sl">APWG</a> ·
-  <a href="https://spycloud.com/resource/2024-annual-identity-exposure-report/" target="_blank" class="sl">SpyCloud</a> ·
+  <a href="https://spycloud.com/" target="_blank" class="sl">SpyCloud</a> ·
   <a href="https://www.enforcementtracker.com/" target="_blank" class="sl">GDPR</a> ·
-  <a href="https://radar.cloudflare.com/reports/ddos-2024-q4" target="_blank" class="sl">Cloudflare</a> ·
+  <a href="https://radar.cloudflare.com/" target="_blank" class="sl">Cloudflare</a> ·
   <a href="https://www.sonicwall.com/threat-report/" target="_blank" class="sl">SonicWall</a> ·
   <a href="https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2025/" target="_blank" class="sl">Chainalysis</a> ·
-  <a href="https://www.sophos.com/en-us/blog/the-state-of-ransomware-2024" target="_blank" class="sl">Sophos</a> ·
+  <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> ·
   <a href="https://www.isc2.org/Insights/2024/09/Workforce-Study" target="_blank" class="sl">ISC2</a> ·
   <a href="https://www.qualys.com/research/threat-landscape-report/" target="_blank" class="sl">Qualys</a>
   <span style="float:right;color:#1a1a2a;">↻ {ts}</span></div>""", unsafe_allow_html=True)
 
-
-# ─── ROW 6: CLOUD, IDENTITY & AI GOVERNANCE METRICS [EST] ────────────────────
-st.markdown(f'<div class="rl-p">🔐 CLOUD, IDENTITY & AI GOVERNANCE METRICS</div>', unsafe_allow_html=True)
-c = st.columns(6)
-with c[0]:
-    pcard("MALWARE-FREE ATTACKS","https://www.crowdstrike.com/global-threat-report/",
-        "79%", "No malware used · CS GTR 2025",
-        "▸ Up from 71% in 2023",
-        "–","d-n", "+8% YoY", "d-b", False,
-        facts=["82% in 2026 GTR (latest)","Valid credentials primary vector","Access brokers up 50% YoY","Hands-on-keyboard intrusions","EDR evasion via LOLBins"])
-with c[1]:
-    pcard("CLOUD INTRUSIONS","https://www.crowdstrike.com/global-threat-report/",
-        "+26% YoY", "Cloud-focused attacks · CS",
-        "▸ Valid accounts 35% of cloud access",
-        "–","d-n", "+37% in 2026", "d-b", False,
-        facts=["Cloud-conscious actors growing","API key theft primary vector","S3/Azure Blob misconfig exploited","Cloud control plane attacks rising","266% surge from nation-states"])
-with c[2]:
-    pcard("SHADOW AI BREACHES","https://www.ibm.com/reports/data-breach",
-        "20%", "of breaches involve shadow AI",
-        "▸ Adds $670k to avg breach cost",
-        "–","d-n", "$4.63M avg", "d-b", False,
-        facts=["97% lacked AI access controls","63% have no AI governance policy","Only 34% audit for rogue AI","PII exposed in 65% of shadow AI","1,200 avg unauthorized apps/org"])
-with c[3]:
-    pcard("AI GOVERNANCE GAP","https://www.ibm.com/reports/data-breach",
-        "63%", "orgs lack AI governance · IBM",
-        "▸ Only 37% have approval processes",
-        "–","d-n", "63% ungoverned", "d-b", False,
-        facts=["13% had AI model/app breach","61% lack AI governance tech","CAIO role emerging in C-suite","EU AI Act enforcement began 2024","NIST AI RMF adoption growing"])
-with c[4]:
-    pcard("IDENTITY ATTACKS","https://www.crowdstrike.com/global-threat-report/",
-        "79%", "initial access via credentials",
-        "▸ Kerberoasting up 583% · CS GTR",
-        "–","d-n", "79% of attacks", "d-b", False,
-        facts=["DPRK placed 304 insider operatives","40% were insider threat ops","Access broker ads +50% YoY","Phishing-resistant MFA critical","FIDO2 hardware keys recommended"])
-with c[5]:
-    pcard("BREAKOUT TIME 2026","https://www.crowdstrike.com/global-threat-report/",
-        "29 Min Avg", "CS GTR 2026 · down 65%",
-        "▸ Fastest: 27 seconds",
-        "–","d-n", "was 48 min", "d-g", False,
-        facts=["Sub-minute breakouts recorded","Automated tooling enables speed","29 min avg in 2025 (from 48)","Detection must be real-time","MDR/XDR essential for response"])
-
-# ── TREND CHARTS ──────────────────────────────────────────────────────────────
-import json
-st.markdown(f"""<div style="margin:12px 0 8px;text-align:center;">
-  <span style="font-size:.82rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;color:{GREEN};">
-    ▸ TREND ANALYSIS</span></div>""", unsafe_allow_html=True)
-ch1,ch2,ch3 = st.columns(3)
-with ch1:
-    import pandas as pd
-    df_cost = pd.DataFrame({"Year":["2020","2021","2022","2023","2024","2025"],"Cost":[3.86,4.24,4.35,4.45,4.88,4.44]})
-    st.markdown(f'<div style="font-size:.58rem;color:{CYAN};text-transform:uppercase;text-align:center;margin-bottom:2px;">Avg Global Breach Cost ($M) · IBM</div>', unsafe_allow_html=True)
-    st.bar_chart(df_cost.set_index("Year"), color="#00ff41", height=180, use_container_width=True)
-with ch2:
-    df_break = pd.DataFrame({"Year":["2022","2023","2024","2025"],"Minutes":[84,62,48,29]})
-    st.markdown(f'<div style="font-size:.58rem;color:{CYAN};text-transform:uppercase;text-align:center;margin-bottom:2px;">Avg Breakout Time (Min) · CrowdStrike</div>', unsafe_allow_html=True)
-    st.bar_chart(df_break.set_index("Year"), color="#ff4b4b", height=180, use_container_width=True)
-with ch3:
-    df_mf = pd.DataFrame({"Year":["2021","2022","2023","2024","2025"],"Pct":[62,71,75,79,82]})
-    st.markdown(f'<div style="font-size:.58rem;color:{CYAN};text-transform:uppercase;text-align:center;margin-bottom:2px;">Malware-Free Attacks (%) · CrowdStrike</div>', unsafe_allow_html=True)
-    st.bar_chart(df_mf.set_index("Year"), color="#008aff", height=180, use_container_width=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  COMBINED THREAT INTEL SECTION
@@ -988,7 +968,7 @@ st.markdown(f"""<div style="margin:12px 0 10px;text-align:center;">
 # ── CISA KEV TABLE ────────────────────────────────────────────────────────────
 @st.cache_data(ttl=3600, show_spinner=False)
 def fetch_kev_recent():
-    r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
+    r = _g("https://www.cisa.gov/known-exploited-vulnerabilities-catalog")
     if not r: return None
     try: return sorted(r.json().get("vulnerabilities",[]), key=lambda x:x.get("dateAdded",""), reverse=True)[:15]
     except: return None
@@ -1096,4 +1076,4 @@ st.markdown(f"""
       Code and layout licensed CC BY-NC 4.0.</a></div>
   <div style="color:#2a2a3a;font-size:.65rem;">
     SecAI-Nexus GRC [v27.0] · Live Data Engine ·
-    87 Metrics · 3 Charts · 8 Intel Tables · 2 Maps · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
+    87 Metrics · 8 Intel Tables · 2 Maps · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
