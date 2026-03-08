@@ -24,7 +24,16 @@ st.markdown(csp_meta, unsafe_allow_html=True)
 
 st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🤖",
                    initial_sidebar_state="collapsed")
-
+# ====================== LINKEDIN PREVIEW IMAGE ======================
+st.markdown("""
+<meta property="og:title" content="SecAI-Nexus GRC — Real-Time Cyber Threat Intelligence Dashboard">
+<meta property="og:description" content="Free open-source platform with 112 live risk metrics, AI/LLM threat tracking, ransomware intelligence, and global attack maps. Built for security & GRC teams.">
+<meta property="og:image" content="https://raw.githubusercontent.com/adamkistler98/SecAI-Nexus/main/assets/SecAiImage.png">
+<meta property="og:url" content="https://secai-nexus.streamlit.app/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+""", unsafe_allow_html=True)
+# ===================================================================
 MONO  = "'Courier New', Courier, monospace"
 GREEN = "#00ff41"; BLUE = "#008aff"; RED = "#ff4b4b"
 AMBER = "#ffaa00"; CYAN = "#00e5ff"; BG = "#050505"; CARD = "#0a0a0a"
