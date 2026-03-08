@@ -136,14 +136,14 @@ SecAI-Nexus is designed with a minimal attack surface:
 - **No data storage** — Nothing persisted to disk, database, or session
 - **No authentication** — No credentials, tokens, or API keys used or stored
 - **No outbound writes** — All API calls are read-only GET requests to public endpoints
-- **Sandboxed iframes** — Embedded maps use `sandbox="allow-scripts allow-same-origin allow-forms allow-popups"` to restrict third-party content
+- **Sandboxed iframes** — Embedded maps restricted via CSP and sandbox attributes
 - **No cookies or tracking** — No analytics, telemetry, or user fingerprinting
-- **Fallback data** — If APIs are unreachable, static baseline data renders (no errors or empty states)
-- **DevSecOps** — GitLab CI/CD pipeline runs SAST (Semgrep/Bandit) on every commit
+- **Fallback data** — Static baselines render when APIs are unreachable
+- **Hardened controls** — Strict CSP, X-Frame-Options DENY, Referrer-Policy, XSRF protection, CORS disabled, response size/type validation, session rate limiting
+- **Pinned dependencies** — Exact versions locked to prevent supply-chain attacks
+- **DevSecOps** — GitLab CI/CD runs SAST, dependency scanning, and secret detection on every commit
 
-For vulnerability reports, see [SECURITY.md](SECURITY.md).
-
----
+For full details, see [SECURITY.md](SECURITY.md).
 
 ## 📄 License
 
