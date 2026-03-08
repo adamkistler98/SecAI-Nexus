@@ -94,7 +94,7 @@ def _g(url, t=14, **k):
     try: r = S.get(url, timeout=t, **k); r.raise_for_status(); return r
     except: return None
 
-@st.cache_data(ttl=3600, show_spinner=False)
+@st.cache_data(ttl=43200, show_spinner=False)
 def fetch_kev():
     r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
     if not r: return None
@@ -118,7 +118,7 @@ def fetch_kev():
                 "tp":tp,"tpc":prods.get(tp,0),"top3v":top3v,"prods":len(prods)}
     except: return None
 
-@st.cache_data(ttl=1800, show_spinner=False)
+@st.cache_data(ttl=43200, show_spinner=False)
 def fetch_bazaar():
     r = _g("https://bazaar.abuse.ch/export/csv/recent/", t=22)
     if not r: return None
@@ -146,13 +146,13 @@ def fetch_bazaar():
                 "top3":top3,"top_ft":top_ft}
     except: return None
 
-@st.cache_data(ttl=600, show_spinner=False)
+@st.cache_data(ttl=43200, show_spinner=False)
 def fetch_urlhaus():
     r = _g("https://urlhaus.abuse.ch/downloads/text_online/", t=15)
     if not r: return None
     return {"online":len([l for l in r.text.splitlines() if l.strip() and not l.startswith("#")])}
 
-@st.cache_data(ttl=900, show_spinner=False)
+@st.cache_data(ttl=43200, show_spinner=False)
 def fetch_feodo():
     r = _g("https://feodotracker.abuse.ch/downloads/ipblocklist.csv", t=15)
     if not r: return None
@@ -170,21 +170,21 @@ def fetch_feodo():
         return {"on":on,"off":off,"total":len(lines),"top_mw":top_mw,"mw_count":mw.get(top_mw,0),"mw_fams":len(mw)}
     except: return None
 
-@st.cache_data(ttl=1800, show_spinner=False)
+@st.cache_data(ttl=43200, show_spinner=False)
 def fetch_sans():
     r = _g("https://isc.sans.edu/api/infocon?json", t=12)
     if not r: return None
     try: return {"infocon":r.json().get("status","?")}
     except: return None
 
-@st.cache_data(ttl=3600, show_spinner=False)
+@st.cache_data(ttl=43200, show_spinner=False)
 def fetch_tor():
     r = _g("https://check.torproject.org/torbulkexitlist", t=15)
     if not r: return None
     try: return {"c":len([l for l in r.text.splitlines() if l.strip() and not l.startswith("#")])}
     except: return None
 
-@st.cache_data(ttl=1800, show_spinner=False)
+@st.cache_data(ttl=43200, show_spinner=False)
 def fetch_topports():
     r = _g("https://isc.sans.edu/api/topports/records/10?json", t=15)
     if not r: return None
@@ -197,7 +197,7 @@ def fetch_topports():
     except: pass
     return None
 
-@st.cache_data(ttl=1800, show_spinner=False)
+@st.cache_data(ttl=43200, show_spinner=False)
 def fetch_topips():
     r = _g("https://isc.sans.edu/api/topips/records/5?json", t=15)
     if not r: return None
@@ -209,7 +209,7 @@ def fetch_topips():
     except: pass
     return None
 
-@st.cache_data(ttl=3600, show_spinner=False)
+@st.cache_data(ttl=43200, show_spinner=False)
 def fetch_honeypot():
     for dd in [0,1,2]:
         dt = (datetime.now(timezone.utc)-timedelta(days=dd)).strftime("%Y-%m-%d")
@@ -1123,7 +1123,7 @@ st.markdown(f"""<div class="sb">
   <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> ·
   <a href="https://www.isc2.org/Insights/2024/09/Workforce-Study" target="_blank" class="sl">ISC2</a> ·
   <a href="https://www.qualys.com/research/threat-landscape-report/" target="_blank" class="sl">Qualys</a>
-  <span style="float:right;color:#1a1a2a;">↻ {ts}</span></div>""", unsafe_allow_html=True)
+  <span style="float:right;color:#1a1a2a;">↻ {ts} · 12hr cache</span></div>""", unsafe_allow_html=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1137,7 +1137,7 @@ st.markdown(f"""<div style="margin:12px 0 10px;text-align:center;">
 </div>""", unsafe_allow_html=True)
 
 # ── CISA KEV TABLE ────────────────────────────────────────────────────────────
-@st.cache_data(ttl=3600, show_spinner=False)
+@st.cache_data(ttl=43200, show_spinner=False)
 def fetch_kev_recent():
     r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
     if not r: return None
@@ -1236,11 +1236,13 @@ with l4:
 st.markdown(f"""
 <div style="border-top:1px solid #141420;padding-top:20px;margin-top:32px;text-align:center;font-family:{MONO};">
   <div style="color:#666;font-size:.8rem;margin-bottom:3px;">Questions, Comments, or Recommendations?</div>
-  <div style="color:#666;font-size:.8rem;margin-bottom:14px;">
+  <div style="color:#666;font-size:.8rem;margin-bottom:10px;">
     Developed by <b style="color:{GREEN};">Adam Kistler</b> &nbsp;|&nbsp;
     <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank"
-       style="color:{BLUE};text-decoration:none;border-bottom:1px dashed {BLUE};">LinkedIn</a></div>
-  <div style="color:#555;font-size:.58rem;padding:0 6%;line-height:1.5;margin-bottom:10px;text-align:left;">
+       style="color:{BLUE};text-decoration:none;border-bottom:1px dashed {BLUE};">LinkedIn</a> &nbsp;|&nbsp;
+    <a href="https://github.com/adamkistler98/SecAI-Nexus" target="_blank"
+       style="color:{BLUE};text-decoration:none;border-bottom:1px dashed {BLUE};">GitHub</a></div>
+  <div style="color:#555;font-size:.56rem;padding:0 8%;line-height:1.5;margin-bottom:10px;text-align:center;max-width:900px;margin-left:auto;margin-right:auto;">
     <b style="color:#777;">LEGAL DISCLAIMER:</b> This project is provided for educational, informational, portfolio
     demonstration, and personal use purposes only. It is not intended for use in production environments,
     as a compliance tool, as professional security advice, or as a basis for business, legal, financial,
@@ -1256,13 +1258,15 @@ st.markdown(f"""
     telemetry, or analytics are implemented. The author is not affiliated with, endorsed by, or sponsored by
     any third-party data provider or cybersecurity company referenced within this project. All external content
     remains the property of its respective owners. Use at your own risk.</div>
-  <div style="color:#555;font-size:.54rem;padding:0 6%;line-height:1.4;margin-bottom:8px;">
+  <div style="color:#555;font-size:.54rem;line-height:1.4;margin-bottom:10px;max-width:900px;margin-left:auto;margin-right:auto;">
     <b style="color:#666;">DUAL LICENSE:</b>
-    Source code licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank" class="fl">MIT License</a>.
-    Dashboard design, layout, and creative presentation licensed under
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="fl">CC BY-NC 4.0</a>.
-    Commercial use of the design requires written permission from the author.
-    See <a href="https://gitlab.com/" target="_blank" class="fl">LICENSE.txt</a> for full terms.</div>
-  <div style="color:#2a2a3a;font-size:.65rem;">
-    SecAI-Nexus GRC [v30.0] · Live Data Engine ·
+    Source code &mdash; <a href="https://opensource.org/licenses/MIT" target="_blank" class="fl">MIT License</a> &nbsp;·&nbsp;
+    Design &amp; layout &mdash; <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="fl">CC BY-NC 4.0</a> &nbsp;·&nbsp;
+    <a href="https://github.com/adamkistler98/SecAI-Nexus/blob/main/LICENSE" target="_blank" class="fl">Full License Terms</a></div>
+  <div style="margin-bottom:8px;">
+    <a href="https://github.com/adamkistler98/SecAI-Nexus" target="_blank"
+       style="color:#505060;font-size:.6rem;text-decoration:none;border:1px solid #1a1a2e;padding:3px 10px;border-radius:3px;">
+       ⭐ Star on GitHub</a></div>
+  <div style="color:#2a2a3a;font-size:.6rem;">
+    SecAI-Nexus GRC [v30.0] · Live Data Engine · 12hr Cache ·
     112 Metrics · 8 Intel Tables · 2 Maps · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
