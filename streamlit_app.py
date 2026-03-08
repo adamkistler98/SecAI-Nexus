@@ -3,7 +3,7 @@ import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 
-st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🌑",
+st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="⚔",
                    initial_sidebar_state="collapsed")
 
 MONO  = "'Courier New', Courier, monospace"
@@ -33,13 +33,13 @@ st.markdown(f"""
     margin-left:3px;vertical-align:middle;animation:pglow 3s ease-in-out infinite;}}
   .cm-e {{font-size:.48rem;color:{AMBER};border:1px solid {AMBER}80;padding:0 3px;
     margin-left:3px;vertical-align:middle;}}
-  .cm-v {{color:{GREEN};font-size:1.35rem;font-weight:bold;margin:3px 0 1px;line-height:1.05;
+  .cm-v {{color:{GREEN};font-size:1.15rem;font-weight:bold;margin:3px 0 1px;line-height:1.05;
     text-shadow:0 0 4px {GREEN}20;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
   .cm-s {{font-size:.6rem;color:{GREY};margin-bottom:2px;line-height:1.15;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
-  .cm-x {{font-size:.54rem;color:#555;margin-bottom:1px;line-height:1.15;
+  .cm-x {{font-size:.6rem;color:#555;margin-bottom:1px;line-height:1.15;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic;}}
-  .cm-f {{font-size:.44rem;color:#505060;line-height:1.25;margin-bottom:2px;}}
+  .cm-f {{font-size:.55rem;color:#556;line-height:1.3;margin-bottom:2px;}}
   .cm-f span {{color:#3a6a4a;}}
   .cm-d {{font-size:.66rem;border-top:1px dashed #1a1a2e;padding-top:3px;line-height:1.55;}}
   .d-b {{color:{RED};font-weight:bold;}} .d-g {{color:{GREEN};font-weight:bold;}}
@@ -50,9 +50,10 @@ st.markdown(f"""
     font-family:{MONO};transition:all .3s;min-height:130px;}}
   .pulse:hover {{border-left-color:{GREEN};box-shadow:0 0 14px {GREEN}12;}}
   .pulse .cm-t a {{font-size:.68rem;color:{CYAN};}}
-  .pulse .cm-v {{font-size:1.5rem;color:{CYAN};text-shadow:0 0 6px {CYAN}30;}}
+  .pulse .cm-v {{font-size:1.3rem;color:{CYAN};text-shadow:0 0 6px {CYAN}30;}}
   .pulse .cm-s {{font-size:.64rem;color:{GREY};}}
-  .pulse .cm-x {{font-size:.58rem;}}
+  .pulse .cm-x {{font-size:.64rem;}}
+  .pulse .cm-f {{font-size:.6rem;}}
   .pulse .cm-d {{font-size:.68rem;}}
 
   .rl {{font-size:.6rem;color:#505060;text-transform:uppercase;letter-spacing:1px;
@@ -916,148 +917,41 @@ else:
     st.markdown(f'<div style="padding:18px;border:1px solid #1a1a2e;background:#080810;text-align:center;"><span style="color:{GREY};font-size:.75rem;">KEV table populates on Streamlit Cloud deployment</span></div>', unsafe_allow_html=True)
 st.markdown("---")
 
+
 # ══════════════════════════════════════════════════════════════════════════════
-#  2×2 INTEL GRID: ATT&CK + RANSOMWARE + APT GROUPS + NOTABLE BREACHES
+#  3×2 INTEL GRID
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""<div style="margin:10px 0 12px;text-align:center;">
   <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
     <a href="https://attack.mitre.org/" target="_blank" class="sh">
       &gt;&gt; THREAT INTELLIGENCE REFERENCE GRID &lt;&lt;</a></span>
-  <div style="font-size:.55rem;color:#505060;margin-top:2px;">ATT&CK TECHNIQUES · RANSOMWARE GROUPS · APT ACTORS · NOTABLE BREACHES</div></div>""", unsafe_allow_html=True)
+  <div style="font-size:.55rem;color:#505060;margin-top:2px;">ATT&CK · RANSOMWARE · APTs · BREACHES · BREACH COSTS · REGULATORY FINES</div></div>""", unsafe_allow_html=True)
 
 def _tbl(title, hdrs, rows_data, hdr_color):
-    hdr_html = "".join(f'<th style="padding:5px 4px;text-align:left;color:{hdr_color};font-size:.5rem;text-transform:uppercase;">{h}</th>' for h in hdrs)
-    rows_html = ""
+    hh = "".join(f'<th style="padding:5px 4px;text-align:left;color:{hdr_color};font-size:.5rem;text-transform:uppercase;">{h}</th>' for h in hdrs)
+    rh = ""
     for r in rows_data:
-        cells = "".join(f'<td style="padding:4px;{s}">{v}</td>' for v,s in r)
-        rows_html += f'<tr style="border-bottom:1px solid #141420;">{cells}</tr>'
-    return f'<div style="margin-bottom:6px;"><div style="font-size:.7rem;font-weight:bold;color:{hdr_color};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {hdr_color}20;padding-bottom:3px;">{title}</div><div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.54rem;"><thead><tr style="background:#0a0a14;border-bottom:1px solid {hdr_color}20;">{hdr_html}</tr></thead><tbody>{rows_html}</tbody></table></div></div>'
+        rh += '<tr style="border-bottom:1px solid #141420;">' + "".join(f'<td style="padding:4px;{s}">{v}</td>' for v,s in r) + '</tr>'
+    return f'<div style="margin-bottom:6px;"><div style="font-size:.68rem;font-weight:bold;color:{hdr_color};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {hdr_color}20;padding-bottom:3px;">{title}</div><div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.54rem;"><thead><tr style="background:#0a0a14;border-bottom:1px solid {hdr_color}20;">{hh}</tr></thead><tbody>{rh}</tbody></table></div></div>'
 
-# TOP LEFT: MITRE ATT&CK
-attck = [
-    [("T1059",f"color:{BLUE};font-weight:bold;"),("Cmd & Scripting",f"color:{CYAN};"),("Execution",f"color:{GREY};font-size:.48rem;"),("85%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],
-    [("T1078",f"color:{BLUE};font-weight:bold;"),("Valid Accounts",f"color:{CYAN};"),("Persistence",f"color:{GREY};font-size:.48rem;"),("75%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],
-    [("T1486",f"color:{BLUE};font-weight:bold;"),("Data Encrypted",f"color:{CYAN};"),("Impact",f"color:{GREY};font-size:.48rem;"),("52%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],
-    [("T1566",f"color:{BLUE};font-weight:bold;"),("Phishing",f"color:{CYAN};"),("Initial Access",f"color:{GREY};font-size:.48rem;"),("44%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],
-    [("T1190",f"color:{BLUE};font-weight:bold;"),("Exploit Public App",f"color:{CYAN};"),("Initial Access",f"color:{GREY};font-size:.48rem;"),("38%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],
-    [("T1003",f"color:{BLUE};font-weight:bold;"),("Cred Dumping",f"color:{CYAN};"),("Cred Access",f"color:{GREY};font-size:.48rem;"),("36%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],
-    [("T1021",f"color:{BLUE};font-weight:bold;"),("Remote Services",f"color:{CYAN};"),("Lateral Mvmt",f"color:{GREY};font-size:.48rem;"),("55%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],
-    [("T1055",f"color:{BLUE};font-weight:bold;"),("Process Injection",f"color:{CYAN};"),("Def Evasion",f"color:{GREY};font-size:.48rem;"),("48%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],
-]
-
-# TOP RIGHT: RANSOMWARE GROUPS
-rwg = [
-    [("LockBit 3.0",f"color:{CYAN};font-weight:bold;"),("~25%",f"color:{GREEN};font-weight:bold;"),("1,000+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-weight:bold;font-size:.48rem;"),("FBI disrupted Feb 2024",f"color:#888;font-size:.46rem;")],
-    [("ALPHV/BlackCat",f"color:{CYAN};font-weight:bold;"),("~12%",f"color:{GREEN};font-weight:bold;"),("400+",f"color:{AMBER};"),("⚫ Defunct",f"color:#555;font-size:.48rem;"),("$22M Change Healthcare",f"color:#888;font-size:.46rem;")],
-    [("Cl0p",f"color:{CYAN};font-weight:bold;"),("~10%",f"color:{GREEN};font-weight:bold;"),("2,700+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-weight:bold;font-size:.48rem;"),("MOVEit mass exploit",f"color:#888;font-size:.46rem;")],
-    [("Play",f"color:{CYAN};font-weight:bold;"),("~8%",f"color:{GREEN};font-weight:bold;"),("300+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-weight:bold;font-size:.48rem;"),("Govt & critical infra",f"color:#888;font-size:.46rem;")],
-    [("Black Basta",f"color:{CYAN};font-weight:bold;"),("~7%",f"color:{GREEN};font-weight:bold;"),("250+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-weight:bold;font-size:.48rem;"),("QakBot successor",f"color:#888;font-size:.46rem;")],
-    [("Akira",f"color:{CYAN};font-weight:bold;"),("~5%",f"color:{GREEN};font-weight:bold;"),("180+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-weight:bold;font-size:.48rem;"),("VPN vuln exploiter",f"color:#888;font-size:.46rem;")],
-    [("Rhysida",f"color:{CYAN};font-weight:bold;"),("~3%",f"color:{GREEN};font-weight:bold;"),("100+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-weight:bold;font-size:.48rem;"),("Healthcare focus",f"color:#888;font-size:.46rem;")],
-    [("Medusa",f"color:{CYAN};font-weight:bold;"),("~3%",f"color:{GREEN};font-weight:bold;"),("120+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-weight:bold;font-size:.48rem;"),("Triple extortion",f"color:#888;font-size:.46rem;")],
-]
-
-# BOTTOM LEFT: NATION-STATE APT GROUPS
-apts = [
-    [("DPRK/Lazarus",f"color:{CYAN};font-weight:bold;"),("🇰🇵 N.Korea",f"color:{GREY};font-size:.48rem;"),("Crypto theft, espionage",f"color:#888;font-size:.46rem;"),("$1.34B stolen 2024",f"color:{RED};font-weight:bold;")],
-    [("APT28/Fancy Bear",f"color:{CYAN};font-weight:bold;"),("🇷🇺 Russia",f"color:{GREY};font-size:.48rem;"),("Political espionage, NATO",f"color:#888;font-size:.46rem;"),("GRU Unit 26165",f"color:{AMBER};")],
-    [("APT29/Cozy Bear",f"color:{CYAN};font-weight:bold;"),("🇷🇺 Russia",f"color:{GREY};font-size:.48rem;"),("SolarWinds, MS 365",f"color:#888;font-size:.46rem;"),("SVR intelligence",f"color:{AMBER};")],
-    [("Volt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳 China",f"color:{GREY};font-size:.48rem;"),("US critical infrastructure",f"color:#888;font-size:.46rem;"),("Living-off-the-land",f"color:{RED};font-weight:bold;")],
-    [("Salt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳 China",f"color:{GREY};font-size:.48rem;"),("US telecoms breach 2024",f"color:#888;font-size:.46rem;"),("9 ISPs compromised",f"color:{RED};font-weight:bold;")],
-    [("APT41/Wicked Panda",f"color:{CYAN};font-weight:bold;"),("🇨🇳 China",f"color:{GREY};font-size:.48rem;"),("Espionage + cybercrime",f"color:#888;font-size:.46rem;"),("Dual-purpose actor",f"color:{AMBER};")],
-    [("Charming Kitten",f"color:{CYAN};font-weight:bold;"),("🇮🇷 Iran",f"color:{GREY};font-size:.48rem;"),("Academic & policy targets",f"color:#888;font-size:.46rem;"),("Social engineering",f"color:{AMBER};")],
-    [("Sandworm",f"color:{CYAN};font-weight:bold;"),("🇷🇺 Russia",f"color:{GREY};font-size:.48rem;"),("Ukraine grid attacks, wipers",f"color:#888;font-size:.46rem;"),("GRU Unit 74455",f"color:{RED};font-weight:bold;")],
-]
-
-# BOTTOM RIGHT: NOTABLE BREACHES 2024
-breaches = [
-    [("Change Healthcare",f"color:{CYAN};font-weight:bold;"),("Feb 2024",f"color:{GREEN};"),("$22M ransom · 100M records",f"color:{RED};font-weight:bold;"),("ALPHV/BlackCat",f"color:#888;font-size:.46rem;")],
-    [("AT&T",f"color:{CYAN};font-weight:bold;"),("Mar 2024",f"color:{GREEN};"),("73M customer records",f"color:{RED};font-weight:bold;"),("Data from 2019 surfaced",f"color:#888;font-size:.46rem;")],
-    [("Snowflake/Ticketmaster",f"color:{CYAN};font-weight:bold;"),("May 2024",f"color:{GREEN};"),("560M records · multi-tenant",f"color:{RED};font-weight:bold;"),("Stolen creds, no MFA",f"color:#888;font-size:.46rem;")],
-    [("Salt Typhoon Telecoms",f"color:{CYAN};font-weight:bold;"),("Oct 2024",f"color:{GREEN};"),("9 US ISPs · wiretap data",f"color:{RED};font-weight:bold;"),("Chinese state actor",f"color:#888;font-size:.46rem;")],
-    [("Dell Technologies",f"color:{CYAN};font-weight:bold;"),("May 2024",f"color:{GREEN};"),("49M customer records",f"color:{RED};font-weight:bold;"),("API scraping attack",f"color:#888;font-size:.46rem;")],
-    [("National Public Data",f"color:{CYAN};font-weight:bold;"),("Aug 2024",f"color:{GREEN};"),("2.9B records · SSNs",f"color:{RED};font-weight:bold;"),("Filed bankruptcy after",f"color:#888;font-size:.46rem;")],
-    [("DMM Bitcoin",f"color:{CYAN};font-weight:bold;"),("May 2024",f"color:{GREEN};"),("$305M · 4,502 BTC",f"color:{RED};font-weight:bold;"),("DPRK/Lazarus Group",f"color:#888;font-size:.46rem;")],
-    [("MediSecure (AU)",f"color:{CYAN};font-weight:bold;"),("May 2024",f"color:{GREEN};"),("12.9M prescriptions",f"color:{RED};font-weight:bold;"),("Ransomware attack",f"color:#888;font-size:.46rem;")],
-]
+attck = [[("T1059",f"color:{BLUE};font-weight:bold;"),("Cmd & Scripting",f"color:{CYAN};"),("Execution",f"color:{GREY};font-size:.48rem;"),("85%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1078",f"color:{BLUE};font-weight:bold;"),("Valid Accounts",f"color:{CYAN};"),("Persistence",f"color:{GREY};font-size:.48rem;"),("75%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1486",f"color:{BLUE};font-weight:bold;"),("Data Encrypted",f"color:{CYAN};"),("Impact",f"color:{GREY};font-size:.48rem;"),("52%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1566",f"color:{BLUE};font-weight:bold;"),("Phishing",f"color:{CYAN};"),("Initial Access",f"color:{GREY};font-size:.48rem;"),("44%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1190",f"color:{BLUE};font-weight:bold;"),("Exploit Public App",f"color:{CYAN};"),("Initial Access",f"color:{GREY};font-size:.48rem;"),("38%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1003",f"color:{BLUE};font-weight:bold;"),("Cred Dumping",f"color:{CYAN};"),("Cred Access",f"color:{GREY};font-size:.48rem;"),("36%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1021",f"color:{BLUE};font-weight:bold;"),("Remote Services",f"color:{CYAN};"),("Lateral Mvmt",f"color:{GREY};font-size:.48rem;"),("55%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1055",f"color:{BLUE};font-weight:bold;"),("Process Injection",f"color:{CYAN};"),("Def Evasion",f"color:{GREY};font-size:.48rem;"),("48%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")]]
+rwg = [[("LockBit 3.0",f"color:{CYAN};font-weight:bold;"),("~25%",f"color:{GREEN};font-weight:bold;"),("1,000+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("FBI disrupted Feb 2024",f"color:#888;font-size:.46rem;")],[("ALPHV/BlackCat",f"color:{CYAN};font-weight:bold;"),("~12%",f"color:{GREEN};font-weight:bold;"),("400+",f"color:{AMBER};"),("⚫ Defunct",f"color:#555;font-size:.48rem;"),("$22M Change Healthcare",f"color:#888;font-size:.46rem;")],[("Cl0p",f"color:{CYAN};font-weight:bold;"),("~10%",f"color:{GREEN};font-weight:bold;"),("2,700+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("MOVEit mass exploit",f"color:#888;font-size:.46rem;")],[("Play",f"color:{CYAN};font-weight:bold;"),("~8%",f"color:{GREEN};font-weight:bold;"),("300+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("Govt & infra",f"color:#888;font-size:.46rem;")],[("Black Basta",f"color:{CYAN};font-weight:bold;"),("~7%",f"color:{GREEN};font-weight:bold;"),("250+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("QakBot successor",f"color:#888;font-size:.46rem;")],[("Akira",f"color:{CYAN};font-weight:bold;"),("~5%",f"color:{GREEN};font-weight:bold;"),("180+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("VPN exploiter",f"color:#888;font-size:.46rem;")],[("Rhysida",f"color:{CYAN};font-weight:bold;"),("~3%",f"color:{GREEN};font-weight:bold;"),("100+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("Healthcare focus",f"color:#888;font-size:.46rem;")],[("Medusa",f"color:{CYAN};font-weight:bold;"),("~3%",f"color:{GREEN};font-weight:bold;"),("120+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.48rem;"),("Triple extortion",f"color:#888;font-size:.46rem;")]]
+apts = [[("DPRK/Lazarus",f"color:{CYAN};font-weight:bold;"),("🇰🇵",f""),("Crypto theft",f"color:#888;font-size:.46rem;"),("$1.34B stolen",f"color:{RED};font-weight:bold;")],[("APT28/Fancy Bear",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("NATO espionage",f"color:#888;font-size:.46rem;"),("GRU 26165",f"color:{AMBER};")],[("APT29/Cozy Bear",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("SolarWinds, MS365",f"color:#888;font-size:.46rem;"),("SVR intel",f"color:{AMBER};")],[("Volt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("US critical infra",f"color:#888;font-size:.46rem;"),("LOTL attacks",f"color:{RED};font-weight:bold;")],[("Salt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("US telecoms 2024",f"color:#888;font-size:.46rem;"),("9 ISPs hit",f"color:{RED};font-weight:bold;")],[("APT41",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Espionage+crime",f"color:#888;font-size:.46rem;"),("Dual-purpose",f"color:{AMBER};")],[("Charming Kitten",f"color:{CYAN};font-weight:bold;"),("🇮🇷",f""),("Academic targets",f"color:#888;font-size:.46rem;"),("Social eng",f"color:{AMBER};")],[("Sandworm",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("Ukraine grid",f"color:#888;font-size:.46rem;"),("GRU 74455",f"color:{RED};font-weight:bold;")]]
+breaches = [[("Change Healthcare",f"color:{CYAN};font-weight:bold;"),("Feb'24",f"color:{GREEN};"),("$22M · 100M records",f"color:{RED};font-weight:bold;"),("ALPHV",f"color:#888;font-size:.46rem;")],[("AT&T",f"color:{CYAN};font-weight:bold;"),("Mar'24",f"color:{GREEN};"),("73M customer records",f"color:{RED};font-weight:bold;"),("2019 data",f"color:#888;font-size:.46rem;")],[("Snowflake/TM",f"color:{CYAN};font-weight:bold;"),("May'24",f"color:{GREEN};"),("560M records",f"color:{RED};font-weight:bold;"),("No MFA",f"color:#888;font-size:.46rem;")],[("Salt Typhoon",f"color:{CYAN};font-weight:bold;"),("Oct'24",f"color:{GREEN};"),("9 US ISPs",f"color:{RED};font-weight:bold;"),("China APT",f"color:#888;font-size:.46rem;")],[("Nat'l Public Data",f"color:{CYAN};font-weight:bold;"),("Aug'24",f"color:{GREEN};"),("2.9B records · SSNs",f"color:{RED};font-weight:bold;"),("Bankrupt",f"color:#888;font-size:.46rem;")],[("Dell",f"color:{CYAN};font-weight:bold;"),("May'24",f"color:{GREEN};"),("49M records",f"color:{RED};font-weight:bold;"),("API scrape",f"color:#888;font-size:.46rem;")],[("DMM Bitcoin",f"color:{CYAN};font-weight:bold;"),("May'24",f"color:{GREEN};"),("$305M · 4,502 BTC",f"color:{RED};font-weight:bold;"),("DPRK",f"color:#888;font-size:.46rem;")],[("MediSecure",f"color:{CYAN};font-weight:bold;"),("May'24",f"color:{GREEN};"),("12.9M prescriptions",f"color:{RED};font-weight:bold;"),("Ransomware",f"color:#888;font-size:.46rem;")]]
+costs = [[("Healthcare",f"color:{CYAN};font-weight:bold;"),("$9.77M",f"color:{RED};font-weight:bold;font-size:.6rem;"),("#1 for 14 yrs",f"color:#888;font-size:.46rem;")],[("Financial",f"color:{CYAN};font-weight:bold;"),("$6.08M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("BEC & wire fraud",f"color:#888;font-size:.46rem;")],[("Industrial",f"color:{CYAN};font-weight:bold;"),("$5.56M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("62% pay ransom",f"color:#888;font-size:.46rem;")],[("Energy",f"color:{CYAN};font-weight:bold;"),("$5.29M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("OT/ICS risk",f"color:#888;font-size:.46rem;")],[("Technology",f"color:{CYAN};font-weight:bold;"),("$5.45M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("Supply chain",f"color:#888;font-size:.46rem;")],[("Pharma",f"color:{CYAN};font-weight:bold;"),("$5.10M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("IP espionage",f"color:#888;font-size:.46rem;")],[("Government",f"color:{CYAN};font-weight:bold;"),("$4.73M",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("APT targeting",f"color:#888;font-size:.46rem;")],[("Retail",f"color:{CYAN};font-weight:bold;"),("$3.91M",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("POS & e-comm",f"color:#888;font-size:.46rem;")]]
+fines = [[("Meta (GDPR)",f"color:{CYAN};font-weight:bold;"),("€1.2B",f"color:{RED};font-weight:bold;font-size:.6rem;"),("2023",f"color:{GREEN};"),("US data transfers",f"color:#888;font-size:.46rem;")],[("Didi (China)",f"color:{CYAN};font-weight:bold;"),("$1.2B",f"color:{RED};font-weight:bold;font-size:.6rem;"),("2022",f"color:{GREEN};"),("Data security law",f"color:#888;font-size:.46rem;")],[("Amazon (GDPR)",f"color:{CYAN};font-weight:bold;"),("€746M",f"color:{RED};font-weight:bold;font-size:.6rem;"),("2021",f"color:{GREEN};"),("Ad targeting",f"color:#888;font-size:.46rem;")],[("Equifax (FTC)",f"color:{CYAN};font-weight:bold;"),("$575M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("2019",f"color:{GREEN};"),("148M exposed",f"color:#888;font-size:.46rem;")],[("Meta/Insta",f"color:{CYAN};font-weight:bold;"),("€405M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("2022",f"color:{GREEN};"),("Children's data",f"color:#888;font-size:.46rem;")],[("Meta/WhatsApp",f"color:{CYAN};font-weight:bold;"),("€225M",f"color:{AMBER};font-weight:bold;font-size:.6rem;"),("2021",f"color:{GREEN};"),("Transparency",f"color:#888;font-size:.46rem;")],[("T-Mobile (FCC)",f"color:{CYAN};font-weight:bold;"),("$60M",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("2024",f"color:{GREEN};"),("Breach penalty",f"color:#888;font-size:.46rem;")],[("Clearview AI",f"color:{CYAN};font-weight:bold;"),("€20M",f"color:{BLUE};font-weight:bold;font-size:.6rem;"),("2022",f"color:{GREEN};"),("Biometric data",f"color:#888;font-size:.46rem;")]]
 
 g1, g2 = st.columns(2)
-with g1:
-    st.markdown(_tbl("⚔ MITRE ATT&CK TOP TECHNIQUES", ["ID","Technique","Tactic","Freq","Sev"], attck, BLUE), unsafe_allow_html=True)
-with g2:
-    st.markdown(_tbl("💀 TOP RANSOMWARE GROUPS", ["Group","Share","Victims","Status","Intel"], rwg, RED), unsafe_allow_html=True)
-
+with g1: st.markdown(_tbl("⚔ MITRE ATT&CK TOP TECHNIQUES", ["ID","Technique","Tactic","Freq","Sev"], attck, BLUE), unsafe_allow_html=True)
+with g2: st.markdown(_tbl("💀 TOP RANSOMWARE GROUPS", ["Group","Share","Victims","Status","Intel"], rwg, RED), unsafe_allow_html=True)
 g3, g4 = st.columns(2)
-with g3:
-    st.markdown(_tbl("🌐 NATION-STATE APT GROUPS", ["Group","Origin","Focus","Key Intel"], apts, AMBER), unsafe_allow_html=True)
-with g4:
-    st.markdown(_tbl("🔥 NOTABLE BREACHES 2024", ["Target","Date","Impact","Attribution"], breaches, RED), unsafe_allow_html=True)
+with g3: st.markdown(_tbl("🌐 NATION-STATE APT GROUPS", ["Group","","Focus","Key Intel"], apts, AMBER), unsafe_allow_html=True)
+with g4: st.markdown(_tbl("🔥 NOTABLE BREACHES 2024", ["Target","Date","Impact","Attrib"], breaches, RED), unsafe_allow_html=True)
+g5, g6 = st.columns(2)
+with g5: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (IBM 2024)", ["Industry","Avg Cost","Key Factor"], costs, GREEN), unsafe_allow_html=True)
+with g6: st.markdown(_tbl("⚖ TOP REGULATORY FINES (ALL TIME)", ["Entity","Fine","Year","Reason"], fines, AMBER), unsafe_allow_html=True)
 
-st.markdown(f'<div style="font-size:.46rem;color:#505060;margin:2px 0 0 4px;">Sources: CrowdStrike GTR 2024 · Mandiant M-Trends · Red Canary · IBM · MITRE ATT&CK · Chainalysis · Public breach disclosures</div>', unsafe_allow_html=True)
-st.markdown("---")
-
-# ══════════════════════════════════════════════════════════════════════════════
-#  COMPLIANCE & REGULATORY FRAMEWORK REFERENCE
-# ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin:10px 0 12px;text-align:center;">
-  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
-    <a href="https://www.nist.gov/cyberframework" target="_blank" class="sh">
-      &gt;&gt; COMPLIANCE &amp; REGULATORY FRAMEWORK REFERENCE &lt;&lt;</a></span>
-  <div style="font-size:.55rem;color:#505060;margin-top:2px;">23 FRAMEWORKS · GRC PROFESSIONAL CHEAT SHEET · GLOBAL COVERAGE</div></div>""", unsafe_allow_html=True)
-
-frameworks = [
-    ("NIST CSF 2.0","Voluntary","All sectors","Govern·Identify·Protect·Detect·Respond·Recover","https://www.nist.gov/cyberframework","6 functions · 106 subcategories"),
-    ("NIST RMF","Voluntary","US Federal","Categorize·Select·Implement·Assess·Authorize·Monitor","https://csrc.nist.gov/projects/risk-management/about-rmf","7-step lifecycle · SP 800-53"),
-    ("NIST AI RMF","Voluntary","AI systems","Govern·Map·Measure·Manage","https://www.nist.gov/itl/ai-risk-management-framework","4 core functions"),
-    ("NIST 800-171","Mandatory","CUI/DoD","14 families · 110 controls","https://csrc.nist.gov/publications/detail/sp/800-171/rev-2/final","CMMC basis"),
-    ("ISO 27001:2022","Cert","Global","PDCA · 93 controls · 4 themes","https://www.iso.org/isoiec-27001-information-security.html","Annex A"),
-    ("ISO 27701","Cert","Privacy","PIMS extension of 27001","https://www.iso.org/standard/71670.html","GDPR alignment"),
-    ("SOC 2 Type II","Audit","SaaS/Cloud","5 Trust Criteria · 12mo audit","https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2","AICPA"),
-    ("PCI DSS 4.0","Mandatory","Payments","12 requirements · 6 goals","https://www.pcisecuritystandards.org/","MFA required"),
-    ("HIPAA","Mandatory","Healthcare US","Admin·Physical·Technical safeguards","https://www.hhs.gov/hipaa/","Privacy+Security+Breach"),
-    ("HITRUST CSF","Audit","Healthcare+","14 categories · 49 objectives","https://hitrustalliance.net/","i1/r2/e1 assessments"),
-    ("GDPR","Mandatory","EU/EEA","6 principles · 72hr notification","https://gdpr.eu/","€20M or 4% fine"),
-    ("CCPA/CPRA","Mandatory","California","Know·Delete·Opt-out","https://oag.ca.gov/privacy/ccpa","$7,500/violation"),
-    ("DORA","Mandatory","EU finance","ICT risk·Incidents·Resilience·3rd party","https://www.digital-operational-resilience-act.com/","Eff. Jan 2025"),
-    ("NIS2","Mandatory","EU critical","18 sectors · risk mgmt · reporting","https://www.nis-2-directive.com/","€10M or 2% fine"),
-    ("CMMC 2.0","Mandatory","US DoD","3 levels · 800-171 aligned","https://www.acq.osd.mil/cmmc/","110+ practices"),
-    ("FedRAMP","Mandatory","US Gov cloud","ATO lifecycle · Low/Mod/High","https://www.fedramp.gov/","JAB authorization"),
-    ("CIS Controls v8","Voluntary","All sectors","18 controls · 153 safeguards · 3 IGs","https://www.cisecurity.org/controls/","Implementation Groups"),
-    ("COBIT 2019","Voluntary","IT governance","40 objectives · ISACA","https://www.isaca.org/resources/cobit","Enterprise IT"),
-    ("CSA STAR","Audit","Cloud","CCM + CAIQ · 197 objectives","https://cloudsecurityalliance.org/star/","17 domains"),
-    ("China MLPS 2.0","Mandatory","China","5 levels · annual review","http://www.djbh.net/","Cybersecurity Law"),
-    ("OWASP Top 10","Voluntary","Web apps","10 web risk categories","https://owasp.org/www-project-top-ten/","2021 revision"),
-    ("OWASP LLM","Voluntary","AI/LLM","Prompt Injection·Data Leak·Overreliance","https://owasp.org/www-project-top-10-for-large-language-model-applications/","2025 revision"),
-    ("OWASP API","Voluntary","APIs","BOLA·Auth·BOPLA·BFLA","https://owasp.org/API-Security/","2023 revision"),
-]
-
-tc2 = {"Mandatory":"#ff6b6b","Cert":"#ff6b6b","Voluntary":GREEN,"Audit":AMBER}
-fwr = ""
-for fw in frameworks:
-    cl = tc2.get(fw[1], GREY)
-    fwr += f'<tr style="border-bottom:1px solid #141420;"><td style="padding:6px;color:{CYAN};font-weight:bold;white-space:nowrap;font-size:.58rem;"><a href="{fw[4]}" target="_blank" style="color:{CYAN};text-decoration:none;border-bottom:1px dashed {CYAN}30;">{fw[0]}</a></td><td style="padding:6px;color:{cl};font-size:.54rem;font-weight:bold;">{fw[1]}</td><td style="padding:6px;color:{GREY};font-size:.54rem;">{fw[2]}</td><td style="padding:6px;color:#888;font-size:.5rem;">{fw[3]}</td><td style="padding:6px;color:#606070;font-size:.48rem;font-style:italic;">{fw[5]}</td></tr>'
-
-st.markdown(f'<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};"><thead><tr style="border-bottom:2px solid {CYAN}30;background:#0a0a14;"><th style="padding:6px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Framework</th><th style="padding:6px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Type</th><th style="padding:6px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Scope</th><th style="padding:6px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Structure</th><th style="padding:6px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Details</th></tr></thead><tbody>{fwr}</tbody></table></div><div style="font-size:.46rem;color:#505060;margin:3px 0 0 4px;"><span style="color:{GREEN};">●</span> Voluntary <span style="color:#ff6b6b;">●</span> Mandatory <span style="color:{AMBER};">●</span> Audit · 23 frameworks hyperlinked</div>', unsafe_allow_html=True)
-st.markdown("---")
-
-# ══════════════════════════════════════════════════════════════════════════════
-#  INDUSTRY BREACH COST RANKINGS
-# ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin:10px 0 12px;text-align:center;">
-  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
-    <a href="https://www.ibm.com/security/data-breach" target="_blank" class="sh">
-      &gt;&gt; INDUSTRY BREACH COST RANKINGS &lt;&lt;</a></span>
-  <div style="font-size:.55rem;color:#505060;margin-top:2px;">IBM COST OF A DATA BREACH 2024 · TOP 15 INDUSTRIES BY AVG COST</div></div>""", unsafe_allow_html=True)
-
-industries = [("Healthcare","$9.77M","↑$0.4M"),("Financial","$6.08M","↑$0.3M"),("Industrial","$5.56M","↑$0.8M"),("Energy","$5.29M","↑$0.5M"),("Technology","$5.45M","↑$0.4M"),("Pharma","$5.10M","↑$0.2M"),("Prof Services","$5.08M","↑$0.3M"),("Government","$4.73M","↑$0.3M"),("Transportation","$4.18M","↑$0.3M"),("Research","$4.02M","↑$0.4M"),("Retail","$3.91M","↑$0.5M"),("Education","$3.65M","↓$0.1M"),("Telecom","$3.62M","↑$0.2M"),("Media","$3.58M","↑$0.2M"),("Hospitality","$3.36M","↑$0.1M")]
-ir=""
-for i,ind in enumerate(industries):
-    bw=int(float(ind[1].replace("$","").replace("M",""))/9.77*100)
-    cl=RED if i<3 else AMBER if i<7 else BLUE
-    yc="#ff6b6b" if "↑" in ind[2] else GREEN
-    ir+=f'<tr style="border-bottom:1px solid #141420;"><td style="padding:5px;color:{GREEN};font-weight:bold;font-size:.56rem;text-align:center;">#{i+1}</td><td style="padding:5px;color:{CYAN};font-weight:bold;font-size:.58rem;">{ind[0]}</td><td style="padding:5px;color:{GREEN};font-weight:bold;font-size:.66rem;">{ind[1]}</td><td style="padding:5px;width:30%;"><div style="background:#141420;border-radius:2px;overflow:hidden;height:9px;"><div style="width:{bw}%;height:100%;background:linear-gradient(90deg,{cl},{cl}80);"></div></div></td><td style="padding:5px;color:{yc};font-size:.52rem;font-weight:bold;">{ind[2]} YoY</td></tr>'
-
-st.markdown(f'<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};"><thead><tr style="border-bottom:2px solid {GREEN}30;background:#0a0a14;"><th style="padding:6px 4px;color:{GREEN};font-size:.5rem;text-transform:uppercase;">#</th><th style="padding:6px;text-align:left;color:{GREEN};font-size:.5rem;text-transform:uppercase;">Industry</th><th style="padding:6px;text-align:left;color:{GREEN};font-size:.5rem;text-transform:uppercase;">Avg Cost</th><th style="padding:6px;text-align:left;color:{GREEN};font-size:.5rem;text-transform:uppercase;">Relative</th><th style="padding:6px;text-align:left;color:{GREEN};font-size:.5rem;text-transform:uppercase;">YoY</th></tr></thead><tbody>{ir}</tbody></table></div><div style="font-size:.46rem;color:#505060;margin:3px 0 0 4px;">Source: IBM Cost of a Data Breach Report 2024 · Global averages</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="font-size:.46rem;color:#505060;margin:2px 0 0 4px;">Sources: CrowdStrike GTR · Mandiant · Red Canary · IBM Cost of Breach 2024 · GDPR Enforcement Tracker · Chainalysis · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1099,5 +993,5 @@ st.markdown(f"""
     <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="fl">
       Code and layout licensed CC BY-NC 4.0.</a></div>
   <div style="color:#2a2a3a;font-size:.65rem;">
-    SecAI-Nexus GRC [v22.0] · Live Data Engine ·
+    SecAI-Nexus GRC [v23.0] · Live Data Engine ·
     75 Indicators · 5 Facts Each · 2 Maps · 23 Frameworks · 60 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
