@@ -3,7 +3,7 @@ import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 
-st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🔒",
+st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🌐",
                    initial_sidebar_state="collapsed")
 
 MONO  = "'Courier New', Courier, monospace"
@@ -39,7 +39,7 @@ st.markdown(f"""
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
   .cm-x {{font-size:.54rem;color:#555;margin-bottom:3px;line-height:1.15;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic;}}
-  .cm-d {{font-size:.6rem;border-top:1px dashed #1a1a2e;padding-top:3px;line-height:1.5;}}
+  .cm-d {{font-size:.66rem;border-top:1px dashed #1a1a2e;padding-top:3px;line-height:1.55;}}
   .d-b {{color:{RED};font-weight:bold;}} .d-g {{color:{GREEN};font-weight:bold;}}
   .d-n {{color:{BLUE};font-weight:bold;}} .d-a {{color:{AMBER};font-weight:bold;}}
 
@@ -51,7 +51,7 @@ st.markdown(f"""
   .pulse .cm-v {{font-size:1.5rem;color:{CYAN};text-shadow:0 0 6px {CYAN}30;}}
   .pulse .cm-s {{font-size:.64rem;color:{GREY};}}
   .pulse .cm-x {{font-size:.58rem;}}
-  .pulse .cm-d {{font-size:.62rem;}}
+  .pulse .cm-d {{font-size:.68rem;}}
 
   .rl {{font-size:.6rem;color:#505060;text-transform:uppercase;letter-spacing:1px;
     border-left:3px solid {BLUE}50;padding-left:6px;margin:10px 0 5px;
@@ -287,7 +287,7 @@ st.markdown(f"""
     <div style="text-align:right;"><div style="font-size:.8rem;font-weight:bold;color:{BLUE};text-shadow:0 0 4px {BLUE};">
         SYS_TIME: {now_utc.strftime("%H:%M:%S")} UTC · {now_utc.strftime("%Y-%m-%d")}</div>
       <div style="font-size:.55rem;color:#505060;margin-top:1px;">
-        <span class="sd sg"></span>FEEDS NOMINAL · 75 INDICATORS · 9 MAPS · 52 RESOURCES</div></div></div></div>""", unsafe_allow_html=True)
+        <span class="sd sg"></span>FEEDS NOMINAL · 75 INDICATORS · 2 MAPS · 60 RESOURCES</div></div></div></div>""", unsafe_allow_html=True)
 
 with st.spinner("Syncing threat intelligence feeds…"):
     kev=fetch_kev(); baz=fetch_bazaar(); uhaus=fetch_urlhaus()
@@ -307,7 +307,7 @@ st.markdown(f"""<div style="margin:2px 0 10px;">
     <a href="https://www.cisa.gov/" target="_blank" class="sh">&gt;&gt; GLOBAL THREAT METRICS</a></span><br>
   <span style="font-size:.6rem;color:#505060;">
     <span class="sd sg"></span><span style="color:{GREEN};">LIVE</span> = real-time
-    &ensp;<span class="sd sa"></span><span style="color:{AMBER};">EST</span> = annual baseline
+    &ensp;<span class="sd sa"></span><span style="color:{AMBER};">EST</span> = last verified 03/26
     &ensp;<span class="sd sc"></span><span style="color:{CYAN};">PULSE</span> = DShield sensors
     &ensp;75 indicators · 5 rows × 9 + 5 pulse rows × 6</span></div>""", unsafe_allow_html=True)
 
@@ -779,7 +779,7 @@ st.markdown(f"""<div style="margin:4px 0 10px;">
   <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
     <a href="https://livethreatmap.radware.com/" target="_blank" class="sh">
       &gt;&gt; LIVE THREAT MAP FEEDS</a></span>
-  <span style="font-size:.55rem;color:#505060;margin-left:8px;">9 REAL-TIME SOURCES</span></div>""", unsafe_allow_html=True)
+  <span style="font-size:.55rem;color:#505060;margin-left:8px;">2 REAL-TIME SOURCES</span></div>""", unsafe_allow_html=True)
 
 m1,m2=st.columns(2)
 with m1:
@@ -789,24 +789,128 @@ with m2:
     st.markdown('<a href="https://threatmap.fortiguard.com/" target="_blank" class="ml">&gt;&gt; FORTINET FORTIGUARD MAP</a>', unsafe_allow_html=True)
     iframe("https://threatmap.fortiguard.com/", 1100)
 st.markdown("---")
-for pair in [
-    ("https://cybermap.kaspersky.com/","KASPERSKY CYBERMAP","https://cybermap.kaspersky.com/en/widget/dynamic/dark",
-     "https://threatmap.bitdefender.com/","BITDEFENDER THREAT MAP","https://threatmap.bitdefender.com/"),
-    ("https://www.sicherheitstacho.eu/?lang=en","SICHERHEITSTACHO (DT)","https://www.sicherheitstacho.eu/?lang=en",
-     "https://threatmap.checkpoint.com/","CHECK POINT THREATCLOUD","https://threatmap.checkpoint.com/"),
-    ("https://attackmap.sonicwall.com/live-attack-map/","SONICWALL LIVE MAP","https://attackmap.sonicwall.com/live-attack-map/",
-     "https://threatbutt.com/map/","THREATBUTT ATTACK MAP","https://threatbutt.com/map/"),
-]:
-    a,b=st.columns(2)
-    with a:
-        st.markdown(f'<a href="{pair[0]}" target="_blank" class="ml">&gt;&gt; {pair[1]}</a>', unsafe_allow_html=True)
-        iframe(pair[2], 520)
-    with b:
-        st.markdown(f'<a href="{pair[3]}" target="_blank" class="ml">&gt;&gt; {pair[4]}</a>', unsafe_allow_html=True)
-        iframe(pair[5], 520)
-    st.markdown("---")
-st.markdown('<a href="https://viz.greynoise.io/trends/trending" target="_blank" class="ml">&gt;&gt; GREYNOISE INTELLIGENCE TRENDS</a>', unsafe_allow_html=True)
-iframe("https://viz.greynoise.io/trends/trending", 1200)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  LATEST CISA KEV ADDITIONS  (parsed live from KEV JSON)
+# ══════════════════════════════════════════════════════════════════════════════
+st.markdown(f"""<div style="margin:10px 0 12px;">
+  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
+    <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sh">
+      &gt;&gt; LATEST CISA KEV ADDITIONS</a></span>
+  <span style="font-size:.55rem;color:#505060;margin-left:8px;">MOST RECENTLY ADDED EXPLOITED VULNERABILITIES</span>
+</div>""", unsafe_allow_html=True)
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def fetch_kev_recent():
+    r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
+    if not r: return None
+    try:
+        vulns = r.json().get("vulnerabilities", [])
+        sorted_v = sorted(vulns, key=lambda x: x.get("dateAdded",""), reverse=True)
+        return sorted_v[:15]
+    except: return None
+
+kev_recent = fetch_kev_recent()
+
+if kev_recent:
+    rows_html = ""
+    for v in kev_recent:
+        cve = v.get("cveID","N/A")
+        vendor = v.get("vendorProject","?")
+        product = v.get("product","?")
+        name = v.get("vulnerabilityName","?")
+        added = v.get("dateAdded","?")
+        rw = "🔴" if v.get("knownRansomwareCampaignUse","").lower()=="known" else "—"
+        due = v.get("dueDate","?")
+        # Truncate name
+        short_name = name[:65] + "…" if len(name) > 65 else name
+        rows_html += f"""<tr>
+            <td style="color:{RED};font-weight:bold;white-space:nowrap;"><a href="https://nvd.nist.gov/vuln/detail/{cve}" target="_blank" style="color:{RED};text-decoration:none;border-bottom:1px dashed {RED}40;">{cve}</a></td>
+            <td style="color:{CYAN};font-weight:bold;">{vendor}</td>
+            <td style="color:{GREY};">{product}</td>
+            <td style="color:#888;font-size:.58rem;">{short_name}</td>
+            <td style="color:{GREEN};white-space:nowrap;">{added}</td>
+            <td style="text-align:center;">{rw}</td>
+            <td style="color:{AMBER};white-space:nowrap;">{due}</td>
+        </tr>"""
+
+    st.markdown(f"""
+    <div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;">
+    <table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.62rem;">
+        <thead><tr style="border-bottom:2px solid {BLUE}30;background:#0a0a14;">
+            <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;letter-spacing:.5px;">CVE ID</th>
+            <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">Vendor</th>
+            <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">Product</th>
+            <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">Vulnerability</th>
+            <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">Added</th>
+            <th style="padding:8px 6px;text-align:center;color:{BLUE};font-size:.58rem;text-transform:uppercase;">RW</th>
+            <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">Due Date</th>
+        </tr></thead>
+        <tbody style="line-height:1.6;">{rows_html}</tbody>
+    </table></div>
+    <div style="font-size:.5rem;color:#505060;margin:4px 0 0 4px;">
+        RW = Known Ransomware Campaign Use (🔴 = confirmed) · Source: CISA KEV JSON · Due Date = federal remediation deadline
+    </div>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown(f"""<div style="padding:20px;border:1px solid #1a1a2e;background:#080810;text-align:center;">
+        <span style="color:{GREY};font-size:.8rem;">KEV table populates on Streamlit Cloud deployment</span></div>""", unsafe_allow_html=True)
+
+st.markdown("---")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  COMPLIANCE FRAMEWORK QUICK REFERENCE
+# ══════════════════════════════════════════════════════════════════════════════
+st.markdown(f"""<div style="margin:10px 0 12px;">
+  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
+    <a href="https://www.nist.gov/cyberframework" target="_blank" class="sh">
+      &gt;&gt; COMPLIANCE FRAMEWORK QUICK REFERENCE</a></span>
+  <span style="font-size:.55rem;color:#505060;margin-left:8px;">GRC PROFESSIONAL CHEAT SHEET</span>
+</div>""", unsafe_allow_html=True)
+
+frameworks = [
+    ("NIST CSF 2.0","Voluntary","All sectors","Govern · Identify · Protect · Detect · Respond · Recover","https://www.nist.gov/cyberframework","6 core functions · 22 categories · 106 subcategories"),
+    ("ISO 27001:2022","Mandatory (cert)","Global","Plan · Do · Check · Act (ISMS lifecycle)","https://www.iso.org/isoiec-27001-information-security.html","93 controls across 4 themes · Annex A"),
+    ("SOC 2 Type II","Audit","SaaS / Cloud","Security · Availability · Processing · Confidentiality · Privacy","https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2","5 Trust Service Criteria · 12-month audit"),
+    ("PCI DSS 4.0","Mandatory","Payment card","Build · Maintain · Protect · Monitor · Test · Policy","https://www.pcisecuritystandards.org/","12 requirements · 6 goals · MFA required"),
+    ("HIPAA","Mandatory","Healthcare US","Administrative · Physical · Technical safeguards","https://www.hhs.gov/hipaa/","Privacy Rule + Security Rule + Breach Notification"),
+    ("GDPR","Mandatory","EU data","Lawfulness · Purpose · Minimization · Accuracy · Storage · Security","https://gdpr.eu/","€20M or 4% revenue max fine · 72hr notification"),
+    ("CMMC 2.0","Mandatory","US DoD supply","Level 1: Basic · Level 2: Advanced · Level 3: Expert","https://www.acq.osd.mil/cmmc/","3 levels · 110+ practices · NIST 800-171 aligned"),
+    ("CIS Controls v8","Voluntary","All sectors","18 controls: Basic → Foundational → Organizational","https://www.cisecurity.org/controls/","18 controls · 153 safeguards · 3 IGs"),
+]
+
+fw_rows = ""
+for fw in frameworks:
+    fw_rows += f"""<tr style="border-bottom:1px solid #141420;">
+        <td style="padding:8px 6px;color:{CYAN};font-weight:bold;white-space:nowrap;font-size:.64rem;">
+            <a href="{fw[4]}" target="_blank" style="color:{CYAN};text-decoration:none;border-bottom:1px dashed {CYAN}40;">{fw[0]}</a></td>
+        <td style="padding:8px 6px;color:{'#ff6b6b' if fw[1]=='Mandatory' else GREEN if fw[1]=='Voluntary' else AMBER};font-size:.6rem;font-weight:bold;">{fw[1]}</td>
+        <td style="padding:8px 6px;color:{GREY};font-size:.6rem;">{fw[2]}</td>
+        <td style="padding:8px 6px;color:#888;font-size:.56rem;">{fw[3]}</td>
+        <td style="padding:8px 6px;color:#606070;font-size:.54rem;font-style:italic;">{fw[5]}</td>
+    </tr>"""
+
+st.markdown(f"""
+<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;">
+<table style="width:100%;border-collapse:collapse;font-family:{MONO};">
+    <thead><tr style="border-bottom:2px solid {CYAN}30;background:#0a0a14;">
+        <th style="padding:8px 6px;text-align:left;color:{CYAN};font-size:.58rem;text-transform:uppercase;letter-spacing:.5px;">Framework</th>
+        <th style="padding:8px 6px;text-align:left;color:{CYAN};font-size:.58rem;text-transform:uppercase;">Type</th>
+        <th style="padding:8px 6px;text-align:left;color:{CYAN};font-size:.58rem;text-transform:uppercase;">Scope</th>
+        <th style="padding:8px 6px;text-align:left;color:{CYAN};font-size:.58rem;text-transform:uppercase;">Core Structure</th>
+        <th style="padding:8px 6px;text-align:left;color:{CYAN};font-size:.58rem;text-transform:uppercase;">Key Details</th>
+    </tr></thead>
+    <tbody>{fw_rows}</tbody>
+</table></div>
+<div style="font-size:.5rem;color:#505060;margin:4px 0 0 4px;">
+    <span style="color:{GREEN};">●</span> Voluntary &nbsp;
+    <span style="color:#ff6b6b;">●</span> Mandatory &nbsp;
+    <span style="color:{AMBER};">●</span> Audit-based &nbsp;·&nbsp;
+    All frameworks hyperlinked to official sources
+</div>
+""", unsafe_allow_html=True)
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -814,23 +918,23 @@ st.markdown(f"""<div style="margin-top:24px;margin-bottom:14px;text-align:center
   <span style="font-size:1.05rem;font-weight:bold;text-transform:uppercase;letter-spacing:1.5px;">
     <a href="https://www.nist.gov/cyberframework" target="_blank" class="sh">
       &gt;&gt; GRC RESOURCES &amp; TOOLS &lt;&lt;</a></span>
-  <div style="font-size:.55rem;color:#505060;margin-top:2px;">52 CURATED · FRAMEWORKS · TOOLS · TRAINING · INTEL</div></div>""", unsafe_allow_html=True)
+  <div style="font-size:.55rem;color:#505060;margin-top:2px;">60 CURATED · FRAMEWORKS · TOOLS · TRAINING · INTEL · THREAT MAPS</div></div>""", unsafe_allow_html=True)
 l1,l2,l3,l4=st.columns(4)
 with l1:
     st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ FRAMEWORKS &amp; STANDARDS</div>', unsafe_allow_html=True)
-    for a in [("01","NIST CSF 2.0","https://www.nist.gov/cyberframework","Cybersecurity risk mgmt."),("02","NIST AI RMF","https://www.nist.gov/itl/ai-risk-management-framework","AI risk management."),("03","ISO/IEC 27001","https://www.iso.org/isoiec-27001-information-security.html","International ISMS."),("04","CIS Controls v8","https://www.cisecurity.org/controls/","Prioritized safeguards."),("05","HITRUST","https://hitrustalliance.net/","Info risk mgmt."),("06","MITRE ATT&CK","https://mitre-attack.github.io/attack-navigator/","Adversary TTP matrix."),("07","MITRE D3FEND","https://d3fend.mitre.org/","Defensive knowledge graph."),("08","CVSS 4.0","https://www.first.org/cvss/calculator/4.0","Vuln scoring."),("09","NIST CSRC","https://csrc.nist.gov/","Comp Security Resource Ctr."),("10","SP 800-53","https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final","Security controls."),("11","NIST NVD","https://nvd.nist.gov/","National Vuln Database."),("12","CISA KEV","https://www.cisa.gov/known-exploited-vulnerabilities-catalog","Exploited CVEs."),("13","Shields Up","https://www.cisa.gov/shields-up","Cyber resilience.")]:
+    for a in [("01","NIST CSF 2.0","https://www.nist.gov/cyberframework","Cybersecurity risk mgmt."),("02","NIST AI RMF","https://www.nist.gov/itl/ai-risk-management-framework","AI risk management."),("03","ISO/IEC 27001","https://www.iso.org/isoiec-27001-information-security.html","International ISMS."),("04","CIS Controls v8","https://www.cisecurity.org/controls/","Prioritized safeguards."),("05","HITRUST","https://hitrustalliance.net/","Info risk mgmt."),("06","MITRE ATT&CK","https://mitre-attack.github.io/attack-navigator/","Adversary TTP matrix."),("07","MITRE D3FEND","https://d3fend.mitre.org/","Defensive knowledge graph."),("08","CVSS 4.0","https://www.first.org/cvss/calculator/4.0","Vuln scoring."),("09","NIST CSRC","https://csrc.nist.gov/","Comp Security Resource Ctr."),("10","SP 800-53","https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final","Security controls."),("11","NIST NVD","https://nvd.nist.gov/","National Vuln Database."),("12","CISA KEV","https://www.cisa.gov/known-exploited-vulnerabilities-catalog","Exploited CVEs."),("13","Shields Up","https://www.cisa.gov/shields-up","Cyber resilience."),("14","NIST 800-171","https://csrc.nist.gov/publications/detail/sp/800-171/rev-2/final","CUI protection (CMMC).")]:
         st.markdown(gl(*a), unsafe_allow_html=True)
 with l2:
-    st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ THREAT INTEL &amp; ANALYSIS</div>', unsafe_allow_html=True)
-    for a in [("14","VirusTotal","https://www.virustotal.com/","Analyze files, domains, IPs."),("15","AlienVault OTX","https://otx.alienvault.com/","Crowdsourced IOCs."),("16","Talos Intel","https://talosintelligence.com/","Cisco threat intel."),("17","Shodan","https://www.shodan.io/","Internet device search."),("18","Have I Been Pwned","https://haveibeenpwned.com/","Breach exposure."),("19","crt.sh","https://crt.sh/","Cert Transparency."),("20","SANS ISC","https://isc.sans.edu/","Threat monitor."),("21","URLhaus","https://urlhaus.abuse.ch/","Malware URLs."),("22","MalwareBazaar","https://bazaar.abuse.ch/","Malware samples."),("23","ThreatFox","https://threatfox.abuse.ch/","Community IOCs."),("24","Exploit-DB","https://www.exploit-db.com/","Public exploits."),("25","Pulsedive","https://pulsedive.com/","Free threat intel."),("26","GreyNoise","https://viz.greynoise.io/","Scanner intel.")]:
+    st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ THREAT INTEL &amp; LIVE MAPS</div>', unsafe_allow_html=True)
+    for a in [("15","VirusTotal","https://www.virustotal.com/","Analyze files, domains, IPs."),("16","AlienVault OTX","https://otx.alienvault.com/","Crowdsourced IOCs."),("17","Talos Intel","https://talosintelligence.com/","Cisco threat intel."),("18","Shodan","https://www.shodan.io/","Internet device search."),("19","Have I Been Pwned","https://haveibeenpwned.com/","Breach exposure."),("20","crt.sh","https://crt.sh/","Cert Transparency."),("21","SANS ISC","https://isc.sans.edu/","Threat monitor."),("22","URLhaus","https://urlhaus.abuse.ch/","Malware URLs."),("23","MalwareBazaar","https://bazaar.abuse.ch/","Malware samples."),("24","ThreatFox","https://threatfox.abuse.ch/","Community IOCs."),("25","Exploit-DB","https://www.exploit-db.com/","Public exploits."),("26","Pulsedive","https://pulsedive.com/","Free threat intel."),("27","GreyNoise","https://viz.greynoise.io/","Scanner &amp; noise intel."),("28","Kaspersky Map","https://cybermap.kaspersky.com/","Live cyber threat map."),("29","Bitdefender Map","https://threatmap.bitdefender.com/","Real-time threat map."),("30","Check Point Map","https://threatmap.checkpoint.com/","ThreatCloud live map."),("31","SonicWall Map","https://attackmap.sonicwall.com/live-attack-map/","Live attack map."),("32","Sicherheitstacho","https://www.sicherheitstacho.eu/?lang=en","Deutsche Telekom map."),("33","Threatbutt","https://threatbutt.com/map/","Internet hacking map.")]:
         st.markdown(gl(*a), unsafe_allow_html=True)
 with l3:
     st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ SECURITY TOOLS</div>', unsafe_allow_html=True)
-    for a in [("27","CyberChef","https://gchq.github.io/CyberChef/","Cyber Swiss Army Knife."),("28","Any.Run","https://any.run/","Malware sandbox."),("29","URLScan.io","https://urlscan.io/","Website scanning."),("30","GTFOBins","https://gtfobins.github.io/","Unix bypass binaries."),("31","LOLBAS","https://lolbas-project.github.io/","Windows LOTL."),("32","Security Onion","https://securityonionsolutions.com/","Threat hunting."),("33","OSINT Framework","https://osintframework.com/","OSINT tools."),("34","PayloadsAllThings","https://github.com/swisskyrepo/PayloadsAllTheThings","Payloads."),("35","Nuclei","https://github.com/projectdiscovery/nuclei-templates","Vuln templates."),("36","OpenCTI","https://www.opencti.io/","Open threat intel."),("37","YARA Rules","https://github.com/Yara-Rules/rules","Malware rules."),("38","Sigma Rules","https://github.com/SigmaHQ/sigma","Detection format."),("39","Wazuh","https://wazuh.com/","Open XDR/SIEM.")]:
+    for a in [("34","CyberChef","https://gchq.github.io/CyberChef/","Cyber Swiss Army Knife."),("35","Any.Run","https://any.run/","Malware sandbox."),("36","URLScan.io","https://urlscan.io/","Website scanning."),("37","GTFOBins","https://gtfobins.github.io/","Unix bypass binaries."),("38","LOLBAS","https://lolbas-project.github.io/","Windows LOTL."),("39","Security Onion","https://securityonionsolutions.com/","Threat hunting."),("40","OSINT Framework","https://osintframework.com/","OSINT tools."),("41","PayloadsAllThings","https://github.com/swisskyrepo/PayloadsAllTheThings","Payloads."),("42","Nuclei","https://github.com/projectdiscovery/nuclei-templates","Vuln templates."),("43","OpenCTI","https://www.opencti.io/","Open threat intel."),("44","YARA Rules","https://github.com/Yara-Rules/rules","Malware rules."),("45","Sigma Rules","https://github.com/SigmaHQ/sigma","Detection format."),("46","Wazuh","https://wazuh.com/","Open XDR/SIEM.")]:
         st.markdown(gl(*a), unsafe_allow_html=True)
 with l4:
     st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ TRAINING &amp; NEWS</div>', unsafe_allow_html=True)
-    for a in [("40","OWASP Top 10","https://owasp.org/www-project-top-ten/","Web app risks."),("41","OWASP LLM","https://owasp.org/www-project-top-10-for-large-language-model-applications/","LLM risks."),("42","OWASP API","https://owasp.org/API-Security/","API risks."),("43","HackTheBox","https://www.hackthebox.com/","Gamified training."),("44","TryHackMe","https://tryhackme.com/","Hands-on labs."),("45","PortSwigger","https://portswigger.net/web-security","Web vuln training."),("46","BleepingComputer","https://www.bleepingcomputer.com/","Security news."),("47","Hacker News","https://thehackernews.com/","Cyber news."),("48","SANS Papers","https://www.sans.org/white-papers/","Whitepapers."),("49","DEF CON","https://defcon.org/html/links/dc-archives.html","Archives."),("50","HackerOne","https://www.hackerone.com/","Bug bounty."),("51","Bugcrowd","https://www.bugcrowd.com/","Vuln disclosure."),("52","VulnHub","https://www.vulnhub.com/","Practice envs.")]:
+    for a in [("47","OWASP Top 10","https://owasp.org/www-project-top-ten/","Web app risks."),("48","OWASP LLM","https://owasp.org/www-project-top-10-for-large-language-model-applications/","LLM risks."),("49","OWASP API","https://owasp.org/API-Security/","API risks."),("50","HackTheBox","https://www.hackthebox.com/","Gamified training."),("51","TryHackMe","https://tryhackme.com/","Hands-on labs."),("52","PortSwigger","https://portswigger.net/web-security","Web vuln training."),("53","BleepingComputer","https://www.bleepingcomputer.com/","Security news."),("54","Hacker News","https://thehackernews.com/","Cyber news."),("55","SANS Papers","https://www.sans.org/white-papers/","Whitepapers."),("56","DEF CON","https://defcon.org/html/links/dc-archives.html","Archives."),("57","HackerOne","https://www.hackerone.com/","Bug bounty."),("58","Bugcrowd","https://www.bugcrowd.com/","Vuln disclosure."),("59","VulnHub","https://www.vulnhub.com/","Practice envs."),("60","Dark Reading","https://www.darkreading.com/","Enterprise security news.")]:
         st.markdown(gl(*a), unsafe_allow_html=True)
 
 st.markdown(f"""
@@ -847,4 +951,4 @@ st.markdown(f"""
       Code and layout licensed CC BY-NC 4.0.</a></div>
   <div style="color:#2a2a3a;font-size:.65rem;">
     SecAI-Nexus GRC [v20.0] · Live Data Engine ·
-    75 Indicators · 11 Live Feeds · 9 Maps · 52 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
+    75 Indicators · 11 Live Feeds · 2 Maps · 60 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
