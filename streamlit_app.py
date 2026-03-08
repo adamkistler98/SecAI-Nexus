@@ -1240,11 +1240,29 @@ st.markdown(f"""
     Developed by <b style="color:{GREEN};">Adam Kistler</b> &nbsp;|&nbsp;
     <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank"
        style="color:{BLUE};text-decoration:none;border-bottom:1px dashed {BLUE};">LinkedIn</a></div>
-  <div style="color:#444;font-size:.65rem;padding:0 10%;line-height:1.4;margin-bottom:8px;">
-    <b>LEGAL DISCLAIMER:</b> Educational and portfolio purposes only. All threat maps and data
-    are property of their respective owners. SecAI-Nexus does not host or process third-party content.<br>
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="fl">
-      Code and layout licensed CC BY-NC 4.0.</a></div>
+  <div style="color:#555;font-size:.58rem;padding:0 6%;line-height:1.5;margin-bottom:10px;text-align:left;">
+    <b style="color:#777;">LEGAL DISCLAIMER:</b> This project is provided for educational, informational, portfolio
+    demonstration, and personal use purposes only. It is not intended for use in production environments,
+    as a compliance tool, as professional security advice, or as a basis for business, legal, financial,
+    or regulatory decisions. All threat intelligence, metrics, statistics, estimates, and data presented
+    are sourced from publicly available third-party reports and APIs. The author makes no representations
+    or warranties, express or implied, regarding the accuracy, completeness, timeliness, reliability, or
+    fitness for any particular purpose of any data displayed. The author shall not be liable for any direct,
+    indirect, incidental, special, exemplary, or consequential damages arising in any way out of the use of
+    this software or reliance on its output, even if advised of the possibility of such damages. Estimated
+    metrics (labeled "EST") are derived from annually published industry reports and may not reflect current
+    conditions. Live metrics are dependent on the availability and accuracy of upstream API providers. This
+    software does not collect, store, process, or transmit any user data. No authentication, cookies, tracking,
+    telemetry, or analytics are implemented. The author is not affiliated with, endorsed by, or sponsored by
+    any third-party data provider or cybersecurity company referenced within this project. All external content
+    remains the property of its respective owners. Use at your own risk.</div>
+  <div style="color:#555;font-size:.54rem;padding:0 6%;line-height:1.4;margin-bottom:8px;">
+    <b style="color:#666;">DUAL LICENSE:</b>
+    Source code licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank" class="fl">MIT License</a>.
+    Dashboard design, layout, and creative presentation licensed under
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="fl">CC BY-NC 4.0</a>.
+    Commercial use of the design requires written permission from the author.
+    See <a href="https://gitlab.com/" target="_blank" class="fl">LICENSE.txt</a> for full terms.</div>
   <div style="color:#2a2a3a;font-size:.65rem;">
     SecAI-Nexus GRC [v30.0] · Live Data Engine ·
     112 Metrics · 8 Intel Tables · 2 Maps · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
