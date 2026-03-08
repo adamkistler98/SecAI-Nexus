@@ -147,9 +147,11 @@ For vulnerability reports, see [SECURITY.md](SECURITY.md).
 
 ## 📄 License
 
-This project is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).
+This project uses a **dual-license** structure:
 
-You are free to share and adapt this work for non-commercial purposes with attribution. Commercial use requires written permission from the author.
+- **Source Code** (`app.py`, configs) — [MIT License](https://opensource.org/licenses/MIT) — free to use, modify, and distribute with attribution
+- **Dashboard Design & Layout** (CSS theme, card structure, section architecture, color scheme) — [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — non-commercial use with attribution
+
 
 All embedded threat maps and external data feeds remain the property of their respective owners (Radware, Fortinet, CISA, abuse.ch, SANS ISC, Tor Project). SecAI-Nexus does not host, cache, or redistribute third-party content.
 
