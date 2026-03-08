@@ -1,4 +1,15 @@
-{
-  "threat_threshold": 60,
-  "suspicious_keywords": ["exec", "shell", "malware", "virus", "trojan", "exploit", "failed login", "attack", "injection", "brute"]
-}
+[server]
+enableXsrfProtection = true
+enableCORS = false
+maxUploadSize = 0
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "dark"
+primaryColor = "#00ff41"
+backgroundColor = "#050505"
+secondaryBackgroundColor = "#0a0a14"
+textColor = "#c0c0c0"
+font = "monospace"
