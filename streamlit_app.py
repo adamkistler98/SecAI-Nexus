@@ -3,7 +3,7 @@ import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 
-st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🌐",
+st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🛡️",
                    initial_sidebar_state="collapsed")
 
 MONO  = "'Courier New', Courier, monospace"
@@ -287,7 +287,7 @@ st.markdown(f"""
     <div style="text-align:right;"><div style="font-size:.8rem;font-weight:bold;color:{BLUE};text-shadow:0 0 4px {BLUE};">
         SYS_TIME: {now_utc.strftime("%H:%M:%S")} UTC · {now_utc.strftime("%Y-%m-%d")}</div>
       <div style="font-size:.55rem;color:#505060;margin-top:1px;">
-        <span class="sd sg"></span>FEEDS NOMINAL · 75 INDICATORS · 2 MAPS · 60 RESOURCES</div></div></div></div>""", unsafe_allow_html=True)
+        <span class="sd sg"></span>FEEDS NOMINAL · 75 INDICATORS · 23 FRAMEWORKS · 2 MAPS · 60 RESOURCES</div></div></div></div>""", unsafe_allow_html=True)
 
 with st.spinner("Syncing threat intelligence feeds…"):
     kev=fetch_kev(); baz=fetch_bazaar(); uhaus=fetch_urlhaus()
@@ -302,7 +302,7 @@ IDENTITY=17_000_000_000; GDPR=2_100_000_000; IC3LOSS=12_500_000_000
 DDOS=15_400_000; IOT_MAL=112_000_000; CRYPTO=2_200_000_000
 CISA_ADV=850; CISA_ICS=420; RECOVERY=2_730_000
 
-st.markdown(f"""<div style="margin:2px 0 10px;">
+st.markdown(f"""<div style="margin:2px 0 10px;text-align:center;">
   <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
     <a href="https://www.cisa.gov/" target="_blank" class="sh">&gt;&gt; GLOBAL THREAT METRICS</a></span><br>
   <span style="font-size:.6rem;color:#505060;">
@@ -774,12 +774,16 @@ st.markdown(f"""<div class="sb">
   <a href="https://www.qualys.com/research/threat-landscape-report/" target="_blank" class="sl">Qualys</a>
   <span style="float:right;color:#1a1a2a;">↻ {ts}</span></div>""", unsafe_allow_html=True)
 
+
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin:4px 0 10px;">
+#  LIVE THREAT MAPS
+# ══════════════════════════════════════════════════════════════════════════════
+st.markdown(f"""<div style="margin:4px 0 10px;text-align:center;">
   <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
     <a href="https://livethreatmap.radware.com/" target="_blank" class="sh">
-      &gt;&gt; LIVE THREAT MAP FEEDS</a></span>
-  <span style="font-size:.55rem;color:#505060;margin-left:8px;">2 REAL-TIME SOURCES</span></div>""", unsafe_allow_html=True)
+      &gt;&gt; LIVE THREAT MAP FEEDS &lt;&lt;</a></span>
+  <div style="font-size:.55rem;color:#505060;margin-top:2px;">2 REAL-TIME GLOBAL ATTACK VISUALIZATION SOURCES</div>
+</div>""", unsafe_allow_html=True)
 
 m1,m2=st.columns(2)
 with m1:
@@ -790,15 +794,14 @@ with m2:
     iframe("https://threatmap.fortiguard.com/", 1100)
 st.markdown("---")
 
-
 # ══════════════════════════════════════════════════════════════════════════════
-#  LATEST CISA KEV ADDITIONS  (parsed live from KEV JSON)
+#  LATEST CISA KEV ADDITIONS
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin:10px 0 12px;">
+st.markdown(f"""<div style="margin:10px 0 12px;text-align:center;">
   <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
     <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sh">
-      &gt;&gt; LATEST CISA KEV ADDITIONS</a></span>
-  <span style="font-size:.55rem;color:#505060;margin-left:8px;">MOST RECENTLY ADDED EXPLOITED VULNERABILITIES</span>
+      &gt;&gt; LATEST CISA KEV ADDITIONS &lt;&lt;</a></span>
+  <div style="font-size:.55rem;color:#505060;margin-top:2px;">MOST RECENTLY ADDED EXPLOITED VULNERABILITIES · LIVE FROM CISA JSON FEED</div>
 </div>""", unsafe_allow_html=True)
 
 @st.cache_data(ttl=3600, show_spinner=False)
@@ -807,112 +810,260 @@ def fetch_kev_recent():
     if not r: return None
     try:
         vulns = r.json().get("vulnerabilities", [])
-        sorted_v = sorted(vulns, key=lambda x: x.get("dateAdded",""), reverse=True)
-        return sorted_v[:15]
+        return sorted(vulns, key=lambda x: x.get("dateAdded",""), reverse=True)[:15]
     except: return None
 
 kev_recent = fetch_kev_recent()
-
 if kev_recent:
     rows_html = ""
     for v in kev_recent:
-        cve = v.get("cveID","N/A")
-        vendor = v.get("vendorProject","?")
-        product = v.get("product","?")
-        name = v.get("vulnerabilityName","?")
-        added = v.get("dateAdded","?")
-        rw = "🔴" if v.get("knownRansomwareCampaignUse","").lower()=="known" else "—"
-        due = v.get("dueDate","?")
-        # Truncate name
-        short_name = name[:65] + "…" if len(name) > 65 else name
-        rows_html += f"""<tr>
-            <td style="color:{RED};font-weight:bold;white-space:nowrap;"><a href="https://nvd.nist.gov/vuln/detail/{cve}" target="_blank" style="color:{RED};text-decoration:none;border-bottom:1px dashed {RED}40;">{cve}</a></td>
-            <td style="color:{CYAN};font-weight:bold;">{vendor}</td>
-            <td style="color:{GREY};">{product}</td>
-            <td style="color:#888;font-size:.58rem;">{short_name}</td>
-            <td style="color:{GREEN};white-space:nowrap;">{added}</td>
-            <td style="text-align:center;">{rw}</td>
-            <td style="color:{AMBER};white-space:nowrap;">{due}</td>
-        </tr>"""
-
-    st.markdown(f"""
-    <div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;">
+        cve=v.get("cveID","N/A"); vendor=v.get("vendorProject","?"); product=v.get("product","?")
+        name=v.get("vulnerabilityName","?"); added=v.get("dateAdded","?"); due=v.get("dueDate","?")
+        rw="🔴" if v.get("knownRansomwareCampaignUse","").lower()=="known" else "—"
+        short_name = name[:60]+"…" if len(name)>60 else name
+        rows_html += f"""<tr><td style="color:{RED};font-weight:bold;white-space:nowrap;"><a href="https://nvd.nist.gov/vuln/detail/{cve}" target="_blank" style="color:{RED};text-decoration:none;border-bottom:1px dashed {RED}40;">{cve}</a></td>
+            <td style="color:{CYAN};font-weight:bold;">{vendor}</td><td style="color:{GREY};">{product}</td>
+            <td style="color:#888;font-size:.58rem;">{short_name}</td><td style="color:{GREEN};white-space:nowrap;">{added}</td>
+            <td style="text-align:center;">{rw}</td><td style="color:{AMBER};white-space:nowrap;">{due}</td></tr>"""
+    st.markdown(f"""<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;">
     <table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.62rem;">
         <thead><tr style="border-bottom:2px solid {BLUE}30;background:#0a0a14;">
-            <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;letter-spacing:.5px;">CVE ID</th>
+            <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">CVE ID</th>
             <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">Vendor</th>
             <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">Product</th>
             <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">Vulnerability</th>
             <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">Added</th>
             <th style="padding:8px 6px;text-align:center;color:{BLUE};font-size:.58rem;text-transform:uppercase;">RW</th>
-            <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">Due Date</th>
-        </tr></thead>
-        <tbody style="line-height:1.6;">{rows_html}</tbody>
-    </table></div>
-    <div style="font-size:.5rem;color:#505060;margin:4px 0 0 4px;">
-        RW = Known Ransomware Campaign Use (🔴 = confirmed) · Source: CISA KEV JSON · Due Date = federal remediation deadline
-    </div>
-    """, unsafe_allow_html=True)
+            <th style="padding:8px 6px;text-align:left;color:{BLUE};font-size:.58rem;text-transform:uppercase;">Due</th>
+        </tr></thead><tbody style="line-height:1.6;">{rows_html}</tbody></table></div>
+    <div style="font-size:.5rem;color:#505060;margin:4px 0 0 4px;">RW = Ransomware (🔴 confirmed) · Source: CISA KEV JSON · Due = federal remediation deadline</div>""", unsafe_allow_html=True)
 else:
-    st.markdown(f"""<div style="padding:20px;border:1px solid #1a1a2e;background:#080810;text-align:center;">
-        <span style="color:{GREY};font-size:.8rem;">KEV table populates on Streamlit Cloud deployment</span></div>""", unsafe_allow_html=True)
-
+    st.markdown(f'<div style="padding:20px;border:1px solid #1a1a2e;background:#080810;text-align:center;"><span style="color:{GREY};font-size:.8rem;">KEV table populates on Streamlit Cloud deployment</span></div>', unsafe_allow_html=True)
 st.markdown("---")
 
-
 # ══════════════════════════════════════════════════════════════════════════════
-#  COMPLIANCE FRAMEWORK QUICK REFERENCE
+#  COMPLIANCE & REGULATORY FRAMEWORK REFERENCE  (23 frameworks)
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin:10px 0 12px;">
+st.markdown(f"""<div style="margin:10px 0 12px;text-align:center;">
   <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
     <a href="https://www.nist.gov/cyberframework" target="_blank" class="sh">
-      &gt;&gt; COMPLIANCE FRAMEWORK QUICK REFERENCE</a></span>
-  <span style="font-size:.55rem;color:#505060;margin-left:8px;">GRC PROFESSIONAL CHEAT SHEET</span>
+      &gt;&gt; COMPLIANCE &amp; REGULATORY FRAMEWORK REFERENCE &lt;&lt;</a></span>
+  <div style="font-size:.55rem;color:#505060;margin-top:2px;">23 FRAMEWORKS · GRC PROFESSIONAL CHEAT SHEET · GLOBAL COVERAGE</div>
 </div>""", unsafe_allow_html=True)
 
 frameworks = [
-    ("NIST CSF 2.0","Voluntary","All sectors","Govern · Identify · Protect · Detect · Respond · Recover","https://www.nist.gov/cyberframework","6 core functions · 22 categories · 106 subcategories"),
-    ("ISO 27001:2022","Mandatory (cert)","Global","Plan · Do · Check · Act (ISMS lifecycle)","https://www.iso.org/isoiec-27001-information-security.html","93 controls across 4 themes · Annex A"),
-    ("SOC 2 Type II","Audit","SaaS / Cloud","Security · Availability · Processing · Confidentiality · Privacy","https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2","5 Trust Service Criteria · 12-month audit"),
+    ("NIST CSF 2.0","Voluntary","All sectors","Govern · Identify · Protect · Detect · Respond · Recover","https://www.nist.gov/cyberframework","6 functions · 22 categories · 106 subcategories"),
+    ("NIST RMF","Voluntary","US Federal","Categorize · Select · Implement · Assess · Authorize · Monitor","https://csrc.nist.gov/projects/risk-management/about-rmf","7-step lifecycle · tied to SP 800-53"),
+    ("NIST AI RMF","Voluntary","AI systems","Govern · Map · Measure · Manage","https://www.nist.gov/itl/ai-risk-management-framework","4 core functions · AI lifecycle risk"),
+    ("NIST 800-171","Mandatory","CUI (DoD)","Access · Awareness · Audit · Config · ID · IR · Maint · Media · PE · RA · SA · SC","https://csrc.nist.gov/publications/detail/sp/800-171/rev-2/final","110 controls · 14 families · CMMC basis"),
+    ("ISO 27001:2022","Mandatory (cert)","Global","Plan · Do · Check · Act (ISMS lifecycle)","https://www.iso.org/isoiec-27001-information-security.html","93 controls · 4 themes · Annex A"),
+    ("ISO 27701","Mandatory (cert)","Privacy","Extension of 27001 for PIMS","https://www.iso.org/standard/71670.html","Privacy info mgmt · GDPR alignment"),
+    ("SOC 2 Type II","Audit","SaaS / Cloud","Security · Availability · Processing · Confidentiality · Privacy","https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2","5 Trust Criteria · 12-month audit period"),
     ("PCI DSS 4.0","Mandatory","Payment card","Build · Maintain · Protect · Monitor · Test · Policy","https://www.pcisecuritystandards.org/","12 requirements · 6 goals · MFA required"),
-    ("HIPAA","Mandatory","Healthcare US","Administrative · Physical · Technical safeguards","https://www.hhs.gov/hipaa/","Privacy Rule + Security Rule + Breach Notification"),
-    ("GDPR","Mandatory","EU data","Lawfulness · Purpose · Minimization · Accuracy · Storage · Security","https://gdpr.eu/","€20M or 4% revenue max fine · 72hr notification"),
-    ("CMMC 2.0","Mandatory","US DoD supply","Level 1: Basic · Level 2: Advanced · Level 3: Expert","https://www.acq.osd.mil/cmmc/","3 levels · 110+ practices · NIST 800-171 aligned"),
+    ("HIPAA","Mandatory","Healthcare US","Administrative · Physical · Technical safeguards","https://www.hhs.gov/hipaa/","Privacy + Security + Breach Notification"),
+    ("HITRUST CSF","Audit","Healthcare+","Implement · Manage · Measure · Report (i1/r2/e1)","https://hitrustalliance.net/","14 control categories · 49 objectives"),
+    ("GDPR","Mandatory","EU/EEA data","Lawfulness · Purpose · Minimization · Accuracy · Storage · Security","https://gdpr.eu/","€20M or 4% revenue fine · 72hr notify"),
+    ("CCPA/CPRA","Mandatory","California","Right to know · Delete · Opt-out · Non-discrimination","https://oag.ca.gov/privacy/ccpa","CA consumers · $7,500/violation max"),
+    ("DORA","Mandatory","EU financial","ICT risk mgmt · Incident reporting · Resilience testing · 3rd party","https://www.digital-operational-resilience-act.com/","Effective Jan 2025 · EU financial sector"),
+    ("NIS2 Directive","Mandatory","EU critical","Risk mgmt · Incident handling · Supply chain · Encryption","https://www.nis-2-directive.com/","18 sectors · €10M or 2% fine · Oct 2024"),
+    ("CMMC 2.0","Mandatory","US DoD supply","Level 1: Basic · Level 2: Advanced · Level 3: Expert","https://www.acq.osd.mil/cmmc/","3 levels · 110+ practices · 800-171 aligned"),
+    ("FedRAMP","Mandatory","US Gov cloud","Authorization to Operate (ATO) lifecycle","https://www.fedramp.gov/","3 impact levels · Low/Mod/High · JAB"),
     ("CIS Controls v8","Voluntary","All sectors","18 controls: Basic → Foundational → Organizational","https://www.cisecurity.org/controls/","18 controls · 153 safeguards · 3 IGs"),
+    ("COBIT 2019","Voluntary","IT governance","Align · Plan · Build · Deliver · Monitor · Evaluate","https://www.isaca.org/resources/cobit","40 governance objectives · ISACA"),
+    ("CSA STAR","Audit","Cloud","Cloud Controls Matrix (CCM) + CAIQ","https://cloudsecurityalliance.org/star/","197 control objectives · 17 domains"),
+    ("China MLPS 2.0","Mandatory","China","5 protection levels · classified by system importance","http://www.djbh.net/","Cybersecurity Law Art.21 · annual review"),
+    ("OWASP Top 10","Voluntary","Web apps","A01:Broken Access · A02:Crypto · A03:Injection · A04–A10","https://owasp.org/www-project-top-ten/","10 web app risk categories · 2021 rev"),
+    ("OWASP LLM Top 10","Voluntary","AI/LLM","Prompt Injection · Data Leak · Supply Chain · Overreliance","https://owasp.org/www-project-top-10-for-large-language-model-applications/","10 LLM-specific risks · 2025 revision"),
+    ("OWASP API Top 10","Voluntary","APIs","BOLA · Auth · BOPLA · Resource · BFLA · Mass Assign","https://owasp.org/API-Security/","10 API security risks · 2023 revision"),
 ]
 
+type_colors = {"Mandatory":"#ff6b6b","Mandatory (cert)":"#ff6b6b","Voluntary":GREEN,"Audit":AMBER}
 fw_rows = ""
 for fw in frameworks:
+    clr = type_colors.get(fw[1], GREY)
     fw_rows += f"""<tr style="border-bottom:1px solid #141420;">
-        <td style="padding:8px 6px;color:{CYAN};font-weight:bold;white-space:nowrap;font-size:.64rem;">
+        <td style="padding:7px 6px;color:{CYAN};font-weight:bold;white-space:nowrap;font-size:.62rem;">
             <a href="{fw[4]}" target="_blank" style="color:{CYAN};text-decoration:none;border-bottom:1px dashed {CYAN}40;">{fw[0]}</a></td>
-        <td style="padding:8px 6px;color:{'#ff6b6b' if fw[1]=='Mandatory' else GREEN if fw[1]=='Voluntary' else AMBER};font-size:.6rem;font-weight:bold;">{fw[1]}</td>
-        <td style="padding:8px 6px;color:{GREY};font-size:.6rem;">{fw[2]}</td>
-        <td style="padding:8px 6px;color:#888;font-size:.56rem;">{fw[3]}</td>
-        <td style="padding:8px 6px;color:#606070;font-size:.54rem;font-style:italic;">{fw[5]}</td>
-    </tr>"""
+        <td style="padding:7px 6px;color:{clr};font-size:.58rem;font-weight:bold;">{fw[1]}</td>
+        <td style="padding:7px 6px;color:{GREY};font-size:.58rem;">{fw[2]}</td>
+        <td style="padding:7px 6px;color:#888;font-size:.54rem;">{fw[3]}</td>
+        <td style="padding:7px 6px;color:#606070;font-size:.52rem;font-style:italic;">{fw[5]}</td></tr>"""
 
-st.markdown(f"""
-<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;">
+st.markdown(f"""<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;">
 <table style="width:100%;border-collapse:collapse;font-family:{MONO};">
     <thead><tr style="border-bottom:2px solid {CYAN}30;background:#0a0a14;">
-        <th style="padding:8px 6px;text-align:left;color:{CYAN};font-size:.58rem;text-transform:uppercase;letter-spacing:.5px;">Framework</th>
-        <th style="padding:8px 6px;text-align:left;color:{CYAN};font-size:.58rem;text-transform:uppercase;">Type</th>
-        <th style="padding:8px 6px;text-align:left;color:{CYAN};font-size:.58rem;text-transform:uppercase;">Scope</th>
-        <th style="padding:8px 6px;text-align:left;color:{CYAN};font-size:.58rem;text-transform:uppercase;">Core Structure</th>
-        <th style="padding:8px 6px;text-align:left;color:{CYAN};font-size:.58rem;text-transform:uppercase;">Key Details</th>
-    </tr></thead>
-    <tbody>{fw_rows}</tbody>
-</table></div>
+        <th style="padding:7px 6px;text-align:left;color:{CYAN};font-size:.56rem;text-transform:uppercase;">Framework</th>
+        <th style="padding:7px 6px;text-align:left;color:{CYAN};font-size:.56rem;text-transform:uppercase;">Type</th>
+        <th style="padding:7px 6px;text-align:left;color:{CYAN};font-size:.56rem;text-transform:uppercase;">Scope</th>
+        <th style="padding:7px 6px;text-align:left;color:{CYAN};font-size:.56rem;text-transform:uppercase;">Core Structure</th>
+        <th style="padding:7px 6px;text-align:left;color:{CYAN};font-size:.56rem;text-transform:uppercase;">Key Details</th>
+    </tr></thead><tbody>{fw_rows}</tbody></table></div>
 <div style="font-size:.5rem;color:#505060;margin:4px 0 0 4px;">
-    <span style="color:{GREEN};">●</span> Voluntary &nbsp;
-    <span style="color:#ff6b6b;">●</span> Mandatory &nbsp;
-    <span style="color:{AMBER};">●</span> Audit-based &nbsp;·&nbsp;
-    All frameworks hyperlinked to official sources
-</div>
-""", unsafe_allow_html=True)
+    <span style="color:{GREEN};">●</span> Voluntary &ensp;
+    <span style="color:#ff6b6b;">●</span> Mandatory &ensp;
+    <span style="color:{AMBER};">●</span> Audit-based &ensp;·&ensp;
+    23 frameworks · All hyperlinked to official sources</div>""", unsafe_allow_html=True)
 st.markdown("---")
 
+# ══════════════════════════════════════════════════════════════════════════════
+#  INDUSTRY BREACH COST RANKINGS
+# ══════════════════════════════════════════════════════════════════════════════
+st.markdown(f"""<div style="margin:10px 0 12px;text-align:center;">
+  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
+    <a href="https://www.ibm.com/security/data-breach" target="_blank" class="sh">
+      &gt;&gt; INDUSTRY BREACH COST RANKINGS &lt;&lt;</a></span>
+  <div style="font-size:.55rem;color:#505060;margin-top:2px;">IBM COST OF A DATA BREACH 2024 · AVG COST BY SECTOR · TOP 15 INDUSTRIES</div>
+</div>""", unsafe_allow_html=True)
+
+industries = [
+    ("Healthcare","$9.77M","↑ $0.4M","#1 for 14 consecutive years","67% hit by ransomware"),
+    ("Financial","$6.08M","↑ $0.3M","BEC & wire fraud primary vector","Highest regulatory fines"),
+    ("Pharmaceuticals","$5.10M","↑ $0.2M","IP theft & research espionage","Long detection lifecycle"),
+    ("Energy","$5.29M","↑ $0.5M","OT/ICS convergence risk","Nation-state targeting"),
+    ("Industrial","$5.56M","↑ $0.8M","Manufacturing ransomware surge","62% payment rate"),
+    ("Technology","$5.45M","↑ $0.4M","Supply chain & IP theft","Fastest breakout times"),
+    ("Professional Svcs","$5.08M","↑ $0.3M","Client data exposure risk","High regulatory scrutiny"),
+    ("Education","$3.65M","↓ $0.1M","Ransomware #1 in higher ed","Limited security budgets"),
+    ("Government","$4.73M","↑ $0.3M","Nation-state APT targeting","Mean dwell 233 days"),
+    ("Retail","$3.91M","↑ $0.5M","POS & e-commerce fraud","PCI DSS compliance"),
+    ("Media","$3.58M","↑ $0.2M","Credential theft & defacement","Public-facing systems"),
+    ("Hospitality","$3.36M","↑ $0.1M","Payment card & PII theft","Franchise model risk"),
+    ("Transportation","$4.18M","↑ $0.3M","OT & logistics disruption","Supply chain impact"),
+    ("Telecom","$3.62M","↑ $0.2M","SIM-swap & subscriber fraud","Critical infrastructure"),
+    ("Research","$4.02M","↑ $0.4M","IP & classified data theft","State-sponsored attacks"),
+]
+ind_rows = ""
+for i, ind in enumerate(industries):
+    bar_w = int(float(ind[1].replace("$","").replace("M","")) / 9.77 * 100)
+    color = RED if i < 3 else AMBER if i < 7 else BLUE
+    ind_rows += f"""<tr style="border-bottom:1px solid #141420;">
+        <td style="padding:6px;color:{GREEN};font-weight:bold;font-size:.6rem;text-align:center;">#{i+1}</td>
+        <td style="padding:6px;color:{CYAN};font-weight:bold;font-size:.62rem;white-space:nowrap;">{ind[0]}</td>
+        <td style="padding:6px;color:{GREEN};font-weight:bold;font-size:.7rem;white-space:nowrap;">{ind[1]}</td>
+        <td style="padding:6px;width:25%;"><div style="background:#141420;border-radius:2px;overflow:hidden;height:10px;">
+            <div style="width:{bar_w}%;height:100%;background:linear-gradient(90deg,{color},{color}80);"></div></div></td>
+        <td style="padding:6px;color:{'#ff6b6b' if chr(8593) in ind[2] else GREEN};font-size:.56rem;font-weight:bold;">{ind[2]} YoY</td>
+        <td style="padding:6px;color:#888;font-size:.52rem;">{ind[3]}</td>
+        <td style="padding:6px;color:#606070;font-size:.52rem;font-style:italic;">{ind[4]}</td></tr>"""
+
+st.markdown(f"""<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;">
+<table style="width:100%;border-collapse:collapse;font-family:{MONO};">
+    <thead><tr style="border-bottom:2px solid {GREEN}30;background:#0a0a14;">
+        <th style="padding:7px 4px;color:{GREEN};font-size:.54rem;text-transform:uppercase;">#</th>
+        <th style="padding:7px 6px;text-align:left;color:{GREEN};font-size:.54rem;text-transform:uppercase;">Industry</th>
+        <th style="padding:7px 6px;text-align:left;color:{GREEN};font-size:.54rem;text-transform:uppercase;">Avg Cost</th>
+        <th style="padding:7px 6px;text-align:left;color:{GREEN};font-size:.54rem;text-transform:uppercase;">Relative</th>
+        <th style="padding:7px 6px;text-align:left;color:{GREEN};font-size:.54rem;text-transform:uppercase;">YoY</th>
+        <th style="padding:7px 6px;text-align:left;color:{GREEN};font-size:.54rem;text-transform:uppercase;">Key Insight</th>
+        <th style="padding:7px 6px;text-align:left;color:{GREEN};font-size:.54rem;text-transform:uppercase;">Note</th>
+    </tr></thead><tbody>{ind_rows}</tbody></table></div>
+<div style="font-size:.5rem;color:#505060;margin:4px 0 0 4px;">
+    Source: IBM Cost of a Data Breach Report 2024 · Global averages · Cost includes detection, notification, response & lost business</div>""", unsafe_allow_html=True)
+st.markdown("---")
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  MITRE ATT&CK TOP TECHNIQUES
+# ══════════════════════════════════════════════════════════════════════════════
+st.markdown(f"""<div style="margin:10px 0 12px;text-align:center;">
+  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
+    <a href="https://attack.mitre.org/" target="_blank" class="sh">
+      &gt;&gt; MITRE ATT&amp;CK TOP TECHNIQUES &lt;&lt;</a></span>
+  <div style="font-size:.55rem;color:#505060;margin-top:2px;">MOST OBSERVED ADVERSARY TECHNIQUES 2024 · RED CANARY / MANDIANT / CROWDSTRIKE</div>
+</div>""", unsafe_allow_html=True)
+
+techniques = [
+    ("T1059","Command & Scripting","Execution","PowerShell, Bash, Python abuse","85%","Critical"),
+    ("T1078","Valid Accounts","Persistence","Stolen/compromised credentials","75%","Critical"),
+    ("T1053","Scheduled Task/Job","Execution","Persistence via cron/Task Scheduler","62%","High"),
+    ("T1027","Obfuscated Files","Defense Evasion","Encoded payloads, packing, encryption","58%","High"),
+    ("T1021","Remote Services","Lateral Movement","RDP, SSH, SMB, WinRM abuse","55%","High"),
+    ("T1486","Data Encrypted","Impact","Ransomware encryption of target data","52%","Critical"),
+    ("T1055","Process Injection","Defense Evasion","DLL injection, hollowing, thread hijack","48%","High"),
+    ("T1105","Ingress Tool Transfer","C2","Download additional payloads post-access","46%","High"),
+    ("T1566","Phishing","Initial Access","Spearphishing attachments & links","44%","High"),
+    ("T1070","Indicator Removal","Defense Evasion","Log deletion, timestomping","42%","High"),
+    ("T1190","Exploit Public App","Initial Access","CVE exploitation of web-facing services","38%","Critical"),
+    ("T1003","OS Credential Dumping","Cred Access","LSASS, SAM, DCSync, Mimikatz","36%","Critical"),
+]
+tech_rows = ""
+for t in techniques:
+    sev_c = RED if t[5]=="Critical" else AMBER
+    sev_icon = "🔴" if t[5]=="Critical" else "🟡"
+    tech_rows += f"""<tr style="border-bottom:1px solid #141420;">
+        <td style="padding:6px;color:{BLUE};font-weight:bold;font-size:.6rem;white-space:nowrap;">
+            <a href="https://attack.mitre.org/techniques/{t[0]}/" target="_blank" style="color:{BLUE};text-decoration:none;border-bottom:1px dashed {BLUE}40;">{t[0]}</a></td>
+        <td style="padding:6px;color:{CYAN};font-weight:bold;font-size:.6rem;">{t[1]}</td>
+        <td style="padding:6px;color:{GREY};font-size:.56rem;">{t[2]}</td>
+        <td style="padding:6px;color:#888;font-size:.52rem;">{t[3]}</td>
+        <td style="padding:6px;color:{GREEN};font-weight:bold;font-size:.62rem;">{t[4]}</td>
+        <td style="padding:6px;color:{sev_c};font-size:.54rem;font-weight:bold;">{sev_icon} {t[5]}</td></tr>"""
+
+st.markdown(f"""<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;">
+<table style="width:100%;border-collapse:collapse;font-family:{MONO};">
+    <thead><tr style="border-bottom:2px solid {BLUE}30;background:#0a0a14;">
+        <th style="padding:7px 6px;text-align:left;color:{BLUE};font-size:.54rem;text-transform:uppercase;">ID</th>
+        <th style="padding:7px 6px;text-align:left;color:{BLUE};font-size:.54rem;text-transform:uppercase;">Technique</th>
+        <th style="padding:7px 6px;text-align:left;color:{BLUE};font-size:.54rem;text-transform:uppercase;">Tactic</th>
+        <th style="padding:7px 6px;text-align:left;color:{BLUE};font-size:.54rem;text-transform:uppercase;">Details</th>
+        <th style="padding:7px 6px;text-align:left;color:{BLUE};font-size:.54rem;text-transform:uppercase;">Freq</th>
+        <th style="padding:7px 6px;text-align:left;color:{BLUE};font-size:.54rem;text-transform:uppercase;">Severity</th>
+    </tr></thead><tbody>{tech_rows}</tbody></table></div>
+<div style="font-size:.5rem;color:#505060;margin:4px 0 0 4px;">
+    Source: Red Canary Threat Detection Report 2024 · Mandiant M-Trends · CrowdStrike GTR · IDs hyperlinked to ATT&CK</div>""", unsafe_allow_html=True)
+st.markdown("---")
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  TOP RANSOMWARE GROUPS TRACKER
+# ══════════════════════════════════════════════════════════════════════════════
+st.markdown(f"""<div style="margin:10px 0 12px;text-align:center;">
+  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
+    <a href="https://www.cisa.gov/stopransomware" target="_blank" class="sh">
+      &gt;&gt; TOP RANSOMWARE GROUPS TRACKER &lt;&lt;</a></span>
+  <div style="font-size:.55rem;color:#505060;margin-top:2px;">MAJOR RAAS OPERATIONS · 2024 ACTIVITY · CROWDSTRIKE / SOPHOS / CHAINALYSIS</div>
+</div>""", unsafe_allow_html=True)
+
+rw_groups = [
+    ("LockBit 3.0","BITWISE SPIDER","RaaS","~25%","1,000+","Active","Disrupted FBI Feb 2024 · rebuilt within weeks"),
+    ("ALPHV/BlackCat","SCATTERED SPIDER","RaaS","~12%","400+","Defunct","Exit-scammed after $22M Change Healthcare"),
+    ("Cl0p / TA505","GRACEFUL SPIDER","Extortion","~10%","2,700+","Active","MOVEit mass exploitation · zero-day specialist"),
+    ("Play","—","RaaS","~8%","300+","Active","Targets govt & critical infra globally"),
+    ("Black Basta","STORM-0506","RaaS","~7%","250+","Active","QakBot successor · healthcare targeting"),
+    ("8Base","—","RaaS","~5%","200+","Active","SMB targeting · double extortion"),
+    ("Akira","PUNK SPIDER","RaaS","~5%","180+","Active","Exploits VPN vulns (Cisco/Fortinet)"),
+    ("Royal/BlackSuit","—","RaaS","~4%","150+","Rebranded","Royal to BlackSuit rebrand · US focus"),
+    ("Rhysida","—","RaaS","~3%","100+","Active","Healthcare & education · Win+Linux"),
+    ("Medusa","—","RaaS","~3%","120+","Active","Triple extortion · data leak + DDoS"),
+]
+rw_rows = ""
+for rw in rw_groups:
+    sc = RED if rw[5]=="Active" else "#555" if rw[5]=="Defunct" else AMBER
+    si = "🔴" if rw[5]=="Active" else "⚫" if rw[5]=="Defunct" else "🟡"
+    rw_rows += f"""<tr style="border-bottom:1px solid #141420;">
+        <td style="padding:6px;color:{CYAN};font-weight:bold;font-size:.62rem;">{rw[0]}</td>
+        <td style="padding:6px;color:#606070;font-size:.52rem;">{rw[1]}</td>
+        <td style="padding:6px;color:{GREY};font-size:.56rem;">{rw[2]}</td>
+        <td style="padding:6px;color:{GREEN};font-weight:bold;font-size:.6rem;">{rw[3]}</td>
+        <td style="padding:6px;color:{AMBER};font-size:.58rem;">{rw[4]} victims</td>
+        <td style="padding:6px;color:{sc};font-weight:bold;font-size:.56rem;">{si} {rw[5]}</td>
+        <td style="padding:6px;color:#888;font-size:.5rem;">{rw[6]}</td></tr>"""
+
+st.markdown(f"""<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;">
+<table style="width:100%;border-collapse:collapse;font-family:{MONO};">
+    <thead><tr style="border-bottom:2px solid {RED}30;background:#0a0a14;">
+        <th style="padding:7px 6px;text-align:left;color:{RED};font-size:.54rem;text-transform:uppercase;">Group</th>
+        <th style="padding:7px 6px;text-align:left;color:{RED};font-size:.54rem;text-transform:uppercase;">Alias</th>
+        <th style="padding:7px 6px;text-align:left;color:{RED};font-size:.54rem;text-transform:uppercase;">Model</th>
+        <th style="padding:7px 6px;text-align:left;color:{RED};font-size:.54rem;text-transform:uppercase;">Share</th>
+        <th style="padding:7px 6px;text-align:left;color:{RED};font-size:.54rem;text-transform:uppercase;">Victims</th>
+        <th style="padding:7px 6px;text-align:left;color:{RED};font-size:.54rem;text-transform:uppercase;">Status</th>
+        <th style="padding:7px 6px;text-align:left;color:{RED};font-size:.54rem;text-transform:uppercase;">Intel</th>
+    </tr></thead><tbody>{rw_rows}</tbody></table></div>
+<div style="font-size:.5rem;color:#505060;margin:4px 0 0 4px;">
+    🔴 Active &ensp; 🟡 Rebranded &ensp; ⚫ Defunct · Source: CrowdStrike GTR 2024 · Ransomware leak site tracking</div>""", unsafe_allow_html=True)
+st.markdown("---")
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  GRC RESOURCES
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""<div style="margin-top:24px;margin-bottom:14px;text-align:center;">
   <span style="font-size:1.05rem;font-weight:bold;text-transform:uppercase;letter-spacing:1.5px;">
@@ -922,19 +1073,19 @@ st.markdown(f"""<div style="margin-top:24px;margin-bottom:14px;text-align:center
 l1,l2,l3,l4=st.columns(4)
 with l1:
     st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ FRAMEWORKS &amp; STANDARDS</div>', unsafe_allow_html=True)
-    for a in [("01","NIST CSF 2.0","https://www.nist.gov/cyberframework","Cybersecurity risk mgmt."),("02","NIST AI RMF","https://www.nist.gov/itl/ai-risk-management-framework","AI risk management."),("03","ISO/IEC 27001","https://www.iso.org/isoiec-27001-information-security.html","International ISMS."),("04","CIS Controls v8","https://www.cisecurity.org/controls/","Prioritized safeguards."),("05","HITRUST","https://hitrustalliance.net/","Info risk mgmt."),("06","MITRE ATT&CK","https://mitre-attack.github.io/attack-navigator/","Adversary TTP matrix."),("07","MITRE D3FEND","https://d3fend.mitre.org/","Defensive knowledge graph."),("08","CVSS 4.0","https://www.first.org/cvss/calculator/4.0","Vuln scoring."),("09","NIST CSRC","https://csrc.nist.gov/","Comp Security Resource Ctr."),("10","SP 800-53","https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final","Security controls."),("11","NIST NVD","https://nvd.nist.gov/","National Vuln Database."),("12","CISA KEV","https://www.cisa.gov/known-exploited-vulnerabilities-catalog","Exploited CVEs."),("13","Shields Up","https://www.cisa.gov/shields-up","Cyber resilience."),("14","NIST 800-171","https://csrc.nist.gov/publications/detail/sp/800-171/rev-2/final","CUI protection (CMMC).")]:
+    for a in [("01","NIST CSF 2.0","https://www.nist.gov/cyberframework","Cybersecurity risk mgmt."),("02","NIST RMF","https://csrc.nist.gov/projects/risk-management/about-rmf","Risk mgmt framework."),("03","NIST AI RMF","https://www.nist.gov/itl/ai-risk-management-framework","AI risk management."),("04","ISO/IEC 27001","https://www.iso.org/isoiec-27001-information-security.html","International ISMS."),("05","CIS Controls v8","https://www.cisecurity.org/controls/","Prioritized safeguards."),("06","HITRUST CSF","https://hitrustalliance.net/","Healthcare+ risk mgmt."),("07","MITRE ATT&CK","https://mitre-attack.github.io/attack-navigator/","Adversary TTP matrix."),("08","MITRE D3FEND","https://d3fend.mitre.org/","Defensive knowledge graph."),("09","CVSS 4.0","https://www.first.org/cvss/calculator/4.0","Vuln scoring."),("10","NIST CSRC","https://csrc.nist.gov/","Comp Security Resource Ctr."),("11","SP 800-53","https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final","Security controls."),("12","NIST NVD","https://nvd.nist.gov/","National Vuln Database."),("13","CISA KEV","https://www.cisa.gov/known-exploited-vulnerabilities-catalog","Exploited CVEs."),("14","Shields Up","https://www.cisa.gov/shields-up","Cyber resilience."),("15","NIST 800-171","https://csrc.nist.gov/publications/detail/sp/800-171/rev-2/final","CUI protection.")]:
         st.markdown(gl(*a), unsafe_allow_html=True)
 with l2:
     st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ THREAT INTEL &amp; LIVE MAPS</div>', unsafe_allow_html=True)
-    for a in [("15","VirusTotal","https://www.virustotal.com/","Analyze files, domains, IPs."),("16","AlienVault OTX","https://otx.alienvault.com/","Crowdsourced IOCs."),("17","Talos Intel","https://talosintelligence.com/","Cisco threat intel."),("18","Shodan","https://www.shodan.io/","Internet device search."),("19","Have I Been Pwned","https://haveibeenpwned.com/","Breach exposure."),("20","crt.sh","https://crt.sh/","Cert Transparency."),("21","SANS ISC","https://isc.sans.edu/","Threat monitor."),("22","URLhaus","https://urlhaus.abuse.ch/","Malware URLs."),("23","MalwareBazaar","https://bazaar.abuse.ch/","Malware samples."),("24","ThreatFox","https://threatfox.abuse.ch/","Community IOCs."),("25","Exploit-DB","https://www.exploit-db.com/","Public exploits."),("26","Pulsedive","https://pulsedive.com/","Free threat intel."),("27","GreyNoise","https://viz.greynoise.io/","Scanner &amp; noise intel."),("28","Kaspersky Map","https://cybermap.kaspersky.com/","Live cyber threat map."),("29","Bitdefender Map","https://threatmap.bitdefender.com/","Real-time threat map."),("30","Check Point Map","https://threatmap.checkpoint.com/","ThreatCloud live map."),("31","SonicWall Map","https://attackmap.sonicwall.com/live-attack-map/","Live attack map."),("32","Sicherheitstacho","https://www.sicherheitstacho.eu/?lang=en","Deutsche Telekom map."),("33","Threatbutt","https://threatbutt.com/map/","Internet hacking map.")]:
+    for a in [("16","VirusTotal","https://www.virustotal.com/","Analyze files, domains, IPs."),("17","AlienVault OTX","https://otx.alienvault.com/","Crowdsourced IOCs."),("18","Talos Intel","https://talosintelligence.com/","Cisco threat intel."),("19","Shodan","https://www.shodan.io/","Internet device search."),("20","Have I Been Pwned","https://haveibeenpwned.com/","Breach exposure."),("21","crt.sh","https://crt.sh/","Cert Transparency."),("22","SANS ISC","https://isc.sans.edu/","Threat monitor."),("23","URLhaus","https://urlhaus.abuse.ch/","Malware URLs."),("24","MalwareBazaar","https://bazaar.abuse.ch/","Malware samples."),("25","ThreatFox","https://threatfox.abuse.ch/","Community IOCs."),("26","Exploit-DB","https://www.exploit-db.com/","Public exploits."),("27","Pulsedive","https://pulsedive.com/","Free threat intel."),("28","GreyNoise","https://viz.greynoise.io/","Scanner & noise intel."),("29","Kaspersky Map","https://cybermap.kaspersky.com/","Live threat map."),("30","Bitdefender Map","https://threatmap.bitdefender.com/","Real-time threat map."),("31","Check Point Map","https://threatmap.checkpoint.com/","ThreatCloud map."),("32","SonicWall Map","https://attackmap.sonicwall.com/live-attack-map/","Live attack map."),("33","Sicherheitstacho","https://www.sicherheitstacho.eu/?lang=en","DT threat map."),("34","Threatbutt","https://threatbutt.com/map/","Attack map.")]:
         st.markdown(gl(*a), unsafe_allow_html=True)
 with l3:
     st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ SECURITY TOOLS</div>', unsafe_allow_html=True)
-    for a in [("34","CyberChef","https://gchq.github.io/CyberChef/","Cyber Swiss Army Knife."),("35","Any.Run","https://any.run/","Malware sandbox."),("36","URLScan.io","https://urlscan.io/","Website scanning."),("37","GTFOBins","https://gtfobins.github.io/","Unix bypass binaries."),("38","LOLBAS","https://lolbas-project.github.io/","Windows LOTL."),("39","Security Onion","https://securityonionsolutions.com/","Threat hunting."),("40","OSINT Framework","https://osintframework.com/","OSINT tools."),("41","PayloadsAllThings","https://github.com/swisskyrepo/PayloadsAllTheThings","Payloads."),("42","Nuclei","https://github.com/projectdiscovery/nuclei-templates","Vuln templates."),("43","OpenCTI","https://www.opencti.io/","Open threat intel."),("44","YARA Rules","https://github.com/Yara-Rules/rules","Malware rules."),("45","Sigma Rules","https://github.com/SigmaHQ/sigma","Detection format."),("46","Wazuh","https://wazuh.com/","Open XDR/SIEM.")]:
+    for a in [("35","CyberChef","https://gchq.github.io/CyberChef/","Cyber Swiss Army Knife."),("36","Any.Run","https://any.run/","Malware sandbox."),("37","URLScan.io","https://urlscan.io/","Website scanning."),("38","GTFOBins","https://gtfobins.github.io/","Unix bypass binaries."),("39","LOLBAS","https://lolbas-project.github.io/","Windows LOTL."),("40","Security Onion","https://securityonionsolutions.com/","Threat hunting."),("41","OSINT Framework","https://osintframework.com/","OSINT tools."),("42","PayloadsAllThings","https://github.com/swisskyrepo/PayloadsAllTheThings","Payloads."),("43","Nuclei","https://github.com/projectdiscovery/nuclei-templates","Vuln templates."),("44","OpenCTI","https://www.opencti.io/","Open threat intel."),("45","YARA Rules","https://github.com/Yara-Rules/rules","Malware rules."),("46","Sigma Rules","https://github.com/SigmaHQ/sigma","Detection format."),("47","Wazuh","https://wazuh.com/","Open XDR/SIEM.")]:
         st.markdown(gl(*a), unsafe_allow_html=True)
 with l4:
     st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ TRAINING &amp; NEWS</div>', unsafe_allow_html=True)
-    for a in [("47","OWASP Top 10","https://owasp.org/www-project-top-ten/","Web app risks."),("48","OWASP LLM","https://owasp.org/www-project-top-10-for-large-language-model-applications/","LLM risks."),("49","OWASP API","https://owasp.org/API-Security/","API risks."),("50","HackTheBox","https://www.hackthebox.com/","Gamified training."),("51","TryHackMe","https://tryhackme.com/","Hands-on labs."),("52","PortSwigger","https://portswigger.net/web-security","Web vuln training."),("53","BleepingComputer","https://www.bleepingcomputer.com/","Security news."),("54","Hacker News","https://thehackernews.com/","Cyber news."),("55","SANS Papers","https://www.sans.org/white-papers/","Whitepapers."),("56","DEF CON","https://defcon.org/html/links/dc-archives.html","Archives."),("57","HackerOne","https://www.hackerone.com/","Bug bounty."),("58","Bugcrowd","https://www.bugcrowd.com/","Vuln disclosure."),("59","VulnHub","https://www.vulnhub.com/","Practice envs."),("60","Dark Reading","https://www.darkreading.com/","Enterprise security news.")]:
+    for a in [("48","OWASP Top 10","https://owasp.org/www-project-top-ten/","Web app risks."),("49","OWASP LLM","https://owasp.org/www-project-top-10-for-large-language-model-applications/","LLM risks."),("50","OWASP API","https://owasp.org/API-Security/","API risks."),("51","HackTheBox","https://www.hackthebox.com/","Gamified training."),("52","TryHackMe","https://tryhackme.com/","Hands-on labs."),("53","PortSwigger","https://portswigger.net/web-security","Web vuln training."),("54","BleepingComputer","https://www.bleepingcomputer.com/","Security news."),("55","Hacker News","https://thehackernews.com/","Cyber news."),("56","SANS Papers","https://www.sans.org/white-papers/","Whitepapers."),("57","DEF CON","https://defcon.org/html/links/dc-archives.html","Archives."),("58","HackerOne","https://www.hackerone.com/","Bug bounty."),("59","Bugcrowd","https://www.bugcrowd.com/","Vuln disclosure."),("60","Dark Reading","https://www.darkreading.com/","Enterprise security news.")]:
         st.markdown(gl(*a), unsafe_allow_html=True)
 
 st.markdown(f"""
@@ -950,5 +1101,5 @@ st.markdown(f"""
     <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="fl">
       Code and layout licensed CC BY-NC 4.0.</a></div>
   <div style="color:#2a2a3a;font-size:.65rem;">
-    SecAI-Nexus GRC [v20.0] · Live Data Engine ·
-    75 Indicators · 11 Live Feeds · 2 Maps · 60 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
+    SecAI-Nexus GRC [v21.0] · Live Data Engine ·
+    75 Indicators · 2 Maps · 22 Frameworks · 60 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
