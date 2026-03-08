@@ -287,7 +287,7 @@ st.markdown(f"""
     <div style="text-align:right;"><div style="font-size:.8rem;font-weight:bold;color:{BLUE};text-shadow:0 0 4px {BLUE};">
         SYS_TIME: {now_utc.strftime("%H:%M:%S")} UTC · {now_utc.strftime("%Y-%m-%d")}</div>
       <div style="font-size:.55rem;color:#505060;margin-top:1px;">
-        <span class="sd sg"></span>FEEDS NOMINAL · 54 INDICATORS · 9 MAPS · 52 RESOURCES</div></div></div></div>""", unsafe_allow_html=True)
+        <span class="sd sg"></span>FEEDS NOMINAL · 75 INDICATORS · 9 MAPS · 52 RESOURCES</div></div></div></div>""", unsafe_allow_html=True)
 
 with st.spinner("Syncing threat intelligence feeds…"):
     kev=fetch_kev(); baz=fetch_bazaar(); uhaus=fetch_urlhaus()
@@ -309,7 +309,7 @@ st.markdown(f"""<div style="margin:2px 0 10px;">
     <span class="sd sg"></span><span style="color:{GREEN};">LIVE</span> = real-time
     &ensp;<span class="sd sa"></span><span style="color:{AMBER};">EST</span> = annual baseline
     &ensp;<span class="sd sc"></span><span style="color:{CYAN};">PULSE</span> = DShield sensors
-    &ensp;54 indicators · 6 categories + 3 pulse rows</span></div>""", unsafe_allow_html=True)
+    &ensp;75 indicators · 5 rows × 9 + 5 pulse rows × 6</span></div>""", unsafe_allow_html=True)
 
 # ─── ROW 1 ────────────────────────────────────────────────────────────────────
 rl("▸ VULNERABILITY & EXPLOIT INTELLIGENCE")
@@ -588,7 +588,7 @@ for i in range(6):
 st.markdown(f'<div class="rl-p">⚡ ATTACK SOURCES, HONEYPOTS & THREAT CATEGORIES</div>', unsafe_allow_html=True)
 c = st.columns(6)
 with c[0]:
-    if topips:
+    if topips and topips.get("top_count",0) > 0:
         pcard("TOP ATTACK SOURCE","https://isc.sans.edu/",
             topips["top_ip"], f'{_f(topips["top_count"])} packets blocked',
             f'▸ {_f(topips["total"])} total from top 5 IPs',
@@ -670,6 +670,74 @@ with c[5]:
         "Exploited Vulns", "29% of ransomware entry",
         "▸ Then: phishing 21% · creds 21%",
         "–","d-n", "29% of attacks", "d-b", False)
+
+# ─── PULSE ROW 4: RANSOMWARE LANDSCAPE & EXTORTION ───────────────────────────
+st.markdown(f'<div class="rl-p">⚡ RANSOMWARE LANDSCAPE & EXTORTION ECONOMICS</div>', unsafe_allow_html=True)
+c = st.columns(6)
+with c[0]:
+    pcard("#1 RANSOMWARE GROUP","https://www.crowdstrike.com/global-threat-report/",
+        "LockBit 3.0", "Most prolific RaaS operation 2024",
+        "▸ ~25% of all ransomware attacks globally",
+        "–","d-n", "25% share", "d-b", False)
+with c[1]:
+    pcard("#2 RANSOMWARE GROUP","https://www.crowdstrike.com/global-threat-report/",
+        "ALPHV/BlackCat", "Seized then resurfaced in 2024",
+        "▸ $22M Change Healthcare ransom paid",
+        "–","d-n", "$22M single hit", "d-b", False)
+with c[2]:
+    pcard("#3 RANSOMWARE GROUP","https://www.crowdstrike.com/global-threat-report/",
+        "Cl0p / TA505", "Mass exploitation specialist",
+        "▸ MOVEit: 2,700+ orgs compromised",
+        "–","d-n", "2,700+ victims", "d-b", False)
+with c[3]:
+    pcard("DOUBLE EXTORTION","https://www.crowdstrike.com/global-threat-report/",
+        "93%", "of ransomware uses data theft",
+        "▸ Encrypt + exfil + leak site pressure",
+        "–","d-n", "+7% YoY", "d-b", False)
+with c[4]:
+    pcard("RANSOM ECONOMY","https://www.chainalysis.com/blog/2025-crypto-crime-report-introduction/",
+        "$1.1B Paid", "Total ransomware payments 2024",
+        "▸ Down 35% from $1.7B peak in 2023",
+        "–","d-n", "-35% YoY", "d-g", False)
+with c[5]:
+    pcard("DWELL → DEPLOY","https://www.crowdstrike.com/global-threat-report/",
+        "2m 07s", "Fastest observed breakout time",
+        "▸ Avg eCrime breakout: 62 minutes",
+        "–","d-n", "62 min avg", "d-b", False)
+
+# ─── PULSE ROW 5: ATTACK SURFACE & EXPOSURE INTELLIGENCE ─────────────────────
+st.markdown(f'<div class="rl-p">⚡ ATTACK SURFACE & GLOBAL EXPOSURE INTEL</div>', unsafe_allow_html=True)
+c = st.columns(6)
+with c[0]:
+    pcard("EXPOSED SMB/445","https://www.shodan.io/search?query=port%3A445",
+        "~1.2M", "Internet-facing SMB endpoints",
+        "▸ EternalBlue & WannaCry still exploited",
+        "–","d-n", "1.2M exposed", "d-b", False)
+with c[1]:
+    pcard("EXPOSED RDP/3389","https://www.shodan.io/search?query=port%3A3389",
+        "~3.5M", "Internet-facing RDP endpoints",
+        "▸ #1 ransomware initial access vector",
+        "–","d-n", "3.5M exposed", "d-b", False)
+with c[2]:
+    pcard("EXPOSED DATABASES","https://www.shodan.io/",
+        "~1.8M", "MySQL + Postgres + MongoDB open",
+        "▸ Ports 3306, 5432, 27017 exposed",
+        "–","d-n", "1.8M exposed", "d-b", False)
+with c[3]:
+    pcard("TOP TARGET COUNTRY","https://www.crowdstrike.com/global-threat-report/",
+        "United States", "46% of all targeted attacks",
+        "▸ Then: UK 8% · Germany 7% · Canada 5%",
+        "–","d-n", "46% of attacks", "d-b", False)
+with c[4]:
+    pcard("TOP SOURCE COUNTRY","https://isc.sans.edu/",
+        "China", "~28% of malicious scan traffic",
+        "▸ Then: US 14% · Russia 11% · India 7%",
+        "–","d-n", "~28% of scans", "d-b", False)
+with c[5]:
+    pcard("OPEN S3 BUCKETS","https://www.trendmicro.com/",
+        "~12,000+", "Publicly accessible cloud storage",
+        "▸ AWS, Azure, GCP misconfigurations",
+        "–","d-n", "12k+ exposed", "d-b", False)
 
 # ─── SOURCES BAR ──────────────────────────────────────────────────────────────
 ts = now_utc.strftime("%Y-%m-%d %H:%M UTC")
@@ -779,4 +847,4 @@ st.markdown(f"""
       Code and layout licensed CC BY-NC 4.0.</a></div>
   <div style="color:#2a2a3a;font-size:.65rem;">
     SecAI-Nexus GRC [v20.0] · Live Data Engine ·
-    54 Indicators · 11 Live Feeds · 9 Maps · 52 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
+    75 Indicators · 11 Live Feeds · 9 Maps · 52 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
