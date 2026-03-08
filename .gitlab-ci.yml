@@ -1,15 +1,37 @@
 # SecAI-Nexus DevSecOps Pipeline
-# Automatically scans Python code for vulnerabilities on every commit
+# Runs SAST, dependency scanning, secret detection, and syntax validation on every commit
 
 stages:
   - test
+  - security
 
-# Include GitLab's official, pre-built SAST template
+# Include GitLab's official security templates
 include:
   - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
 
+# Static Application Security Testing (Semgrep/Bandit for Python)
 sast:
   stage: test
   variables:
-    SAST_EXCLUDED_ANALYZERS: "" # Run all available analyzers for Python (e.g., Semgrep/Bandit)
+    SAST_EXCLUDED_ANALYZERS: ""
+    SEARCH_MAX_DEPTH: 10
 
+# Dependency vulnerability scanning (checks requirements.txt against CVE DBs)
+dependency_scanning:
+  stage: security
+
+# Detect accidentally committed secrets, tokens, or keys
+secret_detection:
+  stage: security
+
+# Basic Python syntax and import validation
+python-lint:
+  stage: test
+  image: python:3.11-slim
+  script:
+    - pip install --quiet streamlit requests
+    - python -m py_compile app.py
+    - echo "✅ Syntax validation passed"
+  allow_failure: false
