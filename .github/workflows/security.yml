@@ -37,15 +37,15 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
 
-      # ==================== Secret Detection (Fixed - Now scans entire repo) ====================
+      # ==================== Secret Detection (Fixed version) ====================
       - name: Scan for Secrets
         uses: trufflesecurity/trufflehog@main
         with:
-          scan_type: repo          # This fixes the BASE/HEAD error
-        continue-on-error: true    # Prevents workflow from failing on first push
+          scan_type: repo
+        continue-on-error: true
 
-      # ==================== Basic Python Syntax Check ====================
+      # ==================== Python Syntax Check (CORRECTED) ====================
       - name: Python Syntax Validation
         run: |
-          python -m pycompile app.py
+          python -m py_compile app.py
           echo "✅ Python syntax validation passed"
