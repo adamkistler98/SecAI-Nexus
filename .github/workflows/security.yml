@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  security-scan:
+  security:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -27,7 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # ==================== CodeQL (Advanced SAST + Dependency Scanning) ====================
+      # ==================== CodeQL (Best-in-class SAST + Dependency Scanning) ====================
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -37,13 +37,12 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
 
-      # ==================== Secret Detection ====================
-      - name: Run Secret Detection (TruffleHog)
+      # ==================== Secret Detection (Simplified & Reliable) ====================
+      - name: Scan for Secrets
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
-          base: main
-          head: HEAD
+          # Removed BASE/HEAD to prevent the error
 
       # ==================== Basic Python Syntax Check ====================
       - name: Python Syntax Validation
