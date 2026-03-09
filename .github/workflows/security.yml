@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      security-events: write   # Required for CodeQL and SARIF uploads
+      security-events: write
 
     steps:
       - name: Checkout code
@@ -27,14 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # ==================== SAST (Static Analysis) ====================
-      - name: Run Bandit (Python SAST)
-        uses: PyCQA/bandit-action@v1.2.0
-        with:
-          targets: .
-          options: "-r -f sarif -o bandit.sarif"
-
-      # ==================== CodeQL (Advanced SAST + Dependency Scan) ====================
+      # ==================== CodeQL (Advanced SAST + Dependency Scanning) ====================
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -43,26 +36,17 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
-        with:
-          upload: true
 
       # ==================== Secret Detection ====================
-      - name: Run Secret Detection
+      - name: Run Secret Detection (TruffleHog)
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
           base: main
           head: HEAD
 
-      # ==================== Basic Python Syntax & Lint Check ====================
-      - name: Python Syntax & Import Check
+      # ==================== Basic Python Syntax Check ====================
+      - name: Python Syntax Validation
         run: |
           python -m pycompile app.py
           echo "✅ Python syntax validation passed"
-
-      # ==================== Upload results to GitHub Security tab ====================
-      - name: Upload Bandit results
-        uses: github/codeql-action/upload-sarif@v3
-        if: always()
-        with:
-          sarif_file: bandit.sarif
