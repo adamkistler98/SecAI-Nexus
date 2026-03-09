@@ -1,5 +1,4 @@
 # 🤖 SecAI-Nexus GRC
-
 **Real-Time Cyber Threat Intelligence & GRC Observability Platform**
 
 SecAI-Nexus is a free, centralized dashboard that delivers real-time cyber threat intelligence — giving security and GRC professionals instant visibility into emerging attack vectors, AI-driven risks, and the latest cybersecurity trends — all without subscriptions or complex setup.
@@ -57,6 +56,7 @@ Every metric includes 5 contextual intel points sourced from the latest publishe
 ## 🛡️ Data Sources
 
 ### Live APIs (No Keys Required)
+
 | Source | Data | Refresh |
 |--------|------|---------|
 | [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | Exploited vulnerabilities catalog | 12 hr |
@@ -70,9 +70,7 @@ Every metric includes 5 contextual intel points sourced from the latest publishe
 | [Tor Project](https://metrics.torproject.org/) | Active exit node count | 12 hr |
 
 ### Estimated Metrics (Labeled `EST`)
-Sourced from the latest published reports, clearly labeled with "last verified 03/26":
-
-IBM Cost of a Data Breach 2025 · CrowdStrike Global Threat Report 2025/2026 · Mandiant M-Trends 2025 · Verizon DBIR 2025 · Sophos State of Ransomware 2025 · FBI IC3 Annual Report · APWG eCrime Report · ISC2 Workforce Study · Chainalysis Crypto Crime Report · Qualys TruRisk Research · SpyCloud Identity Exposure Report · OWASP LLM Top 10 (2025)
+Sourced from the latest published reports, clearly labeled with "last verified 03/26".
 
 ---
 
@@ -85,105 +83,78 @@ IBM Cost of a Data Breach 2025 · CrowdStrike Global Threat Report 2025/2026 · 
 | HTTP | `requests` (read-only GET to public APIs) |
 | Caching | `@st.cache_data` with configurable TTL |
 | Hosting | [Streamlit Community Cloud](https://streamlit.io/cloud) (free) |
-| Styling | Custom CSS (cyberpunk terminal theme) |
+| Styling | Custom CSS |
 | Security | Sandboxed iframes, no user data processing |
 
 ---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Python 3.9+
-- Internet connection (for live feeds and threat maps)
-
 ### Local Development
 ```bash
 git clone https://github.com/adamkistler98/SecAI-Nexus.git
-cd secai-nexus-grc
-
+cd SecAI-Nexus
 python -m venv venv
 source venv/bin/activate    # Windows: venv\Scripts\activate
-
 pip install -r requirements.txt
+streamlit run streamlit_app.py
 
-streamlit run app.py
-```
+Deploy to Streamlit Cloud (Free)
 
-### Deploy to Streamlit Cloud (Free)
-1. Push to GitLab/GitHub
-2. Connect repo at [share.streamlit.io](https://share.streamlit.io)
-3. Set main file to `app.py`
-4. Deploy — no environment variables or secrets needed
+Push to GitHub
+Connect repo at share.streamlit.io
+Set main file to streamlit_app.py
+Deploy — no environment variables or secrets needed
 
----
 
-## 📋 Requirements
-
-```
-streamlit>=1.30.0
+📋 Requirements
+textstreamlit>=1.30.0
 requests>=2.28.0
-```
 
-That's it. No pandas, no numpy, no database drivers. Two dependencies.
-
----
-
-## 🔒 Security
-
+🔒 Security
 SecAI-Nexus is designed with a minimal attack surface:
 
-- **No user input processing** — Dashboard is read-only, no forms or text fields
-- **No data storage** — Nothing persisted to disk, database, or session
-- **No authentication** — No credentials, tokens, or API keys used or stored
-- **No outbound writes** — All API calls are read-only GET requests to public endpoints
-- **Sandboxed iframes** — Embedded maps restricted via CSP and sandbox attributes
-- **No cookies or tracking** — No analytics, telemetry, or user fingerprinting
-- **Fallback data** — Static baselines render when APIs are unreachable
-- **Hardened controls** — Strict CSP, X-Frame-Options DENY, Referrer-Policy, XSRF protection, CORS disabled, response size/type validation, session rate limiting
-- **Pinned dependencies** — Exact versions locked to prevent supply-chain attacks
-- **DevSecOps** — GitLab CI/CD runs SAST, dependency scanning, and secret detection on every commit
+No user input processing — Dashboard is read-only, no forms or text fields
+No data storage — Nothing persisted to disk, database, or session
+No authentication — No credentials, tokens, or API keys used or stored
+No outbound writes — All API calls are read-only GET requests to public endpoints
+Sandboxed iframes — Embedded maps restricted via CSP and sandbox attributes
+No cookies or tracking — No analytics, telemetry, or user fingerprinting
+Fallback data — Static baselines render when APIs are unreachable
+Hardened controls — Strict CSP, X-Frame-Options DENY, Referrer-Policy, XSRF protection, CORS disabled, response size/type validation, session rate limiting
+Pinned dependencies — Exact versions locked to prevent supply-chain attacks
+DevSecOps — GitHub Actions runs SAST, secret detection, and CodeQL scanning on every commit
 
-For full details, see [SECURITY.md](SECURITY.md).
+For full details, see SECURITY.md.
 
-## 📄 License
+📄 License
+This project uses a dual-license structure:
 
-This project uses a **dual-license** structure:
+Source Code (streamlit_app.py, configs) — MIT License — free to use, modify, and distribute with attribution
+Dashboard Design & Layout (CSS theme, card structure, section architecture, color scheme) — CC BY-NC 4.0 — non-commercial use with attribution
 
-- **Source Code** (`app.py`, configs) — [MIT License](https://opensource.org/licenses/MIT) — free to use, modify, and distribute with attribution
-- **Dashboard Design & Layout** (CSS theme, card structure, section architecture, color scheme) — [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — non-commercial use with attribution
+All embedded threat maps and external data feeds remain the property of their respective owners.
+
+🎯 Roadmap
+
+ Additional live API integrations (NVD, CISA RSS, ThreatFox)
+ Exportable PDF/CSV threat reports
+ Historical trend tracking with persistent storage
+ Custom alert thresholds and notifications
+ Dark/light theme toggle
+ Containerized Docker deployment
 
 
-All embedded threat maps and external data feeds remain the property of their respective owners (Radware, Fortinet, CISA, abuse.ch, SANS ISC, Tor Project). SecAI-Nexus does not host, cache, or redistribute third-party content.
+🤝 Contributing
+Contributions welcome. Please open an issue first to discuss proposed changes. All PRs must pass the security pipeline.
 
----
-
-## 🎯 Roadmap
-
-- [ ] Additional live API integrations (NVD, CISA RSS, ThreatFox)
-- [ ] Exportable PDF/CSV threat reports
-- [ ] Historical trend tracking with persistent storage
-- [ ] Custom alert thresholds and notifications
-- [ ] Dark/light theme toggle
-- [ ] Containerized Docker deployment
-
----
-
-## 🤝 Contributing
-
-Contributions welcome. Please open an issue first to discuss proposed changes. All PRs must pass the SAST pipeline.
-
----
-
-## 📬 Contact
-
-**Adam Kistler** — [LinkedIn](https://www.linkedin.com/in/adam-kistler-441a31192/)
-
+📬 Contact
+Adam Kistler — LinkedIn
 Questions, feedback, or collaboration inquiries welcome via LinkedIn DM.
 
----
 
-<p align="center">
-<b>SecAI-Nexus GRC [v30.0]</b><br>
-112 Metrics · 8 Intel Tables · 2 Live Maps · 23 Frameworks · 80 Resources<br>
-<i>Because visibility is the first step in defense.</i>
-</p>
+SecAI-Nexus GRC [v30.0]
+
+112 Metrics · 8 Intel Tables · 2 Live Maps · 23 Frameworks · 80 Resources
+
+Because visibility is the first step in defense.
