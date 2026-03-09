@@ -18,15 +18,15 @@ SecAI-Nexus is designed with a **minimal attack surface by default**:
 | User input                    | **None**  | Dashboard is read-only. No forms, text fields, file uploads, or user-submitted data.         |
 | Data storage                  | **None**  | No database, no disk writes, no session persistence, no cookies.                             |
 | Authentication                | **None**  | No credentials stored or transmitted. No API keys required.                                  |
-| API calls                     | **Low**   | Read-only GET requests to 9 public endpoints. No write operations. Strict size/type validation. |
-| Iframe embedding              | **Medium**| Third-party maps sandboxed with `allow-scripts allow-same-origin allow-forms allow-popups`. No `allow-top-navigation`. |
+| API calls                     | **Low**   | Read-only GET requests to 9 public endpoints. Strict size/type validation.                   |
+| Iframe embedding              | **Medium**| Third-party maps sandboxed with `allow-scripts allow-same-origin allow-forms allow-popups`. |
 | `unsafe_allow_html`           | **Medium**| Used only for developer-controlled CSS/HTML styling. No user input rendered.                 |
-| Dependencies                  | **Low**   | Exact versions pinned in `requirements.txt`. GitLab Dependency Scanning on every commit.     |
+| Dependencies                  | **Low**   | Exact versions pinned in `requirements.txt`. CodeQL scanning on every commit.                |
 | Hosting                       | **Low**   | Streamlit Community Cloud sandboxed runtime. HTTPS enforced.                                 |
 
 ## Hardened Security Controls (2026 updates)
 
-- **Content-Security-Policy (CSP)**: Enforced via meta tag — restricts script/style sources to self, allows only trusted map domains for frames, and limits outbound connections.
+- **Content-Security-Policy (CSP)**: Enforced via meta tag — restricts script/style sources and limits outbound connections.
 - **X-Frame-Options**: Set to `DENY` — prevents clickjacking.
 - **Referrer-Policy**: `strict-origin-when-cross-origin` — minimizes information leakage.
 - **XSRF Protection & CORS**: Explicitly enabled/disabled via Streamlit config.
@@ -36,11 +36,11 @@ SecAI-Nexus is designed with a **minimal attack surface by default**:
 
 ## DevSecOps Pipeline
 
-The GitLab CI/CD pipeline runs on every commit:
+GitHub Actions runs on every push and pull request:
 
-- **SAST** — Static Application Security Testing via GitLab's built-in analyzers (Semgrep, Bandit)
-- **Dependency Scanning** — Checks `requirements.txt` against known CVE databases
-- **Secret Detection** — Scans for accidentally committed credentials or tokens
+- **CodeQL** — Advanced static analysis (SAST) and dependency vulnerability scanning
+- **Secret Detection** — TruffleHog scans for accidentally committed credentials or tokens
+- **Syntax Validation** — Python compile check on every commit
 
 ## Known Considerations
 
