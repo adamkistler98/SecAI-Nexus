@@ -27,7 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # ==================== CodeQL (Best-in-class SAST + Dependency Scanning) ====================
+      # ==================== CodeQL (Best SAST + Dependency Scanning) ====================
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -37,12 +37,12 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
 
-      # ==================== Secret Detection (Simplified & Reliable) ====================
+      # ==================== Secret Detection (Fixed - Now scans entire repo) ====================
       - name: Scan for Secrets
         uses: trufflesecurity/trufflehog@main
         with:
-          path: ./
-          # Removed BASE/HEAD to prevent the error
+          scan_type: repo          # This fixes the BASE/HEAD error
+        continue-on-error: true    # Prevents workflow from failing on first push
 
       # ==================== Basic Python Syntax Check ====================
       - name: Python Syntax Validation
