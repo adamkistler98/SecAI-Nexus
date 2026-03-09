@@ -2,7 +2,7 @@
 
 **Real-Time Cyber Threat Intelligence & GRC Observability Platform**
 
-A cyberpunk-themed Streamlit dashboard delivering live visibility into the global threat landscape — purpose-built for GRC professionals, security analysts, SOC teams, and CISOs who need a consolidated command center without enterprise licensing costs.
+SecAI-Nexus is a free, centralized dashboard that delivers real-time cyber threat intelligence — giving security and GRC professionals instant visibility into emerging attack vectors, AI-driven risks, and the latest cybersecurity trends — all without subscriptions or complex setup.
 
 **100% free. No API keys. No authentication. No data collection.**
 
