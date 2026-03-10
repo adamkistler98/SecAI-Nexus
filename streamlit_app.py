@@ -321,25 +321,25 @@ def gl(n,t,u,d):
             f'<a href="{u}" target="_blank" class="rl2">{t}</a>'
             f'<div style="color:#5a5a6a;font-size:.68rem;margin-top:1px;padding-left:22px;">{d}</div></div>')
 
-# ══════════════════════════════════════════════════════════════════════════════
+## ══════════════════════════════════════════════════════════════════════════════
 now_utc = datetime.now(timezone.utc)
 st.markdown(f"""
-<div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2px solid #141420; padding-bottom:8px; margin-bottom:12px; margin-top:-50px;">
-  <div style="text-align:left;">
+<div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; border-bottom:2px solid #141420; padding-bottom:10px; margin-bottom:15px; margin-top:-50px; gap:10px;">
+  <div style="flex:1; min-width:250px; text-align:left;">
     <div>
-      <span style="font-size:1.3rem;font-weight:bold;color:{GREEN};text-shadow:0 0 12px {GREEN}80;letter-spacing:1px;">🤖 SecAI-Nexus</span>
+      <span style="font-size:1.3rem;font-weight:bold;color:{GREEN};text-shadow:0 0-12px {GREEN}80;letter-spacing:1px;">🤖 SecAI-Nexus</span>
       <span style="font-size:.72rem;color:{BLUE};margin-left:6px;font-weight:bold;">// CYBER THREAT OBSERVABILITY</span>
       <span style="font-size:.42rem;color:#4a4a5a;border:1px solid #2a2a3a;padding:1px 4px;margin-left:4px;vertical-align:middle;">v30</span>
     </div>
-    <div style="font-size:.5rem;color:#505060;margin-top:4px;">
-      <span class="sd sg"></span><span style="color:{GREEN};font-weight:bold;">ONLINE</span> · 118 METRICS · 10 INTEL TABLES · 2 MAPS · 85 LINKS
+    <div style="font-size:.52rem;color:#505060;margin-top:4px;letter-spacing:0.5px;">
+      <span style="color:{GREEN};font-weight:bold;">ONLINE</span> · 118 METRICS · 10 INTEL TABLES · 2 MAPS · 85 LINKS
     </div>
   </div>
-  <div style="text-align:right;">
+  <div style="text-align:right; min-width:180px;">
     <div style="font-size:.7rem;font-weight:bold;color:{BLUE};text-shadow:0 0 4px {BLUE};margin-bottom:6px;">
       {now_utc.strftime("%H:%M:%S")} UTC · {now_utc.strftime("%Y-%m-%d")}
     </div>
-    <a href="#threat-intel-reference" style="display:inline-block; padding:4px 8px; border:1px solid {BLUE}50; border-radius:4px; color:{CYAN}; font-size:0.6rem; font-weight:bold; text-decoration:none; background:linear-gradient(90deg, {BLUE}20, transparent); box-shadow:0 0 6px {CYAN}30; letter-spacing:0.5px; transition:0.3s;">
+    <a href="#threat-intel-reference" style="display:inline-block; padding:4px 10px; border:1px solid {BLUE}50; border-radius:4px; color:{CYAN}; font-size:0.6rem; font-weight:bold; text-decoration:none; background:linear-gradient(90deg, {BLUE}20, transparent); box-shadow:0 0 6px {CYAN}30; letter-spacing:0.5px; transition:0.3s;">
       ⏬ JUMP TO THREAT INTEL REF &gt;&gt;
     </a>
   </div>
@@ -374,14 +374,19 @@ if not sans:
 if not tor:
     tor={"c":7200}
 
-st.markdown(f"""<div style="margin:2px 0 10px;text-align:center;">
-  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
-    <a href="https://www.cisa.gov/" target="_blank" class="sh">&gt;&gt; GLOBAL THREAT METRICS</a></span><br>
-  <span style="font-size:.6rem;color:#505060;">
-    <span class="sd sg"></span><span style="color:{GREEN};">LIVE</span> = real-time
-    &ensp;<span class="sd sa"></span><span style="color:{AMBER};">EST</span> = last verified 03/26
-    &ensp;<span class="sd sc"></span><span style="color:{CYAN};">PULSE</span> = DShield sensors
-    &ensp;112 indicators · 7 pulse rows × 6 + 7 standard rows × 9</span></div>""", unsafe_allow_html=True)
+st.markdown(f"""
+<div style="text-align:left; margin:10px 0 15px 5px;">
+  <div style="font-size:0.85rem; font-weight:bold; color:{CYAN}; letter-spacing:1px; text-transform:uppercase;">
+    &gt;&gt; Global Threat Metrics
+  </div>
+  <div style="font-size:0.55rem; color:#505060; margin-top:2px; letter-spacing:0.3px;">
+    <span style="color:{GREEN}; opacity:0.8;">LIVE</span> = REAL-TIME · 
+    <span style="color:{BLUE}; opacity:0.8;">EST</span> = VERIFIED · 
+    <span style="color:{CYAN}; opacity:0.8;">PULSE</span> = DSHIELD SENSORS · 
+    118 INDICATORS · 14 ACTIVE DATA ROWS
+  </div>
+</div>
+""", unsafe_allow_html=True)
 
 
 # ─── PULSE ROW 6: AI & LLM THREAT INTELLIGENCE ───────────────────────────────
