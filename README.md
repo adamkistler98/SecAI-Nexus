@@ -16,7 +16,7 @@ Works seamlessly on desktop and mobile.
 This project was conceived, designed, developed, and is actively maintained by **Adam Kistler** (LinkedIn: [adam-kistler-441a31192](https://www.linkedin.com/in/adam-kistler-441a31192/)).
 
 **The reason I built it:**  
-What began as a personal tool to sharpen my own awareness has evolved into a centralized dashboard designed to help both experienced cybersecurity and GRC professionals **and** those just entering the field stay ahead of the rapidly evolving threat landscape.
+What began as a personal tool has evolved into a centralized dashboard designed to sharpen awareness for both experienced cybersecurity/GRC professionals and those just entering the field.
 
 ---
 
@@ -27,19 +27,18 @@ SecAI-Nexus was created to democratize high-quality threat intelligence and GRC 
 ### What It Includes
 
 - **112 near-real-time risk metrics** across 14 thematic sections  
-- **Dedicated AI & LLM threat intelligence reference** tracking the emerging AI attack landscape (deepfakes, prompt injection, model poisoning, etc.)  
-- **Contextual, evidence-based intelligence** — every metric includes 5 supporting data points from trusted sources (IBM Cost of a Data Breach, CrowdStrike Global Threat Report, Mandiant M-Trends, Sophos State of Ransomware, Verizon DBIR, CISA)  
-- **10 dynamic intelligence tables** (OWASP LLM Top 10, MITRE ATT&CK, top ransomware groups, nation-state APTs, breach costs by industry, etc.)  
-- **80+ curated cybersecurity resources** — frameworks, tools, training, and references  
+- **Dedicated AI & LLM threat intelligence reference**, tracking the emerging AI attack landscape  
+- **Contextual, evidence-based intelligence** — each metric includes 5 supporting data points from trusted sources (IBM, CrowdStrike, Mandiant, Sophos, Verizon DBIR, CISA)  
+- **80 curated cybersecurity resources** — tools, frameworks, training resources, and references  
 - **Live global threat visualization** — embedded real-time attack maps from Radware and FortiGuard  
-- **Full transparency** — every third-party source is credited with direct hyperlinks  
+- **Full transparency** — all third-party sources credited with direct hyperlinks  
 
 ---
 
 ## ⚡ Optimized Architecture
 
 - 12-hour TTL caching cycle using Streamlit decorators for reliable, always-available metrics while respecting upstream API rate limits and reducing compute overhead  
-- Built with **Python + Streamlit** — intelligent caching, efficient request handling, and a custom UI optimized for high-density information display and fast performance  
+- Python + Streamlit with intelligent caching, efficient request handling, and custom UI optimized for high-density information display and fast performance  
 - Automated CI/CD pipeline via GitHub for consistent deployments, rapid iteration, and version-controlled releases  
 
 ---
@@ -63,7 +62,7 @@ SecAI-Nexus was created to democratize high-quality threat intelligence and GRC 
 - SANS Internet Storm Center (Infocon, top ports, top IPs, honeypots)  
 - Tor Project exit nodes  
 
-**Estimated metrics** (clearly labeled `EST`) are drawn from the latest published industry reports and refreshed with each major release.
+**Estimated metrics** (clearly labeled `EST`) are drawn from the latest published industry reports.
 
 ---
 
@@ -78,14 +77,7 @@ source venv/bin/activate          # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 streamlit run streamlit_app.py
 One-Click Deploy (Free)
-
-Fork or push to your GitHub account
-Visit share.streamlit.io
-Connect repo → select streamlit_app.py → Deploy
-
-requirements.txt
-txtstreamlit>=1.32.0
-requests>=2.32.0
+Visit share.streamlit.io, connect your repo, and deploy streamlit_app.py.
 
 📄 License
 Dual licensing (chosen by the original creator):
@@ -96,10 +88,9 @@ Design, layout & visual architecture — CC BY-NC 4.0 (non-commercial use with a
 
 📬 Community & Feedback
 Community Resource — Feedback Welcome!
-Shoutout to the incredible teams at Streamlit and GitHub for the open-source platforms that power this build.
-Questions, suggestions, or collaboration ideas? Reach out via LinkedIn or open an issue on GitHub.
-Full source code → github.com/adamkistler98/SecAI-Nexus
 
-SecAI-Nexus GRC v30.0
-112 Metrics · 10 Intelligence Tables · 2 Live Maps · 80+ Resources
-This tool is provided for educational and informational purposes only — use at your own risk.
+Shoutout to Streamlit and GitHub for their incredible open-source platforms that power this build!
+
+Full source code → https://github.com/adamkistler98/SecAI-Nexus
+This tool is provided for educational purposes only — use at your own risk!
+#cybersecurity #GRC #threatintelligence #infosec #CISO #AI #LLM #OWASP #SecAINexus #opensource #streamlit #observability #Python #OSINT #APIs #CyberSecurityTools
