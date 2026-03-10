@@ -1177,11 +1177,14 @@ st.markdown(f"""
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
     &gt;&gt; AI Security &amp; Threat Intelligence Reference
   </div>
+  
   <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px; line-height: 1.5;">
-    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">GRC RESOURCES</span> 80 CURATED · RANKED BY POPULARITY · FRAMEWORKS · TOOLS · TRAINING
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">INTEL FEED</span> 
+    &nbsp; 10 CURATED TABLES · REAL-TIME CISA KEV · RANSOMWARE · TOR EXIT NODES · BOTNETS
   </div>
+  
   <div style="font-size: 0.55rem; color: #404050; margin-top: 4px; letter-spacing: 0.3px;">
-    CISA KEV · ATT&amp;CK · RANSOMWARE · APTs · CVEs · OWASP LLM · AI THREATS · BREACH COSTS
+    80+ CURATED RESOURCES · ATT&amp;CK FRAMEWORK · OWASP LLM · AI THREAT VECTORS · GLOBAL BREACH COSTS
   </div>
 </div>
 """, unsafe_allow_html=True)
