@@ -328,16 +328,16 @@ st.markdown(f"""
   
   <div style="flex: 1; min-width: 300px; text-align: left;">
     <div style="margin-bottom: 4px;">
-      <span style="font-size: 1.7rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 15px #00ff4180; letter-spacing: 1.5px;">
+      <span style="font-size: 1.7rem; font-weight: bold; color: {CYAN}; text-shadow: 0 0 15px {CYAN}80; letter-spacing: 1.5px;">
         🤖 SecAI-Nexus
       </span>
       <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v30</span>
     </div>
-    <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 8px {CYAN}40; margin-bottom: 8px;">
+    <div style="font-size: 0.9rem; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 8px rgba(255,255,255,0.2); margin-bottom: 8px;">
       // Cybersecurity GRC Observability Platform
     </div>
     <div style="font-size: .52rem; color: #505060; letter-spacing: 0.5px;">
-      <span style="color: {GREEN}; font-weight: bold;">ONLINE</span> · 
+      <span style="color: {GREEN}; background: {GREEN}15; border: 1px solid {GREEN}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">ONLINE</span> · 
       <span style="color: #606070;">118 METRICS · 14 DATA ROWS · 10 INTEL TABLES · 80+ RESOURCES</span>
     </div>
   </div>
