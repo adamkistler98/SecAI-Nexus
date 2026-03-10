@@ -1510,7 +1510,7 @@ st.markdown(f"""
     &gt;&gt; Live Threat Map Feeds
   </div>
   <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px;">
-    <span style="color: {GREEN}; border: 1px solid {GREEN}40; padding: 0 3px; border-radius: 2px;">REAL-TIME GLOBAL ATTACK VISUALIZATIONS</span> 
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">REAL-TIME GLOBAL ATTACK VISUALIZATIONS</span> 
   </div>
 </div>
 """, unsafe_allow_html=True)
