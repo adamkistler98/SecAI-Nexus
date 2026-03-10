@@ -1172,12 +1172,19 @@ st.markdown(f"""<div class="sb">
 # ══════════════════════════════════════════════════════════════════════════════
 #  COMBINED THREAT INTEL SECTION
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div id="threat-intel-reference" style="margin:12px 0 10px;text-align:center;scroll-margin-top:30px;">
-  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
-    <a href="https://www.cisa.gov/" target="_blank" class="sh">
-      &gt;&gt; THREAT INTELLIGENCE &amp; AI SECURITY REFERENCE &lt;&lt;</a></span>
-  <div style="font-size:.55rem;color:#505060;margin-top:2px;">CISA KEV · ATT&CK · RANSOMWARE · APTs · CVEs · OWASP LLM · AI THREATS · BREACH COSTS</div>
-</div>""", unsafe_allow_html=True)
+st.markdown(f"""
+<div id="threat-intel-reference" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
+  <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
+    &gt;&gt; AI Security &amp; Threat Intelligence Reference
+  </div>
+  <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px; line-height: 1.5;">
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">GRC RESOURCES</span> 80 CURATED · RANKED BY POPULARITY · FRAMEWORKS · TOOLS · TRAINING
+  </div>
+  <div style="font-size: 0.55rem; color: #404050; margin-top: 4px; letter-spacing: 0.3px;">
+    CISA KEV · ATT&amp;CK · RANSOMWARE · APTs · CVEs · OWASP LLM · AI THREATS · BREACH COSTS
+  </div>
+</div>
+""", unsafe_allow_html=True)
 
 def _tbl(title, hdrs, rows_data, hdr_color):
     hh = "".join(f'<th style="padding:6px 4px;text-align:left;color:{hdr_color};font-size:.52rem;text-transform:uppercase;">{h}</th>' for h in hdrs)
