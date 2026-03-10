@@ -1180,7 +1180,7 @@ st.markdown(f"""
   
   <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px; line-height: 1.5;">
     <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">INTEL FEED</span> 
-    &nbsp; 10 CURATED TABLES · REAL-TIME CISA KEV · RANSOMWARE · TOR EXIT NODES · BOTNETS
+    &nbsp; 10 CURATED TABLES · REAL-TIME CISA KEV
   </div>
   
   <div style="font-size: 0.55rem; color: #404050; margin-top: 4px; letter-spacing: 0.3px;">
