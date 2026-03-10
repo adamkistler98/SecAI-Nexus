@@ -333,8 +333,8 @@ st.markdown(f"""
       </span>
       <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v30</span>
     </div>
-    <div style="font-size: 0.9rem; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 8px rgba(255,255,255,0.2); margin-bottom: 8px;">
-      // Cybersecurity GRC Observability Platform
+    <div style="font-size: 0.9rem; font-weight: bold; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; opacity: 0.8;">
+      Cybersecurity GRC Observability Platform
     </div>
     <div style="font-size: .52rem; color: #505060; letter-spacing: 0.5px;">
       <span style="color: {GREEN}; background: {GREEN}15; border: 1px solid {GREEN}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">ONLINE</span> · 
