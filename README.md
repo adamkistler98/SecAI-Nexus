@@ -64,21 +64,6 @@ SecAI-Nexus was created to democratize high-quality threat intelligence and GRC 
 
 **Estimated metrics** (clearly labeled `EST`) are drawn from the latest published industry reports.
 
----
-
-## 🚀 Quick Start
-
-### Local Development
-```bash
-git clone https://github.com/adamkistler98/SecAI-Nexus.git
-cd SecAI-Nexus
-python -m venv venv
-source venv/bin/activate          # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-streamlit run streamlit_app.py
-One-Click Deploy (Free)
-Visit share.streamlit.io, connect your repo, and deploy streamlit_app.py.
-
 📄 License
 Dual licensing (chosen by the original creator):
 
@@ -94,3 +79,20 @@ Shoutout to Streamlit and GitHub for their incredible open-source platforms that
 Full source code → https://github.com/adamkistler98/SecAI-Nexus
 This tool is provided for educational purposes only — use at your own risk!
 #cybersecurity #GRC #threatintelligence #infosec #CISO #AI #LLM #OWASP #SecAINexus #opensource #streamlit #observability #Python #OSINT #APIs #CyberSecurityTools
+
+---
+
+## 🚀 Quick Start
+
+### Local Development
+```bash
+git clone https://github.com/adamkistler98/SecAI-Nexus.git
+cd SecAI-Nexus
+python -m venv venv
+source venv/bin/activate          # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+One-Click Deploy (Free)
+Visit share.streamlit.io, connect your repo, and deploy streamlit_app.py.
+
+
