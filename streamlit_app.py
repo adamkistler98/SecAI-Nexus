@@ -339,7 +339,7 @@ st.markdown(f"""
     </div>
     
     <div style="font-size: .55rem; color: #505060; letter-spacing: 0.8px; font-weight: bold;">
-      <span style="color: {GREEN}; border: 1px solid {GREEN}30; padding: 0 4px; border-radius: 2px; margin-right: 5px;">ONLINE</span> 
+      <span style="color: {GREEN}; border: 1px solid {GREEN}30; background: {GREEN}10; padding: 1px 4px; border-radius: 2px; margin-right: 5px;">ONLINE</span> 
       <span style="color: #606070;">118 METRICS · 14 DATA ROWS · 10 INTEL TABLES · 80+ RESOURCES</span>
     </div>
   </div>
