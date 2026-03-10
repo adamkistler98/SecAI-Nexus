@@ -1536,6 +1536,14 @@ f"""
 </div>
 """, unsafe_allow_html=True)
 
+m1,m2=st.columns(2)
+with m1:
+    st.markdown('<a href="https://livethreatmap.radware.com/" target="_blank" class="ml">&gt;&gt; RADWARE LIVE THREAT MAP</a>', unsafe_allow_html=True)
+    iframe("https://livethreatmap.radware.com/", 1100)
+with m2:
+    st.markdown('<a href="https://threatmap.fortiguard.com/" target="_blank" class="ml">&gt;&gt; FORTINET FORTIGUARD MAP</a>', unsafe_allow_html=True)
+    iframe("https://threatmap.fortiguard.com/", 1100)
+st.markdown("---")
 # ══════════════════════════════════════════════════════════════════════════════
 # GRC RESOURCES
 # ══════════════════════════════════════════════════════════════════════════════
