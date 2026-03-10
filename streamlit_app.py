@@ -3,6 +3,18 @@ import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 
+# ==========================================================
+# SEC AI NEXUS — CYBER THREAT INTELLIGENCE DASHBOARD
+# Author: Adam Kistler
+# Version: 1.0
+# Last Updated: March 2026
+# ==========================================================
+
+# ---------------------------
+# Page Configuration
+# ---------------------------
+
+
 # ====================== SECURITY CONFIG ======================
 # Force XSRF protection and disable CORS
 st.config.set_option("server.enableXsrfProtection", True)
