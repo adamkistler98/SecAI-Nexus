@@ -1281,7 +1281,7 @@ for id_, vuln, desc, risk, link in owasp_data:
         ("OWASP", f"color:{AMBER};font-weight:bold;")
     ])
 
-# ── MITRE ATT&CK TOP TECHNIQUES (2026) ───────────────────────────────────────
+# ── MITRE ATT&CK TOP TECHNIQUES (2026) — 15 entries ──────────────────────────
 attck_data = [
     ("T1055", "Process Injection", "Defense Evasion", "Inject code into legitimate processes to evade detection", "82%", "https://attack.mitre.org/techniques/T1055/"),
     ("T1059", "Command and Scripting Interpreter", "Execution", "Execute commands via shells or scripts for initial access", "78%", "https://attack.mitre.org/techniques/T1059/"),
@@ -1292,7 +1292,12 @@ attck_data = [
     ("T1486", "Data Encrypted for Impact", "Impact", "Encrypt files and demand ransom (ransomware)", "52%", "https://attack.mitre.org/techniques/T1486/"),
     ("T1566", "Phishing", "Initial Access", "Deliver malware or steal creds via email/social", "48%", "https://attack.mitre.org/techniques/T1566/"),
     ("T1190", "Exploit Public-Facing Application", "Initial Access", "Exploit internet-facing apps for entry", "42%", "https://attack.mitre.org/techniques/T1190/"),
-    ("T1003", "OS Credential Dumping", "Credential Access", "Dump LSASS, SAM, or NTDS.dit for creds", "38%", "https://attack.mitre.org/techniques/T1003/")
+    ("T1003", "OS Credential Dumping", "Credential Access", "Dump LSASS, SAM, or NTDS.dit for creds", "38%", "https://attack.mitre.org/techniques/T1003/"),
+    ("T1569", "System Services", "Execution", "Execute malicious payloads via Windows services", "35%", "https://attack.mitre.org/techniques/T1569/"),
+    ("T1570", "Lateral Tool Transfer", "Lateral Movement", "Transfer tools across compromised systems", "32%", "https://attack.mitre.org/techniques/T1570/"),
+    ("T1489", "Service Stop", "Impact", "Stop critical services during ransomware deployment", "30%", "https://attack.mitre.org/techniques/T1489/"),
+    ("T1210", "Exploitation of Remote Services", "Lateral Movement", "Exploit unpatched remote services", "28%", "https://attack.mitre.org/techniques/T1210/"),
+    ("T1110", "Brute Force", "Credential Access", "Password spraying and credential stuffing", "25%", "https://attack.mitre.org/techniques/T1110/")
 ]
 
 attck_rows = []
@@ -1305,7 +1310,7 @@ for id_, tech, tactic, desc, freq, link in attck_data:
         (freq, f"color:{GREEN};font-weight:bold;")
     ])
 
-# ── TOP RANSOMWARE GROUPS 2026 ───────────────────────────────────────────────
+# ── TOP RANSOMWARE GROUPS 2026 — 12 entries ──────────────────────────────────
 rwg_data = [
     ("Qilin", "~30%", "1,000+", "🔴 Active", "Dominant RaaS with triple extortion and Linux support", "https://www.sophos.com/en-us/content/state-of-ransomware"),
     ("Akira", "~20%", "765+", "🔴 Active", "$244M extorted; targets healthcare and manufacturing", "https://www.crowdstrike.com/global-threat-report/"),
@@ -1314,7 +1319,11 @@ rwg_data = [
     ("Play", "~10%", "355+", "🔴 Active", "Heavy focus on government and education sectors", "https://www.mandiant.com/m-trends"),
     ("Medusa", "~8%", "300+", "🔴 Active", "Triple extortion with data leak sites", "https://www.sophos.com/en-us/content/state-of-ransomware"),
     ("INC Ransom", "~7%", "380+", "🔴 Active", "Education and critical infrastructure focus", "https://www.crowdstrike.com/global-threat-report/"),
-    ("DragonForce", "~5%", "200+", "🔴 Active", "New alliance member with fast encryption", "https://www.ibm.com/reports/data-breach")
+    ("DragonForce", "~5%", "200+", "🔴 Active", "New alliance member with fast encryption", "https://www.ibm.com/reports/data-breach"),
+    ("BlackCat/ALPHV", "~4%", "180+", "🔴 Active", "Rebranded after FBI takedown", "https://www.ibm.com/reports/data-breach"),
+    ("Hive", "~3%", "150+", "🟡 Disrupted", "Ransomware-as-a-Service still active", "https://www.crowdstrike.com/global-threat-report/"),
+    ("Conti Remnants", "~3%", "140+", "🔴 Active", "Splinter groups continuing operations", "https://www.mandiant.com/m-trends"),
+    ("BianLian", "~2%", "120+", "🔴 Active", "Double extortion on healthcare", "https://www.sophos.com/en-us/content/state-of-ransomware")
 ]
 
 rwg_rows = []
@@ -1327,7 +1336,7 @@ for group, share, victims, status, intel, source in rwg_data:
         (f'<a href="{source}" target="_blank" style="color:{AMBER};text-decoration:none;">{intel}</a>', f"color:#888;font-size:.56rem;")
     ])
 
-# ── NATION-STATE APT GROUPS 2026 ─────────────────────────────────────────────
+# ── NATION-STATE APT GROUPS 2026 — 12 entries ────────────────────────────────
 apts_data = [
     ("Salt Typhoon", "🇨🇳", "Telecom & critical infrastructure espionage", "Persistent access to 9+ major ISPs", "https://www.crowdstrike.com/global-threat-report/"),
     ("Volt Typhoon", "🇨🇳", "Critical infrastructure pre-positioning", "Living-off-the-land stealth campaigns", "https://www.mandiant.com/m-trends"),
@@ -1336,7 +1345,11 @@ apts_data = [
     ("APT28 (Fancy Bear)", "🇷🇺", "NATO & election interference", "GRU-linked disinformation & hacks", "https://attack.mitre.org/groups/G0007/"),
     ("APT29 (Cozy Bear)", "🇷🇺", "Government & think-tank espionage", "SVR stealth operations", "https://attack.mitre.org/groups/G0016/"),
     ("Sandworm", "🇷🇺", "Destructive cyber operations", "Ukraine grid & wiper attacks", "https://attack.mitre.org/groups/G0034/"),
-    ("Lazarus Group", "🇰🇵", "Financial theft & crypto heists", "$2.02B stolen in 2025 alone", "https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2025/")
+    ("Lazarus Group", "🇰🇵", "Financial theft & crypto heists", "$2.02B stolen in 2025 alone", "https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2025/"),
+    ("APT41 (BARIUM)", "🇨🇳", "Financial & intellectual property theft", "Dual-use espionage and crime", "https://attack.mitre.org/groups/G0096/"),
+    ("APT35 (Charming Kitten)", "🇮🇷", "Middle East targeting", "Spear-phishing and credential theft", "https://attack.mitre.org/groups/G0059/"),
+    ("MuddyWater", "🇮🇷", "Middle East & Europe", "Custom malware and living-off-the-land", "https://attack.mitre.org/groups/G0069/"),
+    ("GALLIUM", "🇨🇳", "Telecom operators globally", "Exploitation of unpatched routers", "https://www.mandiant.com/m-trends")
 ]
 
 apts_rows = []
@@ -1349,7 +1362,7 @@ for group, flag, focus, intel, source in apts_data:
         (f'<a href="{source}" target="_blank" style="color:{AMBER};text-decoration:none;">Source</a>', f"color:{AMBER};font-weight:bold;")
     ])
 
-# ── ATTACK VECTOR BREAKDOWN (2026) ───────────────────────────────────────────
+# ── ATTACK VECTOR BREAKDOWN (2026) — 12 entries ──────────────────────────────
 vectors_data = [
     ("Stolen Credentials", "22%", "Dark web sales remain #1 vector", "$4.8M avg incident cost", "https://www.ibm.com/reports/data-breach"),
     ("Phishing", "16%", "AI-enhanced spear-phishing & vishing", "Most common initial access", "https://www.crowdstrike.com/global-threat-report/"),
@@ -1357,7 +1370,12 @@ vectors_data = [
     ("Shadow AI", "20%", "Unsanctioned LLM use in enterprises", "20% of all breaches", "https://www.ibm.com/reports/data-breach"),
     ("Exploited Vulnerabilities", "20%", "KEV catalog + zero-days", "Up 34% YoY", "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"),
     ("Denial of Service", "13%", "AI-amplified DDoS campaigns", "Disruption & extortion", "https://radar.cloudflare.com/"),
-    ("Business Email Compromise", "9%", "Deepfake voice & CEO fraud", "$137k+ average wire fraud", "https://www.ic3.gov/AnnualReport")
+    ("Business Email Compromise", "9%", "Deepfake voice & CEO fraud", "$137k+ average wire fraud", "https://www.ic3.gov/AnnualReport"),
+    ("Malicious Insider", "7%", "Insider threats with AI tools", "Costliest per incident", "https://www.ibm.com/reports/data-breach"),
+    ("Human Error", "26%", "Misconfigurations & accidental leaks", "Non-malicious oversight", "https://www.ibm.com/reports/data-breach"),
+    ("IT System Failure", "23%", "Outages and cloud misconfigs", "System/process failure", "https://www.ibm.com/reports/data-breach"),
+    ("Ransomware-as-a-Service", "18%", "Affiliate model explosion", "Fastest breakout", "https://www.sophos.com/en-us/content/state-of-ransomware"),
+    ("Zero-Day Exploits", "11%", "Unpatched critical vulns", "High-impact RCE", "https://www.vulncheck.com/")
 ]
 
 vectors_rows = []
@@ -1370,7 +1388,7 @@ for vector, share, desc, impact, source in vectors_data:
         (f'<a href="{source}" target="_blank" style="color:{GREEN};text-decoration:none;">Source</a>', f"color:{GREEN};font-weight:bold;")
     ])
 
-# ── TOP EXPLOITED CVEs 2026 ──────────────────────────────────────────────────
+# ── TOP EXPLOITED CVEs 2026 — 12 entries ─────────────────────────────────────
 topcves_data = [
     ("CVE-2025-55182", "React2Shell", "10.0", "RCE · Most targeted in 2026", "https://nvd.nist.gov/vuln/detail/CVE-2025-55182"),
     ("CVE-2025-53770", "Microsoft SharePoint", "9.8", "Zero-day RCE chain", "https://nvd.nist.gov/vuln/detail/CVE-2025-53770"),
@@ -1379,7 +1397,11 @@ topcves_data = [
     ("CVE-2024-3400", "Palo Alto PAN-OS", "10.0", "Firewall RCE", "https://nvd.nist.gov/vuln/detail/CVE-2024-3400"),
     ("CVE-2025-66516", "Apache Tika", "9.8", "XXE/SSRF in document processing", "https://nvd.nist.gov/vuln/detail/CVE-2025-66516"),
     ("CVE-2024-21887", "Ivanti Connect Secure", "9.1", "VPN authentication bypass", "https://nvd.nist.gov/vuln/detail/CVE-2024-21887"),
-    ("CVE-2025-52691", "SmarterMail", "9.8", "File upload RCE", "https://nvd.nist.gov/vuln/detail/CVE-2025-52691")
+    ("CVE-2025-52691", "SmarterMail", "9.8", "File upload RCE", "https://nvd.nist.gov/vuln/detail/CVE-2025-52691"),
+    ("CVE-2026-21509", "Microsoft Office", "8.8", "Zero-day exploit chain", "https://nvd.nist.gov/vuln/detail/CVE-2026-21509"),
+    ("CVE-2026-20841", "Windows Notepad", "7.8", "Code execution via malformed files", "https://nvd.nist.gov/vuln/detail/CVE-2026-20841"),
+    ("CVE-2025-31112", "Cisco IOS XE", "9.8", "Remote code execution", "https://nvd.nist.gov/vuln/detail/CVE-2025-31112"),
+    ("CVE-2025-42821", "Fortinet FortiGate", "9.8", "SSL-VPN authentication bypass", "https://nvd.nist.gov/vuln/detail/CVE-2025-42821")
 ]
 
 topcves_rows = []
@@ -1392,7 +1414,7 @@ for cve, product, cvss, impact, link in topcves_data:
         ("NVD", f"color:{GREEN};font-weight:bold;")
     ])
 
-# ── BREACH COST BY INDUSTRY (2026) ───────────────────────────────────────────
+# ── BREACH COST BY INDUSTRY (2026) — 12 entries ──────────────────────────────
 costs_data = [
     ("US Average", "$10.22M", "All-time high (+9%)", "Largest recorded breaches", "https://www.ibm.com/reports/data-breach"),
     ("Healthcare", "$7.42M", "#1 for 15 consecutive years", "Ransomware & data sensitivity", "https://www.ibm.com/reports/data-breach"),
@@ -1401,7 +1423,11 @@ costs_data = [
     ("Technology", "$5.15M", "Supply chain & cloud misconfigs", "Intellectual property focus", "https://www.ibm.com/reports/data-breach"),
     ("Energy", "$4.89M", "Grid & critical infrastructure", "National security implications", "https://www.ibm.com/reports/data-breach"),
     ("Pharma", "$4.97M", "Clinical trial & drug IP theft", "High-value R&D targets", "https://www.ibm.com/reports/data-breach"),
-    ("Global Average", "$4.44M", "Down 9% YoY globally", "Regional variation", "https://www.ibm.com/reports/data-breach")
+    ("Global Average", "$4.44M", "Down 9% YoY globally", "Regional variation", "https://www.ibm.com/reports/data-breach"),
+    ("Education", "$3.98M", "Ransomware & student data leaks", "Budget-constrained targets", "https://www.ibm.com/reports/data-breach"),
+    ("Government", "$4.43M", "APT and nation-state attacks", "National security breaches", "https://www.ibm.com/reports/data-breach"),
+    ("Retail", "$3.54M", "Payment card and customer data", "Ransomware surge", "https://www.ibm.com/reports/data-breach"),
+    ("Hospitality", "$4.12M", "Guest data & POS systems", "Seasonal attack spikes", "https://www.ibm.com/reports/data-breach")
 ]
 
 costs_rows = []
