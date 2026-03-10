@@ -1169,6 +1169,7 @@ def _tbl(title, hdrs, rows_data, hdr_color):
         rh += '<tr style="border-bottom:1px solid #141420;">' + "".join(f'<td style="padding:6px 4px;{s}">{v}</td>' for v,s in r) + '</tr>'
     return f'<div style="margin-bottom:10px;"><div style="font-size:.68rem;font-weight:bold;color:{hdr_color};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {hdr_color}20;padding-bottom:3px;">{title}</div><div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.6rem;"><thead><tr style="border-bottom:2px solid {hdr_color}30;background:#0a0a14;">{hh}</tr></thead><tbody style="line-height:1.5;">{rh}</tbody></table></div></div>'
 
+# ── AI MODELS & CISA KEV TABLES ──────────────────────────────────────────────
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_kev_recent():
     r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
@@ -1178,46 +1179,39 @@ def fetch_kev_recent():
 
 kev_recent = fetch_kev_recent()
 
-kev_rows = []
-if kev_recent:
-    for v in kev_recent:
-        cve=v.get("cveID","N/A"); vn=v.get("vendorProject","?"); pr=v.get("product","?")
-        nm=v.get("vulnerabilityName","?"); ad=v.get("dateAdded","?"); du=v.get("dueDate","?")
-        rw="🔴" if v.get("knownRansomwareCampaignUse","").lower()=="known" else "—"
-        sn = nm[:35]+"…" if len(nm)>35 else nm
-        kev_rows.append([
-            (f'<a href="https://nvd.nist.gov/vuln/detail/{cve}" target="_blank" style="color:{RED};text-decoration:none;border-bottom:1px dashed {RED}40;">{cve}</a>', f"color:{RED};font-weight:bold;white-space:nowrap;"),
-            (vn, f"color:{CYAN};font-weight:bold;"),
-            (pr, f"color:{GREY};"),
-            (sn, f"color:#888;font-size:.56rem;"),
-            (ad, f"color:{GREEN};white-space:nowrap;"),
-            (rw, f"text-align:center;"),
-            (du, f"color:{AMBER};white-space:nowrap;")
+top_tables_c1, top_tables_c2 = st.columns(2)
+
+with top_tables_c1:
+    ai_models_data = [
+        ("1. Gemini 3 Pro", "https://gemini.google.com/", "Multimodal Reasoning", "Complex tasks & integration", "Google's flagship with 1M+ context & superior multimodal", "Prompt Injection"),
+        ("2. Claude Opus 4.6", "https://claude.ai/", "Advanced Reasoning", "Safety & long-form content", "Anthropic's top model excelling in logic and ethical alignment", "Insecure Output"),
+        ("3. GPT-5.2", "https://chatgpt.com/", "Agentic Intelligence", "Versatile research & automation", "OpenAI's latest with enhanced reasoning and tool use", "Supply Chain"),
+        ("4. Grok 4.20", "https://x.ai/", "Real-time Knowledge", "Current events & uncensored", "xAI's innovative multi-agent architecture model", "Excessive Agency"),
+        ("5. Llama 4 Scout", "https://llama.meta.com/", "Open Weights", "Local & enterprise deploy", "Meta's leading open-source model with massive context", "Supply Chain"),
+        ("6. DeepSeek V3.2", "https://deepseek.com/", "Math & Coding", "High-precision technical tasks", "Strongest open-source performer in STEM domains", "Training Poisoning"),
+        ("7. Qwen 3.5 Max", "https://qwen.ai/", "Multilingual Efficiency", "Business workflows", "Alibaba's top multilingual & efficient model", "Insecure Plugin"),
+        ("8. Mistral Large 3", "https://mistral.ai/", "Enterprise Reasoning", "Fast & secure inference", "Leading European AI for global business use", "Prompt Injection"),
+        ("9. Perplexity Pro", "https://www.perplexity.ai/", "Search & Research", "Real-time citations", "AI-powered search with live web access", "Model DoS"),
+        ("10. Cohere Command R+", "https://cohere.com/", "Enterprise RAG", "Secure business workflows", "Cohere's retrieval-augmented generation leader", "Insecure Output"),
+        ("11. GLM-5", "https://zhipuai.cn/", "Multimodal", "Chinese/English tasks", "Zhipu AI's powerful multimodal model", "Supply Chain"),
+        ("12. Phi-4", "https://azure.microsoft.com/", "Lightweight Edge", "On-device & efficient AI", "Microsoft's optimized small language model", "Training Poisoning"),
+        ("13. Kimi K2 Thinking", "https://kimi.moonshot.cn/", "Long Context", "Deep reasoning", "Moonshot's advanced long-context model", "Sensitive Disclosure"),
+        ("14. Seed 2.0", "https://bytedance.com/", "Creative Generation", "Content & media", "ByteDance's advanced generative AI", "Insecure Plugin"),
+        ("15. MiniMax M2.5", "https://minimax.cn/", "Compact & Fast", "Mobile & edge deployment", "Highly efficient model for constrained environments", "Model Theft")
+    ]
+
+    ai_rows = []
+    for name, link, use_case, best_for, desc, vuln in ai_models_data:
+        ai_rows.append([
+            (f'<a href="{link}" target="_blank" style="color:{CYAN};text-decoration:none;border-bottom:1px dashed {CYAN}40;">{name}</a>', f"color:{CYAN};font-weight:bold;white-space:nowrap;"),
+            (use_case, f"color:{GREEN};font-weight:bold;"),
+            (best_for, f"color:{AMBER};"),
+            (desc, f"color:#888;font-size:.56rem;"),
+            (f'<a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" style="color:{RED};text-decoration:none;">{vuln}</a>', f"color:{RED};font-weight:bold;")
         ])
 
-ai_models_data = [
-    ("1. Gemini 3 Pro", "https://gemini.google.com/", "Multimodal", "Complex integration", "Google's flagship with 1M+ context", "Prompt Inj"),
-    ("2. Claude Opus 4.6", "https://claude.ai/", "Reasoning", "Long-form content", "Anthropic's top model for logic", "Insecure Out"),
-    ("3. GPT-5.2", "https://chatgpt.com/", "Agents", "Versatile research", "OpenAI's latest agent framework", "Supply Chain"),
-    ("4. Grok 4.20", "https://x.ai/", "Real-time", "Current events", "xAI's unfiltered multi-agent model", "Excessive Ag"),
-    ("5. Llama 4 Scout", "https://llama.meta.com/", "Open Weights", "Local deployment", "Meta's leading open-source LLM", "Supply Chain"),
-    ("6. DeepSeek V3.2", "https://deepseek.com/", "Coding", "High-precision", "Advanced open-source logic model", "Data Poison"),
-    ("7. Kimi K2", "https://kimi.moonshot.cn/", "Multilingual", "Enterprise search", "Moonshot's deep context engine", "Data Leakage"),
-    ("8. Qwen 3.5", "https://qwen.ai/", "Efficiency", "Business flows", "Alibaba's top open-source model", "Insec Plugin"),
-    ("9. Mistral Large 3", "https://mistral.ai/", "Enterprise", "Fast inference", "European leader for secure business", "Prompt Inj"),
-    ("10. Perplexity Pro", "https://www.perplexity.ai/", "Search", "Live citations", "AI search with real-time web access", "Model DoS")
-]
-
-ai_rows = []
-for name, link, use_case, best_for, desc, vuln in ai_models_data:
-    ai_rows.append([
-        (f'<a href="{link}" target="_blank" style="color:{CYAN};text-decoration:none;border-bottom:1px dashed {CYAN}40;">{name}</a>', f"color:{CYAN};font-weight:bold;white-space:nowrap;"),
-        (use_case, f"color:{GREEN};font-weight:bold;"),
-        (best_for, f"color:{AMBER};"),
-        (desc, f"color:#888;font-size:.56rem;"),
-        (f'<a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" style="color:{RED};text-decoration:none;">{vuln}</a>', f"color:{RED};font-weight:bold;")
-    ])
-
+    st.markdown(f'<div style="font-size:.68rem;font-weight:bold;color:{CYAN};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {CYAN}20;padding-bottom:3px;">🤖 TOP 15 AI MODELS & CAPABILITIES (Last updated March 9, 2026)</div>', unsafe_allow_html=True)
+    st.markdown(_tbl("🤖 TOP 15 AI MODELS & CAPABILITIES (Last updated March 9, 2026)", ["Rank & Model", "Top Use Case", "Best For", "Description", "Top Vuln"], ai_rows, CYAN), unsafe_allow_html=True)
 attck = [[("T1055",f"color:{BLUE};font-weight:bold;"),("Process Injection",f"color:{CYAN};"),("Def Evasion",f"color:{GREY};font-size:.56rem;"),("82%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1059",f"color:{BLUE};font-weight:bold;"),("Cmd & Scripting",f"color:{CYAN};"),("Execution",f"color:{GREY};font-size:.56rem;"),("78%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1078",f"color:{BLUE};font-weight:bold;"),("Valid Accounts",f"color:{CYAN};"),("Persistence",f"color:{GREY};font-size:.56rem;"),("75%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1555",f"color:{BLUE};font-weight:bold;"),("Creds from Stores",f"color:{CYAN};"),("Cred Access",f"color:{GREY};font-size:.56rem;"),("65%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1497",f"color:{BLUE};font-weight:bold;"),("Sandbox Evasion",f"color:{CYAN};"),("Discovery",f"color:{GREY};font-size:.56rem;"),("58%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1021",f"color:{BLUE};font-weight:bold;"),("Remote Services",f"color:{CYAN};"),("Lateral Mvmt",f"color:{GREY};font-size:.56rem;"),("55%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1486",f"color:{BLUE};font-weight:bold;"),("Data Encrypted",f"color:{CYAN};"),("Impact",f"color:{GREY};font-size:.56rem;"),("52%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1566",f"color:{BLUE};font-weight:bold;"),("Phishing",f"color:{CYAN};"),("Init Access",f"color:{GREY};font-size:.56rem;"),("48%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1190",f"color:{BLUE};font-weight:bold;"),("Exploit Public App",f"color:{CYAN};"),("Init Access",f"color:{GREY};font-size:.56rem;"),("42%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1003",f"color:{BLUE};font-weight:bold;"),("OS Cred Dumping",f"color:{CYAN};"),("Cred Access",f"color:{GREY};font-size:.56rem;"),("38%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")]]
 rwg = [[("Scattered Lapsus$",f"color:{CYAN};font-weight:bold;"),("~22%",f"color:{GREEN};font-weight:bold;"),("Alliance",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Top in 2025/26",f"color:#888;font-size:.56rem;")],[("Qilin / Agenda",f"color:{CYAN};font-weight:bold;"),("~18%",f"color:{GREEN};font-weight:bold;"),("1,000+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Aggressive RaaS",f"color:#888;font-size:.56rem;")],[("Akira",f"color:{CYAN};font-weight:bold;"),("~15%",f"color:{GREEN};font-weight:bold;"),("765+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("$244M extorted",f"color:#888;font-size:.56rem;")],[("RansomHub",f"color:{CYAN};font-weight:bold;"),("~12%",f"color:{GREEN};font-weight:bold;"),("736+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Filled LockBit void",f"color:#888;font-size:.56rem;")],[("Cl0p",f"color:{CYAN};font-weight:bold;"),("~10%",f"color:{GREEN};font-weight:bold;"),("550+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Mass exploits",f"color:#888;font-size:.56rem;")],[("LockBit5",f"color:{CYAN};font-weight:bold;"),("~8%",f"color:{GREEN};font-weight:bold;"),("400+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Resurfaced Q3 2025",f"color:#888;font-size:.56rem;")],[("Play",f"color:{CYAN};font-weight:bold;"),("~6%",f"color:{GREEN};font-weight:bold;"),("369+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Govt targets",f"color:#888;font-size:.56rem;")],[("Medusa",f"color:{CYAN};font-weight:bold;"),("~5%",f"color:{GREEN};font-weight:bold;"),("300+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Public pressure",f"color:#888;font-size:.56rem;")],[("INC Ransom",f"color:{CYAN};font-weight:bold;"),("~4%",f"color:{GREEN};font-weight:bold;"),("380+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Global focus",f"color:#888;font-size:.56rem;")],[("DragonForce",f"color:{CYAN};font-weight:bold;"),("~3%",f"color:{GREEN};font-weight:bold;"),("200+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Decentralized",f"color:#888;font-size:.56rem;")]]
 apts = [[("Salt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Telecom espionage",f"color:#888;font-size:.56rem;"),("9 ISPs hit",f"color:{RED};font-weight:bold;")],[("Volt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Crit infra",f"color:#888;font-size:.56rem;"),("LOTL stealth",f"color:{RED};font-weight:bold;")],[("Flax Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Espionage",f"color:#888;font-size:.56rem;"),("Persistent",f"color:{AMBER};")],[("Mustang Panda",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Regional targets",f"color:#888;font-size:.56rem;"),("Identity attacks",f"color:{AMBER};")],[("APT28 (Fancy Bear)",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("NATO espionage",f"color:#888;font-size:.56rem;"),("GRU unit",f"color:{RED};font-weight:bold;")],[("APT29 (Cozy Bear)",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("Pre-positioning",f"color:#888;font-size:.56rem;"),("SVR",f"color:{AMBER};")],[("Sandworm",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("Disruption",f"color:#888;font-size:.56rem;"),("Ukraine focus",f"color:{RED};font-weight:bold;")],[("Lazarus Group",f"color:{CYAN};font-weight:bold;"),("🇰🇵",f""),("Crypto theft",f"color:#888;font-size:.56rem;"),("$2.02B in 2025",f"color:{RED};font-weight:bold;")],[("Kimsuky",f"color:{CYAN};font-weight:bold;"),("🇰🇵",f""),("Spear-phishing",f"color:#888;font-size:.56rem;"),("Gov/Think Tanks",f"color:{AMBER};")],[("Charming Kitten",f"color:{CYAN};font-weight:bold;"),("🇮🇷",f""),("Academic/Media",f"color:#888;font-size:.56rem;"),("Social eng",f"color:{AMBER};")]]
