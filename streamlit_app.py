@@ -324,7 +324,10 @@ def gl(n,t,u,d):
 # ══════════════════════════════════════════════════════════════════════════════
 now_utc = datetime.now(timezone.utc)
 st.markdown(f"""
-<div style="border-bottom:2px solid #141420;padding-bottom:6px;margin-bottom:10px;margin-top:-50px;">
+<div style="border-bottom:2px solid #141420;padding-bottom:6px;margin-bottom:10px;margin-top:-50px;position:relative;">
+  <a href="#threat-intel-reference" style="position:absolute; right:10px; top:5px; padding:4px 8px; border:1px solid {BLUE}50; border-radius:4px; color:{CYAN}; font-size:0.65rem; font-weight:bold; text-decoration:none; background:linear-gradient(90deg, {BLUE}20, transparent); box-shadow: 0 0 6px {CYAN}30; letter-spacing:0.5px; transition:0.3s;">
+    ⏬ JUMP TO THREAT INTEL REF &gt;&gt;
+  </a>
   <div style="text-align:center;">
     <span style="font-size:1.3rem;font-weight:bold;color:{GREEN};text-shadow:0 0 12px {GREEN}80;letter-spacing:1px;">🤖 SecAI-Nexus</span>
     <span style="font-size:.72rem;color:{BLUE};margin-left:6px;font-weight:bold;">// CYBER THREAT OBSERVABILITY</span>
@@ -1154,7 +1157,7 @@ st.markdown(f"""<div class="sb">
 # ══════════════════════════════════════════════════════════════════════════════
 #  COMBINED THREAT INTEL SECTION
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin:12px 0 10px;text-align:center;">
+st.markdown(f"""<div id="threat-intel-reference" style="margin:12px 0 10px;text-align:center;scroll-margin-top:20px;">
   <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
     <a href="https://www.cisa.gov/" target="_blank" class="sh">
       &gt;&gt; THREAT INTELLIGENCE &amp; AI SECURITY REFERENCE &lt;&lt;</a></span>
