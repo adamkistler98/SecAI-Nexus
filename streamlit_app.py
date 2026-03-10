@@ -380,15 +380,15 @@ if not tor:
     tor={"c":7200}
 
 st.markdown(f"""
-<div style="text-align:left; margin:10px 0 15px 5px;">
-  <div style="font-size:0.85rem; font-weight:bold; color:{CYAN}; letter-spacing:1px; text-transform:uppercase;">
+<div style="text-align: left; margin: 10px 0 20px 5px;">
+  <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
     &gt;&gt; Global Threat Metrics
   </div>
-  <div style="font-size:0.55rem; color:#505060; margin-top:2px; letter-spacing:0.3px;">
-    <span style="color:{GREEN}; opacity:0.8;">LIVE</span> = REAL-TIME · 
-    <span style="color:{BLUE}; opacity:0.8;">EST</span> = VERIFIED · 
-    <span style="color:{CYAN}; opacity:0.8;">PULSE</span> = DSHIELD SENSORS · 
-    118 INDICATORS · 14 ACTIVE DATA ROWS
+  <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px; line-height: 1.5;">
+    <span style="color: {GREEN}; border: 1px solid {GREEN}40; padding: 0 3px; border-radius: 2px;">LIVE</span> REAL-TIME &nbsp; 
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">EST</span> VERIFIED &nbsp; 
+    <span style="color: {CYAN}; border: 1px solid {CYAN}40; padding: 0 3px; border-radius: 2px;">PULSE</span> DSHIELD &nbsp; 
+    <span style="margin-left: 10px; opacity: 0.6;">118 INDICATORS // 14 ACTIVE DATA ROWS</span>
   </div>
 </div>
 """, unsafe_allow_html=True)
