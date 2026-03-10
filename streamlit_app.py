@@ -1264,7 +1264,7 @@ g9, g10 = st.columns(2)
 with g9: st.markdown(_tbl("📊 ATTACK VECTOR BREAKDOWN (2026)", ["Vector", "Share", "Details"], vectors, GREEN), unsafe_allow_html=True)
 with g10: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (2026)", ["Industry", "Avg Cost", "Detail"], costs, GREEN), unsafe_allow_html=True)
 
-st.markdown(f'<div style="font-size:.44rem;color:#505060;margin:2px 0 0 4px;">Sources: IBM Cost of Breach 2025/2026 · CrowdStrike GTR 2026 · OWASP LLM Top 10 · MITRE ATT&CK/ATLAS · CISA KEV · VulnCheck · Red Canary · Chainalysis · Sophos · Public disclosures</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="font-size:.48rem;color:#505060;margin:2px 0 0 4px;">Sources: <a href="https://www.ibm.com/reports/data-breach" target="_blank" class="sl">IBM Cost of Breach 2025/2026</a> · <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="sl">CrowdStrike GTR 2026</a> · <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" class="sl">OWASP LLM Top 10</a> · <a href="https://attack.mitre.org/" target="_blank" class="sl">MITRE ATT&CK/ATLAS</a> · <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sl">CISA KEV</a> · <a href="https://www.vulncheck.com/" target="_blank" class="sl">VulnCheck</a> · <a href="https://redcanary.com/" target="_blank" class="sl">Red Canary</a> · <a href="https://www.chainalysis.com/" target="_blank" class="sl">Chainalysis</a> · <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
