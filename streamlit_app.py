@@ -334,7 +334,8 @@ def gl(n,t,u,d):
 
 # ══════════════════════════════════════════════════════════════════════════════
 now_utc = datetime.now(timezone.utc)
-st.markdown(f"""
+st.markdown(
+f"""
 <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; border-bottom: 2px solid #141420; padding-bottom: 12px; margin-bottom: 20px; margin-top: -50px; gap: 15px;">
   
   <div style="flex: 1; min-width: 300px; text-align: left;">
@@ -353,10 +354,16 @@ st.markdown(f"""
     </div>
   </div>
 
-  <div style="flex: 1; text-align: center; min-width: 220px;">
-     <a href="#global-threat-metrics" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
+  <div style="flex: 1; text-align: center; min-width: 260px;">
+     <a href="#global-threat-metrics" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase; margin-bottom: 8px;">
       &gt;&gt; ⏬ JUMP TO GLOBAL THREAT METRICS &lt;&lt;
-    </a>
+     </a><br>
+     <a href="#live-threat-maps" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase; margin-bottom: 8px;">
+      &gt;&gt; ⏬ JUMP TO LIVE THREAT MAP FEEDS &lt;&lt;
+     </a><br>
+     <a href="#grc-resources" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
+      &gt;&gt; ⏬ JUMP TO GRC RESOURCES &amp; TOOLS &lt;&lt;
+     </a>
   </div>
 
   <div style="flex: 1; text-align: right; min-width: 220px;">
@@ -1517,8 +1524,9 @@ st.markdown(f"""<div class="sb">
 # ══════════════════════════════════════════════════════════════════════════════
 # LIVE THREAT MAPS
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""
-<div style="text-align: left; margin: 25px 0 15px 5px;">
+st.markdown(
+f"""
+<div id="live-threat-maps" style="text-align: left; margin: 25px 0 15px 5px;">
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
     &gt;&gt; Live Threat Map Feeds
   </div>
@@ -1527,27 +1535,18 @@ st.markdown(f"""
   </div>
 </div>
 """, unsafe_allow_html=True)
-m1,m2=st.columns(2)
-with m1:
-    st.markdown('<a href="https://livethreatmap.radware.com/" target="_blank" class="ml">&gt;&gt; RADWARE LIVE THREAT MAP</a>', unsafe_allow_html=True)
-    iframe("https://livethreatmap.radware.com/", 1100)
-with m2:
-    st.markdown('<a href="https://threatmap.fortiguard.com/" target="_blank" class="ml">&gt;&gt; FORTINET FORTIGUARD MAP</a>', unsafe_allow_html=True)
-    iframe("https://threatmap.fortiguard.com/", 1100)
-st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  GRC RESOURCES
+# GRC RESOURCES
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""
-<div id="threat-intel-reference" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
+st.markdown(
+f"""
+<div id="grc-resources" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
     &gt;&gt; GRC Resources &amp; Tools
   </div>
   <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px; line-height: 1.5;">
     <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">80 CURATED RANKED BY POPULARITY</span> 
-  </div>
-  <div style="font-size: 0.55rem; color: #404050; margin-top: 2px;">
   </div>
 </div>
 """, unsafe_allow_html=True)
