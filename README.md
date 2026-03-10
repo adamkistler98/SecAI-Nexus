@@ -11,7 +11,7 @@ SecAI-Nexus is a free, centralized dashboard that delivers real-time cyber threa
 
 ## 🎯 What It Does
 
-SecAI-Nexus consolidates threat intelligence from 9 free public APIs and 15+ authoritative research reports into a single real-time dashboard with **112 metric cards**, **8 reference tables**, **2 live attack maps**, and **80 curated resource links**.
+SecAI-Nexus consolidates threat intelligence from 9 free public APIs and 15+ authoritative research reports into a single real-time dashboard with **118 metric cards**, **10 reference tables**, **2 live attack maps**, and **80 curated resource links**.
 
 Every metric includes 5 contextual intel points sourced from the latest published data (IBM 2025, CrowdStrike GTR 2025/2026, Mandiant M-Trends, Sophos, OWASP, DBIR).
 
