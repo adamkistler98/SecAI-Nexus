@@ -1548,9 +1548,10 @@ with m2:
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  GRC RESOURCES
+# GRC RESOURCES
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""
+st.markdown(
+f"""
 <div id="grc-resources" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
     &gt;&gt; GRC Resources &amp; Tools
