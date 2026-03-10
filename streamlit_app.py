@@ -1175,7 +1175,7 @@ kev_recent = fetch_kev_recent()
 top_tables_c1, top_tables_c2 = st.columns(2)
 
 with top_tables_c1:
-   ai_models = [
+  ai_models = [
     ("Claude 4.6 Opus", "https://claude.ai/", "Reasoning & Coding", "Complex tasks & safety", "Anthropic's current flagship with superior reasoning"),
     ("Gemini 3.1 Pro", "https://gemini.google.com/", "Multimodal & Long Context", "Documents & video analysis", "Google's 2M+ token leader"),
     ("GPT-5.4", "https://chatgpt.com/", "General Intelligence", "Versatile reasoning", "OpenAI's latest high-intelligence model"),
