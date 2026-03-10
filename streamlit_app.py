@@ -339,7 +339,7 @@ st.markdown(f"""
 
   <div style="flex: 1; text-align: center; min-width: 200px;">
     <a href="#threat-intel-reference" style="display: inline-block; padding: 6px 15px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
-      &gt;&gt; &gt;&gt; ⏬ JUMP TO AI SECURITY &amp; THREAT REFERENCE &lt;&lt;
+      &gt;&gt; ⏬ JUMP TO AI SECURITY &amp; THREAT REFERENCE &lt;&lt;
     </a>
   </div>
 
@@ -348,7 +348,6 @@ st.markdown(f"""
       {now_utc.strftime("%H:%M:%S")} UTC <span style="color:#3a3a4a; margin: 0 6px;">|</span> {now_utc.strftime("%Y-%m-%d")}
     </div>
   </div>
-
 </div>
 """, unsafe_allow_html=True)
 
