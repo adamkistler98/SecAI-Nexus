@@ -1,6 +1,11 @@
 # 🤖 SecAI-Nexus GRC
 **Real-Time Cyber Threat Intelligence & GRC Observability Platform**
-
+# ==========================================================
+# SEC AI NEXUS — CYBER THREAT INTELLIGENCE DASHBOARD
+# Author: Adam Kistler
+# Version: 1.0
+# Last Updated: March 2026
+# ==========================================================
 SecAI-Nexus is a free, centralized dashboard that delivers real-time cyber threat intelligence — giving security and GRC professionals instant visibility into emerging attack vectors, AI-driven risks, and the latest cybersecurity trends — all without subscriptions or complex setup.
 
 **100% free. No API keys. No authentication. No data collection.**
