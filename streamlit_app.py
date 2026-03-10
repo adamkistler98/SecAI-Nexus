@@ -1176,25 +1176,25 @@ top_tables_c1, top_tables_c2 = st.columns(2)
 
 with top_tables_c1:
     ai_models = [
-        ("1. Claude 4 Opus", "https://claude.ai/", "Reasoning & Coding", "Complex tasks & safety", "Anthropic's current flagship with superior reasoning"),
-        ("2. Gemini 3 Ultra", "https://gemini.google.com/", "Multimodal & Long Context", "Documents & video analysis", "Google's 2M+ token leader"),
-        ("3. GPT-5", "https://chatgpt.com/", "General Intelligence", "Versatile reasoning", "OpenAI's latest high-intelligence model"),
-        ("4. Grok 4", "https://x.ai/", "Real-time Knowledge", "Current events & uncensored", "xAI's live-data connected model"),
-        ("5. Llama 4 Maverick", "https://llama.meta.com/", "Open Weights", "Local & enterprise deploy", "Meta's most capable open model"),
-        ("6. DeepSeek R1", "https://deepseek.com/", "Math & Coding", "High-performance reasoning", "Strong open-source performer"),
-        ("7. Qwen 3", "https://qwen.ai/", "Multilingual", "Enterprise workflows", "Alibaba's top multilingual model"),
-        ("8. Mistral Large 3", "https://mistral.ai/", "Enterprise Reasoning", "Multi-lingual & efficient", "Leading European AI for business"),
-        ("9. Perplexity Pro", "https://www.perplexity.ai/", "Search & Research", "Real-time web citations", "AI-powered search engine"),
-        ("10. Midjourney v7", "https://www.midjourney.com/", "Image Generation", "Photorealism & art", "State-of-the-art text-to-image")
+        ("1. Claude 4 Opus", "https://claude.ai/", "Reasoning & Coding", "Complex tasks & safety", "Anthropic's current flagship with superior reasoning and safety alignment", "Prompt Injection (LLM01)"),
+        ("2. Gemini 3 Ultra", "https://gemini.google.com/", "Multimodal & Long Context", "Documents & video analysis", "Google's 2M+ token leader with native multimodality", "Model Poisoning (LLM03)"),
+        ("3. GPT-5", "https://chatgpt.com/", "General Intelligence", "Versatile reasoning", "OpenAI's latest high-intelligence model", "Insecure Output Handling (LLM02)"),
+        ("4. Grok 4", "https://x.ai/", "Real-time Knowledge", "Current events & uncensored", "xAI's live-data connected model", "Excessive Agency (LLM08)"),
+        ("5. Llama 4 Maverick", "https://llama.meta.com/", "Open Weights", "Local & enterprise deploy", "Meta's most capable open model", "Supply Chain Attack (LLM05)"),
+        ("6. DeepSeek R1", "https://deepseek.com/", "Math & Coding", "High-performance reasoning", "Strong open-source performer", "Training Data Poisoning (LLM03)"),
+        ("7. Qwen 3", "https://qwen.ai/", "Multilingual", "Enterprise workflows", "Alibaba's top multilingual model", "Information Disclosure (LLM06)"),
+        ("8. Mistral Large 3", "https://mistral.ai/", "Enterprise Reasoning", "Multi-lingual & efficient", "Leading European AI for business", "Plugin Insecurity (LLM07)"),
+        ("9. Perplexity Pro", "https://www.perplexity.ai/", "Search & Research", "Real-time web citations", "AI-powered search engine", "Prompt Injection (LLM01)"),
+        ("10. Midjourney v7", "https://www.midjourney.com/", "Image Generation", "Photorealism & art", "State-of-the-art text-to-image", "Model DoS (LLM04)")
     ]
 
     ai_rh = ""
-    for name, link, use_case, best_for, desc in ai_models:
-        sn = desc[:45]+"…" if len(desc)>45 else desc
-        ai_rh += f'<tr><td style="color:{CYAN};font-weight:bold;white-space:nowrap;"><a href="{link}" target="_blank" style="color:{CYAN};text-decoration:none;border-bottom:1px dashed {CYAN}40;">{name}</a></td><td style="color:{GREEN};font-weight:bold;">{use_case}</td><td style="color:{AMBER};">{best_for}</td><td style="color:#888;font-size:.56rem;">{sn}</td></tr>'
+    for name, link, use_case, best_for, desc, vuln in ai_models:
+        sn = desc  # Full description — no truncation
+        ai_rh += f'<tr><td style="color:{CYAN};font-weight:bold;white-space:nowrap;"><a href="{link}" target="_blank" style="color:{CYAN};text-decoration:none;border-bottom:1px dashed {CYAN}40;">{name}</a></td><td style="color:{GREEN};font-weight:bold;">{use_case}</td><td style="color:{AMBER};">{best_for}</td><td style="color:#888;font-size:.56rem;">{sn}</td><td style="color:{RED};font-weight:bold;">{vuln}</td></tr>'
 
     st.markdown(f'<div style="font-size:.68rem;font-weight:bold;color:{CYAN};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {CYAN}20;padding-bottom:3px;">🤖 TOP 10 AI MODELS</div>', unsafe_allow_html=True)
-    st.markdown(f'<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;margin-bottom:10px;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.6rem;"><thead><tr style="border-bottom:2px solid {CYAN}30;background:#0a0a14;"><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Rank &amp; Model</th><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Top Use Case</th><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Best For</th><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Description</th></tr></thead><tbody style="line-height:1.5;">{ai_rh}</tbody></table></div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;margin-bottom:10px;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.6rem;"><thead><tr style="border-bottom:2px solid {CYAN}30;background:#0a0a14;"><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Rank &amp; Model</th><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Top Use Case</th><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Best For</th><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Description</th><th style="padding:6px 4px;text-align:left;color:{RED};font-size:.52rem;text-transform:uppercase;">Top Vulnerability</th></tr></thead><tbody style="line-height:1.5;">{ai_rh}</tbody></table></div>', unsafe_allow_html=True)
 with top_tables_c2:
     if kev_recent:
         rh=""
