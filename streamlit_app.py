@@ -1185,8 +1185,8 @@ st.markdown(f"""
   </div>
   
   <div style="font-size: 0.55rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px; line-height: 1.5;">
-    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">80+ GRC RESOURCES</span> 
-    &nbsp; 10 DYNAMIC SECURITY TABLES · REAL-TIME CISA KEV ENUMERATION · THREAT ACTOR PROFILING
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">10 DYNAMIC SECURITY TABLES</span> 
+    &nbsp; REAL-TIME CISA KEV ENUMERATION · THREAT ACTOR PROFILING
   </div>
   
   <div style="font-size: 0.55rem; color: #404050; margin-top: 4px; letter-spacing: 0.3px;">
