@@ -1233,17 +1233,20 @@ owasp_llm = [[("LLM01",f"color:{RED};font-weight:bold;"),("Prompt Injection",f"c
 ai_crime = [[("Deepfake Vishing",f"color:{CYAN};font-weight:bold;"),("442% ↑",f"color:{RED};font-weight:bold;"),("3-sec voice clone for BEC wire fraud",f"color:#888;font-size:.56rem;")],[("LLM Phishing",f"color:{CYAN};font-weight:bold;"),("Scaling",f"color:{RED};font-weight:bold;"),("Perfect grammar, zero typos, at scale",f"color:#888;font-size:.56rem;")],[("WormGPT/FraudGPT",f"color:{CYAN};font-weight:bold;"),("Dark web",f"color:{RED};font-weight:bold;"),("Uncensored LLMs for malware & phish",f"color:#888;font-size:.56rem;")],[("Deepfake Video",f"color:{CYAN};font-weight:bold;"),("$25M scam",f"color:{RED};font-weight:bold;"),("Real-time face swap in video calls",f"color:#888;font-size:.56rem;")],[("PassGAN Cracking",f"color:{CYAN};font-weight:bold;"),("51% <60s",f"color:{AMBER};font-weight:bold;"),("AI cracks common passwords instantly",f"color:#888;font-size:.56rem;")],[("Polymorphic Malware",f"color:{CYAN};font-weight:bold;"),("Evasive",f"color:{AMBER};font-weight:bold;"),("BlackMamba: AI mutates code per exec",f"color:#888;font-size:.56rem;")],[("AI Recon/OSINT",f"color:{CYAN};font-weight:bold;"),("Automated",f"color:{AMBER};font-weight:bold;"),("Target profiling in minutes via LLM",f"color:#888;font-size:.56rem;")],[("Adversarial ML",f"color:{CYAN};font-weight:bold;"),("Evasion",f"color:{AMBER};font-weight:bold;"),("Pixel perturbation fools classifiers",f"color:#888;font-size:.56rem;")]]
 
 g1,g2=st.columns(2)
-with g1: st.markdown(_tbl("⚔ MITRE ATT&CK TOP TECHNIQUES",["ID","Technique","Tactic","Freq","Sev"],attck,BLUE),unsafe_allow_html=True)
-with g2: st.markdown(_tbl("💀 TOP RANSOMWARE GROUPS",["Group","Share","Victims","Status","Intel"],rwg,RED),unsafe_allow_html=True)
+with g1: st.markdown(_tbl("1-8 ⚔ MITRE ATT&CK TOP TECHNIQUES (Last updated March 9, 2026)",["ID","Technique","Tactic","Freq","Sev"],attck,BLUE),unsafe_allow_html=True)
+with g2: st.markdown(_tbl("1-8 💀 TOP RANSOMWARE GROUPS (Last updated March 9, 2026)",["Group","Share","Victims","Status","Intel"],rwg,RED),unsafe_allow_html=True)
+
 g3,g4=st.columns(2)
-with g3: st.markdown(_tbl("🌐 NATION-STATE APT GROUPS",["Group","","Focus","Intel"],apts,AMBER),unsafe_allow_html=True)
-with g4: st.markdown(_tbl("📊 ATTACK VECTOR BREAKDOWN (IBM 2025)",["Vector","Share","Details"],vectors,GREEN),unsafe_allow_html=True)
+with g3: st.markdown(_tbl("1-8 🌐 NATION-STATE APT GROUPS (Last updated March 9, 2026)",["Group","","Focus","Intel"],apts,AMBER),unsafe_allow_html=True)
+with g4: st.markdown(_tbl("1-8 📊 ATTACK VECTOR BREAKDOWN (IBM 2025, Last updated March 9, 2026)",["Vector","Share","Details"],vectors,GREEN),unsafe_allow_html=True)
+
 g5,g6=st.columns(2)
-with g5: st.markdown(_tbl("🔥 TOP EXPLOITED CVEs 2024",["CVE","Product","CVSS","Impact"],topcves,RED),unsafe_allow_html=True)
-with g6: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (IBM 2025)",["Industry","Avg Cost","Detail"],costs,GREEN),unsafe_allow_html=True)
+with g5: st.markdown(_tbl("1-15 🔥 TOP EXPLOITED CVEs 2024-2026 (Last updated March 9, 2026)",["CVE","Product","CVSS","Impact"],topcves,RED),unsafe_allow_html=True)
+with g6: st.markdown(_tbl("1-8 💰 BREACH COST BY INDUSTRY (IBM 2025, Last updated March 9, 2026)",["Industry","Avg Cost","Detail"],costs,GREEN),unsafe_allow_html=True)
+
 g7,g8=st.columns(2)
-with g7: st.markdown(_tbl("🛡 OWASP LLM TOP 10 (2025)",["#","Vulnerability","Description",""],owasp_llm,CYAN),unsafe_allow_html=True)
-with g8: st.markdown(_tbl("🤖 AI-POWERED CYBERCRIME",["Attack","Status","Details"],ai_crime,RED),unsafe_allow_html=True)
+with g7: st.markdown(_tbl("1-8 🛡 OWASP LLM TOP 10 (2025, Last updated March 9, 2026)",["#","Vulnerability","Description",""],owasp_llm,CYAN),unsafe_allow_html=True)
+with g8: st.markdown(_tbl("1-8 🤖 AI-POWERED CYBERCRIME (Last updated March 9, 2026)",["Attack","Status","Details"],ai_crime,RED),unsafe_allow_html=True)
 
 st.markdown(f'<div style="font-size:.44rem;color:#505060;margin:2px 0 0 4px;">Sources: IBM Cost of Breach 2025 · CrowdStrike GTR 2025/2026 · OWASP LLM Top 10 · MITRE ATT&CK/ATLAS · Mandiant · Red Canary · Chainalysis · Sophos · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
