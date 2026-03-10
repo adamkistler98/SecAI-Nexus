@@ -1162,7 +1162,7 @@ st.markdown(f"""<div class="sb">
 # ══════════════════════════════════════════════════════════════════════════════
 #  COMBINED THREAT INTEL SECTION
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div id="threat-intel-reference" style="margin:12px 0 10px;text-align:center;scroll-margin-top:20px;">
+st.markdown(f"""<div id="threat-intel-reference" style="margin:12px 0 10px;text-align:center;scroll-margin-top:30px;">
   <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
     <a href="https://www.cisa.gov/" target="_blank" class="sh">
       &gt;&gt; THREAT INTELLIGENCE &amp; AI SECURITY REFERENCE &lt;&lt;</a></span>
