@@ -324,38 +324,33 @@ def gl(n,t,u,d):
 # ══════════════════════════════════════════════════════════════════════════════
 now_utc = datetime.now(timezone.utc)
 st.markdown(f"""
-<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; border-bottom: 2px solid #141420; padding-bottom: 15px; margin-bottom: 25px; margin-top: -50px; gap: 15px;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; border-bottom: 2px solid #141420; padding-bottom: 12px; margin-bottom: 20px; margin-top: -50px; gap: 15px;">
   
-  <div style="flex: 1.5; min-width: 320px; text-align: left;">
+  <div style="flex: 1; min-width: 300px; text-align: left;">
     <div style="margin-bottom: 4px;">
-      <span style="font-size: 1.8rem; font-weight: bold; color: {CYAN}; text-shadow: 0 0 15px {CYAN}60; letter-spacing: 2px;">
+      <span style="font-size: 1.7rem; font-weight: bold; color: #00ff41; text-shadow: 0 0 15px #00ff4180; letter-spacing: 1.5px;">
         🤖 SecAI-Nexus
       </span>
-      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 8px; vertical-align: middle;">v30</span>
+      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v30</span>
     </div>
-    
-    <div style="font-size: 0.95rem; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 1.2px; text-shadow: 0 0 8px rgba(255,255,255,0.2); margin-bottom: 8px;">
+    <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 8px {CYAN}40; margin-bottom: 8px;">
       // Cybersecurity GRC Observability Platform
     </div>
-    
-    <div style="font-size: .55rem; color: #505060; letter-spacing: 0.8px; font-weight: bold;">
-      <span style="color: {GREEN}; border: 1px solid {GREEN}30; background: {GREEN}10; padding: 1px 4px; border-radius: 2px; margin-right: 5px;">ONLINE</span> 
+    <div style="font-size: .52rem; color: #505060; letter-spacing: 0.5px;">
+      <span style="color: {GREEN}; font-weight: bold;">ONLINE</span> · 
       <span style="color: #606070;">118 METRICS · 14 DATA ROWS · 10 INTEL TABLES · 80+ RESOURCES</span>
     </div>
   </div>
 
-  <div style="flex: 1; text-align: center; min-width: 240px; padding-top: 10px;">
-    <a href="#threat-intel-reference" style="display: inline-block; padding: 8px 20px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.7rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.08); box-shadow: 0 0 20px {CYAN}30; letter-spacing: 1.2px; transition: 0.3s; text-transform: uppercase;">
+  <div style="flex: 1; text-align: center; min-width: 220px;">
+    <a href="#threat-intel-reference" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
       &gt;&gt; ⏬ JUMP TO AI SECURITY &amp; THREAT REFERENCE &lt;&lt;
     </a>
   </div>
 
-  <div style="flex: 1; text-align: right; min-width: 220px; padding-top: 5px;">
-    <div style="font-size: .85rem; font-weight: bold; color: {BLUE}; text-shadow: 0 0 8px {BLUE}60; letter-spacing: 1px;">
-      {now_utc.strftime("%H:%M:%S")} UTC
-    </div>
-    <div style="font-size: .65rem; color: #4a4a5a; font-weight: bold; margin-top: 2px;">
-      {now_utc.strftime("%Y-%m-%d")}
+  <div style="flex: 1; text-align: right; min-width: 220px;">
+    <div style="font-size: .78rem; font-weight: bold; color: {BLUE}; text-shadow: 0 0 4px {BLUE}; letter-spacing: 0.5px;">
+      {now_utc.strftime("%H:%M:%S")} UTC <span style="color:#3a3a4a; margin: 0 6px;">|</span> {now_utc.strftime("%Y-%m-%d")}
     </div>
   </div>
 
