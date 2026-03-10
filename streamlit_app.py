@@ -321,28 +321,37 @@ def gl(n,t,u,d):
             f'<a href="{u}" target="_blank" class="rl2">{t}</a>'
             f'<div style="color:#5a5a6a;font-size:.68rem;margin-top:1px;padding-left:22px;">{d}</div></div>')
 
-## ══════════════════════════════════════════════════════════════════════════════
+# ══════════════════════════════════════════════════════════════════════════════
 now_utc = datetime.now(timezone.utc)
 st.markdown(f"""
-<div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; border-bottom:2px solid #141420; padding-bottom:10px; margin-bottom:15px; margin-top:-50px; gap:10px;">
-  <div style="flex:1; min-width:250px; text-align:left;">
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; border-bottom: 2px solid #141420; padding-bottom: 12px; margin-bottom: 20px; margin-top: -50px; gap: 15px;">
+  
+  <div style="flex: 1; min-width: 200px; text-align: left;">
     <div>
-      <span style="font-size:1.3rem;font-weight:bold;color:{GREEN};text-shadow:0 0-12px {GREEN}80;letter-spacing:1px;">🤖 SecAI-Nexus</span>
-      <span style="font-size:.72rem;color:{BLUE};margin-left:6px;font-weight:bold;">// CYBER THREAT OBSERVABILITY</span>
-      <span style="font-size:.42rem;color:#4a4a5a;border:1px solid #2a2a3a;padding:1px 4px;margin-left:4px;vertical-align:middle;">v30</span>
+      <span style="font-size: 1.3rem; font-weight: bold; color: {GREEN}; text-shadow: 0 0 12px {GREEN}80; letter-spacing: 1px;">🤖 SecAI-Nexus</span>
+      <span style="font-size: .72rem; color: {BLUE}; margin-left: 6px; font-weight: bold;">// OBSERVABILITY</span>
+      <span style="font-size: .42rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 4px; vertical-align: middle;">v30</span>
     </div>
-    <div style="font-size:.52rem;color:#505060;margin-top:4px;letter-spacing:0.5px;">
-      <span style="color:{GREEN};font-weight:bold;">ONLINE</span> · 118 METRICS · 10 INTEL TABLES · 2 MAPS · 85 LINKS
+    <div style="font-size: .52rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px;">
+      <span style="color: {GREEN}; font-weight: bold;">ONLINE</span> · 118 METRICS · 14 ROWS
     </div>
   </div>
-  <div style="text-align:right; min-width:180px;">
-    <div style="font-size:.7rem;font-weight:bold;color:{BLUE};text-shadow:0 0 4px {BLUE};margin-bottom:6px;">
-      {now_utc.strftime("%H:%M:%S")} UTC · {now_utc.strftime("%Y-%m-%d")}
-    </div>
-    <a href="#threat-intel-reference" style="display:inline-block; padding:4px 10px; border:1px solid {BLUE}50; border-radius:4px; color:{CYAN}; font-size:0.6rem; font-weight:bold; text-decoration:none; background:linear-gradient(90deg, {BLUE}20, transparent); box-shadow:0 0 6px {CYAN}30; letter-spacing:0.5px; transition:0.3s;">
+
+  <div style="flex: 1; text-align: center; min-width: 200px;">
+    <a href="#threat-intel-reference" style="display: inline-block; padding: 6px 20px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.75rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
       ⏬ JUMP TO THREAT INTEL REF &gt;&gt;
     </a>
   </div>
+
+  <div style="flex: 1; text-align: right; min-width: 200px;">
+    <div style="font-size: .85rem; font-weight: bold; color: {BLUE}; text-shadow: 0 0 4px {BLUE};">
+      {now_utc.strftime("%H:%M:%S")} UTC
+    </div>
+    <div style="font-size: .65rem; color: #505060; font-weight: bold;">
+      {now_utc.strftime("%Y-%m-%d")}
+    </div>
+  </div>
+
 </div>
 """, unsafe_allow_html=True)
 
