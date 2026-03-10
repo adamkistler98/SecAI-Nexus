@@ -1553,7 +1553,7 @@ st.markdown("---")
 st.markdown(f"""
 <div id="grc-resources" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
-    &gt;&gt; GRC Resources &amp; Tools
+  &gt;&gt; GRC Resources &amp; Tools
   </div>
   <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px; line-height: 1.5;">
     <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">80 CURATED RANKED BY POPULARITY</span> 
