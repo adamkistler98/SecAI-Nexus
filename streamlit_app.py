@@ -1509,11 +1509,19 @@ st.markdown("---")
 # ══════════════════════════════════════════════════════════════════════════════
 #  GRC RESOURCES
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin-top:24px;margin-bottom:14px;text-align:center;">
-  <span style="font-size:1.05rem;font-weight:bold;text-transform:uppercase;letter-spacing:1.5px;">
-    <a href="https://www.nist.gov/cyberframework" target="_blank" class="sh">
-      &gt;&gt; GRC RESOURCES &amp; TOOLS &lt;&lt;</a></span>
-  <div style="font-size:.55rem;color:#505060;margin-top:2px;">80 CURATED · RANKED BY POPULARITY · FRAMEWORKS · TOOLS · TRAINING · INTEL · THREAT MAPS</div></div>""", unsafe_allow_html=True)
+st.markdown(f"""
+<div id="threat-intel-reference" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
+  <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
+    &gt;&gt; GRC Resources &amp; Tools
+  </div>
+  <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px; line-height: 1.5;">
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">80 CURATED</span> RANKED BY POPULARITY · FRAMEWORKS · TOOLS · TRAINING · INTEL · THREAT MAPS
+  </div>
+  <div style="font-size: 0.55rem; color: #404050; margin-top: 2px;">
+    CISA KEV · ATT&amp;CK · RANSOMWARE · APTs · CVEs · OWASP LLM · AI THREATS · BREACH COSTS
+  </div>
+</div>
+""", unsafe_allow_html=True)
 l1,l2,l3,l4=st.columns(4)
 with l1:
     st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ FRAMEWORKS &amp; STANDARDS</div>', unsafe_allow_html=True)
