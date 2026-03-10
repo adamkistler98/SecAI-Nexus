@@ -1488,11 +1488,16 @@ st.markdown("---")
 # ══════════════════════════════════════════════════════════════════════════════
 #  LIVE THREAT MAPS
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""<div style="margin:4px 0 10px;text-align:center;">
-  <span style="font-size:1rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;">
-    <a href="https://livethreatmap.radware.com/" target="_blank" class="sh">
-      &gt;&gt; LIVE THREAT MAP FEEDS &lt;&lt;</a></span>
-  <div style="font-size:.55rem;color:#505060;margin-top:2px;">2 REAL-TIME GLOBAL ATTACK VISUALIZATION SOURCES</div></div>""", unsafe_allow_html=True)
+st.markdown(f"""
+<div style="text-align: left; margin: 25px 0 15px 5px;">
+  <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
+    &gt;&gt; Live Threat Map Feeds
+  </div>
+  <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px;">
+    <span style="color: {GREEN}; border: 1px solid {GREEN}40; padding: 0 3px; border-radius: 2px;">2 SOURCES</span> REAL-TIME GLOBAL ATTACK VISUALIZATION
+  </div>
+</div>
+""", unsafe_allow_html=True)
 m1,m2=st.columns(2)
 with m1:
     st.markdown('<a href="https://livethreatmap.radware.com/" target="_blank" class="ml">&gt;&gt; RADWARE LIVE THREAT MAP</a>', unsafe_allow_html=True)
