@@ -1177,7 +1177,7 @@ def fetch_kev_recent():
 
 kev_recent = fetch_kev_recent()
 
-# ── KEV TABLE ROWS (longer descriptions + rich links) ────────────────────────
+# ── KEV TABLE ROWS (rich format) ─────────────────────────────────────────────
 kev_rows = []
 if kev_recent:
     for v in kev_recent:
@@ -1257,7 +1257,7 @@ for rank, attack, trend, desc, source in ai_crime_data:
         (f'<a href="{source}" target="_blank" style="color:{AMBER};text-decoration:none;">Source</a>', f"color:{AMBER};font-weight:bold;")
     ])
 
-# ── REVAMPED OWASP LLM TOP 10 (full clickable links) ─────────────────────────
+# ── REVAMPED OWASP LLM TOP 10 (v1.1) ─────────────────────────────────────────
 owasp_data = [
     ("LLM01", "Prompt Injection", "Adversary crafts input to bypass filters or exfil data", "🔴 Critical", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/01_prompt_injection"),
     ("LLM02", "Insecure Output Handling", "LLM output not sanitized leading to XSS/SQLi/RCE", "🔴 Critical", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/02_insecure_output"),
@@ -1281,9 +1281,53 @@ for id_, vuln, desc, risk, link in owasp_data:
         ("OWASP", f"color:{AMBER};font-weight:bold;")
     ])
 
+# ── REVAMPED MITRE ATT&CK TOP TECHNIQUES (2026) ──────────────────────────────
+attck_data = [
+    ("T1055", "Process Injection", "Defense Evasion", "Inject code into legitimate processes to evade detection", "82%", "https://attack.mitre.org/techniques/T1055/"),
+    ("T1059", "Command and Scripting Interpreter", "Execution", "Execute commands via shells or scripts for initial access", "78%", "https://attack.mitre.org/techniques/T1059/"),
+    ("T1078", "Valid Accounts", "Persistence", "Use stolen credentials for persistence and lateral movement", "75%", "https://attack.mitre.org/techniques/T1078/"),
+    ("T1555", "Credentials from Password Stores", "Credential Access", "Extract credentials from browsers, OS stores, and keychains", "65%", "https://attack.mitre.org/techniques/T1555/"),
+    ("T1497", "Virtualization/Sandbox Evasion", "Discovery", "Detect and evade sandboxes and virtual environments", "58%", "https://attack.mitre.org/techniques/T1497/"),
+    ("T1021", "Remote Services", "Lateral Movement", "Use RDP, SSH, or SMB for internal pivoting", "55%", "https://attack.mitre.org/techniques/T1021/"),
+    ("T1486", "Data Encrypted for Impact", "Impact", "Encrypt files and demand ransom (ransomware)", "52%", "https://attack.mitre.org/techniques/T1486/"),
+    ("T1566", "Phishing", "Initial Access", "Deliver malware or steal creds via email/social", "48%", "https://attack.mitre.org/techniques/T1566/"),
+    ("T1190", "Exploit Public-Facing Application", "Initial Access", "Exploit internet-facing apps for entry", "42%", "https://attack.mitre.org/techniques/T1190/"),
+    ("T1003", "OS Credential Dumping", "Credential Access", "Dump LSASS, SAM, or NTDS.dit for creds", "38%", "https://attack.mitre.org/techniques/T1003/")
+]
+
+attck_rows = []
+for id_, tech, tactic, desc, freq, link in attck_data:
+    attck_rows.append([
+        (f'<a href="{link}" target="_blank" style="color:{BLUE};text-decoration:none;border-bottom:1px dashed {BLUE}40;">{id_}</a>', f"color:{BLUE};font-weight:bold;white-space:nowrap;"),
+        (tech, f"color:{CYAN};font-weight:bold;"),
+        (tactic, f"color:{GREY};"),
+        (desc, f"color:#888;font-size:.56rem;"),
+        (freq, f"color:{GREEN};font-weight:bold;")
+    ])
+
+# ── REVAMPED TOP RANSOMWARE GROUPS 2026 ──────────────────────────────────────
+rwg_data = [
+    ("Qilin", "~30%", "1,000+", "🔴 Active", "Dominant RaaS with triple extortion and Linux support", "https://www.sophos.com/en-us/content/state-of-ransomware"),
+    ("Akira", "~20%", "765+", "🔴 Active", "$244M extorted; targets healthcare and manufacturing", "https://www.crowdstrike.com/global-threat-report/"),
+    ("Cl0p", "~15%", "550+", "🔴 Active", "Mass MOVEit and GoAnywhere exploits", "https://www.ibm.com/reports/data-breach"),
+    ("LockBit5", "~12%", "400+", "🔴 Active", "Aggressive RaaS with affiliate program", "https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2025/"),
+    ("Play", "~10%", "355+", "🔴 Active", "Heavy focus on government and education sectors", "https://www.mandiant.com/m-trends"),
+    ("Medusa", "~8%", "300+", "🔴 Active", "Triple extortion with data leak sites", "https://www.sophos.com/en-us/content/state-of-ransomware"),
+    ("INC Ransom", "~7%", "380+", "🔴 Active", "Education and critical infrastructure focus", "https://www.crowdstrike.com/global-threat-report/"),
+    ("DragonForce", "~5%", "200+", "🔴 Active", "New alliance member with fast encryption", "https://www.ibm.com/reports/data-breach")
+]
+
+rwg_rows = []
+for group, share, victims, status, intel, source in rwg_data:
+    rwg_rows.append([
+        (group, f"color:{CYAN};font-weight:bold;"),
+        (share, f"color:{GREEN};font-weight:bold;"),
+        (victims, f"color:{AMBER};"),
+        (status, f"color:{RED};font-weight:bold;"),
+        (f'<a href="{source}" target="_blank" style="color:{AMBER};text-decoration:none;">{intel}</a>', f"color:#888;font-size:.56rem;")
+    ])
+
 # ── ALL OTHER TABLES (2026 data) ─────────────────────────────────────────────
-attck = [[("T1055",f"color:{BLUE};font-weight:bold;"),("Process Injection",f"color:{CYAN};"),("Def Evasion",f"color:{GREY};font-size:.56rem;"),("82%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1059",f"color:{BLUE};font-weight:bold;"),("Cmd & Scripting",f"color:{CYAN};"),("Execution",f"color:{GREY};font-size:.56rem;"),("78%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1078",f"color:{BLUE};font-weight:bold;"),("Valid Accounts",f"color:{CYAN};"),("Persistence",f"color:{GREY};font-size:.56rem;"),("75%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1555",f"color:{BLUE};font-weight:bold;"),("Creds from Stores",f"color:{CYAN};"),("Cred Access",f"color:{GREY};font-size:.56rem;"),("65%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1497",f"color:{BLUE};font-weight:bold;"),("Sandbox Evasion",f"color:{CYAN};"),("Discovery",f"color:{GREY};font-size:.56rem;"),("58%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1021",f"color:{BLUE};font-weight:bold;"),("Remote Services",f"color:{CYAN};"),("Lateral Mvmt",f"color:{GREY};font-size:.56rem;"),("55%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1486",f"color:{BLUE};font-weight:bold;"),("Data Encrypted",f"color:{CYAN};"),("Impact",f"color:{GREY};font-size:.56rem;"),("52%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1566",f"color:{BLUE};font-weight:bold;"),("Phishing",f"color:{CYAN};"),("Init Access",f"color:{GREY};font-size:.56rem;"),("48%",f"color:{GREEN};font-weight:bold;"),("🟡",f"text-align:center;")],[("T1190",f"color:{BLUE};font-weight:bold;"),("Exploit Public App",f"color:{CYAN};"),("Init Access",f"color:{GREY};font-size:.56rem;"),("42%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")],[("T1003",f"color:{BLUE};font-weight:bold;"),("OS Cred Dumping",f"color:{CYAN};"),("Cred Access",f"color:{GREY};font-size:.56rem;"),("38%",f"color:{GREEN};font-weight:bold;"),("🔴",f"text-align:center;")]]
-rwg = [[("Qilin",f"color:{CYAN};font-weight:bold;"),("~30%",f"color:{GREEN};font-weight:bold;"),("1,000+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Top in Q3 2025",f"color:#888;font-size:.56rem;")],[("Akira",f"color:{CYAN};font-weight:bold;"),("~20%",f"color:{GREEN};font-weight:bold;"),("765+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("$244M extorted",f"color:#888;font-size:.56rem;")],[("Cl0p",f"color:{CYAN};font-weight:bold;"),("~15%",f"color:{GREEN};font-weight:bold;"),("550+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Mass exploits",f"color:#888;font-size:.56rem;")],[("LockBit5",f"color:{CYAN};font-weight:bold;"),("~12%",f"color:{GREEN};font-weight:bold;"),("400+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Aggressive RaaS",f"color:#888;font-size:.56rem;")],[("Play",f"color:{CYAN};font-weight:bold;"),("~10%",f"color:{GREEN};font-weight:bold;"),("355+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Govt targets",f"color:#888;font-size:.56rem;")],[("Medusa",f"color:{CYAN};font-weight:bold;"),("~8%",f"color:{GREEN};font-weight:bold;"),("300+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Triple extort",f"color:#888;font-size:.56rem;")],[("INC Ransom",f"color:{CYAN};font-weight:bold;"),("~7%",f"color:{GREEN};font-weight:bold;"),("380+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Education focus",f"color:#888;font-size:.56rem;")],[("DragonForce",f"color:{CYAN};font-weight:bold;"),("~5%",f"color:{GREEN};font-weight:bold;"),("200+",f"color:{AMBER};"),("🔴 Active",f"color:{RED};font-size:.56rem;"),("Alliance member",f"color:#888;font-size:.56rem;")]]
 apts = [[("Salt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Telecom espionage",f"color:#888;font-size:.56rem;"),("9 ISPs hit",f"color:{RED};font-weight:bold;")],[("Volt Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Crit infra",f"color:#888;font-size:.56rem;"),("LOTL stealth",f"color:{RED};font-weight:bold;")],[("Flax Typhoon",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Espionage",f"color:#888;font-size:.56rem;"),("Persistent",f"color:{AMBER};")],[("Mustang Panda",f"color:{CYAN};font-weight:bold;"),("🇨🇳",f""),("Regional targets",f"color:#888;font-size:.56rem;"),("Identity attacks",f"color:{AMBER};")],[("APT28",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("NATO espionage",f"color:#888;font-size:.56rem;"),("GRU unit",f"color:{RED};font-weight:bold;")],[("APT29",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("Pre-positioning",f"color:#888;font-size:.56rem;"),("SVR",f"color:{AMBER};")],[("Sandworm",f"color:{CYAN};font-weight:bold;"),("🇷🇺",f""),("Disruption",f"color:#888;font-size:.56rem;"),("Ukraine focus",f"color:{RED};font-weight:bold;")],[("Lazarus",f"color:{CYAN};font-weight:bold;"),("🇰🇵",f""),("Crypto theft",f"color:#888;font-size:.56rem;"),("$2.02B in 2025",f"color:{RED};font-weight:bold;")]]
 vectors = [[("Stolen Credentials",f"color:{CYAN};font-weight:bold;"),("22%",f"color:{RED};font-weight:bold;font-size:.58rem;"),("Dark web sales (#1 vector)",f"color:#888;font-size:.56rem;")],[("Phishing",f"color:{CYAN};font-weight:bold;"),("16%",f"color:{RED};font-weight:bold;font-size:.58rem;"),("Cost $4.8M per incident",f"color:#888;font-size:.56rem;")],[("Supply Chain",f"color:{CYAN};font-weight:bold;"),("30%",f"color:{RED};font-weight:bold;font-size:.58rem;"),("Doubled YoY (30% of total)",f"color:#888;font-size:.56rem;")],[("Shadow AI",f"color:{CYAN};font-weight:bold;"),("20%",f"color:{AMBER};font-weight:bold;font-size:.58rem;"),("Unsanctioned LLM use",f"color:#888;font-size:.56rem;")],[("Exploited Vulns",f"color:{CYAN};font-weight:bold;"),("20%",f"color:{AMBER};font-weight:bold;font-size:.58rem;"),("Up 34% YoY",f"color:#888;font-size:.56rem;")],[("Denial of Service",f"color:{CYAN};font-weight:bold;"),("13%",f"color:{BLUE};font-weight:bold;font-size:.58rem;"),("Disruption & extortion",f"color:#888;font-size:.56rem;")],[("Business Email",f"color:{CYAN};font-weight:bold;"),("9%",f"color:{BLUE};font-weight:bold;font-size:.58rem;"),("BEC wire fraud",f"color:#888;font-size:.56rem;")],[("Malicious Insider",f"color:{CYAN};font-weight:bold;"),("$4.99M",f"color:{RED};font-weight:bold;font-size:.58rem;"),("Costliest per incident",f"color:#888;font-size:.56rem;")],[("Human Error",f"color:{CYAN};font-weight:bold;"),("26%",f"color:{BLUE};font-weight:bold;font-size:.58rem;"),("Non-malicious oversight",f"color:#888;font-size:.56rem;")],[("IT Failure",f"color:{CYAN};font-weight:bold;"),("23%",f"color:{BLUE};font-weight:bold;font-size:.58rem;"),("System/process failure",f"color:#888;font-size:.56rem;")]]
 topcves = [[("CVE-2025-55182",f"color:{CYAN};font-weight:bold;"),("React2Shell",f"color:#888;font-size:.56rem;"),("10.0",f"color:{RED};font-weight:bold;"),("RCE · Most targeted",f"color:{GREY};font-size:.56rem;")],[("CVE-2025-53770",f"color:{CYAN};font-weight:bold;"),("MS SharePoint",f"color:#888;font-size:.56rem;"),("9.8",f"color:{RED};font-weight:bold;"),("Zero-day RCE",f"color:{GREY};font-size:.56rem;")],[("CVE-2020-1472",f"color:{CYAN};font-weight:bold;"),("MS ZeroLogon",f"color:#888;font-size:.56rem;"),("10.0",f"color:{RED};font-weight:bold;"),("Still #1 persistent",f"color:{GREY};font-size:.56rem;")],[("CVE-2021-44228",f"color:{CYAN};font-weight:bold;"),("Log4Shell",f"color:#888;font-size:.56rem;"),("10.0",f"color:{RED};font-weight:bold;"),("Supply chain",f"color:{GREY};font-size:.56rem;")],[("CVE-2024-3400",f"color:{CYAN};font-weight:bold;"),("Palo Alto PAN-OS",f"color:#888;font-size:.56rem;"),("10.0",f"color:{RED};font-weight:bold;"),("Firewall RCE",f"color:{GREY};font-size:.56rem;")],[("CVE-2025-66516",f"color:{CYAN};font-weight:bold;"),("Apache Tika",f"color:#888;font-size:.56rem;"),("9.8",f"color:{RED};font-weight:bold;"),("XXE/SSRF",f"color:{GREY};font-size:.56rem;")],[("CVE-2024-21887",f"color:{CYAN};font-weight:bold;"),("Ivanti Connect",f"color:#888;font-size:.56rem;"),("9.1",f"color:{RED};font-weight:bold;"),("VPN Auth bypass",f"color:{GREY};font-size:.56rem;")],[("CVE-2025-52691",f"color:{CYAN};font-weight:bold;"),("SmarterMail",f"color:#888;font-size:.56rem;"),("9.8",f"color:{RED};font-weight:bold;"),("File Upload RCE",f"color:{GREY};font-size:.56rem;")],[("CVE-2026-21509",f"color:{CYAN};font-weight:bold;"),("MS Office",f"color:#888;font-size:.56rem;"),("8.8",f"color:{AMBER};font-weight:bold;"),("Zero-day exploit",f"color:{GREY};font-size:.56rem;")],[("CVE-2026-20841",f"color:{CYAN};font-weight:bold;"),("Windows Notepad",f"color:#888;font-size:.56rem;"),("7.8",f"color:{AMBER};font-weight:bold;"),("Code execution",f"color:{GREY};font-size:.56rem;")]]
@@ -1303,8 +1347,8 @@ with g4:
         st.markdown(f'<div style="font-size:.68rem;font-weight:bold;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {BLUE}20;padding-bottom:3px;">📋 LATEST CISA KEV ADDITIONS (LIVE)</div><div style="padding:14px;border:1px solid #1a1a2e;background:#080810;text-align:center;margin-bottom:10px;"><span style="color:{GREY};font-size:.7rem;">📋 CISA KEV · Populates on Streamlit Cloud deployment</span></div>', unsafe_allow_html=True)
 
 g5, g6 = st.columns(2)
-with g5: st.markdown(_tbl("⚔ MITRE ATT&CK TOP TECHNIQUES (2026)", ["ID", "Technique", "Tactic", "Freq", "Sev"], attck, BLUE), unsafe_allow_html=True)
-with g6: st.markdown(_tbl("💀 TOP RANSOMWARE GROUPS 2026", ["Group", "Share", "Victims", "Status", "Intel"], rwg, RED), unsafe_allow_html=True)
+with g5: st.markdown(_tbl("⚔ MITRE ATT&CK TOP TECHNIQUES (2026)", ["ID", "Technique", "Tactic", "Description", "Freq"], attck_rows, BLUE), unsafe_allow_html=True)
+with g6: st.markdown(_tbl("💀 TOP RANSOMWARE GROUPS 2026", ["Group", "Share", "Victims", "Status", "Key Intel"], rwg_rows, RED), unsafe_allow_html=True)
 
 g7, g8 = st.columns(2)
 with g7: st.markdown(_tbl("🌐 NATION-STATE APT GROUPS 2026", ["Group", "", "Focus", "Intel"], apts, AMBER), unsafe_allow_html=True)
