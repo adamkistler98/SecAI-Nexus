@@ -353,16 +353,10 @@ st.markdown(f"""
     </div>
   </div>
 
-  <div style="flex: 1; text-align: center; min-width: 260px;">
-     <a href="#global-threat-metrics" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase; margin-bottom: 8px;">
+  <div style="flex: 1; text-align: center; min-width: 220px;">
+     <a href="#global-threat-metrics" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
       &gt;&gt; ⏬ JUMP TO GLOBAL THREAT METRICS &lt;&lt;
-     </a><br>
-     <a href="#live-threat-maps" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase; margin-bottom: 8px;">
-      &gt;&gt; ⏬ JUMP TO LIVE THREAT MAP FEEDS &lt;&lt;
-     </a><br>
-     <a href="#grc-resources" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
-      &gt;&gt; ⏬ JUMP TO GRC RESOURCES &amp; TOOLS &lt;&lt;
-     </a>
+    </a>
   </div>
 
   <div style="flex: 1; text-align: right; min-width: 220px;">
@@ -1524,15 +1518,10 @@ st.markdown(f"""<div class="sb">
 # LIVE THREAT MAPS
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
-<div id="live-threat-maps" style="text-align: left; margin: 25px 0 15px 5px;">
+<div style="text-align: left; margin: 25px 0 15px 5px;">
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
     &gt;&gt; Live Threat Map Feeds
   </div>
-  <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px;">
-    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">REAL-TIME GLOBAL ATTACK VISUALIZATIONS</span> 
-  </div>
-</div>
-""", unsafe_allow_html=True)
   <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px;">
     <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">REAL-TIME GLOBAL ATTACK VISUALIZATIONS</span> 
   </div>
@@ -1548,19 +1537,20 @@ with m2:
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
-# GRC RESOURCES
+#  GRC RESOURCES
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
-<div id="grc-resources" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
+<div id="threat-intel-reference" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
-&gt;&gt; GRC Resources &amp; Tools
+    &gt;&gt; GRC Resources &amp; Tools
   </div>
   <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px; line-height: 1.5;">
     <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">80 CURATED RANKED BY POPULARITY</span> 
   </div>
+  <div style="font-size: 0.55rem; color: #404050; margin-top: 2px;">
+  </div>
 </div>
 """, unsafe_allow_html=True)
-
 l1,l2,l3,l4=st.columns(4)
 with l1:
     st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ FRAMEWORKS &amp; STANDARDS</div>', unsafe_allow_html=True)
