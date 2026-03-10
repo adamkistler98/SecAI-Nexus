@@ -1174,21 +1174,17 @@ st.markdown(f"""<div class="sb">
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
 <div id="threat-intel-reference" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
-  <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-    <span style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
-      &gt;&gt; AI Security &amp; Threat Intelligence Reference
-    </span>
-    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-size: 0.55rem; font-weight: bold; letter-spacing: 1px; background: {BLUE}10;">
-      GRC KNOWLEDGEBASE
-    </span>
+  <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
+    &gt;&gt; AI Security &amp; Threat Intelligence Reference
   </div>
   
   <div style="font-size: 0.55rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px; line-height: 1.5;">
-    10 DYNAMIC INTEL TABLES · REAL-TIME CISA KEV ENUMERATION · THREAT ACTOR PROFILING
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">80+ GRC RESOURCES</span> 
+    &nbsp; 10 DYNAMIC SECURITY TABLES · REAL-TIME CISA KEV ENUMERATION · THREAT ACTOR PROFILING
   </div>
   
   <div style="font-size: 0.55rem; color: #404050; margin-top: 4px; letter-spacing: 0.3px;">
-    80+ GOVERNANCE RESOURCES · MITRE ATT&amp;CK&reg; · OWASP AI/LLM TOP 10 · ADVERSARIAL MACHINE LEARNING · GLOBAL IMPACT ANALYSIS
+    GOVERNANCE REPOSITORY · MITRE ATT&amp;CK&reg; · OWASP AI/LLM TOP 10 · ADVERSARIAL MACHINE LEARNING · GLOBAL IMPACT ANALYSIS
   </div>
 </div>
 """, unsafe_allow_html=True)
