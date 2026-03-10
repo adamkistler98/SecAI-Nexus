@@ -82,9 +82,8 @@ This tool is provided for educational purposes only — use at your own risk!
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Local Deployment
 
-### Local Development
 ```bash
 git clone https://github.com/adamkistler98/SecAI-Nexus.git
 cd SecAI-Nexus
