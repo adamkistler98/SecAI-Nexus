@@ -1179,12 +1179,12 @@ st.markdown(f"""
   </div>
   
   <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px; line-height: 1.5;">
-    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">INTEL FEED</span> 
-    &nbsp; 10 CURATED TABLES · REAL-TIME CISA KEV
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">GRC KNOWLEDGEBASE</span> 
+    &nbsp; 10 DYNAMIC INTEL TABLES · REAL-TIME CISA KEV ENUMERATION · THREAT ACTOR PROFILING
   </div>
   
   <div style="font-size: 0.55rem; color: #404050; margin-top: 4px; letter-spacing: 0.3px;">
-    80+ CURATED RESOURCES · ATT&amp;CK FRAMEWORK · OWASP LLM · AI THREAT VECTORS · GLOBAL BREACH COSTS
+    80+ GOVERNANCE RESOURCES · MITRE ATT&amp;CK® · OWASP AI/LLM TOP 10 · ADVERSARIAL MACHINE LEARNING · GLOBAL IMPACT ANALYSIS
   </div>
 </div>
 """, unsafe_allow_html=True)
