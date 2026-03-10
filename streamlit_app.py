@@ -144,118 +144,6 @@ def fetch_kev():
                 "tp":tp,"tpc":prods.get(tp,0),"top3v":top3v,"prods":len(prods)}
     except: return None
 
-MONO  = "'Courier New', Courier, monospace"
-GREEN = "#00ff41"; BLUE = "#008aff"; RED = "#ff4b4b"
-AMBER = "#ffaa00"; CYAN = "#00e5ff"; BG = "#050505"; CARD = "#0a0a0a"
-GREY  = "#6a6a7a"  # lighter subtitle grey
-DGREY = "#4a4a5a"  # delta label grey
-
-st.markdown(f"""
-<style>
-  @keyframes pglow {{ 0%,100%{{text-shadow:0 0 4px {GREEN}30;}} 50%{{text-shadow:0 0 10px {GREEN}70;}} }}
-  @keyframes cpulse {{ 0%,100%{{text-shadow:0 0 4px {CYAN}30;}} 50%{{text-shadow:0 0 12px {CYAN}80;}} }}
-  .stApp {{background:{BG}!important;font-family:{MONO}!important;}}
-  div[data-testid="stMarkdownContainer"]>p {{color:{GREEN};font-size:1.05rem;line-height:1.6;font-family:{MONO};}}
-  h1,h2,h3,h4,h5,h6,label {{color:{GREEN}!important;}}
-  header,footer {{visibility:hidden;}} .stDeployButton {{display:none;}}
-  div[data-testid="stSpinner"]>div>p {{color:{GREEN}!important;}}
-
-  .cm {{background:linear-gradient(135deg,{CARD},#0d0d12);border:1px solid #1a1a2e;
-    border-left:3px solid {BLUE};padding:8px 9px 7px;margin-bottom:6px;
-    font-family:{MONO};transition:all .3s;min-height:115px;}}
-  .cm:hover {{border-left-color:{GREEN};box-shadow:0 0 10px {GREEN}0d;}}
-  .cm-t a {{color:{BLUE};font-size:.64rem;font-weight:bold;text-transform:uppercase;
-    letter-spacing:.4px;text-decoration:none;transition:.2s;}}
-  .cm-t a:hover {{color:{GREEN};text-shadow:0 0 4px {GREEN};}}
-  .cm-l {{font-size:.48rem;color:{GREEN};border:1px solid {GREEN};padding:0 3px;
-    margin-left:3px;vertical-align:middle;animation:pglow 3s ease-in-out infinite;}}
-  .cm-e {{font-size:.48rem;color:{AMBER};border:1px solid {AMBER}80;padding:0 3px;
-    margin-left:3px;vertical-align:middle;}}
-  .cm-v {{color:{GREEN};font-size:1.15rem;font-weight:bold;margin:3px 0 1px;line-height:1.05;
-    text-shadow:0 0 4px {GREEN}20;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
-  .cm-s {{font-size:.6rem;color:{GREY};margin-bottom:2px;line-height:1.15;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
-  .cm-x {{font-size:.6rem;color:#555;margin-bottom:1px;line-height:1.15;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic;}}
-  .cm-f {{font-size:.55rem;color:#556;line-height:1.3;margin-bottom:2px;}}
-  .cm-f span {{color:#3a6a4a;}}
-  .cm-d {{font-size:.66rem;border-top:1px dashed #1a1a2e;padding-top:3px;line-height:1.55;}}
-  .d-b {{color:{RED};font-weight:bold;}} .d-g {{color:{GREEN};font-weight:bold;}}
-  .d-n {{color:{BLUE};font-weight:bold;}} .d-a {{color:{AMBER};font-weight:bold;}}
-
-  .pulse {{background:linear-gradient(135deg,#0a0a14,#0d0d1a);border:1px solid #1a1a30;
-    border-left:4px solid {CYAN};padding:10px 12px 8px;margin-bottom:8px;
-    font-family:{MONO};transition:all .3s;min-height:130px;}}
-  .pulse:hover {{border-left-color:{GREEN};box-shadow:0 0 14px {GREEN}12;}}
-  .pulse .cm-t a {{font-size:.68rem;color:{CYAN};}}
-  .pulse .cm-v {{font-size:1.3rem;color:{CYAN};text-shadow:0 0 6px {CYAN}30;}}
-  .pulse .cm-s {{font-size:.64rem;color:{GREY};}}
-  .pulse .cm-x {{font-size:.64rem;}}
-  .pulse .cm-f {{font-size:.6rem;}}
-  .pulse .cm-d {{font-size:.68rem;}}
-
-  .rl {{font-size:.6rem;color:#505060;text-transform:uppercase;letter-spacing:1px;
-    border-left:3px solid {BLUE}50;padding-left:6px;margin:10px 0 5px;
-    background:linear-gradient(90deg,{BLUE}06,transparent 35%);padding-top:2px;padding-bottom:2px;}}
-  .rl-p {{font-size:.64rem;color:{CYAN};text-transform:uppercase;letter-spacing:1.2px;
-    border-left:4px solid {CYAN};padding-left:8px;margin:14px 0 6px;
-    background:linear-gradient(90deg,{CYAN}08,transparent 40%);padding-top:3px;padding-bottom:3px;
-    text-shadow:0 0 6px {CYAN}30;}}
-
-  .sh {{color:{GREEN};text-decoration:none;transition:.25s;text-shadow:0 0 6px {GREEN}25;}}
-  .sh:hover {{color:{BLUE};text-shadow:0 0 10px {BLUE};}}
-  .sl {{color:{BLUE};font-weight:bold;text-decoration:none;border-bottom:1px dashed #2a2a3a;transition:.2s;}}
-  .sl:hover {{color:{GREEN};border-bottom-color:{GREEN};text-shadow:0 0 4px {GREEN};}}
-  .ml {{color:{BLUE};font-size:.85rem;font-weight:bold;text-transform:uppercase;
-    text-decoration:none;transition:.2s;display:inline-block;margin-bottom:4px;letter-spacing:.4px;}}
-  .ml:hover {{color:{GREEN};text-shadow:0 0 6px {GREEN};}}
-  .rl2 {{color:{BLUE};font-weight:bold;font-size:.85rem;text-decoration:none;
-    border-bottom:1px dashed {BLUE}50;transition:.2s;}}
-  .rl2:hover {{color:{GREEN};border-bottom-color:{GREEN};text-shadow:0 0 4px {GREEN};}}
-  .sb {{font-size:.64rem;font-family:{MONO};margin:2px 0 20px;padding:8px 12px;
-    background:linear-gradient(135deg,#070709,#0a0a10);
-    border:1px solid #181828;border-left:3px solid {BLUE}40;line-height:1.8;}}
-  .mw {{border:1px solid #1a1a2e;background:#080810;padding:2px;margin-bottom:5px;}}
-  .fl {{color:#383848;text-decoration:none;border-bottom:1px dashed #383848;transition:.2s;}}
-  .fl:hover {{color:{GREEN};border-bottom-color:{GREEN};}}
-  hr {{border-color:#141420!important;}}
-  .sd {{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:3px;vertical-align:middle;}}
-  .sg {{background:{GREEN};box-shadow:0 0 4px {GREEN};}} .sa {{background:{AMBER};box-shadow:0 0 4px {AMBER};}}
-  .sc {{background:{CYAN};box-shadow:0 0 4px {CYAN};}}
-</style>
-""", unsafe_allow_html=True)
-
-# ══════════════════════════════════════════════════════════════════════════════
-S = requests.Session()
-S.headers.update({"User-Agent":"SecAI-Nexus-GRC/5.0 (educational; admin@secai-nexus.dev)"})
-def _g(url, t=14, **k):
-    try: r = S.get(url, timeout=t, **k); r.raise_for_status(); return r
-    except: return None
-
-@st.cache_data(ttl=43200, show_spinner=False)
-def fetch_kev():
-    r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
-    if not r: return None
-    try:
-        vulns = r.json().get("vulnerabilities",[]); now = datetime.now(timezone.utc)
-        cnt={1:0,7:0,30:0,365:0}; rw=0; vd={}; prods={}
-        for v in vulns:
-            try:
-                age=(now-datetime.strptime(v["dateAdded"],"%Y-%m-%d").replace(tzinfo=timezone.utc)).days
-                for d in cnt:
-                    if age<=d: cnt[d]+=1
-            except: pass
-            if v.get("knownRansomwareCampaignUse","").lower()=="known": rw+=1
-            vn=v.get("vendorProject","?"); vd[vn]=vd.get(vn,0)+1
-            pn=v.get("product","?"); prods[pn]=prods.get(pn,0)+1
-        tv=max(vd,key=vd.get) if vd else "N/A"
-        tp=max(prods,key=prods.get) if prods else "N/A"
-        top3v=sorted(vd,key=vd.get,reverse=True)[:3]
-        return {"total":len(vulns),"d1":cnt[1],"d7":cnt[7],"d30":cnt[30],"d365":cnt[365],
-                "rw":rw,"tv":tv,"tvc":vd.get(tv,0),"vendors":len(vd),
-                "tp":tp,"tpc":prods.get(tp,0),"top3v":top3v,"prods":len(prods)}
-    except: return None
-
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_bazaar():
     r = _g("https://bazaar.abuse.ch/export/csv/recent/", t=22)
@@ -1274,27 +1162,53 @@ st.markdown(f"""<div style="margin:12px 0 10px;text-align:center;">
   <div style="font-size:.55rem;color:#505060;margin-top:2px;">CISA KEV · ATT&CK · RANSOMWARE · APTs · CVEs · OWASP LLM · AI THREATS · BREACH COSTS</div>
 </div>""", unsafe_allow_html=True)
 
-# ── CISA KEV TABLE ────────────────────────────────────────────────────────────
+# ── AI MODELS & CISA KEV TABLES ──────────────────────────────────────────────
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_kev_recent():
     r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
     if not r: return None
-    try: return sorted(r.json().get("vulnerabilities",[]), key=lambda x:x.get("dateAdded",""), reverse=True)[:15]
+    try: return sorted(r.json().get("vulnerabilities",[]), key=lambda x:x.get("dateAdded",""), reverse=True)[:10]
     except: return None
 
 kev_recent = fetch_kev_recent()
-if kev_recent:
-    rh=""
-    for v in kev_recent:
-        cve=v.get("cveID","N/A"); vn=v.get("vendorProject","?"); pr=v.get("product","?")
-        nm=v.get("vulnerabilityName","?"); ad=v.get("dateAdded","?"); du=v.get("dueDate","?")
-        rw="🔴" if v.get("knownRansomwareCampaignUse","").lower()=="known" else "—"
-        sn = nm[:55]+"…" if len(nm)>55 else nm
-        rh+=f'<tr><td style="color:{RED};font-weight:bold;white-space:nowrap;"><a href="https://nvd.nist.gov/vuln/detail/{cve}" target="_blank" style="color:{RED};text-decoration:none;border-bottom:1px dashed {RED}40;">{cve}</a></td><td style="color:{CYAN};font-weight:bold;">{vn}</td><td style="color:{GREY};">{pr}</td><td style="color:#888;font-size:.56rem;">{sn}</td><td style="color:{GREEN};white-space:nowrap;">{ad}</td><td style="text-align:center;">{rw}</td><td style="color:{AMBER};white-space:nowrap;">{du}</td></tr>'
-    st.markdown(f'<div style="font-size:.68rem;font-weight:bold;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {BLUE}20;padding-bottom:3px;">📋 LATEST CISA KEV ADDITIONS (LIVE)</div>', unsafe_allow_html=True)
-    st.markdown(f'<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;margin-bottom:10px;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.6rem;"><thead><tr style="border-bottom:2px solid {BLUE}30;background:#0a0a14;"><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">CVE</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Vendor</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Product</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Vulnerability</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Added</th><th style="padding:6px 4px;text-align:center;color:{BLUE};font-size:.52rem;text-transform:uppercase;">RW</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Due</th></tr></thead><tbody style="line-height:1.5;">{rh}</tbody></table></div>', unsafe_allow_html=True)
-else:
-    st.markdown(f'<div style="padding:14px;border:1px solid #1a1a2e;background:#080810;text-align:center;margin-bottom:10px;"><span style="color:{GREY};font-size:.7rem;">📋 CISA KEV · Populates on Streamlit Cloud deployment</span></div>', unsafe_allow_html=True)
+
+top_tables_c1, top_tables_c2 = st.columns(2)
+
+with top_tables_c1:
+    ai_models = [
+        ("GPT-4o", "https://chatgpt.com/", "General Logic", "Coding & Analysis", "OpenAI's multimodal flagship model"),
+        ("Claude 3.5 Sonnet", "https://claude.ai/", "Writing/Coding", "Nuanced text & UI dev", "Anthropic's fast, highly capable assistant"),
+        ("Gemini 1.5 Pro", "https://gemini.google.com/", "Large Context", "Doc & Video analysis", "Google's model with 2M token context window"),
+        ("Llama 3", "https://llama.meta.com/", "Open Weights", "Local/Enterprise deploy", "Meta's highly capable open-source tier"),
+        ("Mistral Large", "https://mistral.ai/", "Enterprise", "Multi-lingual reasoning", "Leading European AI for enterprise workflows"),
+        ("Perplexity", "https://www.perplexity.ai/", "Search", "Real-time research", "AI search engine with live web citations"),
+        ("Midjourney v6", "https://www.midjourney.com/", "Image Gen", "Photorealism/Art", "State-of-the-art text-to-image generation"),
+        ("GitHub Copilot", "https://github.com/features/copilot", "Development", "IDE Autocomplete", "Industry standard AI pair programmer"),
+        ("Sora", "https://openai.com/sora", "Video Gen", "Text-to-Video", "High-fidelity video generation by OpenAI"),
+        ("Grok 1.5", "https://x.ai/", "Real-Time Intel", "X (Twitter) Integration", "Unfiltered knowledge connected to live data"),
+    ]
+    ai_rh = ""
+    for name, link, use_case, best_for, desc in ai_models:
+        sn = desc[:45]+"…" if len(desc)>45 else desc
+        ai_rh += f'<tr><td style="color:{CYAN};font-weight:bold;white-space:nowrap;"><a href="{link}" target="_blank" style="color:{CYAN};text-decoration:none;border-bottom:1px dashed {CYAN}40;">{name}</a></td><td style="color:{GREEN};font-weight:bold;">{use_case}</td><td style="color:{AMBER};">{best_for}</td><td style="color:#888;font-size:.56rem;">{sn}</td></tr>'
+
+    st.markdown(f'<div style="font-size:.68rem;font-weight:bold;color:{CYAN};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {CYAN}20;padding-bottom:3px;">🤖 TOP 10 AI MODELS & CAPABILITIES</div>', unsafe_allow_html=True)
+    st.markdown(f'<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;margin-bottom:10px;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.6rem;"><thead><tr style="border-bottom:2px solid {CYAN}30;background:#0a0a14;"><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Model</th><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Top Use Case</th><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Best For</th><th style="padding:6px 4px;text-align:left;color:{CYAN};font-size:.52rem;text-transform:uppercase;">Description</th></tr></thead><tbody style="line-height:1.5;">{ai_rh}</tbody></table></div>', unsafe_allow_html=True)
+
+with top_tables_c2:
+    if kev_recent:
+        rh=""
+        for v in kev_recent:
+            cve=v.get("cveID","N/A"); vn=v.get("vendorProject","?"); pr=v.get("product","?")
+            nm=v.get("vulnerabilityName","?"); ad=v.get("dateAdded","?"); du=v.get("dueDate","?")
+            rw="🔴" if v.get("knownRansomwareCampaignUse","").lower()=="known" else "—"
+            sn = nm[:35]+"…" if len(nm)>35 else nm
+            rh+=f'<tr><td style="color:{RED};font-weight:bold;white-space:nowrap;"><a href="https://nvd.nist.gov/vuln/detail/{cve}" target="_blank" style="color:{RED};text-decoration:none;border-bottom:1px dashed {RED}40;">{cve}</a></td><td style="color:{CYAN};font-weight:bold;">{vn}</td><td style="color:{GREY};">{pr}</td><td style="color:#888;font-size:.56rem;">{sn}</td><td style="color:{GREEN};white-space:nowrap;">{ad}</td><td style="text-align:center;">{rw}</td><td style="color:{AMBER};white-space:nowrap;">{du}</td></tr>'
+        st.markdown(f'<div style="font-size:.68rem;font-weight:bold;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {BLUE}20;padding-bottom:3px;">📋 LATEST CISA KEV ADDITIONS (LIVE)</div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;margin-bottom:10px;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.6rem;"><thead><tr style="border-bottom:2px solid {BLUE}30;background:#0a0a14;"><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">CVE</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Vendor</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Product</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Vulnerability</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Added</th><th style="padding:6px 4px;text-align:center;color:{BLUE};font-size:.52rem;text-transform:uppercase;">RW</th><th style="padding:6px 4px;text-align:left;color:{BLUE};font-size:.52rem;text-transform:uppercase;">Due</th></tr></thead><tbody style="line-height:1.5;">{rh}</tbody></table></div>', unsafe_allow_html=True)
+    else:
+        st.markdown(f'<div style="font-size:.68rem;font-weight:bold;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {BLUE}20;padding-bottom:3px;">📋 LATEST CISA KEV ADDITIONS (LIVE)</div>', unsafe_allow_html=True)
+        st.markdown(f'<div style="padding:14px;border:1px solid #1a1a2e;background:#080810;text-align:center;margin-bottom:10px;"><span style="color:{GREY};font-size:.7rem;">📋 CISA KEV · Populates on Streamlit Cloud deployment</span></div>', unsafe_allow_html=True)
 
 # ── INTEL GRID (4×2) ──────────────────────────────────────────────────────────
 def _tbl(title, hdrs, rows_data, hdr_color):
@@ -1389,7 +1303,7 @@ st.markdown(f"""
     or warranties, express or implied, regarding the accuracy, completeness, timeliness, reliability, or
     fitness for any particular purpose of any data displayed. The author shall not be liable for any direct,
     indirect, incidental, special, exemplary, or consequential damages arising in any way out of the use of
-    this software or reliance on its output, even if advised of the possibility of such damages. Estimated
+    this software or reliance on output, even if advised of the possibility of such damages. Estimated
     metrics (labeled "EST") are derived from annually published industry reports and may not reflect current
     conditions. Live metrics are dependent on the availability and accuracy of upstream API providers. This
     software does not collect, store, process, or transmit any user data. No authentication, cookies, tracking,
