@@ -326,7 +326,7 @@ now_utc = datetime.now(timezone.utc)
 st.markdown(f"""
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; border-bottom: 2px solid #141420; padding-bottom: 12px; margin-bottom: 20px; margin-top: -50px; gap: 15px;">
   
-  <div style="flex: 1; min-width: 200px; text-align: left;">
+  <div style="flex: 1; min-width: 220px; text-align: left;">
     <div>
       <span style="font-size: 1.3rem; font-weight: bold; color: {GREEN}; text-shadow: 0 0 12px {GREEN}80; letter-spacing: 1px;">🤖 SecAI-Nexus</span>
       <span style="font-size: .72rem; color: {BLUE}; margin-left: 6px; font-weight: bold;">// OBSERVABILITY</span>
@@ -343,12 +343,9 @@ st.markdown(f"""
     </a>
   </div>
 
-  <div style="flex: 1; text-align: right; min-width: 200px;">
-    <div style="font-size: .85rem; font-weight: bold; color: {BLUE}; text-shadow: 0 0 4px {BLUE};">
-      {now_utc.strftime("%H:%M:%S")} UTC
-    </div>
-    <div style="font-size: .65rem; color: #505060; font-weight: bold;">
-      {now_utc.strftime("%Y-%m-%d")}
+  <div style="flex: 1; text-align: right; min-width: 220px;">
+    <div style="font-size: .78rem; font-weight: bold; color: {BLUE}; text-shadow: 0 0 4px {BLUE}; letter-spacing: 0.5px;">
+      {now_utc.strftime("%H:%M:%S")} UTC <span style="color:#3a3a4a; margin: 0 6px;">|</span> {now_utc.strftime("%Y-%m-%d")}
     </div>
   </div>
 
