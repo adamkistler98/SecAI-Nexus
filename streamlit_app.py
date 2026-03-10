@@ -1199,8 +1199,24 @@ if kev_recent:
             (du, f"color:{AMBER};white-space:nowrap;")
         ])
 
-# ── TOP 15 AI MODELS (2026) ──────────────────────────────────────────────────
-ai_models_data = [ ... ]  # (unchanged from your last working version)
+# ── TOP 15 AI MODELS & CAPABILITIES (2026) ───────────────────────────────────
+ai_models_data = [
+    ("1. Gemini 3 Pro", "https://gemini.google.com/", "Multimodal Reasoning", "Complex tasks & integration", "Google's flagship with 1M+ context & superior multimodal", "Prompt Injection"),
+    ("2. Claude Opus 4.6", "https://claude.ai/", "Advanced Reasoning", "Safety & long-form content", "Anthropic's top model excelling in logic and ethical alignment", "Insecure Output"),
+    ("3. GPT-5.2", "https://chatgpt.com/", "Agentic Intelligence", "Versatile research & automation", "OpenAI's latest with enhanced reasoning and tool use", "Supply Chain"),
+    ("4. Grok 4.20", "https://x.ai/", "Real-time Knowledge", "Current events & uncensored", "xAI's innovative multi-agent architecture model", "Excessive Agency"),
+    ("5. Llama 4 Scout", "https://llama.meta.com/", "Open Weights", "Local & enterprise deploy", "Meta's leading open-source model with massive context", "Supply Chain"),
+    ("6. DeepSeek V3.2", "https://deepseek.com/", "Math & Coding", "High-precision technical tasks", "Strongest open-source performer in STEM domains", "Training Poisoning"),
+    ("7. Qwen 3.5 Max", "https://qwen.ai/", "Multilingual Efficiency", "Business workflows", "Alibaba's top multilingual & efficient model", "Insecure Plugin"),
+    ("8. Mistral Large 3", "https://mistral.ai/", "Enterprise Reasoning", "Fast & secure inference", "Leading European AI for global business use", "Prompt Injection"),
+    ("9. Perplexity Pro", "https://www.perplexity.ai/", "Search & Research", "Real-time citations", "AI-powered search with live web access", "Model DoS"),
+    ("10. Cohere Command R+", "https://cohere.com/", "Enterprise RAG", "Secure business workflows", "Cohere's retrieval-augmented generation leader", "Insecure Output"),
+    ("11. GLM-5", "https://zhipuai.cn/", "Multimodal", "Chinese/English tasks", "Zhipu AI's powerful multimodal model", "Supply Chain"),
+    ("12. Phi-4", "https://azure.microsoft.com/", "Lightweight Edge", "On-device & efficient AI", "Microsoft's optimized small language model", "Training Poisoning"),
+    ("13. Kimi K2 Thinking", "https://kimi.moonshot.cn/", "Long Context", "Deep reasoning", "Moonshot's advanced long-context model", "Sensitive Disclosure"),
+    ("14. Seed 2.0", "https://bytedance.com/", "Creative Generation", "Content & media", "ByteDance's advanced generative AI", "Insecure Plugin"),
+    ("15. MiniMax M2.5", "https://minimax.cn/", "Compact & Fast", "Mobile & edge deployment", "Highly efficient model for constrained environments", "Model Theft")
+]
 
 ai_rows = []
 for name, link, use_case, best_for, desc, vuln in ai_models_data:
@@ -1213,7 +1229,23 @@ for name, link, use_case, best_for, desc, vuln in ai_models_data:
     ])
 
 # ── TOP 15 AI-POWERED CYBERCRIME (2026) ──────────────────────────────────────
-ai_crime_data = [ ... ]  # (unchanged)
+ai_crime_data = [
+    ("1. AI Phishing Campaigns", "Scaling 400% YoY", "Hyper-personalized spear-phishing with perfect grammar", "CrowdStrike GTR 2026", "https://www.crowdstrike.com/global-threat-report/"),
+    ("2. Deepfake Vishing", "442% ↑", "3-second voice cloning for CEO fraud & wire transfers", "IBM Cost of Breach 2026", "https://www.ibm.com/reports/data-breach"),
+    ("3. Polymorphic AI Malware", "Evasive", "BlackMamba-style code mutation that bypasses all AV", "CrowdStrike GTR 2026", "https://www.crowdstrike.com/global-threat-report/"),
+    ("4. Prompt Injection Attacks", "#1 LLM risk", "Direct/indirect injection leading to data exfil", "OWASP LLM Top 10", "https://owasp.org/www-project-top-10-for-large-language-model-applications/"),
+    ("5. Automated OSINT & Recon", "Automated", "LLM-driven target profiling in minutes", "Mandiant M-Trends 2026", "https://www.mandiant.com/m-trends"),
+    ("6. Model Poisoning (Supply Chain)", "Growing", "Backdoored Hugging Face models & training data", "MITRE ATLAS", "https://atlas.mitre.org/"),
+    ("7. Agentic AI Abuse", "Insider Risk", "Autonomous agents performing unintended actions", "IBM Cost of Breach 2026", "https://www.ibm.com/reports/data-breach"),
+    ("8. Deepfake Video Fraud", "Rising", "Real-time face swaps in video calls ($25M+ scams)", "Chainalysis 2026", "https://www.chainalysis.com/"),
+    ("9. AI PassGAN Cracking", "51% <60s", "Predictive password cracking at machine speed", "Dark Reading", "https://www.darkreading.com/"),
+    ("10. Adversarial ML Evasion", "Emerging", "Pixel perturbations that fool every classifier", "CrowdStrike GTR 2026", "https://www.crowdstrike.com/global-threat-report/"),
+    ("11. AI-Generated Ransomware", "Fastest breakout", "LLMs writing custom encryptors on demand", "Sophos 2026", "https://www.sophos.com/en-us/content/state-of-ransomware"),
+    ("12. Shadow AI Data Leakage", "20% of breaches", "Rogue LLMs exfiltrating sensitive data", "IBM Cost of Breach 2026", "https://www.ibm.com/reports/data-breach"),
+    ("13. AI-Driven BEC", "Deepfake voice", "CEO voice cloning for $137k+ wire fraud", "FBI IC3 2026", "https://www.ic3.gov/AnnualReport"),
+    ("14. Training Data Poisoning", "Backdoor risk", "Corrupted datasets creating hidden triggers", "OWASP LLM Top 10", "https://owasp.org/www-project-top-10-for-large-language-model-applications/"),
+    ("15. AI SOC Evasion", "New frontier", "Tricking XDR/SOAR with adversarial prompts", "Mandiant M-Trends 2026", "https://www.mandiant.com/m-trends")
+]
 
 ai_crime_rows = []
 for rank, attack, trend, desc, source in ai_crime_data:
@@ -1225,8 +1257,19 @@ for rank, attack, trend, desc, source in ai_crime_data:
         (f'<a href="{source}" target="_blank" style="color:{AMBER};text-decoration:none;">Source</a>', f"color:{AMBER};font-weight:bold;")
     ])
 
-# ── REVAMPED OWASP LLM TOP 10 (v1.1) ─────────────────────────────────────────
-owasp_data = [ ... ]  # (unchanged)
+# ── OWASP LLM TOP 10 (v1.1) ──────────────────────────────────────────────────
+owasp_data = [
+    ("LLM01", "Prompt Injection", "Adversary crafts input to bypass filters or exfil data", "🔴 Critical", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/01_prompt_injection"),
+    ("LLM02", "Insecure Output Handling", "LLM output not sanitized leading to XSS/SQLi/RCE", "🔴 Critical", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/02_insecure_output"),
+    ("LLM03", "Training Data Poisoning", "Backdoors via corrupted training data", "🟡 High", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/03_training_data_poisoning"),
+    ("LLM04", "Model Denial of Service", "Resource exhaustion via complex prompts", "🟡 High", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/04_model_dos"),
+    ("LLM05", "Supply Chain Vulnerabilities", "Compromised weights/plugins/pipelines", "🔴 Critical", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/05_supply_chain"),
+    ("LLM06", "Sensitive Info Disclosure", "LLM leaks PII/creds in responses", "🔴 Critical", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/06_sensitive_info_disclosure"),
+    ("LLM07", "Insecure Plugin Design", "Excessive perms, no input validation", "🟡 High", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/07_insecure_plugin_design"),
+    ("LLM08", "Excessive Agency", "Agents w/too many perms, autonomous", "🟡 High", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/08_excessive_agency"),
+    ("LLM09", "Overreliance", "Blind trust in LLM output → errors/risks", "🟡 Medium", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/09_overreliance"),
+    ("LLM10", "Model Theft", "Steal model weights/IP", "🟡 Medium", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/10_model_theft")
+]
 
 owasp_rows = []
 for id_, vuln, desc, risk, link in owasp_data:
@@ -1238,8 +1281,19 @@ for id_, vuln, desc, risk, link in owasp_data:
         ("OWASP", f"color:{AMBER};font-weight:bold;")
     ])
 
-# ── REVAMPED MITRE ATT&CK TOP TECHNIQUES (2026) ──────────────────────────────
-attck_data = [ ... ]  # (unchanged from last revamp)
+# ── MITRE ATT&CK TOP TECHNIQUES (2026) ───────────────────────────────────────
+attck_data = [
+    ("T1055", "Process Injection", "Defense Evasion", "Inject code into legitimate processes to evade detection", "82%", "https://attack.mitre.org/techniques/T1055/"),
+    ("T1059", "Command and Scripting Interpreter", "Execution", "Execute commands via shells or scripts for initial access", "78%", "https://attack.mitre.org/techniques/T1059/"),
+    ("T1078", "Valid Accounts", "Persistence", "Use stolen credentials for persistence and lateral movement", "75%", "https://attack.mitre.org/techniques/T1078/"),
+    ("T1555", "Credentials from Password Stores", "Credential Access", "Extract credentials from browsers, OS stores, and keychains", "65%", "https://attack.mitre.org/techniques/T1555/"),
+    ("T1497", "Virtualization/Sandbox Evasion", "Discovery", "Detect and evade sandboxes and virtual environments", "58%", "https://attack.mitre.org/techniques/T1497/"),
+    ("T1021", "Remote Services", "Lateral Movement", "Use RDP, SSH, or SMB for internal pivoting", "55%", "https://attack.mitre.org/techniques/T1021/"),
+    ("T1486", "Data Encrypted for Impact", "Impact", "Encrypt files and demand ransom (ransomware)", "52%", "https://attack.mitre.org/techniques/T1486/"),
+    ("T1566", "Phishing", "Initial Access", "Deliver malware or steal creds via email/social", "48%", "https://attack.mitre.org/techniques/T1566/"),
+    ("T1190", "Exploit Public-Facing Application", "Initial Access", "Exploit internet-facing apps for entry", "42%", "https://attack.mitre.org/techniques/T1190/"),
+    ("T1003", "OS Credential Dumping", "Credential Access", "Dump LSASS, SAM, or NTDS.dit for creds", "38%", "https://attack.mitre.org/techniques/T1003/")
+]
 
 attck_rows = []
 for id_, tech, tactic, desc, freq, link in attck_data:
@@ -1251,8 +1305,17 @@ for id_, tech, tactic, desc, freq, link in attck_data:
         (freq, f"color:{GREEN};font-weight:bold;")
     ])
 
-# ── REVAMPED TOP RANSOMWARE GROUPS 2026 ──────────────────────────────────────
-rwg_data = [ ... ]  # (unchanged from last revamp)
+# ── TOP RANSOMWARE GROUPS 2026 ───────────────────────────────────────────────
+rwg_data = [
+    ("Qilin", "~30%", "1,000+", "🔴 Active", "Dominant RaaS with triple extortion and Linux support", "https://www.sophos.com/en-us/content/state-of-ransomware"),
+    ("Akira", "~20%", "765+", "🔴 Active", "$244M extorted; targets healthcare and manufacturing", "https://www.crowdstrike.com/global-threat-report/"),
+    ("Cl0p", "~15%", "550+", "🔴 Active", "Mass MOVEit and GoAnywhere exploits", "https://www.ibm.com/reports/data-breach"),
+    ("LockBit5", "~12%", "400+", "🔴 Active", "Aggressive RaaS with affiliate program", "https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2025/"),
+    ("Play", "~10%", "355+", "🔴 Active", "Heavy focus on government and education sectors", "https://www.mandiant.com/m-trends"),
+    ("Medusa", "~8%", "300+", "🔴 Active", "Triple extortion with data leak sites", "https://www.sophos.com/en-us/content/state-of-ransomware"),
+    ("INC Ransom", "~7%", "380+", "🔴 Active", "Education and critical infrastructure focus", "https://www.crowdstrike.com/global-threat-report/"),
+    ("DragonForce", "~5%", "200+", "🔴 Active", "New alliance member with fast encryption", "https://www.ibm.com/reports/data-breach")
+]
 
 rwg_rows = []
 for group, share, victims, status, intel, source in rwg_data:
@@ -1264,7 +1327,7 @@ for group, share, victims, status, intel, source in rwg_data:
         (f'<a href="{source}" target="_blank" style="color:{AMBER};text-decoration:none;">{intel}</a>', f"color:#888;font-size:.56rem;")
     ])
 
-# ── REVAMPED NATION-STATE APT GROUPS (2026) ──────────────────────────────────
+# ── NATION-STATE APT GROUPS 2026 ─────────────────────────────────────────────
 apts_data = [
     ("Salt Typhoon", "🇨🇳", "Telecom & critical infrastructure espionage", "Persistent access to 9+ major ISPs", "https://www.crowdstrike.com/global-threat-report/"),
     ("Volt Typhoon", "🇨🇳", "Critical infrastructure pre-positioning", "Living-off-the-land stealth campaigns", "https://www.mandiant.com/m-trends"),
@@ -1286,7 +1349,7 @@ for group, flag, focus, intel, source in apts_data:
         (f'<a href="{source}" target="_blank" style="color:{AMBER};text-decoration:none;">Source</a>', f"color:{AMBER};font-weight:bold;")
     ])
 
-# ── REVAMPED ATTACK VECTOR BREAKDOWN (2026) ──────────────────────────────────
+# ── ATTACK VECTOR BREAKDOWN (2026) ───────────────────────────────────────────
 vectors_data = [
     ("Stolen Credentials", "22%", "Dark web sales remain #1 vector", "$4.8M avg incident cost", "https://www.ibm.com/reports/data-breach"),
     ("Phishing", "16%", "AI-enhanced spear-phishing & vishing", "Most common initial access", "https://www.crowdstrike.com/global-threat-report/"),
@@ -1307,7 +1370,7 @@ for vector, share, desc, impact, source in vectors_data:
         (f'<a href="{source}" target="_blank" style="color:{GREEN};text-decoration:none;">Source</a>', f"color:{GREEN};font-weight:bold;")
     ])
 
-# ── REVAMPED TOP EXPLOITED CVEs (2026) ───────────────────────────────────────
+# ── TOP EXPLOITED CVEs 2026 ──────────────────────────────────────────────────
 topcves_data = [
     ("CVE-2025-55182", "React2Shell", "10.0", "RCE · Most targeted in 2026", "https://nvd.nist.gov/vuln/detail/CVE-2025-55182"),
     ("CVE-2025-53770", "Microsoft SharePoint", "9.8", "Zero-day RCE chain", "https://nvd.nist.gov/vuln/detail/CVE-2025-53770"),
@@ -1329,7 +1392,7 @@ for cve, product, cvss, impact, link in topcves_data:
         ("NVD", f"color:{GREEN};font-weight:bold;")
     ])
 
-# ── REVAMPED BREACH COST BY INDUSTRY (2026) ──────────────────────────────────
+# ── BREACH COST BY INDUSTRY (2026) ───────────────────────────────────────────
 costs_data = [
     ("US Average", "$10.22M", "All-time high (+9%)", "Largest recorded breaches", "https://www.ibm.com/reports/data-breach"),
     ("Healthcare", "$7.42M", "#1 for 15 consecutive years", "Ransomware & data sensitivity", "https://www.ibm.com/reports/data-breach"),
