@@ -326,20 +326,19 @@ now_utc = datetime.now(timezone.utc)
 st.markdown(f"""
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; border-bottom: 2px solid #141420; padding-bottom: 12px; margin-bottom: 20px; margin-top: -50px; gap: 15px;">
   
-  <div style="flex: 1; min-width: 350px; text-align: left;">
-    <div>
-      <span style="font-size: 1.3rem; font-weight: bold; color: {GREEN}; text-shadow: 0 0 12px {GREEN}80; letter-spacing: 1px;">🤖 SecAI-Nexus</span>
-      <span style="font-size: .62rem; color: {BLUE}; margin-left: 6px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">
+  <div style="flex: 1; min-width: 450px; text-align: left;">
+    <div style="display: flex; align-items: baseline; gap: 8px;">
+      <span style="font-size: 1.6rem; font-weight: bold; color: {GREEN}; text-shadow: 0 0 15px {GREEN}80; letter-spacing: 1.5px; white-space: nowrap;">
+        🤖 SecAI-Nexus
+      </span>
+      <span style="font-size: 0.95rem; font-weight: bold; color: {CYAN}; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 8px {CYAN}40;">
         // Cybersecurity GRC Observability Platform
       </span>
-      <span style="font-size: .42rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 4px; vertical-align: middle;">v30</span>
+      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 4px; vertical-align: middle;">v30</span>
     </div>
-    <div style="font-size: .52rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px;">
+    <div style="font-size: .52rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px;">
       <span style="color: {GREEN}; font-weight: bold;">ONLINE</span> · 
-      <span style="color: {CYAN};">118 METRICS</span> · 
-      <span style="color: {CYAN};">14 DATA ROWS</span> · 
-      <span style="color: {CYAN};">10 INTEL TABLES</span> · 
-      <span style="color: {CYAN};">80+ RESOURCES</span>
+      <span style="color: #606070;">118 METRICS · 14 DATA ROWS · 10 INTEL TABLES · 80+ RESOURCES</span>
     </div>
   </div>
 
