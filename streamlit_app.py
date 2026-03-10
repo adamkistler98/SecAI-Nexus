@@ -1518,7 +1518,6 @@ st.markdown(f"""
     <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">80 CURATED</span> RANKED BY POPULARITY
   </div>
   <div style="font-size: 0.55rem; color: #404050; margin-top: 2px;">
-    CISA KEV · ATT&amp;CK · RANSOMWARE · APTs · CVEs · OWASP LLM · AI THREATS · BREACH COSTS
   </div>
 </div>
 """, unsafe_allow_html=True)
