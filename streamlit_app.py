@@ -2,37 +2,32 @@ import streamlit as st
 import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
-
 # ==========================================================
 # SEC AI NEXUS — CYBER THREAT INTELLIGENCE DASHBOARD
 # Author: Adam Kistler
-# Version: 1.0
-# Last Updated: March 2026
+# Version: 1.1
+# Last Updated: March 30, 2026
 # ==========================================================
-
 # ---------------------------
 # Page Configuration
 # ---------------------------
-
 # ====================== SECURITY CONFIG ======================
 # Force XSRF protection and disable CORS
 st.config.set_option("server.enableXsrfProtection", True)
 st.config.set_option("server.enableCORS", False)
-
 # Strict CSP + security headers (must be first markdown call)
 csp_meta = """
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
-script-src 'self' 'unsafe-inline'; 
-style-src 'self' 'unsafe-inline'; 
-img-src 'self' data: https:; 
-frame-src https://livethreatmap.radware.com https://threatmap.fortiguard.com; 
+<meta http-equiv="Content-Security-Policy" content="default-src 'self';
+script-src 'self' 'unsafe-inline';
+style-src 'self' 'unsafe-inline';
+img-src 'self' data: https:;
+frame-src https://livethreatmap.radware.com https://threatmap.fortiguard.com;
 connect-src 'self' https://www.cisa.gov https://*.abuse.ch https://isc.sans.edu https://check.torproject.org;">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 """
 st.markdown(csp_meta, unsafe_allow_html=True)
 # ===================================================================
-
 st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🤖",
                    initial_sidebar_state="collapsed")
 # ====================== LINKEDIN PREVIEW IMAGE ======================
@@ -45,12 +40,11 @@ st.markdown("""
 <meta name="twitter:card" content="summary_large_image">
 """, unsafe_allow_html=True)
 # ===================================================================
-MONO  = "'Courier New', Courier, monospace"
+MONO = "'Courier New', Courier, monospace"
 GREEN = "#00ff41"; BLUE = "#008aff"; RED = "#ff4b4b"
 AMBER = "#ffaa00"; CYAN = "#00e5ff"; BG = "#050505"; CARD = "#0a0a0a"
-GREY  = "#6a6a7a"  # lighter subtitle grey
-DGREY = "#4a4a5a"  # delta label grey
-
+GREY = "#6a6a7a" # lighter subtitle grey
+DGREY = "#4a4a5a" # delta label grey
 st.markdown(f"""
 <style>
   @keyframes pglow {{ 0%,100%{{text-shadow:0 0 4px {GREEN}30;}} 50%{{text-shadow:0 0 10px {GREEN}70;}} }}
@@ -60,7 +54,6 @@ st.markdown(f"""
   h1,h2,h3,h4,h5,h6,label {{color:{GREEN}!important;}}
   header,footer {{visibility:hidden;}} .stDeployButton {{display:none;}}
   div[data-testid="stSpinner"]>div>p {{color:{GREEN}!important;}}
-
   .cm {{background:linear-gradient(135deg,{CARD},#0d0d12);border:1px solid #1a1a2e;
     border-left:3px solid {BLUE};padding:8px 9px 7px;margin-bottom:6px;
     font-family:{MONO};transition:all .3s;min-height:115px;}}
@@ -83,7 +76,6 @@ st.markdown(f"""
   .cm-d {{font-size:.66rem;border-top:1px dashed #1a1a2e;padding-top:3px;line-height:1.55;}}
   .d-b {{color:{RED};font-weight:bold;}} .d-g {{color:{GREEN};font-weight:bold;}}
   .d-n {{color:{BLUE};font-weight:bold;}} .d-a {{color:{AMBER};font-weight:bold;}}
-
   .pulse {{background:linear-gradient(135deg,#0a0a14,#0d0d1a);border:1px solid #1a1a30;
     border-left:4px solid {CYAN};padding:10px 12px 8px;margin-bottom:8px;
     font-family:{MONO};transition:all .3s;min-height:130px;}}
@@ -94,7 +86,6 @@ st.markdown(f"""
   .pulse .cm-x {{font-size:.64rem;}}
   .pulse .cm-f {{font-size:.6rem;}}
   .pulse .cm-d {{font-size:.68rem;}}
-
   .rl {{font-size:.6rem;color:#505060;text-transform:uppercase;letter-spacing:1px;
     border-left:3px solid {BLUE}50;padding-left:6px;margin:10px 0 5px;
     background:linear-gradient(90deg,{BLUE}06,transparent 35%);padding-top:2px;padding-bottom:2px;}}
@@ -102,7 +93,6 @@ st.markdown(f"""
     border-left:4px solid {CYAN};padding-left:8px;margin:14px 0 6px;
     background:linear-gradient(90deg,{CYAN}08,transparent 40%);padding-top:3px;padding-bottom:3px;
     text-shadow:0 0 6px {CYAN}30;}}
-
   .sh {{color:{GREEN};text-decoration:none;transition:.25s;text-shadow:0 0 6px {GREEN}25;}}
   .sh:hover {{color:{BLUE};text-shadow:0 0 10px {BLUE};}}
   .sl {{color:{BLUE};font-weight:bold;text-decoration:none;border-bottom:1px dashed #2a2a3a;transition:.2s;}}
@@ -130,7 +120,6 @@ S.headers.update({"User-Agent":"SecAI-Nexus-GRC/5.0 (educational; admin@secai-ne
 def _g(url, t=14, **k):
     try: r = S.get(url, timeout=t, **k); r.raise_for_status(); return r
     except: return None
-
 @st.cache_data(ttl=3600, show_spinner=False)
 def fetch_kev():
     r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
@@ -154,7 +143,6 @@ def fetch_kev():
                 "rw":rw,"tv":tv,"tvc":vd.get(tv,0),"vendors":len(vd),
                 "tp":tp,"tpc":prods.get(tp,0),"top3v":top3v,"prods":len(prods)}
     except: return None
-
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_bazaar():
     r = _g("https://bazaar.abuse.ch/export/csv/recent/", t=22)
@@ -182,13 +170,11 @@ def fetch_bazaar():
         return {"d1":d1,"d7":d7,"total":len(lines),"tf":tf,"families":len(sm),
                 "top3":top3,"top_ft":top_ft}
     except: return None
-
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_urlhaus():
     r = _g("https://urlhaus.abuse.ch/downloads/text_online/", t=15)
     if not r: return None
     return {"online":len([l for l in r.text.splitlines() if l.strip() and not l.startswith("#")])}
-
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_feodo():
     r = _g("https://feodotracker.abuse.ch/downloads/ipblocklist.csv", t=15)
@@ -206,21 +192,18 @@ def fetch_feodo():
         top_mw=max(mw,key=mw.get) if mw else "N/A"
         return {"on":on,"off":off,"total":len(lines),"top_mw":top_mw,"mw_count":mw.get(top_mw,0),"mw_fams":len(mw)}
     except: return None
-
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_sans():
     r = _g("https://isc.sans.edu/api/infocon?json", t=12)
     if not r: return None
     try: return {"infocon":r.json().get("status","?")}
     except: return None
-
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_tor():
     r = _g("https://check.torproject.org/torbulkexitlist", t=15)
     if not r: return None
     try: return {"c":len([l for l in r.text.splitlines() if l.strip() and not l.startswith("#")])}
     except: return None
-
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_topports():
     r = _g("https://isc.sans.edu/api/topports/records/10?json", t=15)
@@ -233,7 +216,6 @@ def fetch_topports():
             return {"ports":ports, "total":sum(p["records"] for p in ports)}
     except: pass
     return None
-
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_topips():
     r = _g("https://isc.sans.edu/api/topips/records/5?json", t=15)
@@ -245,7 +227,6 @@ def fetch_topips():
                     "total":sum(int(i.get("count",0)) for i in data[:5]),"n":len(data)}
     except: pass
     return None
-
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_honeypot():
     for dd in [0,1,2]:
@@ -261,7 +242,6 @@ def fetch_honeypot():
                             "sources":int(d.get("sources",0)),"date":dt}
             except: pass
     return None
-
 # ══════════════════════════════════════════════════════════════════════════════
 def _f(n):
     if not isinstance(n,(int,float)): return str(n)
@@ -281,12 +261,10 @@ PN = {22:"SSH",23:"Telnet",25:"SMTP",53:"DNS",80:"HTTP",110:"POP3",123:"NTP",135
 def pn(p):
     try: return PN.get(int(p), f":{p}")
     except: return str(p)
-
 # ── Card with 3 content lines + facts ─────────────────────────────────────────
 def _fb(facts):
     if not facts: return ""
     return '<div class="cm-f">' + "<br>".join(f'<span>·</span> {f}' for f in facts) + '</div>'
-
 def card(title, url, value, sub, extra, d30, d30c, d1yr, d1yc, live=True, facts=None):
     b = f'<span class="cm-l">LIVE</span>' if live else f'<span class="cm-e">EST</span>'
     x = f'<div class="cm-x">{extra}</div>' if extra else ''
@@ -295,7 +273,6 @@ def card(title, url, value, sub, extra, d30, d30c, d1yr, d1yc, live=True, facts=
   <div class="cm-v">{value}</div><div class="cm-s">{sub}</div>{x}{fh}
   <div class="cm-d"><span style="color:{DGREY};">30d </span><span class="{d30c}">{d30}</span>
     <span style="color:{DGREY};"> 1yr </span><span class="{d1yc}">{d1yr}</span></div></div>""", unsafe_allow_html=True)
-
 def pcard(title, url, value, sub, extra, d30, d30c, d1yr, d1yc, live=True, facts=None):
     b = f'<span class="cm-l">LIVE</span>' if live else f'<span class="cm-e">EST</span>'
     x = f'<div class="cm-x">{extra}</div>' if extra else ''
@@ -304,7 +281,6 @@ def pcard(title, url, value, sub, extra, d30, d30c, d1yr, d1yc, live=True, facts
   <div class="cm-v">{value}</div><div class="cm-s">{sub}</div>{x}{fh}
   <div class="cm-d"><span style="color:{DGREY};">30d </span><span class="{d30c}">{d30}</span>
     <span style="color:{DGREY};"> 1yr </span><span class="{d1yc}">{d1yr}</span></div></div>""", unsafe_allow_html=True)
-
 def lcard(title, url, data, vf, sf, xf, d30f, d1yf, d30c="d-b", d1yc="d-b", fsub="awaiting", facts=None):
     if data:
         try: card(title,url,vf(data),sf(data),xf(data) if xf else "",d30f(data),d30c,d1yf(data),d1yc,True,facts=facts); return
@@ -313,7 +289,6 @@ def lcard(title, url, data, vf, sf, xf, d30f, d1yf, d30c="d-b", d1yc="d-b", fsub
     st.markdown(f"""<div class="cm" style="opacity:.5;"><div class="cm-t"><a href="{url}" target="_blank">{title}</a>
     <span class="cm-l">LIVE</span></div><div class="cm-v" style="font-size:.95rem;color:#2a7a3a;">Syncing…</div>
     <div class="cm-s">{fsub}</div>{fh}<div class="cm-d" style="color:#333;">Populates on Cloud deploy</div></div>""", unsafe_allow_html=True)
-
 def lpulse(title, url, data, vf, sf, xf, d30f, d1yf, d30c="d-b", d1yc="d-b", fsub="awaiting", facts=None):
     if data:
         try: pcard(title,url,vf(data),sf(data),xf(data) if xf else "",d30f(data),d30c,d1yf(data),d1yc,True,facts=facts); return
@@ -322,7 +297,6 @@ def lpulse(title, url, data, vf, sf, xf, d30f, d1yf, d30c="d-b", d1yc="d-b", fsu
     st.markdown(f"""<div class="pulse" style="opacity:.5;"><div class="cm-t"><a href="{url}" target="_blank">{title}</a>
     <span class="cm-l">LIVE</span></div><div class="cm-v" style="font-size:1rem;color:#2a7a3a;">Syncing…</div>
     <div class="cm-s">{fsub}</div>{fh}<div class="cm-d" style="color:#333;">DShield sensor network</div></div>""", unsafe_allow_html=True)
-
 def iframe(url, h=1100):
     st.markdown(f'<div class="mw"><iframe src="{url}" width="100%" height="{h}" style="border:none;" '
         f'sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe></div>', unsafe_allow_html=True)
@@ -331,29 +305,27 @@ def gl(n,t,u,d):
     return (f'<div style="margin-bottom:11px;"><span style="color:{GREEN};font-weight:bold;font-size:.78rem;">{n}.</span> '
             f'<a href="{u}" target="_blank" class="rl2">{t}</a>'
             f'<div style="color:#5a5a6a;font-size:.68rem;margin-top:1px;padding-left:22px;">{d}</div></div>')
-
 # ══════════════════════════════════════════════════════════════════════════════
 now_utc = datetime.now(timezone.utc)
 st.markdown(
 f"""
 <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; border-bottom: 2px solid #141420; padding-bottom: 12px; margin-bottom: 20px; margin-top: -50px; gap: 15px;">
-  
+ 
   <div style="flex: 1; min-width: 300px; text-align: left;">
     <div style="margin-bottom: 4px;">
       <span style="font-size: 1.7rem; font-weight: bold; color: {CYAN}; text-shadow: 0 0 15px {CYAN}80; letter-spacing: 1.5px;">
         🤖 SecAI-Nexus
       </span>
-      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v30</span>
+      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v31</span>
     </div>
     <div style="font-size: 0.9rem; font-weight: bold; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; opacity: 0.8;">
       Cybersecurity GRC Observability Platform
     </div>
     <div style="font-size: .52rem; color: #505060; letter-spacing: 0.5px;">
-      <span style="color: {GREEN}; background: {GREEN}15; border: 1px solid {GREEN}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">ONLINE</span> · 
+      <span style="color: {GREEN}; background: {GREEN}15; border: 1px solid {GREEN}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">ONLINE</span> ·
       <span style="color: #606070;">118 METRICS · 14 DATA ROWS · 10 INTEL TABLES · 80+ RESOURCES</span>
     </div>
   </div>
-
   <div style="flex: 1; text-align: center; min-width: 260px;">
      <a href="#global-threat-metrics" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase; margin-bottom: 8px;">
       &gt;&gt; ⏬ JUMP TO GLOBAL THREAT METRICS &lt;&lt;
@@ -365,44 +337,38 @@ f"""
       &gt;&gt; ⏬ JUMP TO GRC RESOURCES &amp; TOOLS &lt;&lt;
      </a>
   </div>
-
   <div style="flex: 1; text-align: right; min-width: 220px;">
     <div style="font-size: .78rem; font-weight: bold; color: {BLUE}; text-shadow: 0 0 4px {BLUE}; letter-spacing: 0.5px;">
       {now_utc.strftime("%H:%M:%S")} UTC <span style="color:#3a3a4a; margin: 0 6px;">|</span> {now_utc.strftime("%Y-%m-%d")}
     </div>
   </div>
-
 </div>
 """, unsafe_allow_html=True)
-
 with st.spinner("Syncing threat intelligence feeds…"):
     kev=fetch_kev(); baz=fetch_bazaar(); uhaus=fetch_urlhaus()
     feodo=fetch_feodo(); sans=fetch_sans(); tor=fetch_tor()
     topports=fetch_topports(); topips=fetch_topips(); honeypot=fetch_honeypot()
-
-# ── BASELINES ─────────────────────────────────────────────────────────────────
-CVE_TOT=29_000; CVE_CRIT=4_200; CVE_HIGH=12_500
-RANSOM=5_500; SUPPLY=3_000; INSIDER=6_800
-BREACH=8_000_000_000; BEC=21_489; PHISH=1_970_000
-IDENTITY=17_000_000_000; GDPR=2_100_000_000; IC3LOSS=12_500_000_000
-DDOS=15_400_000; IOT_MAL=112_000_000; CRYPTO=2_200_000_000
-CISA_ADV=850; CISA_ICS=420; RECOVERY=2_730_000
-
+# ── BASELINES (updated March 30 2026 with IBM 2025 / CrowdStrike 2026 GTR) ─────────────────────────────────────────────────────────────────
+CVE_TOT=31_500; CVE_CRIT=4_800; CVE_HIGH=13_200
+RANSOM=6_100; SUPPLY=3_400; INSIDER=7_200
+BREACH=8_400_000_000; BEC=23_100; PHISH=2_150_000
+IDENTITY=18_200_000_000; GDPR=2_300_000_000; IC3LOSS=13_800_000_000
+DDOS=18_200_000; IOT_MAL=128_000_000; CRYPTO=2_400_000_000
+CISA_ADV=920; CISA_ICS=460; RECOVERY=2_910_000
 # ── FALLBACKS (when APIs blocked locally) ────────────────────────────────────
 if not kev:
-    kev={"total":1225,"rw":330,"vendors":265,"prods":580,"tv":"Microsoft","tvc":315,
-         "top3v":["Microsoft","Apple","Google"],"tp":"Windows","tpc":185,"d30":8,"d365":95}
+    kev={"total":1555,"rw":380,"vendors":278,"prods":620,"tv":"Microsoft","tvc":340,
+         "top3v":["Microsoft","Apple","Google"],"tp":"Windows","tpc":210,"d30":11,"d365":102}
 if not feodo:
-    feodo={"on":280,"off":520,"total":800,"mw_fams":5,"top_mw":"Pikabot","mw_count":95}
+    feodo={"on":310,"off":550,"total":860,"mw_fams":6,"top_mw":"Pikabot","mw_count":110}
 if not baz:
-    baz={"total":4200,"tf":"AgentTesla","families":85,"top_ft":".exe","d7":2800}
+    baz={"total":4800,"tf":"AgentTesla","families":92,"top_ft":".exe","d7":3100}
 if not uhaus:
-    uhaus={"online":12500}
+    uhaus={"online":13800}
 if not sans:
     sans={"infocon":"green"}
 if not tor:
-    tor={"c":7200}
-
+    tor={"c":7600}
 # ══════════════════════════════════════════════════════════════════════════════
 # AI SECURITY & THREAT INTELLIGENCE REFERENCE (MOVED HERE — ORIGINAL GLOBAL SPOT)
 # ══════════════════════════════════════════════════════════════════════════════
@@ -411,34 +377,30 @@ st.markdown(f"""
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
     &gt;&gt; AI Security &amp; Threat Intelligence Reference
   </div>
-  
+ 
   <div style="font-size: 0.55rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px; line-height: 1.5;">
-    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">10 DYNAMIC SECURITY TABLES</span> 
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">10 DYNAMIC SECURITY TABLES</span>
     &nbsp; REAL-TIME CISA KEV ENUMERATION · THREAT ACTOR PROFILING
   </div>
-  
+ 
   <div style="font-size: 0.55rem; color: #404050; margin-top: 4px; letter-spacing: 0.3px;">
     GOVERNANCE REPOSITORY · MITRE ATT&amp;CK&reg; · OWASP AI/LLM TOP 10 · ADVERSARIAL MACHINE LEARNING · GLOBAL IMPACT ANALYSIS
   </div>
 </div>
 """, unsafe_allow_html=True)
-
 def _tbl(title, hdrs, rows_data, hdr_color):
     hh = "".join(f'<th style="padding:6px 4px;text-align:left;color:{hdr_color};font-size:.52rem;text-transform:uppercase;">{h}</th>' for h in hdrs)
     rh = ""
     for r in rows_data:
         rh += '<tr style="border-bottom:1px solid #141420;">' + "".join(f'<td style="padding:6px 4px;{s}">{v}</td>' for v,s in r) + '</tr>'
     return f'<div style="margin-bottom:10px;"><div style="font-size:.68rem;font-weight:bold;color:{hdr_color};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {hdr_color}20;padding-bottom:3px;">{title}</div><div style="overflow-x:auto;border:1px solid #1a1a2e;background:#080810;padding:2px;"><table style="width:100%;border-collapse:collapse;font-family:{MONO};font-size:.6rem;"><thead><tr style="border-bottom:2px solid {hdr_color}30;background:#0a0a14;">{hh}</tr></thead><tbody style="line-height:1.5;">{rh}</tbody></table></div></div>'
-
 @st.cache_data(ttl=43200, show_spinner=False)
 def fetch_kev_recent():
     r = _g("https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json")
     if not r: return None
     try: return sorted(r.json().get("vulnerabilities",[]), key=lambda x:x.get("dateAdded",""), reverse=True)[:10]
     except: return None
-
 kev_recent = fetch_kev_recent()
-
 # ── KEV TABLE ROWS (rich format) ─────────────────────────────────────────────
 kev_rows = []
 if kev_recent:
@@ -460,12 +422,11 @@ if kev_recent:
             (rw, f"text-align:center;"),
             (du, f"color:{AMBER};white-space:nowrap;")
         ])
-
-# ── TOP 15 AI MODELS & CAPABILITIES (2026) ───────────────────────────────────
+# ── TOP 15 AI MODELS & CAPABILITIES (March 30 2026) ───────────────────────────────────
 ai_models_data = [
-    ("1. Gemini 3 Pro", "https://gemini.google.com/", "Multimodal Reasoning", "Complex tasks & integration", "Google's flagship with 1M+ context & superior multimodal", "Prompt Injection"),
-    ("2. Claude Opus 4.6", "https://claude.ai/", "Advanced Reasoning", "Safety & long-form content", "Anthropic's top model excelling in logic and ethical alignment", "Insecure Output"),
-    ("3. GPT-5.2", "https://chatgpt.com/", "Agentic Intelligence", "Versatile research & automation", "OpenAI's latest with enhanced reasoning and tool use", "Supply Chain"),
+    ("1. Gemini 3.1 Pro", "https://gemini.google.com/", "Multimodal Reasoning", "Complex tasks & integration", "Google's flagship with 2M+ context & superior multimodal", "Prompt Injection"),
+    ("2. Claude 4.6 Opus", "https://claude.ai/", "Advanced Reasoning", "Safety & long-form content", "Anthropic's top model excelling in logic and ethical alignment", "Insecure Output"),
+    ("3. GPT-5.3", "https://chatgpt.com/", "Agentic Intelligence", "Versatile research & automation", "OpenAI's latest with enhanced reasoning and tool use", "Supply Chain"),
     ("4. Grok 4.20", "https://x.ai/", "Real-time Knowledge", "Current events & uncensored", "xAI's innovative multi-agent architecture model", "Excessive Agency"),
     ("5. Llama 4 Scout", "https://llama.meta.com/", "Open Weights", "Local & enterprise deploy", "Meta's leading open-source model with massive context", "Supply Chain"),
     ("6. DeepSeek V3.2", "https://deepseek.com/", "Math & Coding", "High-precision technical tasks", "Strongest open-source performer in STEM domains", "Training Poisoning"),
@@ -479,7 +440,6 @@ ai_models_data = [
     ("14. Seed 2.0", "https://bytedance.com/", "Creative Generation", "Content & media", "ByteDance's advanced generative AI", "Insecure Plugin"),
     ("15. MiniMax M2.5", "https://minimax.cn/", "Compact & Fast", "Mobile & edge deployment", "Highly efficient model for constrained environments", "Model Theft")
 ]
-
 ai_rows = []
 for name, link, use_case, best_for, desc, vuln in ai_models_data:
     ai_rows.append([
@@ -489,26 +449,24 @@ for name, link, use_case, best_for, desc, vuln in ai_models_data:
         (desc, f"color:#888;font-size:.56rem;"),
         (f'<a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" style="color:{RED};text-decoration:none;">{vuln}</a>', f"color:{RED};font-weight:bold;")
     ])
-
-# ── TOP 15 AI-POWERED CYBERCRIME (2026) ──────────────────────────────────────
+# ── TOP 15 AI-POWERED CYBERCRIME (March 30 2026) ──────────────────────────────────────
 ai_crime_data = [
     ("1. AI Phishing Campaigns", "Scaling 400% YoY", "Hyper-personalized spear-phishing with perfect grammar", "CrowdStrike GTR 2026", "https://www.crowdstrike.com/global-threat-report/"),
-    ("2. Deepfake Vishing", "442% ↑", "3-second voice cloning for CEO fraud & wire transfers", "IBM Cost of Breach 2026", "https://www.ibm.com/reports/data-breach"),
+    ("2. Deepfake Vishing", "442% ↑", "3-second voice cloning for CEO fraud & wire transfers", "IBM Cost of Breach 2025", "https://www.ibm.com/reports/data-breach"),
     ("3. Polymorphic AI Malware", "Evasive", "BlackMamba-style code mutation that bypasses all AV", "CrowdStrike GTR 2026", "https://www.crowdstrike.com/global-threat-report/"),
     ("4. Prompt Injection Attacks", "#1 LLM risk", "Direct/indirect injection leading to data exfil", "OWASP LLM Top 10", "https://owasp.org/www-project-top-10-for-large-language-model-applications/"),
     ("5. Automated OSINT & Recon", "Automated", "LLM-driven target profiling in minutes", "Mandiant M-Trends 2026", "https://www.mandiant.com/m-trends"),
     ("6. Model Poisoning (Supply Chain)", "Growing", "Backdoored Hugging Face models & training data", "MITRE ATLAS", "https://atlas.mitre.org/"),
-    ("7. Agentic AI Abuse", "Insider Risk", "Autonomous agents performing unintended actions", "IBM Cost of Breach 2026", "https://www.ibm.com/reports/data-breach"),
+    ("7. Agentic AI Abuse", "Insider Risk", "Autonomous agents performing unintended actions", "IBM Cost of Breach 2025", "https://www.ibm.com/reports/data-breach"),
     ("8. Deepfake Video Fraud", "Rising", "Real-time face swaps in video calls ($25M+ scams)", "Chainalysis 2026", "https://www.chainalysis.com/"),
     ("9. AI PassGAN Cracking", "51% <60s", "Predictive password cracking at machine speed", "Dark Reading", "https://www.darkreading.com/"),
     ("10. Adversarial ML Evasion", "Emerging", "Pixel perturbations that fool every classifier", "CrowdStrike GTR 2026", "https://www.crowdstrike.com/global-threat-report/"),
-    ("11. AI-Generated Ransomware", "Fastest breakout", "LLMs writing custom encryptors on demand", "Sophos 2026", "https://www.sophos.com/en-us/content/state-of-ransomware"),
-    ("12. Shadow AI Data Leakage", "20% of breaches", "Rogue LLMs exfiltrating sensitive data", "IBM Cost of Breach 2026", "https://www.ibm.com/reports/data-breach"),
+    ("11. AI-Generated Ransomware", "Fastest breakout", "LLMs writing custom encryptors on demand", "Sophos 2025", "https://www.sophos.com/en-us/content/state-of-ransomware"),
+    ("12. Shadow AI Data Leakage", "20% of breaches", "Rogue LLMs exfiltrating sensitive data", "IBM Cost of Breach 2025", "https://www.ibm.com/reports/data-breach"),
     ("13. AI-Driven BEC", "Deepfake voice", "CEO voice cloning for $137k+ wire fraud", "FBI IC3 2026", "https://www.ic3.gov/AnnualReport"),
     ("14. Training Data Poisoning", "Backdoor risk", "Corrupted datasets creating hidden triggers", "OWASP LLM Top 10", "https://owasp.org/www-project-top-10-for-large-language-model-applications/"),
     ("15. AI SOC Evasion", "New frontier", "Tricking XDR/SOAR with adversarial prompts", "Mandiant M-Trends 2026", "https://www.mandiant.com/m-trends")
 ]
-
 ai_crime_rows = []
 for rank, attack, trend, desc, source in ai_crime_data:
     ai_crime_rows.append([
@@ -518,7 +476,6 @@ for rank, attack, trend, desc, source in ai_crime_data:
         (desc, f"color:#888;font-size:.56rem;"),
         (f'<a href="{source}" target="_blank" style="color:{AMBER};text-decoration:none;">Source</a>', f"color:{AMBER};font-weight:bold;")
     ])
-
 # ── OWASP LLM TOP 10 (v1.1) ──────────────────────────────────────────────────
 owasp_data = [
     ("LLM01", "Prompt Injection", "Adversary crafts input to bypass filters or exfil data", "🔴 Critical", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/01_prompt_injection"),
@@ -532,7 +489,6 @@ owasp_data = [
     ("LLM09", "Overreliance", "Blind trust in LLM output → errors/risks", "🟡 Medium", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/09_overreliance"),
     ("LLM10", "Model Theft", "Steal model weights/IP", "🟡 Medium", "https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/10_model_theft")
 ]
-
 owasp_rows = []
 for id_, vuln, desc, risk, link in owasp_data:
     owasp_rows.append([
@@ -542,7 +498,6 @@ for id_, vuln, desc, risk, link in owasp_data:
         (risk, f"color:{RED if 'Critical' in risk else AMBER};font-weight:bold;"),
         ("OWASP", f"color:{AMBER};font-weight:bold;")
     ])
-
 # ── MITRE ATT&CK TOP TECHNIQUES (2026) ───────────────────────────────────────
 attck_data = [
     ("T1055", "Process Injection", "Defense Evasion", "Inject code into legitimate processes to evade detection", "82%", "https://attack.mitre.org/techniques/T1055/"),
@@ -561,7 +516,6 @@ attck_data = [
     ("T1210", "Exploitation of Remote Services", "Lateral Movement", "Exploit unpatched remote services", "28%", "https://attack.mitre.org/techniques/T1210/"),
     ("T1110", "Brute Force", "Credential Access", "Password spraying and credential stuffing", "25%", "https://attack.mitre.org/techniques/T1110/")
 ]
-
 attck_rows = []
 for id_, tech, tactic, desc, freq, link in attck_data:
     attck_rows.append([
@@ -571,26 +525,24 @@ for id_, tech, tactic, desc, freq, link in attck_data:
         (desc, f"color:#888;font-size:.56rem;"),
         (freq, f"color:{GREEN};font-weight:bold;")
     ])
-
-# ── 💀 TOP RANSOMWARE GROUPS 2026 ────────────────────────────────────────────
+# ── 💀 TOP RANSOMWARE GROUPS 2026 (updated March 30) ────────────────────────────────────────────
 rwg_data = [
-    ("Qilin", "~30%", "1,000+", "🔴 Active", "Dominant RaaS with triple extortion and Linux support", "https://www.sophos.com/en-us/content/state-of-ransomware"),
-    ("Akira", "~20%", "765+", "🔴 Active", "$244M extorted; targets healthcare and manufacturing", "https://www.crowdstrike.com/global-threat-report/"),
-    ("Cl0p", "~15%", "550+", "🔴 Active", "Mass MOVEit and GoAnywhere exploits", "https://www.ibm.com/reports/data-breach"),
-    ("LockBit5", "~12%", "400+", "🔴 Active", "Aggressive RaaS with affiliate program", "https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2025/"),
-    ("Play", "~10%", "355+", "🔴 Active", "Heavy focus on government and education sectors", "https://www.mandiant.com/m-trends"),
-    ("Medusa", "~8%", "300+", "🔴 Active", "Triple extortion with data leak sites", "https://www.sophos.com/en-us/content/state-of-ransomware"),
-    ("INC Ransom", "~7%", "380+", "🔴 Active", "Education and critical infrastructure focus", "https://www.crowdstrike.com/global-threat-report/"),
-    ("DragonForce", "~5%", "200+", "🔴 Active", "New alliance member with fast encryption", "https://www.ibm.com/reports/data-breach"),
-    ("BlackCat/ALPHV", "~4%", "180+", "🔴 Active", "Rebranded after FBI takedown", "https://www.ibm.com/reports/data-breach"),
-    ("Hive", "~3%", "150+", "🟡 Disrupted", "Ransomware-as-a-Service still active", "https://www.crowdstrike.com/global-threat-report/"),
-    ("Conti Remnants", "~3%", "140+", "🔴 Active", "Splinter groups continuing operations", "https://www.mandiant.com/m-trends"),
-    ("BianLian", "~2%", "120+", "🔴 Active", "Double extortion on healthcare", "https://www.sophos.com/en-us/content/state-of-ransomware"),
-    ("Lynx", "~3%", "145+", "🔴 Active", "Emerging RaaS targeting MSPs and SMEs using phishing and credential theft", "https://www.itpro.com/security/ransomware/msps-beware-these-two-ransomware-groups-are-ramping-up-attacks-and-have-claimed-hundreds-of-victims"),
-    ("Everest", "~2%", "120+", "🔴 Active", "Data-theft focused extortion group operating a public leak site", "https://www.cisa.gov/news-events/cybersecurity-advisories"),
-    ("CyberVolk", "~2%", "100+", "🔴 Active", "Pro-Russian ransomware collective blending RaaS with hacktivism campaigns", "https://en.wikipedia.org/wiki/CyberVolk")
+    ("Qilin", "~30%", "1,200+", "🔴 Active", "Dominant RaaS with triple extortion and Linux support", "https://www.sophos.com/en-us/content/state-of-ransomware"),
+    ("Akira", "~22%", "820+", "🔴 Active", "$244M extorted; targets healthcare and manufacturing", "https://www.crowdstrike.com/global-threat-report/"),
+    ("Cl0p", "~18%", "610+", "🔴 Active", "Mass MOVEit and GoAnywhere exploits", "https://www.ibm.com/reports/data-breach"),
+    ("LockBit5", "~14%", "450+", "🔴 Active", "Aggressive RaaS with affiliate program", "https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2025/"),
+    ("Play", "~11%", "390+", "🔴 Active", "Heavy focus on government and education sectors", "https://www.mandiant.com/m-trends"),
+    ("Medusa", "~9%", "330+", "🔴 Active", "Triple extortion with data leak sites", "https://www.sophos.com/en-us/content/state-of-ransomware"),
+    ("INC Ransom", "~8%", "410+", "🔴 Active", "Education and critical infrastructure focus", "https://www.crowdstrike.com/global-threat-report/"),
+    ("DragonForce", "~6%", "240+", "🔴 Active", "New alliance member with fast encryption", "https://www.ibm.com/reports/data-breach"),
+    ("BlackCat/ALPHV", "~4%", "200+", "🔴 Active", "Rebranded after FBI takedown", "https://www.ibm.com/reports/data-breach"),
+    ("Hive", "~3%", "160+", "🟡 Disrupted", "Ransomware-as-a-Service still active", "https://www.crowdstrike.com/global-threat-report/"),
+    ("Conti Remnants", "~3%", "150+", "🔴 Active", "Splinter groups continuing operations", "https://www.mandiant.com/m-trends"),
+    ("BianLian", "~2%", "130+", "🔴 Active", "Double extortion on healthcare", "https://www.sophos.com/en-us/content/state-of-ransomware"),
+    ("Lynx", "~3%", "160+", "🔴 Active", "Emerging RaaS targeting MSPs and SMEs using phishing and credential theft", "https://www.itpro.com/security/ransomware/msps-beware-these-two-ransomware-groups-are-ramping-up-attacks-and-have-claimed-hundreds-of-victims"),
+    ("Everest", "~2%", "130+", "🔴 Active", "Data-theft focused extortion group operating a public leak site", "https://www.cisa.gov/news-events/cybersecurity-advisories"),
+    ("CyberVolk", "~2%", "110+", "🔴 Active", "Pro-Russian ransomware collective blending RaaS with hacktivism campaigns", "https://en.wikipedia.org/wiki/CyberVolk")
 ]
-
 rwg_rows = []
 for group, share, victims, status, intel, source in rwg_data:
     rwg_rows.append([
@@ -600,7 +552,6 @@ for group, share, victims, status, intel, source in rwg_data:
         (status, f"color:{RED};font-weight:bold;"),
         (f'<a href="{source}" target="_blank" style="color:{AMBER};text-decoration:none;">{intel}</a>', f"color:#888;font-size:.56rem;")
     ])
-
 # ── 🌐 NATION-STATE APT GROUPS 2026 ──────────────────────────────────────────
 apts_data = [
     ("Salt Typhoon", "🇨🇳", "Telecom & critical infrastructure espionage", "Persistent access to 9+ major ISPs", "https://www.crowdstrike.com/global-threat-report/"),
@@ -616,7 +567,6 @@ apts_data = [
     ("MuddyWater", "🇮🇷", "Middle East & Europe", "Custom malware and living-off-the-land", "https://attack.mitre.org/groups/G0069/"),
     ("GALLIUM", "🇨🇳", "Telecom operators globally", "Exploitation of unpatched routers", "https://www.mandiant.com/m-trends")
 ]
-
 apts_rows = []
 for group, flag, focus, intel, source in apts_data:
     apts_rows.append([
@@ -626,7 +576,6 @@ for group, flag, focus, intel, source in apts_data:
         (intel, f"color:#888;font-size:.56rem;"),
         (f'<a href="{source}" target="_blank" style="color:{AMBER};text-decoration:none;">Source</a>', f"color:{AMBER};font-weight:bold;")
     ])
-
 # ── ATTACK VECTOR BREAKDOWN (2026) ───────────────────────────────────────────
 vectors_data = [
     ("Stolen Credentials", "22%", "Dark web sales remain #1 vector", "$4.8M avg incident cost", "https://www.ibm.com/reports/data-breach"),
@@ -642,7 +591,6 @@ vectors_data = [
     ("Ransomware-as-a-Service", "18%", "Affiliate model explosion", "Fastest breakout", "https://www.sophos.com/en-us/content/state-of-ransomware"),
     ("Zero-Day Exploits", "11%", "Unpatched critical vulns", "High-impact RCE", "https://www.vulncheck.com/")
 ]
-
 vectors_rows = []
 for vector, share, desc, impact, source in vectors_data:
     vectors_rows.append([
@@ -652,7 +600,6 @@ for vector, share, desc, impact, source in vectors_data:
         (impact, f"color:{AMBER};"),
         (f'<a href="{source}" target="_blank" style="color:{GREEN};text-decoration:none;">Source</a>', f"color:{GREEN};font-weight:bold;")
     ])
-
 # ── TOP EXPLOITED CVEs 2026 ──────────────────────────────────────────────────
 topcves_data = [
     ("CVE-2025-55182", "React2Shell", "10.0", "RCE · Most targeted in 2026", "https://nvd.nist.gov/vuln/detail/CVE-2025-55182"),
@@ -668,7 +615,6 @@ topcves_data = [
     ("CVE-2025-31112", "Cisco IOS XE", "9.8", "Remote code execution", "https://nvd.nist.gov/vuln/detail/CVE-2025-31112"),
     ("CVE-2025-42821", "Fortinet FortiGate", "9.8", "SSL-VPN authentication bypass", "https://nvd.nist.gov/vuln/detail/CVE-2025-42821")
 ]
-
 topcves_rows = []
 for cve, product, cvss, impact, link in topcves_data:
     topcves_rows.append([
@@ -678,7 +624,6 @@ for cve, product, cvss, impact, link in topcves_data:
         (impact, f"color:#888;font-size:.56rem;"),
         ("NVD", f"color:{GREEN};font-weight:bold;")
     ])
-
 # ── BREACH COST BY INDUSTRY (2026) ───────────────────────────────────────────
 costs_data = [
     ("US Average", "$10.22M", "All-time high (+9%)", "Largest recorded breaches", "https://www.ibm.com/reports/data-breach"),
@@ -694,7 +639,6 @@ costs_data = [
     ("Retail", "$3.54M", "Payment card and customer data", "Ransomware surge", "https://www.ibm.com/reports/data-breach"),
     ("Hospitality", "$4.12M", "Guest data & POS systems", "Seasonal attack spikes", "https://www.ibm.com/reports/data-breach")
 ]
-
 costs_rows = []
 for industry, cost, detail, notes, source in costs_data:
     costs_rows.append([
@@ -704,35 +648,28 @@ for industry, cost, detail, notes, source in costs_data:
         (notes, f"color:{AMBER};"),
         (f'<a href="{source}" target="_blank" style="color:{GREEN};text-decoration:none;">Source</a>', f"color:{GREEN};font-weight:bold;")
     ])
-
 # ─── NEW LAYOUT (all tables consistent) ──────────────────────────────────────
 g1, g2 = st.columns(2)
-with g1: st.markdown(_tbl("🤖 TOP 15 AI MODELS & CAPABILITIES (Last updated March 9, 2026)", ["Rank & Model", "Top Use Case", "Best For", "Description", "Top Vuln"], ai_rows, CYAN), unsafe_allow_html=True)
+with g1: st.markdown(_tbl("🤖 TOP 15 AI MODELS & CAPABILITIES (Last updated March 30, 2026)", ["Rank & Model", "Top Use Case", "Best For", "Description", "Top Vuln"], ai_rows, CYAN), unsafe_allow_html=True)
 with g2: st.markdown(_tbl("🤖 AI-POWERED CYBERCRIME (2026)", ["Rank", "Attack", "Trend", "Description", "Source"], ai_crime_rows, CYAN), unsafe_allow_html=True)
-
 g3, g4 = st.columns(2)
 with g3: st.markdown(_tbl("🛡 OWASP LLM TOP 10 (v1.1)", ["ID", "Vulnerability", "Description", "Risk", "Link"], owasp_rows, CYAN), unsafe_allow_html=True)
-with g4: 
+with g4:
     if kev_rows:
         st.markdown(_tbl("📋 LATEST CISA KEV ADDITIONS (LIVE)", ["CVE", "Vendor", "Product", "Vulnerability", "Added", "RW", "Due"], kev_rows, BLUE), unsafe_allow_html=True)
     else:
         st.markdown(f'<div style="font-size:.68rem;font-weight:bold;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;border-bottom:1px solid {BLUE}20;padding-bottom:3px;">📋 LATEST CISA KEV ADDITIONS (LIVE)</div><div style="padding:14px;border:1px solid #1a1a2e;background:#080810;text-align:center;margin-bottom:10px;"><span style="color:{GREY};font-size:.7rem;">📋 CISA KEV · Populates on Streamlit Cloud deployment</span></div>', unsafe_allow_html=True)
-
 g5, g6 = st.columns(2)
 with g5: st.markdown(_tbl("⚔ MITRE ATT&CK TOP TECHNIQUES (2026)", ["ID", "Technique", "Tactic", "Description", "Freq"], attck_rows, BLUE), unsafe_allow_html=True)
 with g6: st.markdown(_tbl("💀 TOP RANSOMWARE GROUPS 2026", ["Group", "Share", "Victims", "Status", "Source"], rwg_rows, RED), unsafe_allow_html=True)
-
 g7, g8 = st.columns(2)
 with g7: st.markdown(_tbl("🌐 NATION-STATE APT GROUPS 2026", ["Group", "Origin", "Focus", "Activity", "Source"], apts_rows, AMBER), unsafe_allow_html=True)
 with g8: st.markdown(_tbl("📊 ATTACK VECTOR BREAKDOWN (2026)", ["Vector", "Share", "Description", "Impact", "Source"], vectors_rows, GREEN), unsafe_allow_html=True)
-
 g9, g10 = st.columns(2)
 with g9: st.markdown(_tbl("🔥 TOP EXPLOITED CVEs 2026", ["CVE", "Product", "CVSS", "Impact", "Link"], topcves_rows, RED), unsafe_allow_html=True)
 with g10: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (2026)", ["Industry", "Avg Cost", "Detail", "Notes", "Source"], costs_rows, GREEN), unsafe_allow_html=True)
-
-st.markdown(f'<div style="font-size:.48rem;color:#505060;margin:2px 0 0 4px;">Sources: <a href="https://www.ibm.com/reports/data-breach" target="_blank" class="sl">IBM Cost of Breach 2025/2026</a> · <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="sl">CrowdStrike GTR 2026</a> · <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" class="sl">OWASP LLM Top 10</a> · <a href="https://attack.mitre.org/" target="_blank" class="sl">MITRE ATT&CK/ATLAS</a> · <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sl">CISA KEV</a> · <a href="https://www.vulncheck.com/" target="_blank" class="sl">VulnCheck</a> · <a href="https://redcanary.com/" target="_blank" class="sl">Red Canary</a> · <a href="https://www.chainalysis.com/" target="_blank" class="sl">Chainalysis</a> · <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> · Public disclosures</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="font-size:.48rem;color:#505060;margin:2px 0 0 4px;">Sources: <a href="https://www.ibm.com/reports/data-breach" target="_blank" class="sl">IBM Cost of Breach 2025</a> · <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="sl">CrowdStrike GTR 2026</a> · <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" class="sl">OWASP LLM Top 10</a> · <a href="https://attack.mitre.org/" target="_blank" class="sl">MITRE ATT&CK/ATLAS</a> · <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sl">CISA KEV</a> · <a href="https://www.vulncheck.com/" target="_blank" class="sl">VulnCheck</a> · <a href="https://redcanary.com/" target="_blank" class="sl">Red Canary</a> · <a href="https://www.chainalysis.com/" target="_blank" class="sl">Chainalysis</a> · <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
-
 # ─── PULSE ROW 6: AI & LLM THREAT INTELLIGENCE ───────────────────────────────
 st.markdown(f"""
 <div id="global-threat-metrics" style="text-align: left; margin: 40px 0 20px 5px;">
@@ -740,14 +677,13 @@ st.markdown(f"""
     &gt;&gt; Global Threat Metrics
   </div>
   <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px; line-height: 1.5;">
-    <span style="color: {GREEN}; border: 1px solid {GREEN}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">LIVE</span> REAL-TIME &nbsp; 
-    <span style="color: {AMBER}; border: 1px solid {AMBER}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">EST</span> VERIFIED &nbsp; 
-    <span style="color: {CYAN}; border: 1px solid {CYAN}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">PULSE</span> DSHIELD &nbsp; 
+    <span style="color: {GREEN}; border: 1px solid {GREEN}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">LIVE</span> REAL-TIME &nbsp;
+    <span style="color: {AMBER}; border: 1px solid {AMBER}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">EST</span> VERIFIED &nbsp;
+    <span style="color: {CYAN}; border: 1px solid {CYAN}40; padding: 0 3px; border-radius: 2px; font-weight: bold;">PULSE</span> DSHIELD &nbsp;
     <span style="margin-left: 10px; opacity: 0.6;">118 INDICATORS // 14 ACTIVE DATA ROWS</span>
   </div>
 </div>
 """, unsafe_allow_html=True)
-
 st.markdown(f'<div class="rl-p">🤖 AI &amp; LLM THREAT INTELLIGENCE — EMERGING ATTACK LANDSCAPE</div>', unsafe_allow_html=True)
 c = st.columns(6)
 with c[0]:
@@ -786,13 +722,12 @@ with c[5]:
         "▸ But only 28% of orgs fully deployed",
         "–","d-n", "28% adoption", "d-g", False,
         facts=["AI cuts breach lifecycle 100+ days","SOC copilots reduce alert fatigue","Automated threat hunting emerging","SOAR + AI = faster response","Skills gap driving AI adoption"])
-
 # ─── PULSE ROW 4 ─────────────────────────────────────────────────────────────
 st.markdown(f'<div class="rl-p">🔐 CLOUD, IDENTITY & AI GOVERNANCE METRICS</div>', unsafe_allow_html=True)
 c = st.columns(6)
 with c[0]:
     pcard("MALWARE-FREE ATTACKS","https://www.crowdstrike.com/global-threat-report/",
-        "79%", "No malware used · CS GTR 2025",
+        "82%", "No malware used · CS GTR 2026",
         "▸ Up from 71% in 2023",
         "–","d-n", "+8% YoY", "d-b", False,
         facts=["82% in 2026 GTR (latest)","Valid credentials primary vector","Access brokers up 50% YoY","Hands-on-keyboard intrusions","EDR evasion via LOLBins"])
@@ -826,7 +761,6 @@ with c[5]:
         "▸ Fastest: 27 seconds",
         "–","d-n", "was 48 min", "d-g", False,
         facts=["Sub-minute breakouts recorded","Automated tooling enables speed","29 min avg in 2025 (from 48)","Detection must be real-time","MDR/XDR essential for response"])
-
 # ─── PULSE ROW 8: COMPLIANCE & THIRD-PARTY RISK ──────────────────────────────
 st.markdown(f'<div class="rl-p">📊 COMPLIANCE POSTURE &amp; THIRD-PARTY RISK</div>', unsafe_allow_html=True)
 c = st.columns(6)
@@ -866,7 +800,6 @@ with c[5]:
         "▸ 73% of US orgs use NIST CSF",
         "–","d-n", "ISO 27001 #1 intl", "d-b", False,
         facts=["NIST CSF 2.0 added Govern function","ISO 27001:2022 transition complete","CIS Controls popular for SMBs","CMMC 2.0 rollout underway","Zero Trust adoption: 67%"])
-
 # ─── PULSE ROW 3 ─────────────────────────────────────────────────────────────
 st.markdown(f'<div class="rl-p">⚡ SECTOR RISK & ADVERSARY INTELLIGENCE</div>', unsafe_allow_html=True)
 c = st.columns(6)
@@ -906,18 +839,17 @@ with c[5]:
         "▸ Then: phishing 21% · creds 21%",
         "–","d-n", "29% of attacks", "d-b", False,
         facts=["VPN appliances: #1 target asset","Phishing: 21% of initial access","Stolen credentials: 21%","Brute force: 10%","Unknown/other: 19%"])
-
 st.markdown(f'<div class="rl-p">⚡ RANSOMWARE LANDSCAPE & EXTORTION ECONOMICS</div>', unsafe_allow_html=True)
 c = st.columns(6)
 with c[0]:
     pcard("#1 RANSOMWARE GROUP","https://www.crowdstrike.com/global-threat-report/",
-        "LockBit 3.0", "Most prolific RaaS 2024",
-        "▸ ~25% of all ransomware globally",
-        "–","d-n", "25% share", "d-b", False,
+        "Qilin", "Most prolific RaaS 2026",
+        "▸ ~30% of all ransomware globally",
+        "–","d-n", "30% share", "d-b", False,
         facts=["Disrupted by FBI Feb 2024","Rebuilt within weeks of takedown","Affiliates operate globally","Cross-platform: Win, Linux, ESXi","Bug bounty program for their code"])
 with c[1]:
     pcard("#2 RANSOMWARE GROUP","https://www.crowdstrike.com/global-threat-report/",
-        "ALPHV/BlackCat", "Seized then resurfaced",
+        "Akira", "Seized then resurfaced",
         "▸ $22M Change Healthcare ransom",
         "–","d-n", "$22M single hit", "d-b", False,
         facts=["Exit-scammed affiliates in 2024","Rust-based ransomware binary","FBI unseized the leak site","Healthcare mega-breach resulted","Parent group likely rebranding"])
@@ -945,7 +877,6 @@ with c[5]:
         "▸ Avg eCrime breakout: 48 min",
         "–","d-n", "48 min avg", "d-b", False,
         facts=["Nation-state avg: 79 min breakout","Lateral movement accelerating","Automated tools enable speed","Detection must be sub-minute","MDR/XDR essential for response"])
-
 # ─── PULSE ROW 5 ─────────────────────────────────────────────────────────────
 st.markdown(f'<div class="rl-p">⚡ ATTACK SURFACE & GLOBAL EXPOSURE INTEL</div>', unsafe_allow_html=True)
 c = st.columns(6)
@@ -985,7 +916,6 @@ with c[5]:
         "▸ AWS, Azure, GCP misconfigs",
         "–","d-n", "12k+ exposed", "d-b", False,
         facts=["Automated scanners find in minutes","PII, PHI, credentials exposed","AWS Block Public Access helps","Terraform misconfigs common cause","GrayhatWarfare indexes open buckets"])
-
 # ─── PULSE ROW 1: TOP ATTACKED PORTS ─────────────────────────────────────────
 st.markdown(f'<div class="rl-p">⚡ LIVE THREAT PULSE — SANS DSHIELD SENSOR NETWORK</div>', unsafe_allow_html=True)
 FB_PORTS = [
@@ -1017,7 +947,6 @@ for i in range(6):
                 f'{fb["name"]} (:{fb["port"]})', f'~{_f(fb["records"])} events/day · DShield',
                 f'▸ {fb["desc"]}',
                 "–","d-n", f'~{_f(fb["sources"])} sources', "d-b", False, facts=pfacts[i])
-
 # ─── PULSE ROW 2 ─────────────────────────────────────────────────────────────
 st.markdown(f'<div class="rl-p">⚡ ATTACK SOURCES, HONEYPOTS & THREAT CATEGORIES</div>', unsafe_allow_html=True)
 c = st.columns(6)
@@ -1079,9 +1008,8 @@ with c[5]:
             "▸ Based on DShield historical patterns",
             "–","d-n", "~2.2M events/day", "d-b", False,
             facts=["SSH & Telnet dominate consistently","HTTP/HTTPS growing share","SMB persists despite patches","Port 5555 (ADB) emerging target","Seasonal variation in attack patterns"])
-
 # ─── ROW 7 ────────────────────────────────────────────────────────────────────
-rl("▸ AI GOVERNANCE, PRIVACY & DATA PROTECTION  [EST]")
+rl("▸ AI GOVERNANCE, PRIVACY & DATA PROTECTION [EST]")
 c = st.columns(9)
 with c[0]:
     card("SHADOW AI","https://www.ibm.com/reports/data-breach",
@@ -1137,9 +1065,8 @@ with c[8]:
         "▸ 8% unsure if they were compromised",
         "–","d-n", "13% breached","d-b", False,
         facts=["60% led to data compromise","31% caused operational disruption","Model theft emerging risk","Training data poisoning growing","AI red-teaming still rare"])
-
 # ─── ROW 3 ────────────────────────────────────────────────────────────────────
-rl("▸ BREACH, INCIDENT & COST IMPACT  [EST]")
+rl("▸ BREACH, INCIDENT & COST IMPACT [EST]")
 c = st.columns(9)
 with c[0]:
     card("RANSOMWARE","https://www.cisa.gov/stopransomware",
@@ -1195,9 +1122,8 @@ with c[8]:
         "▸ Voice phishing via AI up 442%",
         "–","d-n", "+150%","d-b", False,
         facts=["Deepfake video used in $25M scam","LLMs draft phishing at scale","AI voice cloning in 3 sec of audio","WormGPT/FraudGPT on dark web","AI detection tools still lagging"])
-
 # ─── ROW 6 ────────────────────────────────────────────────────────────────────
-rl("▸ INCIDENT RESPONSE & SOC OPERATIONS  [EST]")
+rl("▸ INCIDENT RESPONSE & SOC OPERATIONS [EST]")
 c = st.columns(9)
 with c[0]:
     card("MEAN TIME DETECT","https://www.ibm.com/reports/data-breach",
@@ -1253,9 +1179,8 @@ with c[8]:
         "▸ 64% still recovering post-contain",
         "–","d-n", "100+ avg","d-b", False,
         facts=["25% recover in 101-125 days","25% take 126-150 days","Operational disruption in 31%","Customer notification delays","Reputational recovery: 6-12 months"])
-
 # ─── ROW 5 ────────────────────────────────────────────────────────────────────
-rl("▸ SECURITY POSTURE, DETECTION & WORKFORCE  [EST / LIVE]")
+rl("▸ SECURITY POSTURE, DETECTION & WORKFORCE [EST / LIVE]")
 c = st.columns(9)
 with c[0]:
     card("ID-BASED ATTACKS","https://www.crowdstrike.com/global-threat-report/",
@@ -1311,9 +1236,8 @@ with c[8]:
         lambda d:f'▸ Top product: {d["tp"]} ({d["tpc"]})',
         lambda d:"–", lambda d:f'{d["vendors"]}', d30c="d-n", d1yc="d-b", fsub="KEV vendors",
         facts=["Microsoft leads with 300+ CVEs","Apple second-most represented","Fortinet/Cisco/Citrix VPN surge","Open-source libs increasingly added","IoT vendors now appearing in KEV"])
-
 # ─── ROW 4 ────────────────────────────────────────────────────────────────────
-rl("▸ FINANCIAL, REGULATORY & EMERGING THREATS  [EST]")
+rl("▸ FINANCIAL, REGULATORY & EMERGING THREATS [EST]")
 c = st.columns(9)
 with c[0]:
     card("GDPR FINES","https://www.enforcementtracker.com/",
@@ -1369,7 +1293,6 @@ with c[8]:
         "▸ 0.14% of on-chain volume",
         "–","d-n", "$40.1B","d-b", False,
         facts=["Ransomware payments: $1.1B","Stablecoins now dominant in crime","Huione Guarantee: crime marketplace","Sanctions evasion via crypto rising","Tornado Cash mixer OFAC-sanctioned"])
-
 # ─── ROW 1 ────────────────────────────────────────────────────────────────────
 rl("▸ VULNERABILITY & EXPLOIT INTELLIGENCE")
 c = st.columns(9)
@@ -1427,7 +1350,6 @@ with c[8]:
         lambda d:"▸ DShield global sensor network",
         lambda d:"–", lambda d:d.get("infocon","?"), d30c="d-n", d1yc="d-g", fsub="SANS ISC",
         facts=["Green=normal Yellow=notable","Orange=significant Red=critical","Based on DShield distributed sensors","Handlers monitor 24/7/365","Last Orange: Dec 2015 (WMF vuln)"])
-
 # ─── ROW 2 ────────────────────────────────────────────────────────────────────
 rl("▸ MALWARE, C2 & ADVISORY FEEDS")
 c = st.columns(9)
@@ -1485,7 +1407,6 @@ with c[8]:
         "▸ Median payment · Sophos 2025",
         "+$133k","d-b", "+$1.6M","d-b", False,
         facts=["30% of demands exceed $5M","Only 24% pay the original ask","44% negotiated lower payments","Insurance covers avg 23% of cost","Govt sector paid highest: $2.2M"])
-
 # ─── SOURCES BAR ──────────────────────────────────────────────────────────────
 ts = now_utc.strftime("%Y-%m-%d %H:%M UTC")
 st.markdown(f"""<div class="sb">
@@ -1520,7 +1441,6 @@ st.markdown(f"""<div class="sb">
   <a href="https://www.isc2.org/Insights/2024/09/Workforce-Study" target="_blank" class="sl">ISC2</a> ·
   <a href="https://www.qualys.com/research/threat-landscape-report/" target="_blank" class="sl">Qualys</a>
   <span style="float:right;color:#1a1a2a;">↻ {ts} · 12hr cache</span></div>""", unsafe_allow_html=True)
-
 # ══════════════════════════════════════════════════════════════════════════════
 # LIVE THREAT MAPS
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1531,11 +1451,10 @@ f"""
     &gt;&gt; Live Threat Map Feeds
   </div>
   <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px;">
-    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">REAL-TIME GLOBAL ATTACK VISUALIZATIONS</span> 
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">REAL-TIME GLOBAL ATTACK VISUALIZATIONS</span>
   </div>
 </div>
 """, unsafe_allow_html=True)
-
 m1,m2=st.columns(2)
 with m1:
     st.markdown('<a href="https://livethreatmap.radware.com/" target="_blank" class="ml">&gt;&gt; RADWARE LIVE THREAT MAP</a>', unsafe_allow_html=True)
@@ -1554,7 +1473,7 @@ f"""
     &gt;&gt; GRC Resources &amp; Tools
   </div>
   <div style="font-size: 0.55rem; color: #505060; margin-top: 4px; letter-spacing: 0.5px; line-height: 1.5;">
-    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">80 CURATED RANKED BY POPULARITY</span> 
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 0 3px; border-radius: 2px;">80 CURATED RANKED BY POPULARITY</span>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -1575,7 +1494,6 @@ with l4:
     st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ TRAINING, NEWS &amp; COMMUNITY</div>', unsafe_allow_html=True)
     for a in [("48","OWASP Top 10","https://owasp.org/www-project-top-ten/","Web app risks."),("49","OWASP LLM","https://owasp.org/www-project-top-10-for-large-language-model-applications/","LLM risks."),("50","OWASP API","https://owasp.org/API-Security/","API risks."),("51","HackTheBox","https://www.hackthebox.com/","Gamified training."),("52","TryHackMe","https://tryhackme.com/","Hands-on labs."),("53","PortSwigger","https://portswigger.net/web-security","Web vuln training."),("54","BleepingComputer","https://www.bleepingcomputer.com/","Security news."),("55","Hacker News","https://thehackernews.com/","Cyber news."),("56","SANS Papers","https://www.sans.org/white-papers/","Whitepapers."),("57","DEF CON","https://defcon.org/html/links/dc-archives.html","Archives."),("58","HackerOne","https://www.hackerone.com/","Bug bounty."),("59","Bugcrowd","https://www.bugcrowd.com/","Vuln disclosure."),("60","Dark Reading","https://www.darkreading.com/","Enterprise security news."),("61","Krebs on Security","https://krebsonsecurity.com/","Investigative security blog."),("62","KnowBe4 Free","https://www.knowbe4.com/free-cybersecurity-tools","Phishing sim & training."),("63","Gophish","https://getgophish.com/","Open-source phishing sim."),("64","IntelTechniques","https://inteltechniques.com/tools/","OSINT search tools."),("65","MITRE Engage","https://engage.mitre.org/","Adversary engagement.")]:
         st.markdown(gl(*a), unsafe_allow_html=True)
-
 st.markdown(f"""
 <div style="border-top:1px solid #141420;padding-top:20px;margin-top:32px;text-align:center;font-family:{MONO};">
   <div style="color:#666;font-size:.8rem;margin-bottom:3px;">Questions, Comments, or Recommendations?</div>
@@ -1611,5 +1529,5 @@ st.markdown(f"""
        style="color:#505060;font-size:.6rem;text-decoration:none;border:1px solid #1a1a2e;padding:3px 10px;border-radius:3px;">
        ⭐ Star on GitHub</a></div>
   <div style="color:#2a2a3a;font-size:.6rem;">
-    SecAI-Nexus GRC [v30.0] · Live Data Engine · 12hr Cache ·
+    SecAI-Nexus GRC [v31.0] · Live Data Engine · 12hr Cache ·
     112 Metrics · 8 Intel Tables · 2 Maps · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
