@@ -355,11 +355,11 @@ st.html("""
     </div>
     
     <div style="text-align:center; flex:1; min-width:320px;">
-      <div style="font-size:1.45rem; font-weight:700; color:#ffeb3b;">
+      <div style="font-size:1.4rem; font-weight:700; color:#ffeb3b;">
         IRGC NAMES 18 MAJOR U.S. COMPANIES AS CYBER TARGETS
       </div>
-      <div style="margin-top:12px; font-size:1.1rem; line-height:1.5;">
-        Apple • Microsoft • Google • Meta • Tesla • Intel • IBM • Boeing • Oracle • Palantir • + 8 additional firms
+      <div style="margin-top:12px; font-size:1.02rem; line-height:1.45;">
+        Apple, Microsoft, Google, Meta, Tesla, Intel, IBM, Boeing, Oracle, Palantir, Amazon, Cisco, NVIDIA, Lockheed Martin, Raytheon, JPMorgan Chase, General Dynamics, Northrop Grumman
       </div>
     </div>
     
@@ -369,8 +369,8 @@ st.html("""
   </div>
  
   <div style="margin-top:22px; padding:16px 28px; background:rgba(255,235,59,0.1); border:1px solid #ffeb3b; border-radius:6px; text-align:center; font-size:1.05rem;">
-    <strong>Announced:</strong> March 31, 2026 &nbsp;&nbsp;|&nbsp;&nbsp; 
-    <strong>Effective:</strong> April 1, 2026 (20:00 Tehran time)<br>
+    <strong>Announced:</strong> March 31, 2026<br>
+    <strong>Effective:</strong> April 1, 2026 — 20:00 Tehran (IRST) | 11:30 AM EST | 10:30 AM CST<br>
     <span style="color:#ffeb3b;">Recommended action:</span> Increase monitoring for spear-phishing and credential access attempts. Review critical system access controls and enforce multi-factor authentication.
   </div>
 </div>
