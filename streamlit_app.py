@@ -344,6 +344,37 @@ f"""
   </div>
 </div>
 """, unsafe_allow_html=True)
+# ====================== HIGH PRIORITY ALERT BANNER — IRGC IRAN THREAT (March 31, 2026) ======================
+st.markdown(f"""
+<div style="background:#1a1a2a; border:3px solid #c8102e; border-radius:8px; padding:20px 28px; margin:18px 0 32px 0; 
+            box-shadow:0 8px 32px rgba(200,16,46,0.4); color:#fff; font-family:{MONO}; position:relative;">
+  
+  <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap; justify-content:center;">
+    <div style="background:#c8102e; color:#fff; padding:6px 18px; border-radius:4px; font-size:1.1rem; font-weight:700; letter-spacing:1.5px; white-space:nowrap;">
+      HIGH PRIORITY ALERT
+    </div>
+    
+    <div style="flex:1; min-width:280px; text-align:center;">
+      <div style="font-size:1.35rem; font-weight:700; color:#ffeb3b; letter-spacing:1px;">
+        IRGC NAMES 18 MAJOR U.S. COMPANIES AS CYBER TARGETS
+      </div>
+      <div style="margin-top:8px; font-size:1.05rem; line-height:1.5;">
+        Apple • Microsoft • Google • Meta • Tesla • Intel • IBM • Boeing • Oracle • Palantir • + 8 additional firms
+      </div>
+    </div>
+    
+    <div style="background:#c8102e; color:#fff; padding:6px 18px; border-radius:4px; font-size:1.1rem; font-weight:700; letter-spacing:1.5px; white-space:nowrap;">
+      ACTIVE
+    </div>
+  </div>
+  
+  <div style="margin-top:18px; padding:14px 22px; background:rgba(255,235,59,0.1); border:1px solid #ffeb3b; border-radius:6px; font-size:1rem; line-height:1.6; text-align:center;">
+    <strong>Announced:</strong> March 31, 2026 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 
+    <strong>Effective:</strong> April 1, 2026 (20:00 Tehran time)<br>
+    <span style="color:#ffeb3b;">Immediate recommendation:</span> Heighten monitoring of spear-phishing, credential access, and supply-chain vectors. Review access controls and enable multi-factor authentication on all critical systems.
+  </div>
+</div>
+""", unsafe_allow_html=True)
 with st.spinner("Syncing threat intelligence feeds…"):
     kev=fetch_kev(); baz=fetch_bazaar(); uhaus=fetch_urlhaus()
     feodo=fetch_feodo(); sans=fetch_sans(); tor=fetch_tor()
