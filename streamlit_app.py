@@ -400,6 +400,7 @@ if not sans:
     sans={"infocon":"green"}
 if not tor:
     tor={"c":7600}
+    
 # ══════════════════════════════════════════════════════════════════════════════
 # AI SECURITY & THREAT INTELLIGENCE REFERENCE (MOVED HERE — ORIGINAL GLOBAL SPOT)
 # ══════════════════════════════════════════════════════════════════════════════
