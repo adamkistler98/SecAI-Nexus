@@ -344,6 +344,48 @@ f"""
   </div>
 </div>
 """, unsafe_allow_html=True)
+# ====================== HIGH ALERT BANNER — IRAN THREAT (March 31, 2026) ======================
+st.markdown(f"""
+<div style="background:linear-gradient(90deg, #c8102e, #ff4d00); color:#fff; padding:18px 24px; margin:12px 0 28px 0; border-radius:8px; 
+            border:4px solid #ffeb3b; box-shadow:0 0 30px #ff1744, inset 0 0 25px rgba(255,235,59,0.6); 
+            text-align:center; font-family:{MONO}; position:relative; overflow:hidden;">
+  
+  <!-- pulsing warning icon -->
+  <div style="position:absolute; top:-8px; right:-8px; font-size:92px; opacity:0.12; animation:alertpulse 1.8s infinite ease-in-out;">🚨</div>
+  
+  <div style="display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;">
+    <span style="font-size:2.6rem; animation:alertpulse 1.8s infinite ease-in-out;">🚨</span>
+    
+    <div>
+      <div style="font-size:1.55rem; font-weight:bold; letter-spacing:2.5px; text-transform:uppercase; color:#ffeb3b; text-shadow:0 0 15px #ffeb3b;">
+        HIGH ALERT — IRANIAN CYBER THREAT
+      </div>
+      <div style="font-size:1.15rem; margin-top:4px; font-weight:600;">
+        IRGC names 18 major U.S. tech &amp; defense companies as targets
+      </div>
+    </div>
+    
+    <span style="font-size:2.6rem; animation:alertpulse 1.8s infinite ease-in-out;">🚨</span>
+  </div>
+  
+  <div style="margin-top:12px; padding:10px 20px; background:rgba(255,255,255,0.15); border-radius:8px; font-size:1.05rem; line-height:1.5;">
+    <strong>Companies named:</strong> Apple • Microsoft • Google • Meta • Tesla • Intel • IBM • Boeing • Oracle • Palantir + 8 more<br>
+    <strong>Announced:</strong> March 31, 2026 &nbsp;&nbsp;|&nbsp;&nbsp; 
+    <strong>Effective:</strong> April 1, 2026 (8 PM Tehran time)
+  </div>
+  
+  <div style="margin-top:14px; font-size:0.95rem; background:rgba(0,0,0,0.4); display:inline-block; padding:6px 22px; border-radius:30px; letter-spacing:1px;">
+    ⚡ Immediate action: Heightened monitoring • Spear-phishing defense • Credential access review
+  </div>
+</div>
+
+<style>
+@keyframes alertpulse {{
+  0%, 100% {{ box-shadow: 0 0 30px #ff1744, inset 0 0 25px rgba(255,235,59,0.6); }}
+  50% {{ box-shadow: 0 0 45px #ffeb3b, inset 0 0 35px rgba(255,235,59,0.9); }}
+}}
+</style>
+""", unsafe_allow_html=True)
 with st.spinner("Syncing threat intelligence feeds…"):
     kev=fetch_kev(); baz=fetch_bazaar(); uhaus=fetch_urlhaus()
     feodo=fetch_feodo(); sans=fetch_sans(); tor=fetch_tor()
