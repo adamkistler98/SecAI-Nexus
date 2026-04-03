@@ -306,43 +306,10 @@ def gl(n,t,u,d):
             f'<a href="{u}" target="_blank" class="rl2">{t}</a>'
             f'<div style="color:#5a5a6a;font-size:.68rem;margin-top:1px;padding-left:22px;">{d}</div></div>')
 # ══════════════════════════════════════════════════════════════════════════════
-# ====================== HIGH PRIORITY ALERT BANNER — IRGC IRAN THREAT (March 31, 2026) ======================
-st.html("""
-<div style="background:#1f2533; border:3px solid #c8102e; border-radius:8px; padding:24px 30px; margin:20px 0 35px 0;
-            box-shadow:0 10px 30px rgba(200,16,46,0.3); color:#fff; font-family:'Courier New', Courier, monospace;">
- 
-  <div style="display:flex; align-items:center; gap:25px; justify-content:center; flex-wrap:wrap;">
-    <div style="background:#c8102e; color:#fff; padding:10px 24px; border-radius:6px; font-size:1.2rem; font-weight:700; letter-spacing:1.5px;">
-      HIGH PRIORITY ALERT
-    </div>
-   
-    <div style="text-align:center; flex:1; min-width:320px;">
-      <div style="font-size:1.4rem; font-weight:700; color:#ffeb3b;">
-        IRGC NAMES 18 MAJOR U.S. COMPANIES AS CYBER TARGETS
-      </div>
-      <div style="margin-top:12px; font-size:1.02rem; line-height:1.45;">
-        Apple, Microsoft, Google, Meta, Tesla, Intel, IBM, Boeing, Oracle, Palantir, Amazon, Cisco, NVIDIA, Lockheed Martin, Raytheon, JPMorgan Chase, General Dynamics, Northrop Grumman
-      </div>
-    </div>
-   
-    <div style="background:#c8102e; color:#fff; padding:10px 24px; border-radius:6px; font-size:1.2rem; font-weight:700; letter-spacing:1.5px;">
-      ACTIVE
-    </div>
-  </div>
- 
-  <div style="margin-top:22px; padding:16px 28px; background:rgba(255,235,59,0.1); border:1px solid #ffeb3b; border-radius:6px; text-align:center; font-size:1.05rem;">
-    <strong>Announced:</strong> March 31, 2026<br>
-    <strong>Effective:</strong> April 1, 2026 — 20:00 Tehran (IRST) | 11:30 AM EST | 10:30 AM CST<br>
-    <span style="color:#ffeb3b;">Recommended action:</span> Increase monitoring for spear-phishing and credential access attempts. Review critical system access controls and enforce multi-factor authentication.
-  </div>
-</div>
-""")
-
 now_utc = datetime.now(timezone.utc)
 st.markdown(
 f"""
 <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; border-bottom: 2px solid #141420; padding-bottom: 12px; margin-bottom: 20px; margin-top: -50px; gap: 15px;">
- 
   <div style="flex: 1; min-width: 300px; text-align: left;">
     <div style="margin-bottom: 4px;">
       <span style="font-size: 1.7rem; font-weight: bold; color: {CYAN}; text-shadow: 0 0 15px {CYAN}80; letter-spacing: 1.5px;">
@@ -358,7 +325,6 @@ f"""
       <span style="color: #606070;">118 METRICS · 14 DATA ROWS · 10 INTEL TABLES · 80+ RESOURCES</span>
     </div>
   </div>
- 
   <div style="flex: 1; text-align: center; min-width: 260px;">
      <a href="#global-threat-metrics" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase; margin-bottom: 12px;">
       &gt;&gt; ⏬ JUMP TO GLOBAL THREAT METRICS &lt;&lt;
@@ -370,7 +336,6 @@ f"""
       &gt;&gt; ⏬ JUMP TO GRC RESOURCES &amp; TOOLS &lt;&lt;
      </a>
   </div>
- 
   <div style="flex: 1; text-align: right; min-width: 220px;">
     <div style="font-size: .78rem; font-weight: bold; color: {BLUE}; text-shadow: 0 0 4px {BLUE}; letter-spacing: 0.5px;">
       {now_utc.strftime("%H:%M:%S")} UTC <span style="color:#3a3a4a; margin: 0 6px;">|</span> {now_utc.strftime("%Y-%m-%d")}
@@ -411,12 +376,10 @@ st.markdown(f"""
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
     &gt;&gt; AI Security &amp; Threat Intelligence Reference
   </div>
- 
   <div style="font-size: 0.55rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px; line-height: 1.5;">
     <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">10 DYNAMIC SECURITY TABLES</span>
     &nbsp; REAL-TIME CISA KEV ENUMERATION · THREAT ACTOR PROFILING
   </div>
- 
   <div style="font-size: 0.55rem; color: #404050; margin-top: 4px; letter-spacing: 0.3px;">
     GOVERNANCE REPOSITORY · MITRE ATT&amp;CK&reg; · OWASP AI/LLM TOP 10 · ADVERSARIAL MACHINE LEARNING · GLOBAL IMPACT ANALYSIS
   </div>
