@@ -3,7 +3,7 @@
   <div style="flex: 1; min-width: 300px; text-align: left;">
     <div style="margin-bottom: 4px;">
       <span style="font-size: 1.7rem; font-weight: bold; color: #00e5ff; text-shadow: 0 0 15px #00e5ff80; letter-spacing: 1.5px;">
-        🤖 SecAI-Nexus
+        # 🤖 SecAI-Nexus
       </span>
       <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v31</span>
     </div>
