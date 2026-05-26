@@ -11,7 +11,7 @@
       Cybersecurity GRC Observability Platform
     </div>
     <div style="font-size: .52rem; color: #505060; letter-spacing: 0.5px;">
-      <span style="color: #00ff41; background: #00ff4115; border: 1px solid #00ff4140; padding: 0 3px; border-radius: 2px; font-weight: bold;">ONLINE</span> ·
+             <span style="color: #00ff41; background: #00ff4115; border: 1px solid #00ff4140; padding: 0 3px; border-radius: 2px; font-weight: bold;">ONLINE</span> &middot;
       <span style="color: #606070;">118 METRICS · 14 DATA ROWS · 10 INTEL TABLES · 80+ RESOURCES</span>
     </div>
   </div>
