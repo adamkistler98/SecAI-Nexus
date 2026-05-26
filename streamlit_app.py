@@ -1695,4 +1695,3 @@ st.markdown(f"""
   <div style="color:#2a2a3a;font-size:.6rem;">
     SecAI-Nexus GRC [v31.0] · Live Data Engine · 12hr Cache ·
     112 Metrics · 8 Intel Tables · 2 Maps · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
-```
