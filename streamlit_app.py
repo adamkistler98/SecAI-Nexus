@@ -1680,7 +1680,7 @@ for fw, focus, cert, audience, adoption, controls, link in framework_comp_data:
     ])
 st.markdown(_tbl("📊 MAJOR FRAMEWORK COMPARISON MATRIX (2026 GRC VIEW)", ["Framework", "Primary Focus", "Certification", "Target Audience", "Adoption Rate", "Controls / Outcomes"], fc_rows, CYAN), unsafe_allow_html=True)
 
-# ── Visual Analysis (4 clean graphs — no repeats) ───────────────────────────
+# ── Visual Analysis (4 clean graphs) ─────────────────────────────────────────
 st.markdown(f'<div class="rl-p" style="margin-top:25px;">📈 2026 GRC FRAMEWORK VISUAL ANALYSIS</div>', unsafe_allow_html=True)
 col1, col2, col3, col4 = st.columns(4)
 
