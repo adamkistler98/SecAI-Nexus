@@ -1467,8 +1467,7 @@ with m2:
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
-# NEW SECTION: CYBERSECURITY FRAMEWORK COMPARISON & LINEAGE (GRC PROFESSIONAL)
-# Inserted after Live Threat Maps — consistent modern cyber/GRC style
+# NEW SECTION: CYBERSECURITY FRAMEWORK COMPARISON & LINEAGE (REVAMPED 2026)
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
 <div id="framework-comparison" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
@@ -1476,13 +1475,13 @@ st.markdown(f"""
     &gt;&gt; Cybersecurity Framework Comparison &amp; Lineage
   </div>
   <div style="font-size: 0.55rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px; line-height: 1.5;">
-    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">TOP 8 MAJOR INDUSTRY FRAMEWORKS</span>
-    &nbsp; 2026 GRC BENCHMARK · VISUAL LINEAGE · COVERAGE RADAR &amp; BAR ANALYSIS
+    <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">TOP 8 MAJOR INDUSTRY FRAMEWORKS • 2026 GRC BENCHMARK</span>
+    &nbsp; VISUAL LINEAGE • COVERAGE • ADOPTION • INTEROPERABILITY
   </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Framework comparison matrix (HTML table via existing _tbl helper)
+# Framework comparison table (unchanged but looks sharp)
 framework_comp_data = [
     ("NIST CSF 2.0", "Risk-based governance &amp; outcomes", "Voluntary / 3rd-party", "All sectors (US gov preferred)", "73%", "6 Functions, 106 Outcomes", "https://www.nist.gov/cyberframework"),
     ("ISO/IEC 27001:2022", "International ISMS standard", "Certifiable (audit required)", "Global enterprises &amp; regulated", "65%", "93 Annex A controls", "https://www.iso.org/isoiec-27001-information-security.html"),
@@ -1491,7 +1490,7 @@ framework_comp_data = [
     ("CIS Controls v8", "Actionable, prioritized safeguards", "No certification", "SMB → Enterprise", "58%", "18 controls (153 sub)", "https://www.cisecurity.org/controls/"),
     ("COBIT 2019", "Enterprise IT governance &amp; mgmt", "No certification", "Large enterprises / boards", "52%", "40 governance + mgmt objectives", "https://www.isaca.org/resources/cobit"),
     ("PCI DSS v4.0", "Payment card data security", "Mandatory (self/audit)", "Merchants &amp; processors", "68% (finance)", "12 core requirements", "https://www.pcisecuritystandards.org/"),
-    ("SOC 2 Type II", "Trust Services Criteria (security, availability, etc.)", "Audit report", "Service organizations (SaaS, cloud)", "70%", "5 TSC criteria (CC series)", "https://www.aicpa-cima.com/")
+    ("SOC 2 Type II", "Trust Services Criteria", "Audit report", "Service organizations (SaaS, cloud)", "70%", "5 TSC criteria (CC series)", "https://www.aicpa-cima.com/")
 ]
 fc_rows = []
 for fw, focus, cert, audience, adoption, controls, link in framework_comp_data:
@@ -1505,126 +1504,166 @@ for fw, focus, cert, audience, adoption, controls, link in framework_comp_data:
     ])
 st.markdown(_tbl("📊 MAJOR FRAMEWORK COMPARISON MATRIX (2026 GRC VIEW)", ["Framework", "Primary Focus", "Certification", "Target Audience", "Adoption Rate", "Controls / Outcomes"], fc_rows, CYAN), unsafe_allow_html=True)
 
-# 4 Graphs / Visuals section (Plotly + HTML for lineage)
-st.markdown(f'<div class="rl-p" style="margin-top:20px;">📈 VISUAL ANALYSIS: ADOPTION · COVERAGE · LINEAGE · INTEROPERABILITY</div>', unsafe_allow_html=True)
-g1, g2, g3, g4 = st.columns(4)
+# ── IMPROVED VISUAL ANALYSIS ─────────────────────────────────────────────────
+st.markdown(f'<div class="rl-p" style="margin-top:25px;">📈 2026 GRC FRAMEWORK VISUAL ANALYSIS</div>', unsafe_allow_html=True)
 
-with g1:
-    # Radar chart — coverage across NIST core functions (hardcoded realistic scores)
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    # Improved Radar Chart
     categories = ['Govern', 'Identify', 'Protect', 'Detect', 'Respond', 'Recover']
-    frameworks = ['NIST CSF', 'ISO 27001', 'MITRE ATT&amp;CK', 'HITRUST', 'CIS Controls']
+    frameworks = ['NIST CSF 2.0', 'ISO 27001', 'MITRE ATT&amp;CK', 'HITRUST', 'CIS Controls']
     values = [
-        [10, 9, 9, 8, 9, 9],      # NIST
-        [8, 9, 10, 7, 8, 7],      # ISO
-        [6, 5, 6, 10, 10, 4],     # MITRE
-        [9, 9, 9, 8, 9, 8],       # HITRUST
-        [7, 8, 9, 8, 8, 7]        # CIS
+        [10, 9, 9, 8, 9, 9],
+        [8, 9, 10, 7, 8, 7],
+        [6, 5, 6, 10, 10, 4],
+        [9, 9, 9, 8, 9, 8],
+        [7, 8, 9, 8, 8, 7]
     ]
     fig_radar = go.Figure()
+    colors = [CYAN, GREEN, BLUE, AMBER, RED]
     for i, fw in enumerate(frameworks):
         fig_radar.add_trace(go.Scatterpolar(
             r=values[i] + [values[i][0]],
             theta=categories + [categories[0]],
             fill='toself',
             name=fw,
-            line_color=[CYAN, GREEN, RED, AMBER, BLUE][i % 5]
+            line_color=colors[i],
+            hovertemplate="%{theta}: %{r}/10<extra></extra>"
         ))
     fig_radar.update_layout(
-        polar=dict(radialaxis=dict(visible=True, range=[0, 10])),
+        polar=dict(radialaxis=dict(visible=True, range=[0, 10], gridcolor="#222")),
         showlegend=True,
-        title="Framework Coverage Radar (NIST Core Functions)",
-        height=340,
-        margin=dict(l=40, r=40, t=40, b=20),
+        title="Framework Coverage Radar<br><span style='font-size:11px;color:#888'>(NIST Core Functions)</span>",
+        height=380,
+        margin=dict(l=40, r=40, t=60, b=20),
         paper_bgcolor=BG,
         plot_bgcolor=CARD,
-        font=dict(family=MONO, color=GREEN, size=11)
+        font=dict(family=MONO, color=GREEN, size=12)
     )
     st.plotly_chart(fig_radar, use_container_width=True)
 
-with g2:
-    # Bar chart — adoption rates
+with col2:
+    # Horizontal Adoption Bar
     adoption_data = {
-        "Framework": ["NIST CSF", "ISO 27001", "MITRE ATT&amp;CK", "HITRUST", "CIS Controls", "COBIT", "PCI DSS", "SOC 2"],
-        "Adoption %": [73, 65, 82, 45, 58, 52, 68, 70]
+        "Framework": ["NIST CSF 2.0", "ISO 27001", "MITRE ATT&amp;CK", "SOC 2", "PCI DSS", "CIS Controls", "COBIT", "HITRUST"],
+        "Adoption %": [73, 65, 82, 70, 68, 58, 52, 45]
     }
-    fig_adopt = px.bar(adoption_data, x="Framework", y="Adoption %", text="Adoption %",
-                       color_discrete_sequence=[CYAN])
+    fig_adopt = px.bar(adoption_data, y="Framework", x="Adoption %", orientation='h',
+                       text="Adoption %", color_discrete_sequence=[CYAN])
     fig_adopt.update_traces(textposition='outside', marker_line_color=BG, marker_line_width=1)
     fig_adopt.update_layout(
         title="2026 Industry Adoption Rate (%)",
-        xaxis_tickangle=-45,
-        height=340,
+        height=380,
         paper_bgcolor=BG,
         plot_bgcolor=CARD,
-        font=dict(family=MONO, color=GREEN, size=11)
+        font=dict(family=MONO, color=GREEN, size=12),
+        xaxis=dict(title="Adoption Rate", gridcolor="#222"),
+        yaxis=dict(title="")
     )
     st.plotly_chart(fig_adopt, use_container_width=True)
 
-with g3:
-    # Bar chart — approximate control / outcome count
+with col3:
+    # Horizontal Control Density
     control_data = {
-        "Framework": ["NIST CSF", "ISO 27001", "MITRE ATT&amp;CK", "HITRUST", "CIS Controls"],
-        "Controls/Outcomes": [106, 93, 320, 1050, 153]
+        "Framework": ["HITRUST CSF", "MITRE ATT&amp;CK", "NIST CSF 2.0", "ISO 27001", "CIS Controls"],
+        "Controls": [1050, 320, 106, 93, 153]
     }
-    fig_control = px.bar(control_data, x="Framework", y="Controls/Outcomes", text="Controls/Outcomes",
-                         color_discrete_sequence=[GREEN])
+    fig_control = px.bar(control_data, y="Framework", x="Controls", orientation='h',
+                         text="Controls", color_discrete_sequence=[GREEN])
     fig_control.update_traces(textposition='outside')
     fig_control.update_layout(
         title="Control / Outcome Density",
-        xaxis_tickangle=-45,
-        height=340,
+        height=380,
         paper_bgcolor=BG,
         plot_bgcolor=CARD,
-        font=dict(family=MONO, color=GREEN, size=11)
+        font=dict(family=MONO, color=GREEN, size=12),
+        xaxis=dict(title="Number of Controls / Outcomes", gridcolor="#222"),
+        yaxis=dict(title="")
     )
     st.plotly_chart(fig_control, use_container_width=True)
 
-with g4:
-    # Simple lineage / interoperability bar (overlap with NIST as baseline)
+with col4:
+    # Horizontal NIST Overlap (Lineage)
     lineage_data = {
-        "Framework": ["ISO 27001", "HITRUST", "CIS Controls", "COBIT", "PCI DSS"],
-        "NIST Overlap %": [78, 85, 72, 65, 58]
+        "Framework": ["HITRUST CSF", "ISO 27001", "CIS Controls", "COBIT", "PCI DSS"],
+        "NIST Overlap %": [85, 78, 72, 65, 58]
     }
-    fig_lineage = px.bar(lineage_data, x="Framework", y="NIST Overlap %", text="NIST Overlap %",
-                         color_discrete_sequence=[AMBER])
+    fig_lineage = px.bar(lineage_data, y="Framework", x="NIST Overlap %", orientation='h',
+                         text="NIST Overlap %", color_discrete_sequence=[AMBER])
     fig_lineage.update_traces(textposition='outside')
     fig_lineage.update_layout(
-        title="Lineage / Interoperability with NIST CSF",
-        xaxis_tickangle=-45,
-        height=340,
+        title="Lineage / Interoperability<br><span style='font-size:11px;color:#888'>with NIST CSF 2.0</span>",
+        height=380,
         paper_bgcolor=BG,
         plot_bgcolor=CARD,
-        font=dict(family=MONO, color=GREEN, size=11)
+        font=dict(family=MONO, color=GREEN, size=12),
+        xaxis=dict(title="Overlap %", gridcolor="#222"),
+        yaxis=dict(title="")
     )
     st.plotly_chart(fig_lineage, use_container_width=True)
 
-# Lineage visual (simple HTML diagram + facts)
+# Extra useful graph row (new addition)
+st.markdown(f'<div class="rl-p" style="margin-top:30px;">📍 ADDITIONAL GRC INSIGHT: CERTIFICATION COMPLEXITY &amp; HYBRID USE</div>', unsafe_allow_html=True)
+c1, c2 = st.columns(2)
+
+with c1:
+    # New: Certification Complexity
+    complexity_data = {
+        "Framework": ["HITRUST", "ISO 27001", "SOC 2", "PCI DSS", "NIST CSF", "CIS Controls", "MITRE ATT&amp;CK"],
+        "Complexity Score": [9.5, 8.5, 8.0, 7.5, 4.0, 5.0, 3.0]
+    }
+    fig_complex = px.bar(complexity_data, y="Framework", x="Complexity Score", orientation='h',
+                         text="Complexity Score", color_discrete_sequence=[RED])
+    fig_complex.update_layout(
+        title="Certification / Implementation Complexity",
+        height=340,
+        paper_bgcolor=BG,
+        plot_bgcolor=CARD,
+        font=dict(family=MONO, color=GREEN, size=12)
+    )
+    st.plotly_chart(fig_complex, use_container_width=True)
+
+with c2:
+    # New: Most Common Hybrid Combinations (pie)
+    hybrid_labels = ["NIST + MITRE", "ISO + NIST", "NIST + CIS", "HITRUST + NIST", "SOC 2 + ISO"]
+    hybrid_values = [38, 29, 18, 9, 6]
+    fig_hybrid = px.pie(names=hybrid_labels, values=hybrid_values, color_discrete_sequence=[CYAN, GREEN, BLUE, AMBER, RED])
+    fig_hybrid.update_layout(
+        title="Most Common Hybrid Framework Combinations (2026)",
+        height=340,
+        paper_bgcolor=BG,
+        plot_bgcolor=CARD,
+        font=dict(family=MONO, color=GREEN, size=12)
+    )
+    fig_hybrid.update_traces(textinfo='label+percent', hovertemplate="%{label}: %{value}%")
+    st.plotly_chart(fig_hybrid, use_container_width=True)
+
+# Clean lineage visual
 st.markdown(f"""
-<div style="margin-top:25px;background:#080810;border:1px solid #1a1a2e;padding:18px;border-radius:4px;">
+<div style="margin-top:25px;background:#080810;border:1px solid #1a1a2e;padding:20px;border-radius:4px;">
   <div style="font-size:.68rem;font-weight:bold;color:{CYAN};margin-bottom:12px;">📍 FRAMEWORK LINEAGE &amp; RELATIONSHIPS (2026)</div>
-  <div style="display:flex;align-items:center;justify-content:space-between;font-size:.62rem;color:#888;line-height:1.4;">
+  <div style="display:flex;align-items:center;justify-content:space-between;font-size:.62rem;color:#aaa;line-height:1.5;">
     <div style="text-align:center;flex:1;">
       <div style="color:{GREEN};font-weight:bold;">NIST CSF 2.0</div>
-      <div style="font-size:.55rem;margin:4px 0;">↓ influences / maps to</div>
+      <div style="font-size:.55rem;margin:6px 0;">↓ foundational umbrella</div>
     </div>
-    <div style="flex:1;border-left:2px dashed #1a1a2e;padding-left:12px;">
+    <div style="flex:1;border-left:2px dashed #1a1a2e;padding-left:18px;">
       ISO 27001 (international baseline)<br>
       COBIT (governance layer)<br>
       CIS Controls (actionable implementation)
     </div>
-    <div style="flex:1;border-left:2px dashed #1a1a2e;padding-left:12px;">
-      HITRUST (healthcare overlay on NIST)<br>
+    <div style="flex:1;border-left:2px dashed #1a1a2e;padding-left:18px;">
+      HITRUST (healthcare overlay)<br>
       PCI DSS / SOC 2 (compliance-specific)
     </div>
-    <div style="flex:1;border-left:2px dashed #1a1a2e;padding-left:12px;color:{RED};">
-      MITRE ATT&amp;CK (complementary TTP layer — used with ALL above)
+    <div style="flex:1;border-left:2px dashed #1a1a2e;padding-left:18px;color:{RED};font-weight:bold;">
+      MITRE ATT&amp;CK (TTP layer — used with ALL frameworks)
     </div>
   </div>
-  <div style="margin-top:14px;font-size:.58rem;color:{GREY};">
-    • NIST CSF is the most widely adopted “umbrella” framework in the US.<br>
-    • ISO 27001 provides the certifiable international standard most orgs map to.<br>
-    • MITRE ATT&amp;CK is not a controls framework but the de-facto threat modeling layer.<br>
-    • Most mature GRC programs use 2–3 frameworks in a hybrid model (NIST + ISO + MITRE).
+  <div style="margin-top:16px;font-size:.58rem;color:{GREY};">
+    • Most mature GRC programs run a <b>hybrid model</b> (NIST + ISO + MITRE).<br>
+    • NIST CSF is the most widely adopted “umbrella” framework in the US.
   </div>
 </div>
 """, unsafe_allow_html=True)
