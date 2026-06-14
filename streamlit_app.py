@@ -4,11 +4,13 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 import plotly.express as px
 import plotly.graph_objects as go
+import pandas as pd
+from io import StringIO
 # ==========================================================
 # SEC AI NEXUS — CYBER THREAT INTELLIGENCE DASHBOARD
 # Author: Adam Kistler
-# Version: 1.2 (v32)
-# Last Updated: May 26, 2026
+# Version: 1.3 (v33)
+# Last Updated: June 14, 2026
 # ==========================================================
 # --------------------------- 
 # Page Configuration
@@ -115,6 +117,19 @@ st.markdown(f"""
   .sd {{display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:3px;vertical-align:middle;}}
   .sg {{background:{GREEN};box-shadow:0 0 4px {GREEN};}} .sa {{background:{AMBER};box-shadow:0 0 4px {AMBER};}}
   .sc {{background:{CYAN};box-shadow:0 0 4px {CYAN};}}
+
+  /* Responsive improvements for mobile / smaller screens (v33) */
+  @media (max-width: 1200px) {{
+    .cm, .pulse {{ min-height: auto !important; padding: 6px 7px 5px !important; }}
+    .cm-v, .pulse .cm-v {{ font-size: 1.0rem !important; }}
+  }}
+  @media (max-width: 768px) {{
+    .stApp {{ font-size: 0.95rem !important; }}
+    .cm, .pulse {{ min-height: auto !important; margin-bottom: 8px !important; border-left-width: 3px !important; }}
+    .cm-v, .pulse .cm-v {{ font-size: 0.95rem !important; line-height: 1.1 !important; }}
+    .cm-s, .pulse .cm-s, .cm-f, .pulse .cm-f {{ font-size: 0.52rem !important; }}
+    div[data-testid="column"] {{ padding: 2px !important; }}
+  }}
 </style>
 """, unsafe_allow_html=True)
 S = requests.Session()
@@ -317,7 +332,7 @@ f"""
       <span style="font-size: 1.7rem; font-weight: bold; color: {CYAN}; text-shadow: 0 0 15px {CYAN}80; letter-spacing: 1.5px;">
         🤖 SecAI-Nexus
       </span>
-      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v32</span>
+      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v33</span>
     </div>
     <div style="font-size: 0.9rem; font-weight: bold; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; opacity: 0.8;">
       Cybersecurity GRC Observability Platform
@@ -348,11 +363,20 @@ f"""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
+# ── REFRESH CONTROL (new in v33) ─────────────────────────────────────────────
+col_r1, col_r2, col_r3 = st.columns([3, 2, 3])
+with col_r2:
+    if st.button("🔄 Refresh All Data & Clear Cache", type="secondary", use_container_width=True, help="Clears all @st.cache_data and reloads fresh API responses. Useful after long sessions."):
+        st.cache_data.clear()
+        st.toast("Cache cleared. Reloading latest threat intel...", icon="🔄")
+        st.rerun()
+
 with st.spinner("Syncing threat intelligence feeds…"):
     kev=fetch_kev(); baz=fetch_bazaar(); uhaus=fetch_urlhaus()
     feodo=fetch_feodo(); sans=fetch_sans(); tor=fetch_tor()
     topports=fetch_topports(); topips=fetch_topips(); honeypot=fetch_honeypot()
-# ── BASELINES (updated May 26 2026 with IBM 2025 / CrowdStrike 2026 GTR + latest verified data) ─────────────────────────────────────────────────────────────────
+# ── BASELINES (updated June 14 2026 with IBM 2025 / CrowdStrike 2026 GTR + latest verified data) ─────────────────────────────────────────────────────────────────
 CVE_TOT=32_800; CVE_CRIT=5_100; CVE_HIGH=13_900
 RANSOM=6_400; SUPPLY=3_700; INSIDER=7_800
 BREACH=8_700_000_000; BEC=24_500; PHISH=2_300_000
@@ -1509,6 +1533,18 @@ for fw, focus, cert, audience, adoption, controls, link in framework_comp_data:
     ])
 st.markdown(_tbl("📊 MAJOR FRAMEWORK COMPARISON MATRIX (2026 GRC VIEW — SOC 2 &amp; NIST AI RMF ADDED)", ["Framework", "Primary Focus", "Certification", "Target Audience", "Adoption Rate", "Controls / Outcomes"], fc_rows, CYAN), unsafe_allow_html=True)
 
+# Download button for framework matrix (new v33)
+fw_df = pd.DataFrame(framework_comp_data, columns=["Framework", "Primary Focus", "Certification", "Target Audience", "Adoption Rate", "Controls / Outcomes", "Link"])
+fw_csv = fw_df.drop(columns=["Link"]).to_csv(index=False)
+st.download_button(
+    label="📥 Download Framework Comparison (CSV)",
+    data=fw_csv,
+    file_name="secai_nexus_framework_comparison_2026.csv",
+    mime="text/csv",
+    key="fw_dl",
+    help="Export the full framework matrix for reports or further analysis"
+)
+
 # ── Visual Analysis (5 clean graphs — added SOC 2 coverage heatmap) ─────────────────────────────────────────
 st.markdown(f'<div class="rl-p" style="margin-top:25px;">📈 2026 GRC FRAMEWORK VISUAL ANALYSIS (ENHANCED)</div>', unsafe_allow_html=True)
 col1, col2, col3, col4, col5 = st.columns(5)
@@ -1673,12 +1709,13 @@ st.plotly_chart(fig_soc_lineage, use_container_width=True)
 
 st.markdown(f"""
 <div style="background:#080810;border:1px solid #1a1a2e;padding:18px;border-radius:4px;margin-top:12px;">
-  <b>📍 How to read the lineage graphs:</b><br>
-  • <span style="color:{CYAN}">Left</span> = 12 Frameworks (FedRAMP, SOC 2 &amp; NIST AI RMF included)<br>
-  • <span style="color:{GREEN}">Middle</span> = Control Categories<br>
-  • <span style="color:{AMBER}">Right</span> = Specific high-impact controls (including new AI governance)<br>
-  • Line thickness = relative emphasis / coverage strength<br>
-  Hover any flow for exact mapping details. SOC 2 now has dedicated heatmap + second Sankey showing strong AI alignment.
+  <b>📍 How to read the lineage graphs (v33 Enhanced):</b><br>
+  • <span style="color:{CYAN}">Left</span> = 12 Frameworks (FedRAMP, SOC 2 Type II &amp; NIST AI RMF 1.0 fully included)<br>
+  • <span style="color:{GREEN}">Middle</span> = Aggregated Control Categories (Governance, IAM, vuln mgmt, IR, etc.)<br>
+  • <span style="color:{AMBER}">Right</span> = 34 high-impact specific controls + new AI governance controls<br>
+  • <b>Line thickness</b> = relative coverage strength / emphasis across frameworks (illustrative mapping based on common GRC crosswalks — not exhaustive 1:1)<br>
+  • <b>Second Sankey</b> focuses on SOC 2 + NIST AI RMF → AI-specific risks (Prompt Injection, Model Governance, etc.)<br>
+  Hover nodes/links for details. These visuals help GRC teams quickly see overlap, gaps, and consolidation opportunities when mapping multiple frameworks.
 </div>
 """, unsafe_allow_html=True)
 # Continue with original GRC Resources section (unchanged)
