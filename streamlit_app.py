@@ -743,7 +743,173 @@ with g9: st.markdown(_tbl("🔥 TOP EXPLOITED CVEs 2026", ["CVE", "Product", "CV
 with g10: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (2026)", ["Industry", "Avg Cost", "Detail", "Notes", "Source"], costs_rows, GREEN), unsafe_allow_html=True)
 st.markdown(f'<div style="font-size:.48rem;color:#505060;margin:2px 0 0 4px;">Sources: <a href="https://www.ibm.com/reports/data-breach" target="_blank" class="sl">IBM Cost of Breach 2026</a> · <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="sl">CrowdStrike GTR 2026</a> · <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" class="sl">OWASP LLM Top 10</a> · <a href="https://attack.mitre.org/" target="_blank" class="sl">MITRE ATT&CK/ATLAS</a> · <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sl">CISA KEV</a> · <a href="https://www.vulncheck.com/" target="_blank" class="sl">VulnCheck</a> · <a href="https://redcanary.com/" target="_blank" class="sl">Red Canary</a> · <a href="https://www.chainalysis.com/" target="_blank" class="sl">Chainalysis</a> · <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
-# ─── PULSE ROW 6: AI & LLM THREAT INTELLIGENCE ───────────────────────────────
+
+# ══════════════════════════════════════════════════════════════════════════════
+# WHY AI SECURITY MATTERS — REGULATORY RISK & BUSINESS IMPACT (Executive Brief)
+# Placed prominently for CISOs and business leaders
+# ══════════════════════════════════════════════════════════════════════════════
+st.markdown(f"""
+<div id="why-ai-security-matters" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
+  <div style="font-size: 0.95rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
+    &gt;&gt; Why AI Security Matters: Risk, Regulation &amp; Business Impact
+  </div>
+  <div style="font-size: 0.58rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px;">
+    Executive context for CISOs, Boards, and Risk Committees • July 2026
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown(f"""
+<div style="background:#0a0a0a; border-left:4px solid {RED}; padding:14px 18px; margin-bottom:20px; border-radius:3px; max-width:1100px;">
+  <b style="color:#ffaa00; font-size:0.85rem;">The Business Reality in 2026</b><br>
+  <span style="color:#ddd; font-size:0.78rem; line-height:1.55;">
+  AI is no longer just a technology risk — it is a <b>material financial, legal, and reputational risk</b>. 
+  Shadow AI, model poisoning, prompt injection, and deepfake attacks are driving real breach costs and regulatory enforcement. 
+  At the same time, new laws (especially the EU AI Act) introduce some of the highest percentage-based fines in regulatory history. 
+  Boards are asking CISOs: <i>“What is our AI risk exposure and are we compliant?”</i>
+  </span>
+</div>
+""", unsafe_allow_html=True)
+
+# Key Stats Row
+c1, c2, c3 = st.columns(3)
+with c1:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:110px; padding:12px 14px;">
+      <div style="color:#888; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.5px;">Shadow AI Breaches</div>
+      <div style="color:#00ff41; font-size:1.65rem; font-weight:bold; margin:4px 0 2px;">22%</div>
+      <div style="color:#aaa; font-size:0.68rem;">of breaches now involve unauthorized AI use (IBM 2026)</div>
+      <div style="color:#ffaa00; font-size:0.7rem; margin-top:6px;">+ $680k to average breach cost</div>
+    </div>
+    """, unsafe_allow_html=True)
+with c2:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:110px; padding:12px 14px;">
+      <div style="color:#888; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.5px;">Highest AI Fine</div>
+      <div style="color:#ff4b4b; font-size:1.65rem; font-weight:bold; margin:4px 0 2px;">7%</div>
+      <div style="color:#aaa; font-size:0.68rem;">of global turnover (EU AI Act — prohibited practices)</div>
+      <div style="color:#ffaa00; font-size:0.7rem; margin-top:6px;">€35M+ cap also applies</div>
+    </div>
+    """, unsafe_allow_html=True)
+with c3:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:110px; padding:12px 14px;">
+      <div style="color:#888; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.5px;">SEC Enforcement</div>
+      <div style="color:#00e5ff; font-size:1.65rem; font-weight:bold; margin:4px 0 2px;">Active</div>
+      <div style="color:#aaa; font-size:0.68rem;">Multiple actions in 2025-2026 for disclosure failures</div>
+      <div style="color:#ffaa00; font-size:0.7rem; margin-top:6px;">4-business-day incident reporting</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("---")
+
+# Detailed Regulatory Breakdown
+st.markdown(f'<div class="rl-p" style="margin-top:10px;">📜 KEY REGULATIONS DRIVING AI & DATA RISK</div>', unsafe_allow_html=True)
+
+# GDPR
+with st.expander("🇪🇺 **GDPR** — The Most Enforced Data Regulation (Still #1 Risk)", expanded=False):
+    st.markdown("""
+    **Maximum Penalty:** Up to **4% of global annual turnover** or €20 million (whichever is higher).
+    
+    **Why it matters for AI:** Any AI system that processes personal data of EU residents falls under GDPR. This includes training data, inference logs, and profiling. Key obligations include:
+    - Lawful basis for processing (consent, legitimate interest, contract, etc.)
+    - Data Protection Impact Assessments (DPIA) for high-risk AI
+    - Transparency and explainability for automated decision-making
+    - 72-hour breach notification
+    
+    **Recent enforcement trend:** Regulators are increasingly fining companies for inadequate AI governance, lack of DPIAs on AI projects, and insufficient transparency in automated decisions.
+    
+    **Official Source:** [GDPR Official Text (EUR-Lex)](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+    """)
+
+# EU AI Act
+with st.expander("🇪🇺 **EU AI Act** — The Highest AI-Specific Penalties Globally", expanded=True):
+    st.markdown("""
+    **Maximum Penalty:** 
+    - **€35 million or 7% of global turnover** for prohibited AI practices
+    - **€15 million or 3%** for most other obligations
+    - **€7.5 million or 1%** for supplying incorrect information
+    
+    **Why it matters:** This is the first comprehensive AI law in the world with binding requirements and very high fines. It uses a risk-based approach:
+    - **Prohibited practices** (social scoring, real-time biometric ID in public spaces with limited exceptions, manipulative subliminal techniques)
+    - **High-risk AI systems** (biometrics, critical infrastructure, education, employment, law enforcement, etc.) — require conformity assessment, risk management, data quality, transparency, human oversight, and logging.
+    - **General-purpose AI models** (like large language models) have transparency and copyright obligations.
+    
+    **Timeline:** Most obligations apply from August 2026 onward.
+    
+    **Official Source:** [EU AI Act Official Text](https://artificialintelligenceact.eu/)
+    """)
+
+# NIS2 + DORA
+with st.expander("🇪🇺 **NIS2 Directive & DORA** — Critical Infrastructure & Financial Sector", expanded=False):
+    st.markdown("""
+    **NIS2 Maximum Penalty:** Up to **€10 million or 2% of global turnover**.
+    
+    **DORA Maximum Penalty:** Up to **2% of global turnover** + potential personal liability for management bodies.
+    
+    **Key Requirements:**
+    - NIS2 significantly expands the scope of the original NIS Directive to more sectors (including digital providers, postal services, waste management, etc.).
+    - Mandatory supply chain security and third-party risk management.
+    - 24h early warning + 72h full incident report.
+    - DORA applies specifically to the financial sector and requires ICT risk management, resilience testing, and oversight of critical third-party providers (including cloud and AI service providers).
+    
+    **Why CISOs should care:** Both explicitly require governance accountability at the highest levels. Management bodies can be held personally responsible.
+    
+    **Official Sources:** 
+    - [NIS2 Directive](https://eur-lex.europa.eu/eli/dir/2022/2555/oj)
+    - [DORA Regulation](https://eur-lex.europa.eu/eli/reg/2022/2554/oj)
+    """)
+
+# US Regulations
+with st.expander("🇺🇸 **US Regulatory Landscape** — SEC, CMMC, State Privacy Laws", expanded=False):
+    st.markdown("""
+    **SEC Cybersecurity Disclosure Rules**
+    - Material incidents must be disclosed on Form 8-K within **4 business days**.
+    - Annual disclosures required on cybersecurity risk management, strategy, and board oversight.
+    - Enforcement actions have already begun for inadequate or delayed disclosure.
+    
+    **CMMC 2.0 (Defense Contractors)**
+    - Level 2 requires third-party assessment against NIST SP 800-171.
+    - Non-compliance can lead to loss of DoD contracts and False Claims Act liability.
+    
+    **State Privacy Laws (CCPA/CPRA + others)**
+    - California: Up to $7,500 per intentional violation.
+    - Growing number of states with similar laws (Virginia, Colorado, Connecticut, Utah, etc.).
+    - Increasing requirements around automated decision-making and profiling disclosures.
+    
+    **Official Sources:**
+    - [SEC Final Rule](https://www.sec.gov/rules/final/2023/33-11216.pdf)
+    - [CMMC Program](https://dodcio.defense.gov/CMMC/)
+    - [CPPA (California)](https://cppa.ca.gov/)
+    """)
+
+st.markdown("---")
+
+# Quick Reference Table
+st.markdown(f'<div style="margin-top:10px; margin-bottom:8px; color:#888; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.8px;">Quick Reference — Maximum Penalties</div>', unsafe_allow_html=True)
+
+quick_data = [
+    ("EU AI Act (Prohibited)", "7% global turnover", "Highest AI-specific fine globally"),
+    ("GDPR", "4% global turnover", "Most enforced data protection law"),
+    ("NIS2", "2% global turnover", "Critical infrastructure & supply chain"),
+    ("DORA (Finance)", "2% global turnover", "Personal liability for executives"),
+    ("SEC Disclosure", "Civil + potential criminal", "4-business-day incident reporting"),
+    ("CCPA/CPRA (CA)", "$7,500 per violation", "Strongest US state privacy law"),
+]
+
+quick_rows = []
+for reg, fine, note in quick_data:
+    quick_rows.append([
+        (reg, "color:#00e5ff; font-weight:bold;"),
+        (fine, "color:#ff4b4b; font-weight:bold;"),
+        (note, "color:#aaa; font-size:0.62rem;")
+    ])
+
+st.markdown(_tbl("MAXIMUM PENALTIES AT A GLANCE", ["Regulation", "Maximum Fine", "Key Note"], quick_rows, CYAN), unsafe_allow_html=True)
+
+st.caption("Sources: Official regulatory texts (EUR-Lex, SEC, CMMC, CPPA). Enforcement trends based on 2025–2026 public actions and regulatory guidance.")
+
+# Continue to Global Threat Metrics
 st.markdown(f"""
 <div id="global-threat-metrics" style="text-align: left; margin: 40px 0 20px 5px;">
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
@@ -1870,93 +2036,8 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# ══════════════════════════════════════════════════════════════════════════════
-# NEW: REGULATORY RISK & PENALTY LANDSCAPE (July 2026)
-# Why compliance (especially AI governance) matters at the board level
-# ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""
-<div id="regulatory-risk" style="text-align: left; margin: 35px 0 15px 5px; scroll-margin-top: 35px;">
-  <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
-    &gt;&gt; Regulatory Risk &amp; Penalty Landscape (July 2026)
-  </div>
-  <div style="font-size: 0.55rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px; line-height: 1.5;">
-    <span style="color: {RED}; border: 1px solid {RED}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">ENFORCEMENT IS REAL</span>
-    &nbsp; GDPR • EU AI Act • NIS2 • DORA • SEC • State Privacy Laws
-  </div>
-  <div style="font-size: 0.55rem; color: #404050; margin-top: 4px; max-width: 1100px;">
-    Boards and CISOs are increasingly judged on regulatory posture. AI governance failures now carry some of the highest financial and reputational penalties in history. 
-    Below is a consolidated view of the most consequential regulations in 2026, their maximum penalties, and direct links to official requirements.
-  </div>
 </div>
 """, unsafe_allow_html=True)
-
-# Regulatory data (accurate as of July 2026)
-reg_data = [
-    ("GDPR", "EU", "Up to 4% of global annual turnover or €20M (whichever higher)", 
-     "Lawful basis, DPIAs for high-risk processing, Data Protection by Design, breach notification within 72h. AI systems processing personal data must meet transparency &amp; accountability requirements.",
-     "https://eur-lex.europa.eu/eli/reg/2016/679/oj"),
-    
-    ("EU AI Act", "EU", "Up to €35M or 7% of global turnover (prohibited practices); €15M or 3% for other obligations", 
-     "Risk-based classification of AI systems. High-risk systems require conformity assessment, transparency, human oversight, and logging. General-purpose AI models have additional obligations. Prohibited practices include social scoring and real-time biometric identification in public spaces (with narrow exceptions).",
-     "https://artificialintelligenceact.eu/"),
-    
-    ("NIS2 Directive", "EU", "Up to €10M or 2% of global turnover", 
-     "Mandatory risk management measures, incident reporting within 24h (early warning) / 72h (full report), supply chain security, and governance accountability for essential and important entities. Significantly expands scope beyond NIS1.",
-     "https://eur-lex.europa.eu/eli/dir/2022/2555/oj"),
-    
-    ("DORA", "EU", "Up to 2% of global turnover + personal liability for management", 
-     "Digital Operational Resilience Act for financial sector. Requires ICT risk management, incident reporting, digital operational resilience testing, and third-party risk management (including critical ICT providers). Management bodies have direct accountability.",
-     "https://eur-lex.europa.eu/eli/reg/2022/2554/oj"),
-    
-    ("CCPA / CPRA", "California, US", "Up to $7,500 per intentional violation (CPRA); $2,500 per violation (CCPA)", 
-     "Consumer rights (access, deletion, opt-out of sale/sharing). CPRA adds sensitive personal information protections, risk assessments for high-risk processing, and cybersecurity audit requirements. AI profiling and automated decision-making have specific disclosure rules.",
-     "https://cppa.ca.gov/"),
-    
-    ("SEC Cybersecurity Rules", "United States (Public Companies)", "Civil penalties + enforcement actions; potential criminal referrals", 
-     "Material cybersecurity incident disclosure within 4 business days (Form 8-K). Annual disclosure of cybersecurity risk management, strategy, and governance (including board oversight). Applies to public companies and certain foreign private issuers.",
-     "https://www.sec.gov/rules/final/2023/33-11216.pdf"),
-    
-    ("CMMC 2.0", "United States (DoD Contractors)", "Contract ineligibility, False Claims Act liability, potential debarment", 
-     "Cybersecurity Maturity Model Certification for Defense Industrial Base. Level 2 requires third-party assessment against NIST SP 800-171 controls. Flow-down requirements to subcontractors. Non-compliance can result in loss of contracts.",
-     "https://dodcio.defense.gov/CMMC/"),
-    
-    ("NYDFS 500", "New York (Financial Services)", "Up to $1,000 per day per violation; potential license revocation", 
-     "One of the strictest US financial cybersecurity regulations. Requires risk assessments, multi-factor authentication, encryption, incident response plans, and annual certification by senior officer. Strong enforcement history.",
-     "https://www.dfs.ny.gov/industry_guidance/cybersecurity"),
-    
-    ("HIPAA", "United States (Healthcare)", "Up to $1.5M+ per violation category per year; criminal penalties possible", 
-     "Privacy and Security Rules for protected health information (PHI). Requires risk analysis, access controls, audit controls, integrity controls, and breach notification. Increasing enforcement focus on ransomware and business associate agreements.",
-     "https://www.hhs.gov/hipaa/index.html"),
-]
-
-reg_rows = []
-for reg, jurisdiction, penalty, requirements, link in reg_data:
-    reg_rows.append([
-        (f'<a href="{link}" target="_blank" style="color:{CYAN};text-decoration:none;border-bottom:1px dashed {CYAN}40;">{reg}</a>', "color:#00e5ff; font-weight:bold; white-space:nowrap;"),
-        (jurisdiction, "color:#888;"),
-        (penalty, "color:#ffaa00; font-weight:600; font-size:0.58rem;"),
-        (requirements, "color:#ccc; font-size:0.56rem; line-height:1.35;"),
-        (f'<a href="{link}" target="_blank" style="color:{GREEN};text-decoration:none;">Official Site →</a>', "color:#00ff41; font-weight:bold; font-size:0.58rem;")
-    ])
-
-st.markdown(_tbl(
-    "📊 MAJOR REGULATORY PENALTIES &amp; COMPLIANCE REQUIREMENTS (2026)",
-    ["Regulation", "Jurisdiction", "Maximum Penalty", "Key Requirements (esp. AI/Data)", "Official Link"],
-    reg_rows,
-    RED
-), unsafe_allow_html=True)
-
-st.markdown(f"""
-<div style="background:#0a0a0a; border:1px solid #1a1a2e; padding:14px 16px; margin:12px 0 20px 0; border-radius:4px; font-size:0.62rem; line-height:1.5;">
-  <b style="color:#ffaa00;">Key Takeaways for GRC &amp; Security Leaders:</b><br>
-  • <b>EU AI Act</b> introduces the highest percentage-based fines globally for AI-specific violations (up to 7%).<br>
-  • <b>GDPR</b> remains the most enforced; AI systems processing EU personal data are squarely in scope.<br>
-  • <b>SEC rules</b> have already triggered multiple enforcement actions in 2025–2026 for inadequate disclosure.<br>
-  • Management liability is increasing (DORA, NIS2, SEC) — boards and CISOs can face personal consequences.<br>
-  • Many regulations now explicitly require <b>AI risk assessments</b>, logging, and human oversight for high-risk systems.
-</div>
-""", unsafe_allow_html=True)
-
 # Continue with original GRC Resources section (unchanged)
 st.markdown(
 f"""
@@ -2013,13 +2094,13 @@ st.markdown(f"""
     remains the property of its respective owners. Use at your own risk.</div>
   <div style="color:#555;font-size:.54rem;line-height:1.4;margin-bottom:10px;max-width:900px;margin-left:auto;margin-right:auto;">
     <b style="color:#666;">DUAL LICENSE:</b>
-    Source code &mdash; <a href="https://opensource.org/licenses/MIT" target="_blank" class="fl">MIT License</a> &nbsp;·&nbsp;
-    Design &amp; layout &mdash; <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="fl">CC BY-NC 4.0</a> &nbsp;·&nbsp;
+    Source code &mdash; <a href="https://opensource.org/licenses/MIT" target="_blank" class="fl">MIT License</a> &nbsp;|&nbsp;
+    Design &amp; layout &mdash; <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" class="fl">CC BY-NC 4.0</a> &nbsp;|&nbsp;
     <a href="https://github.com/adamkistler98/SecAI-Nexus/blob/main/LICENSE" target="_blank" class="fl">Full License Terms</a></div>
   <div style="margin-bottom:8px;">
     <a href="https://github.com/adamkistler98/SecAI-Nexus" target="_blank"
        style="color:#505060;font-size:.6rem;text-decoration:none;border:1px solid #1a1a2e;padding:3px 10px;border-radius:3px;">
-       ⭐ Star on GitHub</a></div>
+       Star on GitHub</a></div>
   <div style="color:#2a2a3a;font-size:.6rem;">
-    SecAI-Nexus GRC [v34] · Live Data Engine · 12hr Cache ·
-    118 Metrics · 10 Intel Tables · 2 Maps · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
+    SecAI-Nexus GRC [v34] | Live Data Engine | 12 hr Cache |
+    118 Metrics | 10 Intel Tables | 2 Maps | 80 Resources | {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
