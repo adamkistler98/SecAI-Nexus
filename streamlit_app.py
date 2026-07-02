@@ -9,7 +9,7 @@ from io import StringIO
 # ==========================================================
 # SEC AI NEXUS — CYBER THREAT INTELLIGENCE DASHBOARD
 # Author: Adam Kistler
-# Version: 1.4 (v34)
+# Version: 1.4 (v72)
 # Last Updated: July 2, 2026
 # ==========================================================
 # --------------------------- 
@@ -35,7 +35,7 @@ st.markdown(csp_meta, unsafe_allow_html=True)
 st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🤖",
                    initial_sidebar_state="collapsed")
 
-# ====================== AUTHOR HEADER (neat top bar - v34) ======================
+# ====================== AUTHOR HEADER (neat top bar - v72) ======================
 st.markdown("""
 <div style="background:#0a0a0a; border-bottom:1px solid #1a1a2e; padding:8px 14px; margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; font-family:'Courier New', Courier, monospace; font-size:0.68rem; letter-spacing:0.5px;">
   <div style="color:#00ff41; display:flex; align-items:center; gap:14px;">
@@ -48,7 +48,7 @@ st.markdown("""
        style="color:#008aff; text-decoration:none; border-bottom:1px dashed #008aff50; padding-bottom:1px; transition:0.2s; font-size:0.66rem;">GITHUB</a>
   </div>
   <div style="color:#4a4a5a; font-size:0.62rem; background:#111; padding:2px 8px; border:1px solid #1a1a2e; border-radius:2px;">
-    v34 • JUL 2026
+    v72 • JUL 2026
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -150,7 +150,7 @@ st.markdown(f"""
     div[data-testid="column"] {{ padding: 2px !important; }}
   }}
 
-  /* Sleek Cyber-Themed Refresh Button (v34) */
+  /* Sleek Cyber-Themed Refresh Button (v72) */
   .stButton button[kind="secondary"] {{
     background: linear-gradient(135deg, #0a0a14 0%, #111113 100%) !important;
     color: #00e5ff !important;
@@ -387,7 +387,7 @@ f"""
       <span style="font-size: 1.7rem; font-weight: bold; color: {CYAN}; text-shadow: 0 0 15px {CYAN}80; letter-spacing: 1.5px;">
         🤖 SecAI-Nexus
       </span>
-      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v34</span>
+      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v72</span>
     </div>
     <div style="font-size: 0.9rem; font-weight: bold; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; opacity: 0.8;">
       Cybersecurity GRC Observability Platform
@@ -427,7 +427,7 @@ f"""
 </div>
 """, unsafe_allow_html=True)
 
-# ── REFRESH CONTROL (v34 — sleek cyber theme) ─────────────────────────────────────────────
+# ── REFRESH CONTROL (v72 — sleek cyber theme) ─────────────────────────────────────────────
 col_r1, col_r2, col_r3 = st.columns([3, 2, 3])
 with col_r2:
     if st.button("Sync & Clear Cache", type="secondary", use_container_width=True, help="Clears all cached threat intel and reloads fresh data from APIs."):
@@ -905,25 +905,7 @@ with g10: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (2026)", ["Industry", "
 st.markdown(f'<div style="font-size:.48rem;color:#505060;margin:2px 0 0 4px;">Sources: <a href="https://www.ibm.com/reports/data-breach" target="_blank" class="sl">IBM Cost of Breach 2026</a> · <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="sl">CrowdStrike GTR 2026</a> · <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" class="sl">OWASP LLM Top 10</a> · <a href="https://attack.mitre.org/" target="_blank" class="sl">MITRE ATT&CK/ATLAS</a> · <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sl">CISA KEV</a> · <a href="https://www.vulncheck.com/" target="_blank" class="sl">VulnCheck</a> · <a href="https://redcanary.com/" target="_blank" class="sl">Red Canary</a> · <a href="https://www.chainalysis.com/" target="_blank" class="sl">Chainalysis</a> · <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
 
-# (Cleaned duplicate leftover section) 
-
-# EU AI Act
-with st.expander("🇪🇺 **EU AI Act** — The Highest AI-Specific Penalties Globally", expanded=True):
-    st.markdown("""
-    **Maximum Penalty:** 
-    - **€35 million or 7% of global turnover** for prohibited AI practices
-    - **€15 million or 3%** for most other obligations
-    - **€7.5 million or 1%** for supplying incorrect information
-    
-    **Why it matters:** This is the first comprehensive AI law in the world with binding requirements and very high fines. It uses a risk-based approach:
-    - **Prohibited practices** (social scoring, real-time biometric ID in public spaces with limited exceptions, manipulative subliminal techniques)
-    - **High-risk AI systems** (biometrics, critical infrastructure, education, employment, law enforcement, etc.) — require conformity assessment, risk management, data quality, transparency, human oversight, and logging.
-    - **General-purpose AI models** (like large language models) have transparency and copyright obligations.
-    
-    **Timeline:** Most obligations apply from August 2026 onward.
-    
-    **Official Source:** [EU AI Act Official Text](https://artificialintelligenceact.eu/)
-    """)
+# (Cleaned all duplicate leftover sections)
 
 # NIS2 + DORA
 with st.expander("🇪🇺 **NIS2 Directive & DORA** — Critical Infrastructure & Financial Sector", expanded=False):
@@ -1896,7 +1878,7 @@ with col5:
     st.plotly_chart(fig_heatmap, use_container_width=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
-# NEW: ONE-CLICK FRAMEWORK CROSSWALK + GAP MATRIX (v34)
+# NEW: ONE-CLICK FRAMEWORK CROSSWALK + GAP MATRIX (v72)
 # Extremely useful for GRC professionals doing multi-framework mapping
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f'<div class="rl-p" style="margin-top:25px;">🧭 ONE-CLICK FRAMEWORK CROSSWALK + GAP MATRIX</div>', unsafe_allow_html=True)
@@ -2164,6 +2146,6 @@ st.markdown(f'''
        style="color:#505060;font-size:.6rem;text-decoration:none;border:1px solid #1a1a2e;padding:3px 10px;border-radius:3px;">
        Star on GitHub</a></div>
   <div style="color:#2a2a3a;font-size:.6rem;">
-    SecAI-Nexus GRC [v34] | Live Data Engine | 12 hr Cache |
+    SecAI-Nexus GRC [v72] | Live Data Engine | 12 hr Cache |
     118 Metrics | 10 Intel Tables | 2 Maps | 80 Resources | {now_utc.strftime("%Y")}</div></div>
 ''', unsafe_allow_html=True)
