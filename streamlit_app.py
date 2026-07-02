@@ -446,7 +446,7 @@ f"""
       &gt;&gt; ⏬ FRAMEWORK COMPARISON &amp; LINEAGE &lt;&lt;
      </a>
      <a href="#framework-gap-matrix" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
-      &gt;&gt; ⏬ INDUSTRY FRAMEWORK GAP MATRIX &lt;&lt;
+      &gt;&gt; ⏬ GAP MATRIX (BETA) — AI/REG RISK &lt;&lt;
      </a>
      <a href="#grc-resources" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
       &gt;&gt; ⏬ GRC RESOURCES &amp; TOOLS &lt;&lt;
@@ -1875,7 +1875,7 @@ st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # CYBERSECURITY FRAMEWORK COMPARISON & CONTROL LINEAGE (2026 GRC — ENHANCED)
-# Verified data • FedRAMP + SOC 2 fully covered • All frameworks in lineage
+# Verified data • FedRAMP + SOC 2 fully covered • All frameworks in lineage • Gap Matrix (Beta) integrated below
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
 <div id="framework-comparison" style="text-align: left; margin: 35px 0 15px 5px; scroll-margin-top: 35px;">
@@ -1884,7 +1884,7 @@ st.markdown(f"""
   </div>
   <div style="font-size: 0.55rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px; line-height: 1.5;">
     <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">12 MAJOR FRAMEWORKS • VERIFIED 2026 DATA</span>
-    &nbsp; FedRAMP &amp; SOC 2 strengthened • Real coverage, adoption &amp; lineage
+    &nbsp; FedRAMP &amp; SOC 2 strengthened • <span style="color:#ffaa00;">Interactive Gap Matrix (BETA) below for AI/Reg risk mapping</span>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -2015,12 +2015,32 @@ with col5:
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
 <div id="framework-gap-matrix" style="scroll-margin-top: 20px;">
-  <div class="rl-p" style="margin-top:25px;">🧭 INDUSTRY FRAMEWORK GAP MATRIX</div>
+  <div class="rl-p" style="margin-top:25px;">🧭 INDUSTRY FRAMEWORK GAP MATRIX <span style="color:#ffaa00; font-size:0.62rem; border:1px solid #ffaa0040; padding:1px 5px; border-radius:2px;">BETA v73</span></div>
   <div style="font-size:0.54rem; color:#505060; margin-top:2px; margin-bottom:8px; letter-spacing:0.3px;">
-    Interactive crosswalk tool for GRC teams. Select 2+ frameworks to instantly see consolidated control coverage, identify gaps (especially AI/LLM, Vendor/Third-Party Risk, Business Continuity), and map coverage against high-impact regulations (EU AI Act, NIS2/DORA supply chain rules, GDPR, SEC disclosure, CMMC). Helps prioritize control enhancements and framework rationalization.
+    Interactive crosswalk tool for GRC teams. Select 2+ frameworks to instantly see consolidated control coverage, identify gaps (especially AI/LLM, Vendor/Third-Party Risk, Business Continuity), and map coverage against high-impact regulations (EU AI Act 7% fines, NIS2/DORA supply chain, GDPR, SEC AI disclosure, CMMC). Helps prioritize control enhancements, framework rationalization, and AI governance investments. <b>Ties directly to the top "Why AI Security Matters" risks.</b>
   </div>
 </div>
 """, unsafe_allow_html=True)
+
+# ── PRESET BUTTONS for common GRC use cases (NEW in v73 Beta) ─────────────────────────────
+st.markdown('<div style="margin-bottom:6px;"><span style="color:#ffaa00; font-size:0.62rem; font-weight:bold; text-transform:uppercase; letter-spacing:0.5px;">QUICK PRESETS (click to auto-select common regulatory combos)</span></div>', unsafe_allow_html=True)
+p1, p2, p3, p4 = st.columns(4)
+with p1:
+    if st.button("🇪🇺 EU AI Act + NIS2 Readiness", use_container_width=True, key="preset_eu"):
+        st.session_state.fw_crosswalk = ["NIST CSF 2.0", "NIST AI RMF 1.0", "ISO 27001:2022", "SOC 2 Type II"]
+        st.rerun()
+with p2:
+    if st.button("☁️ SOC 2 + FedRAMP Cloud GRC", use_container_width=True, key="preset_cloud"):
+        st.session_state.fw_crosswalk = ["NIST CSF 2.0", "SOC 2 Type II", "FedRAMP", "NIST SP 800-53"]
+        st.rerun()
+with p3:
+    if st.button("🛡️ Ransomware & Supply Chain", use_container_width=True, key="preset_ransom"):
+        st.session_state.fw_crosswalk = ["NIST CSF 2.0", "CIS Controls v8", "MITRE ATT&CK", "CMMC 2.0"]
+        st.rerun()
+with p4:
+    if st.button("🤖 Full AI Governance Focus", use_container_width=True, key="preset_ai"):
+        st.session_state.fw_crosswalk = ["NIST CSF 2.0", "NIST AI RMF 1.0", "SOC 2 Type II", "HITRUST CSF"]
+        st.rerun()
 
 with st.expander("▶ Configure Crosswalk (select 2+ frameworks to analyze overlap, gaps & regulatory alignment)", expanded=True):
     selected_frameworks = st.multiselect(
@@ -2029,10 +2049,12 @@ with st.expander("▶ Configure Crosswalk (select 2+ frameworks to analyze overl
                  "SOC 2 Type II", "FedRAMP", "NIST SP 800-53", "CMMC 2.0", "NIST AI RMF 1.0"],
         default=["NIST CSF 2.0", "SOC 2 Type II", "FedRAMP"],
         key="fw_crosswalk",
-        help="Common regulatory combos: EU AI Act → NIST CSF + NIST AI RMF + ISO 27001 + SOC 2; NIS2/DORA → NIST CSF + ISO + FedRAMP + HITRUST"
+        help="Common regulatory combos: EU AI Act → NIST CSF + NIST AI RMF + ISO 27001 + SOC 2; NIS2/DORA → NIST CSF + ISO + FedRAMP + HITRUST. Presets above auto-populate for speed."
     )
 
 # Core control categories + estimated strong coverage per framework (illustrative GRC estimates based on typical mappings — not exhaustive)
+# NOTE: These scores are DEMO/illustrative for the SecAI-Nexus dashboard experience. Real program mapping should use official crosswalks
+# (NIST CSF <-> ISO 27001 mappings, HITRUST CSF mappings, FedRAMP baselines, SOC 2 TSC to NIST, etc.) and your organization's scope.
 core_controls = [
     "Identity & Access Management (IAM)", "Incident Response", "Vulnerability Management",
     "Risk Assessment & Governance", "Data Protection & Encryption", "Monitoring & Logging",
@@ -2168,7 +2190,7 @@ if len(selected_frameworks) >= 2:
     fig_cross.update_traces(hovertemplate="%{y}<br>%{x}% coverage<extra></extra>")
     st.plotly_chart(fig_cross, use_container_width=True)
     
-    # Enhanced actionable insight with dynamic recommendations
+    # Enhanced actionable insight with dynamic recommendations (tied to top AI risks: Shadow AI, Agentic threats, Deepfakes, EU AI Act 7% fines)
     low_coverage = [core_controls[i] for i, v in enumerate(avg_coverage) if v < 65]
     ai_gap = "AI / LLM Specific Controls" in low_coverage
     vendor_gap = "Vendor / Third-Party Risk" in low_coverage
@@ -2176,30 +2198,32 @@ if len(selected_frameworks) >= 2:
     
     recs = []
     if ai_gap and "NIST AI RMF 1.0" not in selected_frameworks:
-        recs.append("<b>NIST AI RMF 1.0</b> (for EU AI Act high-risk systems, model governance, prompt injection controls)")
+        recs.append("<b>NIST AI RMF 1.0</b> (for EU AI Act high-risk/prohibited systems, model governance, prompt injection, excessive agency — directly addresses 22% Shadow AI breach risk &amp; agentic espionage)")
     if vendor_gap and "HITRUST CSF" not in selected_frameworks and "ISO 27001:2022" not in selected_frameworks:
-        recs.append("<b>HITRUST CSF</b> or <b>ISO 27001</b> (strong vendor/third-party risk and supply chain controls — critical for NIS2/DORA)")
+        recs.append("<b>HITRUST CSF</b> or <b>ISO 27001</b> (strong vendor/third-party risk &amp; supply chain controls — critical for NIS2/DORA 2% turnover fines &amp; SolarWinds/MOVEit-style attacks)")
     if bc_gap:
-        recs.append("<b>NIST CSF 2.0 Recover function</b> or <b>ISO 22301</b> alignment for business continuity testing")
+        recs.append("<b>NIST CSF 2.0 Recover</b> or <b>ISO 22301</b> alignment (business continuity testing — reduces 99+ day recovery times &amp; ransomware dwell impact)")
+    if ai_gap and vendor_gap:
+        recs.append("<b>SOC 2 Type II + NIST AI RMF</b> combo recommended for Shadow AI (22% breaches) + AI Agent visibility crisis (48.9% blind spots) — map to TSC CC6/CC7 + AI RMF Map 1.0")
     
     insight_text = ""
     if recs:
-        insight_text = "⚠️ <b>Priority Recommendations:</b><br>" + "<br>".join(f"• {r}" for r in recs)
+        insight_text = "⚠️ <b>Priority Recommendations (tied to top AI/Reg risks):</b><br>" + "<br>".join(f"• {r}" for r in recs)
         if ai_gap:
-            insight_text += "<br><span style='color:#ffaa00;'>AI/LLM gap directly impacts EU AI Act prohibited/high-risk compliance and SEC AI-related disclosure readiness.</span>"
+            insight_text += "<br><span style='color:#ffaa00; font-weight:bold;'>AI/LLM gap = direct exposure to EU AI Act 7% global revenue fines, SEC 4-day AI incident disclosure, and Shadow AI data leaks (only 3% orgs have proper controls).</span>"
     elif low_coverage:
-        insight_text = f"⚠️ <b>Priority Gaps:</b> {', '.join(low_coverage[:2])}. Review policies or add compensating controls from frameworks with high scores in those areas."
+        insight_text = f"⚠️ <b>Priority Gaps:</b> {', '.join(low_coverage[:2])}. Review policies or add compensating controls from frameworks with high scores in those areas. These map to high-penalty areas in the 'Why AI Security Matters' section above."
     else:
-        insight_text = "✅ <b>Strong consolidated coverage.</b> Focus on implementation depth, evidence automation, and continuous monitoring rather than adding more frameworks."
+        insight_text = "✅ <b>Strong consolidated coverage.</b> Focus on implementation depth, evidence automation (e.g. via SecAI-Nexus dashboards), continuous monitoring, and tabletop exercises rather than adding more frameworks. Low gaps = faster audit readiness for EU AI Act / NIS2 / SOC 2."
     
     st.markdown(f"""
     <div style="background:#0a0a0a; border-left:4px solid {AMBER if recs or low_coverage else GREEN}; padding:12px 14px; margin:10px 0 6px; border-radius:3px; font-size:0.72rem; line-height:1.5;">
       {insight_text}<br>
-      <span style="color:#666; font-size:0.62rem; display:block; margin-top:6px;">Note: Coverage scores are illustrative GRC estimates based on common mappings (NIST CSF/800-53 Rev 5, ISO 27001 Annex A, SOC 2 TSC, MITRE, CIS v8). Always validate with official crosswalks (e.g. NIST CSF to ISO, HITRUST mappings) for your exact scope and regulatory jurisdiction.</span>
+      <span style="color:#666; font-size:0.62rem; display:block; margin-top:6px;">Note: Coverage scores are <b>illustrative GRC estimates</b> based on common mappings (NIST CSF/800-53 Rev 5, ISO 27001 Annex A, SOC 2 TSC, MITRE, CIS v8). Always validate with official crosswalks (NIST CSF ↔ ISO, HITRUST mappings, FedRAMP baselines) for your exact scope, regulatory jurisdiction, and control implementation evidence. This Beta tool is for prioritization and board storytelling — not a substitute for formal gap assessments.</span>
     </div>
     """, unsafe_allow_html=True)
     
-    st.caption("💡 Tip: Use this matrix to build a defensible control rationalization story for auditors and boards. Low-coverage areas (AI governance, vendor risk, BC) are high-priority for 2026 regulatory enforcement actions.")
+    st.caption("💡 Tip: Use this matrix + the top 'Why AI Security Matters' risks to build a defensible 2026-2027 control rationalization story for auditors, CISOs, and boards. Low-coverage areas (AI governance, vendor risk, BC) are now high-priority for enforcement actions (EU AI Act Q2 2026 fines already issued). Export the CSV above for your GRC tool or Excel workbook.")
 else:
     st.info("Select at least **2 frameworks** above to generate the crosswalk and gap analysis. Try presets like NIST CSF + SOC 2 + NIST AI RMF for modern AI/regulatory risk programs.")
 
