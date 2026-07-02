@@ -2012,7 +2012,7 @@ fig_soc_lineage = go.Figure(data=[go.Sankey(
         thickness = 22,
         line = dict(color = "#111", width = 0.5),
         label = soc_labels,
-        color = [CYAN, BLUE, GREEN, AMBER, RED, GREEN, GREEN, CYAN, CYAN, RED, RED, RED, AMBER]
+        color = [CYAN, BLUE, GREEN, AMBER, RED, GREEN, GREEN, CYAN, CYAN, RED, RED, RED, AMBER] 
     ),
     link = dict(
         source = soc_source,
