@@ -881,21 +881,6 @@ with g10: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (2026)", ["Industry", "
 st.markdown(f'<div style="font-size:.48rem;color:#505060;margin:2px 0 0 4px;">Sources: <a href="https://www.ibm.com/reports/data-breach" target="_blank" class="sl">IBM Cost of Breach 2026</a> · <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="sl">CrowdStrike GTR 2026</a> · <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" class="sl">OWASP LLM Top 10</a> · <a href="https://attack.mitre.org/" target="_blank" class="sl">MITRE ATT&CK/ATLAS</a> · <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sl">CISA KEV</a> · <a href="https://www.vulncheck.com/" target="_blank" class="sl">VulnCheck</a> · <a href="https://redcanary.com/" target="_blank" class="sl">Red Canary</a> · <a href="https://www.chainalysis.com/" target="_blank" class="sl">Chainalysis</a> · <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
 
-# ══════════════════════════════════════════════════════════════════════════════
-# WHY AI SECURITY MATTERS — REGULATORY RISK & BUSINESS IMPACT (Executive Brief)
-# Placed prominently for CISOs and business leaders
-# ══════════════════════════════════════════════════════════════════════════════
-st.markdown(f"""
-<div id="why-ai-security-matters" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
-  <div style="font-size: 0.95rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
-    &gt;&gt; Why AI Security Matters: Risk, Regulation &amp; Business Impact
-  </div>
-  <div style="font-size: 0.58rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px;">
-    Executive context for CISOs, Boards, and Risk Committees • July 2026
-  </div>
-</div>
-""", unsafe_allow_html=True)
-
 st.markdown(f"""
 <div style="background:#0a0a0a; border-left:4px solid {RED}; padding:14px 18px; margin-bottom:20px; border-radius:3px; max-width:1100px;">
   <b style="color:#ffaa00; font-size:0.85rem;">The Business Reality in 2026</b><br>
