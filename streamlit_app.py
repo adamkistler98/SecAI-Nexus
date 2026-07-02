@@ -38,10 +38,10 @@ st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🤖"
 # ====================== AUTHOR HEADER (neat top bar - v34) ======================
 st.markdown("""
 <div style="background:#0a0a0a; border-bottom:1px solid #1a1a2e; padding:8px 14px; margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; font-family:'Courier New', Courier, monospace; font-size:0.68rem; letter-spacing:0.5px;">
-  <div style="color:#00ff41;">
-    <span style="color:#008aff; font-weight:bold;">▸</span> DEVELOPED BY <b style="color:#fff; text-shadow:0 0 4px #00ff4140;">ADAM KISTLER</b>
-  </div>
-  <div style="display:flex; align-items:center; gap:16px;">
+  <div style="color:#00ff41; display:flex; align-items:center; gap:14px;">
+    <span style="color:#008aff; font-weight:bold;">▸</span> 
+    DEVELOPED BY <b style="color:#fff; text-shadow:0 0 4px #00ff4140;">ADAM KISTLER</b>
+    <span style="color:#2a2a3a;">|</span>
     <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" 
        style="color:#008aff; text-decoration:none; border-bottom:1px dashed #008aff50; padding-bottom:1px; transition:0.2s; font-size:0.66rem;">LINKEDIN</a>
     <a href="https://github.com/adamkistler98/SecAI-Nexus" target="_blank" 
