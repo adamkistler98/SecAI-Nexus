@@ -37,8 +37,8 @@ st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🤖"
 
 # ====================== AUTHOR HEADER (neat top bar - v72) ======================
 st.markdown("""
-<div style="background:#0a0a0a; border-bottom:1px solid #1a1a2e; padding:8px 14px; margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; font-family:'Courier New', Courier, monospace; font-size:0.68rem; letter-spacing:0.5px;">
-  <div style="color:#00ff41; display:flex; align-items:center; gap:10px;">
+<div class="author-header" style="background:#0a0a0a; border-bottom:1px solid #1a1a2e; padding:8px 14px; margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; font-family:'Courier New', Courier, monospace; font-size:0.68rem; letter-spacing:0.5px;">
+  <div style="color:#00ff41; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
     <span style="color:#008aff; font-weight:bold;">▸</span> 
     DEVELOPED BY <b style="color:#fff; text-shadow:0 0 4px #00ff4140;">ADAM KISTLER</b>
     <span style="color:#2a2a3a;">|</span>
@@ -47,7 +47,7 @@ st.markdown("""
     <a href="https://github.com/adamkistler98/SecAI-Nexus" target="_blank" 
        style="color:#008aff; text-decoration:none; border-bottom:1px dashed #008aff50; padding-bottom:1px; transition:0.2s; font-size:0.66rem;">GITHUB</a>
   </div>
-  <div style="color:#00ff41; font-size:0.62rem; background:#0a0a0a; padding:3px 10px; border:1px solid #00ff4140; border-radius:2px; text-shadow:0 0 4px #00ff4140; font-weight:bold;">
+  <div style="color:#00ff41; font-size:0.62rem; background:#0a0a0a; padding:3px 10px; border:1px solid #00ff4140; border-radius:2px; text-shadow:0 0 4px #00ff4140; font-weight:bold; white-space:nowrap; flex-shrink:0;">
     v72 • JUL 2026
   </div>
 </div>
@@ -148,6 +148,21 @@ st.markdown(f"""
     .cm-v, .pulse .cm-v {{ font-size: 0.95rem !important; line-height: 1.1 !important; }}
     .cm-s, .pulse .cm-s, .cm-f, .pulse .cm-f {{ font-size: 0.52rem !important; }}
     div[data-testid="column"] {{ padding: 2px !important; }}
+  }}
+
+  /* Author header mobile responsiveness (v72 fix) */
+  @media (max-width: 600px) {{
+    .author-header {{
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 6px !important;
+    }}
+    .author-header > div:last-child {{
+      font-size: 0.52rem !important;
+      padding: 2px 8px !important;
+      align-self: flex-end !important;
+      margin-top: 2px;
+    }}
   }}
 
   /* Sleek Cyber-Themed Refresh Button (v72) */
@@ -620,7 +635,7 @@ with r2:
     </div>
     """, unsafe_allow_html=True)
 
-st.caption("Sources: Official regulatory texts (EUR-Lex, SEC, CMMC, CPPA). These cards summarize the highest-impact regulations affecting AI governance, data protection, and cybersecurity compliance as of mid-2026. Enforcement trends based on 2025–2026 public actions.")
+st.caption("Sources: [EU AI Act](https://artificialintelligenceact.eu/) · [NIS2 Directive](https://eur-lex.europa.eu/eli/dir/2022/2555/oj) · [DORA Regulation](https://eur-lex.europa.eu/eli/reg/2022/2554/oj) · [GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj) · [SEC Cybersecurity Disclosure Rule](https://www.sec.gov/rules/final/2023/33-11216.pdf) · [CMMC 2.0](https://dodcio.defense.gov/CMMC/) · [CPRA / CCPA](https://cppa.ca.gov/). These cards summarize the highest-impact regulations affecting AI governance, data protection, and cybersecurity compliance as of mid-2026. Enforcement trends based on 2025–2026 public actions.")
 
 # Quick Reference Table — Maximum Penalties
 quick_data = [
@@ -642,7 +657,7 @@ for reg, fine, note in quick_data:
 
 st.markdown(_tbl("MAXIMUM PENALTIES AT A GLANCE", ["Regulation", "Maximum Fine", "Key Note"], quick_rows, CYAN), unsafe_allow_html=True)
 
-st.caption("Sources: Official regulatory texts (EUR-Lex, SEC, CMMC, CPPA). Enforcement trends based on 2025–2026 public actions and regulatory guidance.")
+st.caption("Sources: [EU AI Act](https://artificialintelligenceact.eu/) · [NIS2 Directive](https://eur-lex.europa.eu/eli/dir/2022/2555/oj) · [DORA Regulation](https://eur-lex.europa.eu/eli/reg/2022/2554/oj) · [GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj) · [SEC Cybersecurity Disclosure Rule](https://www.sec.gov/rules/final/2023/33-11216.pdf) · [CMMC 2.0](https://dodcio.defense.gov/CMMC/) · [CPRA / CCPA](https://cppa.ca.gov/). Enforcement trends based on 2025–2026 public actions and regulatory guidance.")
 
 # AI Reference section starts here
 # ══════════════════════════════════════════════════════════════════════════════
