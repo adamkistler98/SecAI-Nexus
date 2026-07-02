@@ -905,68 +905,7 @@ with g10: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (2026)", ["Industry", "
 st.markdown(f'<div style="font-size:.48rem;color:#505060;margin:2px 0 0 4px;">Sources: <a href="https://www.ibm.com/reports/data-breach" target="_blank" class="sl">IBM Cost of Breach 2026</a> · <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="sl">CrowdStrike GTR 2026</a> · <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" class="sl">OWASP LLM Top 10</a> · <a href="https://attack.mitre.org/" target="_blank" class="sl">MITRE ATT&CK/ATLAS</a> · <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sl">CISA KEV</a> · <a href="https://www.vulncheck.com/" target="_blank" class="sl">VulnCheck</a> · <a href="https://redcanary.com/" target="_blank" class="sl">Red Canary</a> · <a href="https://www.chainalysis.com/" target="_blank" class="sl">Chainalysis</a> · <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
 
-st.markdown(f"""
-<div style="background:#0a0a0a; border-left:4px solid {RED}; padding:14px 18px; margin-bottom:20px; border-radius:3px; max-width:1100px;">
-  <b style="color:#ffaa00; font-size:0.85rem;">The Business Reality in 2026</b><br>
-  <span style="color:#ddd; font-size:0.78rem; line-height:1.55;">
-  AI is no longer just a technology risk — it is a <b>material financial, legal, and reputational risk</b>. 
-  Shadow AI, model poisoning, prompt injection, and deepfake attacks are driving real breach costs and regulatory enforcement. 
-  At the same time, new laws (especially the EU AI Act) introduce some of the highest percentage-based fines in regulatory history. 
-  Boards are asking CISOs: <i>“What is our AI risk exposure and are we compliant?”</i>
-  </span>
-</div>
-""", unsafe_allow_html=True)
-
-# Key Stats Row
-c1, c2, c3 = st.columns(3)
-with c1:
-    st.markdown(f"""
-    <div class="pulse" style="min-height:110px; padding:12px 14px;">
-      <div style="color:#888; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.5px;">Shadow AI Breaches</div>
-      <div style="color:#00ff41; font-size:1.65rem; font-weight:bold; margin:4px 0 2px;">22%</div>
-      <div style="color:#aaa; font-size:0.68rem;">of breaches now involve unauthorized AI use (IBM 2026)</div>
-      <div style="color:#ffaa00; font-size:0.7rem; margin-top:6px;">+ $680k to average breach cost</div>
-    </div>
-    """, unsafe_allow_html=True)
-with c2:
-    st.markdown(f"""
-    <div class="pulse" style="min-height:110px; padding:12px 14px;">
-      <div style="color:#888; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.5px;">Highest AI Fine</div>
-      <div style="color:#ff4b4b; font-size:1.65rem; font-weight:bold; margin:4px 0 2px;">7%</div>
-      <div style="color:#aaa; font-size:0.68rem;">of global turnover (EU AI Act — prohibited practices)</div>
-      <div style="color:#ffaa00; font-size:0.7rem; margin-top:6px;">€35M+ cap also applies</div>
-    </div>
-    """, unsafe_allow_html=True)
-with c3:
-    st.markdown(f"""
-    <div class="pulse" style="min-height:110px; padding:12px 14px;">
-      <div style="color:#888; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.5px;">SEC Enforcement</div>
-      <div style="color:#00e5ff; font-size:1.65rem; font-weight:bold; margin:4px 0 2px;">Active</div>
-      <div style="color:#aaa; font-size:0.68rem;">Multiple actions in 2025-2026 for disclosure failures</div>
-      <div style="color:#ffaa00; font-size:0.7rem; margin-top:6px;">4-business-day incident reporting</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("---")
-
-# Detailed Regulatory Breakdown
-st.markdown(f'<div class="rl-p" style="margin-top:10px;">📜 KEY REGULATIONS DRIVING AI & DATA RISK</div>', unsafe_allow_html=True)
-
-# GDPR
-with st.expander("🇪🇺 **GDPR** — The Most Enforced Data Regulation (Still #1 Risk)", expanded=False):
-    st.markdown("""
-    **Maximum Penalty:** Up to **4% of global annual turnover** or €20 million (whichever is higher).
-    
-    **Why it matters for AI:** Any AI system that processes personal data of EU residents falls under GDPR. This includes training data, inference logs, and profiling. Key obligations include:
-    - Lawful basis for processing (consent, legitimate interest, contract, etc.)
-    - Data Protection Impact Assessments (DPIA) for high-risk AI
-    - Transparency and explainability for automated decision-making
-    - 72-hour breach notification
-    
-    **Recent enforcement trend:** Regulators are increasingly fining companies for inadequate AI governance, lack of DPIAs on AI projects, and insufficient transparency in automated decisions.
-    
-    **Official Source:** [GDPR Official Text (EUR-Lex)](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
-    """)
+# (Cleaned duplicate leftover section) 
 
 # EU AI Act
 with st.expander("🇪🇺 **EU AI Act** — The Highest AI-Specific Penalties Globally", expanded=True):
