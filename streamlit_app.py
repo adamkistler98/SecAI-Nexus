@@ -47,9 +47,6 @@ st.markdown("""
     <a href="https://github.com/adamkistler98/SecAI-Nexus" target="_blank" 
        style="color:#008aff; text-decoration:none; border-bottom:1px dashed #008aff50; padding-bottom:1px; transition:0.2s; font-size:0.66rem;">GITHUB</a>
   </div>
-  <div style="color:#00ff41; font-size:0.62rem; background:#0a0a0a; padding:3px 10px; border:1px solid #00ff4140; border-radius:2px; text-shadow:0 0 4px #00ff4140; font-weight:bold; white-space:nowrap; flex-shrink:0;">
-    v72 • JUL 2026
-  </div>
 </div>
 """, unsafe_allow_html=True)
 # ===================================================================
@@ -150,21 +147,6 @@ st.markdown(f"""
     div[data-testid="column"] {{ padding: 2px !important; }}
   }}
 
-  /* Author header mobile responsiveness (v72 fix) */
-  @media (max-width: 600px) {{
-    .author-header {{
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      gap: 6px !important;
-    }}
-    .author-header > div:last-child {{
-      font-size: 0.52rem !important;
-      padding: 2px 8px !important;
-      align-self: flex-end !important;
-      margin-top: 2px;
-    }}
-  }}
-
   /* Sleek Cyber-Themed Refresh Button (v72) */
   .stButton button[kind="secondary"] {{
     background: linear-gradient(135deg, #0a0a14 0%, #111113 100%) !important;
@@ -191,6 +173,43 @@ st.markdown(f"""
   .stButton button[kind="secondary"]:active {{
     transform: translateY(1px) !important;
     box-shadow: 0 0 8px rgba(0, 229, 255, 0.6) !important;
+  }}
+
+  /* Why AI Security Matters + Key Regulations section - Mobile friendly sizing (v72) */
+  @media (max-width: 768px) {{
+    /* Executive summary box */
+    div[style*="border-left: 5px solid #ff4b4b"] {{
+      padding: 12px 14px !important;
+      margin-bottom: 16px !important;
+    }}
+    /* 4 stat cards - better mobile sizing */
+    .pulse[style*="min-height:135px"] {{
+      min-height: 118px !important;
+      padding: 10px 12px !important;
+    }}
+    .pulse[style*="min-height:135px"] .cm-v,
+    .pulse[style*="min-height:135px"] > div[style*="font-size:2.1rem"] {{
+      font-size: 1.65rem !important;
+      line-height: 1.05 !important;
+    }}
+    /* Regulation cards - reduce tall min-height on mobile */
+    div[style*="min-height:275px"] {{
+      min-height: auto !important;
+      padding: 12px 14px !important;
+    }}
+    /* Penalties table smaller fonts */
+    table[style*="font-size:.6rem"] {{
+      font-size: 0.55rem !important;
+    }}
+    /* Navigation grid buttons wrap better */
+    div[style*="grid-template-columns: repeat(2, 1fr)"] {{
+      grid-template-columns: 1fr !important;
+      gap: 6px !important;
+    }}
+    div[style*="grid-template-columns: repeat(2, 1fr)"] a {{
+      padding: 6px 12px !important;
+      font-size: 0.62rem !important;
+    }}
   }}
 </style>
 """, unsafe_allow_html=True)
@@ -402,7 +421,7 @@ f"""
       <span style="font-size: 1.7rem; font-weight: bold; color: {CYAN}; text-shadow: 0 0 15px {CYAN}80; letter-spacing: 1.5px;">
         🤖 SecAI-Nexus
       </span>
-      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v72</span>
+      <span style="font-size: .52rem; color: #00ff41; background:#0a0a0a; border:1px solid #00ff4140; padding:1px 6px; margin-left: 8px; vertical-align: middle; border-radius:2px; font-weight:bold; white-space:nowrap;">v72 • JUL 2026</span>
     </div>
     <div style="font-size: 0.9rem; font-weight: bold; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; opacity: 0.8;">
       Cybersecurity GRC Observability Platform
@@ -635,7 +654,7 @@ with r2:
     </div>
     """, unsafe_allow_html=True)
 
-st.caption("Sources: [EU AI Act](https://artificialintelligenceact.eu/) · [NIS2 Directive](https://eur-lex.europa.eu/eli/dir/2022/2555/oj) · [DORA Regulation](https://eur-lex.europa.eu/eli/reg/2022/2554/oj) · [GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj) · [SEC Cybersecurity Disclosure Rule](https://www.sec.gov/rules/final/2023/33-11216.pdf) · [CMMC 2.0](https://dodcio.defense.gov/CMMC/) · [CPRA / CCPA](https://cppa.ca.gov/). These cards summarize the highest-impact regulations affecting AI governance, data protection, and cybersecurity compliance as of mid-2026. Enforcement trends based on 2025–2026 public actions.")
+st.caption("Sources: Official regulatory texts (EUR-Lex, SEC, CMMC, CPPA). These cards summarize the highest-impact regulations affecting AI governance, data protection, and cybersecurity compliance as of mid-2026. Enforcement trends based on 2025–2026 public actions.")
 
 # Quick Reference Table — Maximum Penalties
 quick_data = [
@@ -657,7 +676,7 @@ for reg, fine, note in quick_data:
 
 st.markdown(_tbl("MAXIMUM PENALTIES AT A GLANCE", ["Regulation", "Maximum Fine", "Key Note"], quick_rows, CYAN), unsafe_allow_html=True)
 
-st.caption("Sources: [EU AI Act](https://artificialintelligenceact.eu/) · [NIS2 Directive](https://eur-lex.europa.eu/eli/dir/2022/2555/oj) · [DORA Regulation](https://eur-lex.europa.eu/eli/reg/2022/2554/oj) · [GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj) · [SEC Cybersecurity Disclosure Rule](https://www.sec.gov/rules/final/2023/33-11216.pdf) · [CMMC 2.0](https://dodcio.defense.gov/CMMC/) · [CPRA / CCPA](https://cppa.ca.gov/). Enforcement trends based on 2025–2026 public actions and regulatory guidance.")
+st.caption("Sources: Official regulatory texts (EUR-Lex, SEC, CMMC, CPPA). Enforcement trends based on 2025–2026 public actions and regulatory guidance.")
 
 # AI Reference section starts here
 # ══════════════════════════════════════════════════════════════════════════════
