@@ -147,11 +147,11 @@ st.markdown(f"""
     .cm, .pulse {{ min-height: auto !important; margin-bottom: 8px !important; border-left-width: 3px !important; }}
     .cm-v, .pulse .cm-v {{ font-size: 0.95rem !important; line-height: 1.1 !important; }}
     .cm-s, .pulse .cm-s, .cm-f, .pulse .cm-f {{ font-size: 0.52rem !important; }}
-    div[data-testid="column"] {{ padding: 2px !important; }}
+        div[data-testid="column"] {{ padding: 2px !important; }}
   }}
 
   /* Sleek Cyber-Themed Refresh Button (v34) */
-  .stButton button[kind="secondary"] {
+  .stButton button[kind="secondary"] {{
     background: linear-gradient(135deg, #0a0a14 0%, #111113 100%) !important;
     color: #00e5ff !important;
     border: 1px solid #00e5ff !important;
@@ -165,18 +165,18 @@ st.markdown(f"""
     box-shadow: 0 0 12px rgba(0, 229, 255, 0.25) !important;
     transition: all 0.2s cubic-bezier(0.23, 1.0, 0.32, 1) !important;
     min-height: 42px !important;
-  }
-  .stButton button[kind="secondary"]:hover {
+  }}
+  .stButton button[kind="secondary"]:hover {{
     background: linear-gradient(135deg, #111113 0%, #1a1a20 100%) !important;
     color: #00ff41 !important;
     border-color: #00ff41 !important;
     box-shadow: 0 0 20px rgba(0, 255, 65, 0.45) !important;
     text-shadow: 0 0 6px #00ff4140;
-  }
-  .stButton button[kind="secondary"]:active {
+  }}
+  .stButton button[kind="secondary"]:active {{
     transform: translateY(1px) !important;
     box-shadow: 0 0 8px rgba(0, 229, 255, 0.6) !important;
-  }
+  }}
 </style>
 """, unsafe_allow_html=True)
 S = requests.Session()
