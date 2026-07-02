@@ -423,7 +423,7 @@ with st.spinner("Syncing threat intelligence feeds…"):
     kev=fetch_kev(); baz=fetch_bazaar(); uhaus=fetch_urlhaus()
     feodo=fetch_feodo(); sans=fetch_sans(); tor=fetch_tor()
     topports=fetch_topports(); topips=fetch_topips(); honeypot=fetch_honeypot()
-# ── BASELINES (updated June 14 2026 with IBM 2025 / CrowdStrike 2026 GTR + latest verified data) ─────────────────────────────────────────────────────────────────
+# ── BASELINES (updated July 2026 with IBM 2026 / CrowdStrike GTR 2026 + latest verified data) ─────────────────────────────────────────────────────────────────
 CVE_TOT=32_800; CVE_CRIT=5_100; CVE_HIGH=13_900
 RANSOM=6_400; SUPPLY=3_700; INSIDER=7_800
 BREACH=8_700_000_000; BEC=24_500; PHISH=2_300_000
@@ -445,7 +445,7 @@ if not sans:
 if not tor:
     tor={"c":7800}
 # ══════════════════════════════════════════════════════════════════════════════
-# AI SECURITY & THREAT INTELLIGENCE REFERENCE (UPDATED May 26 2026)
+# AI SECURITY & THREAT INTELLIGENCE REFERENCE (UPDATED July 2026)
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
 <div id="threat-intel-reference" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
@@ -525,17 +525,17 @@ for name, link, use_case, best_for, desc, vuln in ai_models_data:
 # ── TOP 15 AI-POWERED CYBERCRIME (as of July 2026) ──────────────────────────────────────
 ai_crime_data = [
     ("1. AI Phishing Campaigns", "Scaling 420% YoY", "Hyper-personalized spear-phishing with perfect grammar", "CrowdStrike GTR 2026", "https://www.crowdstrike.com/global-threat-report/"),
-    ("2. Deepfake Vishing", "442% ↑", "3-second voice cloning for CEO fraud & wire transfers", "IBM Cost of Breach 2025", "https://www.ibm.com/reports/data-breach"),
+    ("2. Deepfake Vishing", "442% ↑", "3-second voice cloning for CEO fraud & wire transfers", "IBM Cost of Breach 2026", "https://www.ibm.com/reports/data-breach"),
     ("3. Polymorphic AI Malware", "Evasive", "BlackMamba-style code mutation that bypasses all AV", "CrowdStrike GTR 2026", "https://www.crowdstrike.com/global-threat-report/"),
     ("4. Prompt Injection Attacks", "#1 LLM risk", "Direct/indirect injection leading to data exfil", "OWASP LLM Top 10", "https://owasp.org/www-project-top-10-for-large-language-model-applications/"),
     ("5. Automated OSINT & Recon", "Automated", "LLM-driven target profiling in minutes", "Mandiant M-Trends 2026", "https://www.mandiant.com/m-trends"),
     ("6. Model Poisoning (Supply Chain)", "Growing", "Backdoored Hugging Face models & training data", "MITRE ATLAS", "https://atlas.mitre.org/"),
-    ("7. Agentic AI Abuse", "Insider Risk", "Autonomous agents performing unintended actions", "IBM Cost of Breach 2025", "https://www.ibm.com/reports/data-breach"),
+    ("7. Agentic AI Abuse", "Insider Risk", "Autonomous agents performing unintended actions", "IBM Cost of Breach 2026", "https://www.ibm.com/reports/data-breach"),
     ("8. Deepfake Video Fraud", "Rising", "Real-time face swaps in video calls ($28M+ scams)", "Chainalysis 2026", "https://www.chainalysis.com/"),
     ("9. AI PassGAN Cracking", "51% <60s", "Predictive password cracking at machine speed", "Dark Reading", "https://www.darkreading.com/"),
     ("10. Adversarial ML Evasion", "Emerging", "Pixel perturbations that fool every classifier", "CrowdStrike GTR 2026", "https://www.crowdstrike.com/global-threat-report/"),
     ("11. AI-Generated Ransomware", "Fastest breakout", "LLMs writing custom encryptors on demand", "Sophos 2026", "https://www.sophos.com/en-us/content/state-of-ransomware"),
-    ("12. Shadow AI Data Leakage", "22% of breaches", "Rogue LLMs exfiltrating sensitive data", "IBM Cost of Breach 2025", "https://www.ibm.com/reports/data-breach"),
+    ("12. Shadow AI Data Leakage", "22% of breaches", "Rogue LLMs exfiltrating sensitive data", "IBM Cost of Breach 2026", "https://www.ibm.com/reports/data-breach"),
     ("13. AI-Driven BEC", "Deepfake voice", "CEO voice cloning for $142k+ wire fraud", "FBI IC3 2026", "https://www.ic3.gov/AnnualReport"),
     ("14. Training Data Poisoning", "Backdoor risk", "Corrupted datasets creating hidden triggers", "OWASP LLM Top 10", "https://owasp.org/www-project-top-10-for-large-language-model-applications/"),
     ("15. AI SOC Evasion", "New frontier", "Tricking XDR/SOAR with adversarial prompts", "Mandiant M-Trends 2026", "https://www.mandiant.com/m-trends")
@@ -598,7 +598,7 @@ for id_, tech, tactic, desc, freq, link in attck_data:
         (desc, f"color:#888;font-size:.56rem;"),
         (freq, f"color:{GREEN};font-weight:bold;")
     ])
-# ── 💀 TOP RANSOMWARE GROUPS 2026 (updated May 26) ────────────────────────────────────────────
+# ── 💀 TOP RANSOMWARE GROUPS 2026 (updated July 2026) ────────────────────────────────────────────
 rwg_data = [
     ("Qilin", "~31%", "1,300+", "🔴 Active", "Dominant RaaS with triple extortion and Linux support", "https://www.sophos.com/en-us/content/state-of-ransomware"),
     ("Akira", "~23%", "880+", "🔴 Active", "$260M extorted; targets healthcare and manufacturing", "https://www.crowdstrike.com/global-threat-report/"),
@@ -723,7 +723,7 @@ for industry, cost, detail, notes, source in costs_data:
     ])
 # ─── NEW LAYOUT (all tables consistent) ──────────────────────────────────────
 g1, g2 = st.columns(2)
-with g1: st.markdown(_tbl("🤖 TOP 15 AI MODELS & CAPABILITIES (Last updated May 26, 2026)", ["Rank & Model", "Top Use Case", "Best For", "Description", "Top Vuln"], ai_rows, CYAN), unsafe_allow_html=True)
+with g1: st.markdown(_tbl("🤖 TOP 15 AI MODELS & CAPABILITIES (Last updated July 2026)", ["Rank & Model", "Top Use Case", "Best For", "Description", "Top Vuln"], ai_rows, CYAN), unsafe_allow_html=True)
 with g2: st.markdown(_tbl("🤖 AI-POWERED CYBERCRIME (2026)", ["Rank", "Attack", "Trend", "Description", "Source"], ai_crime_rows, CYAN), unsafe_allow_html=True)
 g3, g4 = st.columns(2)
 with g3: st.markdown(_tbl("🛡 OWASP LLM TOP 10 (v1.1)", ["ID", "Vulnerability", "Description", "Risk", "Link"], owasp_rows, CYAN), unsafe_allow_html=True)
@@ -741,7 +741,7 @@ with g8: st.markdown(_tbl("📊 ATTACK VECTOR BREAKDOWN (2026)", ["Vector", "Sha
 g9, g10 = st.columns(2)
 with g9: st.markdown(_tbl("🔥 TOP EXPLOITED CVEs 2026", ["CVE", "Product", "CVSS", "Impact", "Link"], topcves_rows, RED), unsafe_allow_html=True)
 with g10: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (2026)", ["Industry", "Avg Cost", "Detail", "Notes", "Source"], costs_rows, GREEN), unsafe_allow_html=True)
-st.markdown(f'<div style="font-size:.48rem;color:#505060;margin:2px 0 0 4px;">Sources: <a href="https://www.ibm.com/reports/data-breach" target="_blank" class="sl">IBM Cost of Breach 2025</a> · <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="sl">CrowdStrike GTR 2026</a> · <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" class="sl">OWASP LLM Top 10</a> · <a href="https://attack.mitre.org/" target="_blank" class="sl">MITRE ATT&CK/ATLAS</a> · <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sl">CISA KEV</a> · <a href="https://www.vulncheck.com/" target="_blank" class="sl">VulnCheck</a> · <a href="https://redcanary.com/" target="_blank" class="sl">Red Canary</a> · <a href="https://www.chainalysis.com/" target="_blank" class="sl">Chainalysis</a> · <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> · Public disclosures</div>', unsafe_allow_html=True)
+st.markdown(f'<div style="font-size:.48rem;color:#505060;margin:2px 0 0 4px;">Sources: <a href="https://www.ibm.com/reports/data-breach" target="_blank" class="sl">IBM Cost of Breach 2026</a> · <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="sl">CrowdStrike GTR 2026</a> · <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" class="sl">OWASP LLM Top 10</a> · <a href="https://attack.mitre.org/" target="_blank" class="sl">MITRE ATT&CK/ATLAS</a> · <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sl">CISA KEV</a> · <a href="https://www.vulncheck.com/" target="_blank" class="sl">VulnCheck</a> · <a href="https://redcanary.com/" target="_blank" class="sl">Red Canary</a> · <a href="https://www.chainalysis.com/" target="_blank" class="sl">Chainalysis</a> · <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
 # ─── PULSE ROW 6: AI & LLM THREAT INTELLIGENCE ───────────────────────────────
 st.markdown(f"""
