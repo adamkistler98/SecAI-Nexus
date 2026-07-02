@@ -445,8 +445,8 @@ f"""
      <a href="#framework-comparison" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
       &gt;&gt; ⏬ FRAMEWORK COMPARISON &amp; LINEAGE &lt;&lt;
      </a>
-     <a href="#regulatory-risk" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
-      &gt;&gt; ⏬ REGULATORY RISK &amp; PENALTIES &lt;&lt;
+     <a href="#framework-gap-matrix" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
+      &gt;&gt; ⏬ INDUSTRY FRAMEWORK GAP MATRIX &lt;&lt;
      </a>
      <a href="#grc-resources" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
       &gt;&gt; ⏬ GRC RESOURCES &amp; TOOLS &lt;&lt;
@@ -616,8 +616,7 @@ with r1:
         Non-compliance can halt AI initiatives and trigger the largest revenue-based fines currently possible under any AI-specific regulation.
       </div>
       <div style="margin-top:8px; padding-top:6px; border-top:1px dashed #1a1a2e;">
-        <a href="https://artificialintelligenceact.eu/" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">Official EU AI Act Text &amp; Guidance →</a><br>
-        <a href="#framework-gap-matrix" style="color:{CYAN}; font-size:0.62rem; font-weight:bold; text-decoration:none; margin-top:3px; display:inline-block;">→ MAP TO FRAMEWORK CONTROLS &amp; GAP ANALYSIS</a>
+        <a href="https://artificialintelligenceact.eu/" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">Official EU AI Act Text &amp; Guidance →</a>
       </div>
     </div>
     """, unsafe_allow_html=True)
@@ -637,8 +636,7 @@ with r1:
         These create concrete compliance burdens and potential operational constraints for organizations in scope.
       </div>
       <div style="margin-top:8px; padding-top:6px; border-top:1px dashed #1a1a2e;">
-        <a href="https://eur-lex.europa.eu/eli/dir/2022/2555/oj" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">NIS2 Directive</a> • <a href="https://eur-lex.europa.eu/eli/reg/2022/2554/oj" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">DORA Regulation →</a><br>
-        <a href="#framework-gap-matrix" style="color:{CYAN}; font-size:0.62rem; font-weight:bold; text-decoration:none; margin-top:3px; display:inline-block;">→ MAP TO FRAMEWORK CONTROLS &amp; GAP ANALYSIS</a>
+        <a href="https://eur-lex.europa.eu/eli/dir/2022/2555/oj" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">NIS2 Directive</a> • <a href="https://eur-lex.europa.eu/eli/reg/2022/2554/oj" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">DORA Regulation →</a>
       </div>
     </div>
     """, unsafe_allow_html=True)
@@ -659,8 +657,7 @@ with r2:
         Remains the most enforced data protection regulation with well-established precedent for very large penalties.
       </div>
       <div style="margin-top:8px; padding-top:6px; border-top:1px dashed #1a1a2e;">
-        <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">Official GDPR Text →</a><br>
-        <a href="#framework-gap-matrix" style="color:{CYAN}; font-size:0.62rem; font-weight:bold; text-decoration:none; margin-top:3px; display:inline-block;">→ MAP TO FRAMEWORK CONTROLS &amp; GAP ANALYSIS</a>
+        <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">Official GDPR Text →</a>
       </div>
     </div>
     """, unsafe_allow_html=True)
@@ -681,8 +678,7 @@ with r2:
         These create concrete compliance timelines, contractual requirements, and enforcement exposure for organizations operating in the US.
       </div>
       <div style="margin-top:8px; padding-top:6px; border-top:1px dashed #1a1a2e;">
-        <a href="https://www.sec.gov/rules/final/2023/33-11216.pdf" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">SEC Rule</a> • <a href="https://dodcio.defense.gov/CMMC/" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">CMMC Program →</a><br>
-        <a href="#framework-gap-matrix" style="color:{CYAN}; font-size:0.62rem; font-weight:bold; text-decoration:none; margin-top:3px; display:inline-block;">→ MAP TO FRAMEWORK CONTROLS &amp; GAP ANALYSIS</a>
+        <a href="https://www.sec.gov/rules/final/2023/33-11216.pdf" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">SEC Rule</a> • <a href="https://dodcio.defense.gov/CMMC/" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">CMMC Program →</a>
       </div>
     </div>
     """, unsafe_allow_html=True)
@@ -715,7 +711,7 @@ for reg, fine, note in quick_data:
 
 st.markdown(_tbl("MAXIMUM PENALTIES &amp; REGULATORY FINES AT A GLANCE", ["Regulation", "Maximum Fine", "Key Note"], quick_rows, CYAN), unsafe_allow_html=True)
 
-st.markdown(f'<div style="text-align:right; margin-top:-6px; margin-bottom:12px;"><a href="#framework-gap-matrix" style="color:{CYAN}; font-size:0.64rem; font-weight:bold; text-decoration:none;">→ Analyze Regulatory Control Coverage &amp; Gaps in Framework Gap Matrix</a></div>', unsafe_allow_html=True)
+st.markdown(f'<div style="text-align:right; margin-top:-6px; margin-bottom:12px;"><a href="#framework-gap-matrix" style="color:{CYAN}; font-size:0.64rem; font-weight:bold; text-decoration:none;">→ Analyze Regulatory Control Coverage &amp; Gaps in Industry Framework Gap Matrix</a></div>', unsafe_allow_html=True)
 
 st.caption("Sources: [EU AI Act](https://artificialintelligenceact.eu/) · [NIS2 Directive](https://eur-lex.europa.eu/eli/dir/2022/2555/oj) · [DORA Regulation](https://eur-lex.europa.eu/eli/reg/2022/2554/oj) · [GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj) · [SEC Cybersecurity Disclosure Rule](https://www.sec.gov/rules/final/2023/33-11216.pdf) · [CMMC 2.0](https://dodcio.defense.gov/CMMC/) · [CPRA / CCPA](https://cppa.ca.gov/). Enforcement trends based on 2025–2026 public actions and regulatory guidance.")
 
@@ -1944,14 +1940,14 @@ with col5:
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
 <div id="framework-gap-matrix" style="scroll-margin-top: 20px;">
-  <div class="rl-p" style="margin-top:25px;">🧭 ONE-CLICK FRAMEWORK CROSSWALK + GAP MATRIX</div>
+  <div class="rl-p" style="margin-top:25px;">🧭 INDUSTRY FRAMEWORK GAP MATRIX</div>
   <div style="font-size:0.54rem; color:#505060; margin-top:2px; margin-bottom:8px; letter-spacing:0.3px;">
-    Select 2+ frameworks to instantly see consolidated control coverage, identify gaps (especially AI/LLM &amp; Vendor Risk), and understand how to address regulatory penalties from the section above.
+    Interactive crosswalk tool for GRC teams. Select 2+ frameworks to instantly see consolidated control coverage, identify gaps (especially AI/LLM, Vendor/Third-Party Risk, Business Continuity), and map coverage against high-impact regulations (EU AI Act, NIS2/DORA supply chain rules, GDPR, SEC disclosure, CMMC). Helps prioritize control enhancements and framework rationalization.
   </div>
 </div>
 """, unsafe_allow_html=True)
 
-with st.expander("▶ Configure Crosswalk (select 2+ frameworks to analyze overlap & gaps — now directly linked from Regulatory Penalties cards)", expanded=True):
+with st.expander("▶ Configure Crosswalk (select 2+ frameworks to analyze overlap, gaps & regulatory alignment)", expanded=True):
     selected_frameworks = st.multiselect(
         "Select frameworks to crosswalk:",
         options=["NIST CSF 2.0", "ISO 27001:2022", "MITRE ATT&CK", "HITRUST CSF", "CIS Controls v8", 
@@ -1999,12 +1995,47 @@ if len(selected_frameworks) >= 2:
     
     # Overall unified score
     overall_score = round(sum(avg_coverage) / len(avg_coverage))
+    num_strong = sum(1 for v in avg_coverage if v >= 80)
+    num_gaps = len([v for v in avg_coverage if v < 65])
+    
+    # Top metrics row (new improvement)
+    m1, m2, m3, m4 = st.columns(4)
+    with m1:
+        st.markdown(f"""
+        <div class="pulse" style="min-height:78px; padding:8px 12px; border-left:4px solid {CYAN};">
+          <div style="color:#00e5ff; font-size:0.58rem; text-transform:uppercase; letter-spacing:0.5px;">UNIFIED COVERAGE</div>
+          <div style="color:#00ff41; font-size:1.65rem; font-weight:bold; line-height:1.0; margin:2px 0;">{overall_score}%</div>
+          <div style="color:#888; font-size:0.6rem;">across {len(selected_frameworks)} frameworks</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with m2:
+        st.markdown(f"""
+        <div class="pulse" style="min-height:78px; padding:8px 12px; border-left:4px solid {GREEN};">
+          <div style="color:#00ff41; font-size:0.58rem; text-transform:uppercase; letter-spacing:0.5px;">STRONG CONTROLS</div>
+          <div style="color:#00ff41; font-size:1.65rem; font-weight:bold; line-height:1.0; margin:2px 0;">{num_strong} / {len(core_controls)}</div>
+          <div style="color:#888; font-size:0.6rem;">≥80% avg coverage</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with m3:
+        gap_color = RED if num_gaps > 0 else GREEN
+        st.markdown(f"""
+        <div class="pulse" style="min-height:78px; padding:8px 12px; border-left:4px solid {gap_color};">
+          <div style="color:{gap_color}; font-size:0.58rem; text-transform:uppercase; letter-spacing:0.5px;">IDENTIFIED GAPS</div>
+          <div style="color:{gap_color}; font-size:1.65rem; font-weight:bold; line-height:1.0; margin:2px 0;">{num_gaps}</div>
+          <div style="color:#888; font-size:0.6rem;">controls &lt;65% coverage</div>
+        </div>
+        """, unsafe_allow_html=True)
+    with m4:
+        st.markdown(f"""
+        <div class="pulse" style="min-height:78px; padding:8px 12px; border-left:4px solid {AMBER};">
+          <div style="color:#ffaa00; font-size:0.58rem; text-transform:uppercase; letter-spacing:0.5px;">REGULATORY FOCUS</div>
+          <div style="color:#ffaa00; font-size:1.1rem; font-weight:bold; line-height:1.15; margin:2px 0;">EU AI Act / NIS2<br>GDPR / SEC / CMMC</div>
+        </div>
+        """, unsafe_allow_html=True)
     
     st.markdown(f"""
-    <div style="background:#0a0a0a; border:1px solid #1a1a2e; padding:12px 16px; margin-bottom:12px; border-radius:4px;">
-      <span style="color:#00e5ff; font-weight:bold; font-size:0.85rem;">UNIFIED COVERAGE SCORE:</span> 
-      <span style="color:#00ff41; font-size:1.4rem; font-weight:bold; margin-left:8px;">{overall_score}%</span>
-      <span style="color:#888; margin-left:20px;">| {len(selected_frameworks)} frameworks analyzed</span>
+    <div style="background:#0a0a0a; border:1px solid #1a1a2e; padding:10px 14px; margin:10px 0 8px; border-radius:4px; font-size:0.68rem;">
+      <span style="color:#00e5ff; font-weight:bold;">💡 How to use:</span> This matrix helps GRC teams map high-penalty regulations (shown in the Regulatory Risk section above) to practical control coverage. Low-scoring areas indicate where to prioritize policy updates, tool investments, or framework additions for better audit readiness and risk reduction.
     </div>
     """, unsafe_allow_html=True)
     
@@ -2024,7 +2055,7 @@ if len(selected_frameworks) >= 2:
         CYAN
     ), unsafe_allow_html=True)
     
-    # Download button for crosswalk results (new v73 enhancement)
+    # Download button for crosswalk results
     cw_df = pd.DataFrame({
         "Control Category": core_controls,
         "Avg Coverage %": avg_coverage,
@@ -2040,7 +2071,7 @@ if len(selected_frameworks) >= 2:
         help="Export this crosswalk for reports, audits, or further analysis in Excel/GRC tools"
     )
     
-    # Simple bar chart for visual
+    # Bar chart
     fig_cross = px.bar(
         x=avg_coverage, 
         y=core_controls, 
@@ -2051,36 +2082,49 @@ if len(selected_frameworks) >= 2:
         labels={"x": "Average Coverage %", "y": ""}
     )
     fig_cross.update_layout(
-        height=380,
+        height=360,
         paper_bgcolor=BG,
         plot_bgcolor=CARD,
         font=dict(family=MONO, color=GREEN, size=11),
-        margin=dict(l=10, r=10, t=30, b=10),
+        margin=dict(l=10, r=10, t=25, b=10),
         coloraxis_showscale=False,
         title="Crosswalk Coverage by Control Category"
     )
     fig_cross.update_traces(hovertemplate="%{y}<br>%{x}% coverage<extra></extra>")
     st.plotly_chart(fig_cross, use_container_width=True)
     
-    # Enhanced actionable insight (v73)
+    # Enhanced actionable insight with dynamic recommendations
     low_coverage = [core_controls[i] for i, v in enumerate(avg_coverage) if v < 65]
     ai_gap = "AI / LLM Specific Controls" in low_coverage
+    vendor_gap = "Vendor / Third-Party Risk" in low_coverage
+    bc_gap = "Business Continuity" in low_coverage
+    
+    recs = []
+    if ai_gap and "NIST AI RMF 1.0" not in selected_frameworks:
+        recs.append("<b>NIST AI RMF 1.0</b> (for EU AI Act high-risk systems, model governance, prompt injection controls)")
+    if vendor_gap and "HITRUST CSF" not in selected_frameworks and "ISO 27001:2022" not in selected_frameworks:
+        recs.append("<b>HITRUST CSF</b> or <b>ISO 27001</b> (strong vendor/third-party risk and supply chain controls — critical for NIS2/DORA)")
+    if bc_gap:
+        recs.append("<b>NIST CSF 2.0 Recover function</b> or <b>ISO 22301</b> alignment for business continuity testing")
+    
     insight_text = ""
-    if ai_gap:
-        insight_text = "⚠️ <b>Key Gap Detected:</b> AI/LLM Specific Controls show the lowest average coverage. Strongly consider adding <b>NIST AI RMF 1.0</b> to your stack for regulatory alignment (EU AI Act, emerging SEC AI guidance)."
+    if recs:
+        insight_text = "⚠️ <b>Priority Recommendations:</b><br>" + "<br>".join(f"• {r}" for r in recs)
+        if ai_gap:
+            insight_text += "<br><span style='color:#ffaa00;'>AI/LLM gap directly impacts EU AI Act prohibited/high-risk compliance and SEC AI-related disclosure readiness.</span>"
     elif low_coverage:
-        insight_text = f"⚠️ <b>Priority Gaps:</b> {', '.join(low_coverage[:2])} have lower coverage — review policies or add compensating controls from frameworks with high scores in those areas."
+        insight_text = f"⚠️ <b>Priority Gaps:</b> {', '.join(low_coverage[:2])}. Review policies or add compensating controls from frameworks with high scores in those areas."
     else:
-        insight_text = "✅ Strong consolidated coverage across selected frameworks. Focus on implementation depth and continuous monitoring rather than framework expansion."
+        insight_text = "✅ <b>Strong consolidated coverage.</b> Focus on implementation depth, evidence automation, and continuous monitoring rather than adding more frameworks."
     
     st.markdown(f"""
-    <div style="background:#0a0a0a; border-left:4px solid {AMBER if low_coverage else GREEN}; padding:10px 14px; margin:8px 0 4px; border-radius:3px; font-size:0.72rem; line-height:1.45;">
+    <div style="background:#0a0a0a; border-left:4px solid {AMBER if recs or low_coverage else GREEN}; padding:12px 14px; margin:10px 0 6px; border-radius:3px; font-size:0.72rem; line-height:1.5;">
       {insight_text}<br>
-      <span style="color:#666; font-size:0.62rem;">Note: Coverage scores are illustrative GRC estimates based on common control mappings (NIST CSF/800-53, ISO 27001 Annex A, SOC 2 TSC, etc.). Always validate with official crosswalks for your specific scope.</span>
+      <span style="color:#666; font-size:0.62rem; display:block; margin-top:6px;">Note: Coverage scores are illustrative GRC estimates based on common mappings (NIST CSF/800-53 Rev 5, ISO 27001 Annex A, SOC 2 TSC, MITRE, CIS v8). Always validate with official crosswalks (e.g. NIST CSF to ISO, HITRUST mappings) for your exact scope and regulatory jurisdiction.</span>
     </div>
     """, unsafe_allow_html=True)
     
-    st.caption("💡 Tip: Low coverage areas (especially AI/LLM, Vendor Risk, Business Continuity) are excellent candidates for control enhancement or policy expansion when operating under multiple regulatory frameworks. Use this view to rationalize your GRC tool stack.")
+    st.caption("💡 Tip: Use this matrix to build a defensible control rationalization story for auditors and boards. Low-coverage areas (AI governance, vendor risk, BC) are high-priority for 2026 regulatory enforcement actions.")
 else:
     st.info("Select at least **2 frameworks** above to generate the crosswalk and gap analysis. Try presets like NIST CSF + SOC 2 + NIST AI RMF for modern AI/regulatory risk programs.")
 
