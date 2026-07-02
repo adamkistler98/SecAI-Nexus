@@ -580,7 +580,29 @@ with st.expander("🇺🇸 US — SEC Disclosure, CMMC, State Privacy"):
 
 st.markdown("---")
 
-# AI Reference section starts here (moved after)
+# Quick Reference Table — Maximum Penalties (moved here just above AI Reference)
+quick_data = [
+    ("EU AI Act (Prohibited)", "7% global turnover", "Highest AI-specific fine globally"),
+    ("GDPR", "4% global turnover", "Most enforced data protection law"),
+    ("NIS2", "2% global turnover", "Critical infrastructure & supply chain"),
+    ("DORA (Finance)", "2% global turnover", "Personal liability for executives"),
+    ("SEC Disclosure", "Civil + potential criminal", "4-business-day incident reporting"),
+    ("CCPA/CPRA (CA)", "$7,500 per violation", "Strongest US state privacy law"),
+]
+
+quick_rows = []
+for reg, fine, note in quick_data:
+    quick_rows.append([
+        (reg, "color:#00e5ff; font-weight:bold;"),
+        (fine, "color:#ff4b4b; font-weight:bold;"),
+        (note, "color:#aaa; font-size:0.62rem;")
+    ])
+
+st.markdown(_tbl("MAXIMUM PENALTIES AT A GLANCE", ["Regulation", "Maximum Fine", "Key Note"], quick_rows, CYAN), unsafe_allow_html=True)
+
+st.caption("Sources: Official regulatory texts (EUR-Lex, SEC, CMMC, CPPA). Enforcement trends based on 2025–2026 public actions and regulatory guidance.")
+
+# AI Reference section starts here
 # ══════════════════════════════════════════════════════════════════════════════
 # AI SECURITY & THREAT INTELLIGENCE REFERENCE (UPDATED July 2026)
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1009,27 +1031,6 @@ st.markdown("---")
 
 # Quick Reference Table
 st.markdown(f'<div style="margin-top:10px; margin-bottom:8px; color:#888; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.8px;">Quick Reference — Maximum Penalties</div>', unsafe_allow_html=True)
-
-quick_data = [
-    ("EU AI Act (Prohibited)", "7% global turnover", "Highest AI-specific fine globally"),
-    ("GDPR", "4% global turnover", "Most enforced data protection law"),
-    ("NIS2", "2% global turnover", "Critical infrastructure & supply chain"),
-    ("DORA (Finance)", "2% global turnover", "Personal liability for executives"),
-    ("SEC Disclosure", "Civil + potential criminal", "4-business-day incident reporting"),
-    ("CCPA/CPRA (CA)", "$7,500 per violation", "Strongest US state privacy law"),
-]
-
-quick_rows = []
-for reg, fine, note in quick_data:
-    quick_rows.append([
-        (reg, "color:#00e5ff; font-weight:bold;"),
-        (fine, "color:#ff4b4b; font-weight:bold;"),
-        (note, "color:#aaa; font-size:0.62rem;")
-    ])
-
-st.markdown(_tbl("MAXIMUM PENALTIES AT A GLANCE", ["Regulation", "Maximum Fine", "Key Note"], quick_rows, CYAN), unsafe_allow_html=True)
-
-st.caption("Sources: Official regulatory texts (EUR-Lex, SEC, CMMC, CPPA). Enforcement trends based on 2025–2026 public actions and regulatory guidance.")
 
 # Continue to Global Threat Metrics
 st.markdown(f"""
