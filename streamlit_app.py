@@ -37,7 +37,7 @@ st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🤖"
 
 # ====================== AUTHOR HEADER (neat top bar - v34) ======================
 st.markdown("""
-<div style="background:#0a0a0a; border-bottom:1px solid #1a1a2e; padding:8px 14px; margin-bottom:10px; display:flex; align-items:center; justify-content:space-between; font-family:'Courier New', Courier, monospace; font-size:0.68rem; letter-spacing:0.5px;">
+<div style="background:#0a0a0a; border-bottom:1px solid #1a1a2e; padding:8px 14px; margin-bottom:18px; display:flex; align-items:center; justify-content:space-between; font-family:'Courier New', Courier, monospace; font-size:0.68rem; letter-spacing:0.5px;">
   <div style="color:#00ff41;">
     <span style="color:#008aff; font-weight:bold;">▸</span> DEVELOPED BY <b style="color:#fff; text-shadow:0 0 4px #00ff4140;">ADAM KISTLER</b>
   </div>
@@ -414,7 +414,7 @@ f"""
 # ── REFRESH CONTROL (v34 — sleek cyber theme) ─────────────────────────────────────────────
 col_r1, col_r2, col_r3 = st.columns([3, 2, 3])
 with col_r2:
-    if st.button("⟳ SYNC & CLEAR INTEL CACHE", type="secondary", use_container_width=True, help="Clears @st.cache_data + reloads fresh API responses. Cyber refresh for latest threat intel."):
+    if st.button("Sync & Clear Cache", type="secondary", use_container_width=True, help="Clears all cached threat intel and reloads fresh data from APIs."):
         st.cache_data.clear()
         st.toast("Cache cleared. Reloading latest threat intel...", icon="🔄")
         st.rerun()
@@ -1705,7 +1705,6 @@ coverage_matrix = {
 if len(selected_frameworks) >= 2:
     # Calculate average coverage per control across selected frameworks
     avg_coverage = []
-    gap_flags = []
     strong_frameworks = []
     
     for i, control in enumerate(core_controls):
@@ -1713,39 +1712,33 @@ if len(selected_frameworks) >= 2:
         avg = sum(scores) / len(scores)
         avg_coverage.append(round(avg))
         
-        # Flag as gap if average < 65%
-        is_gap = avg < 65
-        gap_flags.append("🔴 GAP" if is_gap else "🟢 OK")
-        
         # Find frameworks that cover it strongly (>80)
         strong = [fw.split()[0] for fw, s in zip(selected_frameworks, scores) if s >= 80]
         strong_frameworks.append(", ".join(strong) if strong else "—")
     
     # Overall unified score
     overall_score = round(sum(avg_coverage) / len(avg_coverage))
-    gap_count = sum(1 for g in gap_flags if "GAP" in g)
     
     st.markdown(f"""
     <div style="background:#0a0a0a; border:1px solid #1a1a2e; padding:12px 16px; margin-bottom:12px; border-radius:4px;">
       <span style="color:#00e5ff; font-weight:bold; font-size:0.85rem;">UNIFIED COVERAGE SCORE:</span> 
       <span style="color:#00ff41; font-size:1.4rem; font-weight:bold; margin-left:8px;">{overall_score}%</span>
-      <span style="color:#888; margin-left:20px;">| {len(selected_frameworks)} frameworks analyzed | {gap_count} potential gaps identified</span>
+      <span style="color:#888; margin-left:20px;">| {len(selected_frameworks)} frameworks analyzed</span>
     </div>
     """, unsafe_allow_html=True)
     
-    # Build results table
+    # Build results table (removed Status/Gap column per request)
     crosswalk_rows = []
     for i, ctrl in enumerate(core_controls):
         crosswalk_rows.append([
             (ctrl, "color:#ddd; font-weight:500;"),
             (f"{avg_coverage[i]}%", f"color:{'#00ff41' if avg_coverage[i]>=80 else '#ffaa00' if avg_coverage[i]>=65 else '#ff4b4b'}; font-weight:bold;"),
-            (strong_frameworks[i], "color:#888; font-size:0.58rem;"),
-            (gap_flags[i], f"color:{'#ff4b4b' if 'GAP' in gap_flags[i] else '#00ff41'}; font-weight:bold;")
+            (strong_frameworks[i], "color:#888; font-size:0.58rem;")
         ])
     
     st.markdown(_tbl(
         f"CONSOLIDATED CONTROL COVERAGE — {', '.join([f.split()[0] for f in selected_frameworks])}",
-        ["Control Category", "Avg Coverage", "Strongly Covered By", "Status"],
+        ["Control Category", "Avg Coverage", "Strongly Covered By"],
         crosswalk_rows,
         CYAN
     ), unsafe_allow_html=True)
