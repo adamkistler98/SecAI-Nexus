@@ -37,7 +37,7 @@ st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🤖"
 
 # ====================== AUTHOR HEADER (neat top bar - v73) ======================
 st.markdown("""
-<div class="author-header" style="background:#0a0a0a; border-bottom:1px solid #1a1a2e; padding:8px 14px; margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; font-family:'Courier New', Courier, monospace; font-size:0.68rem; letter-spacing:0.5px;">
+<div class="author-header" style="background:#0a0a0a; border-bottom:1px solid #1a1a2e; padding:8px 14px; margin-top:-6px; margin-bottom:6px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; font-family:'Courier New', Courier, monospace; font-size:0.68rem; letter-spacing:0.5px;">
   <div style="color:#00ff41; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
     <span style="color:#008aff; font-weight:bold;">▸</span> 
     DEVELOPED BY <b style="color:#fff; text-shadow:0 0 4px #00ff4140;">ADAM KISTLER</b>
@@ -74,6 +74,7 @@ st.markdown(f"""
   h1,h2,h3,h4,h5,h6,label {{color:{GREEN}!important;}}
   header,footer {{visibility:hidden;}} .stDeployButton {{display:none;}}
   div[data-testid="stSpinner"]>div>p {{color:{GREEN}!important;}}
+  .block-container {{ padding-top: 0.35rem !important; padding-bottom: 0.5rem !important; }}
   .cm {{background:linear-gradient(135deg,{CARD},#0d0d12);border:1px solid #1a1a2e;
     border-left:3px solid {BLUE};padding:8px 9px 7px;margin-bottom:6px;
     font-family:{MONO};transition:all .3s;min-height:115px;}}
@@ -147,32 +148,32 @@ st.markdown(f"""
     div[data-testid="column"] {{ padding: 2px !important; }}
   }}
 
-  /* Sleek Cyber-Themed Refresh Button (v73 - styled like jump buttons, darker cyber blue tone) */
+  /* Sleek Cyber-Themed Refresh Button (v73 — matches jump buttons: cyan theme, smaller & tighter) */
   .stButton button[kind="secondary"] {{
-    background: rgba(0, 138, 255, 0.08) !important;
-    color: #008aff !important;
-    border: 1px solid #008aff !important;
+    background: rgba(0, 229, 255, 0.08) !important;
+    color: #00e5ff !important;
+    border: 1px solid #00e5ff !important;
     border-radius: 4px !important;
     font-family: 'Courier New', Courier, monospace !important;
-    font-size: 0.68rem !important;
+    font-size: 0.62rem !important;
     font-weight: bold !important;
-    letter-spacing: 1.2px !important;
+    letter-spacing: 1.0px !important;
     text-transform: uppercase !important;
-    padding: 8px 18px !important;
-    box-shadow: 0 0 15px rgba(0, 138, 255, 0.35) !important;
+    padding: 5px 14px !important;
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.3) !important;
     transition: all 0.2s cubic-bezier(0.23, 1.0, 0.32, 1) !important;
-    min-height: 42px !important;
+    min-height: 32px !important;
   }}
   .stButton button[kind="secondary"]:hover {{
-    background: rgba(0, 138, 255, 0.18) !important;
+    background: rgba(0, 229, 255, 0.18) !important;
     color: #00ff41 !important;
     border-color: #00ff41 !important;
-    box-shadow: 0 0 25px rgba(0, 255, 65, 0.5) !important;
-    text-shadow: 0 0 8px #00ff4140;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.45) !important;
+    text-shadow: 0 0 6px #00ff4140;
   }}
   .stButton button[kind="secondary"]:active {{
     transform: translateY(1px) !important;
-    box-shadow: 0 0 10px rgba(0, 138, 255, 0.65) !important;
+    box-shadow: 0 0 8px rgba(0, 138, 255, 0.55) !important;
   }}
 
   /* Why AI Security Matters + Key Regulations section - Mobile friendly sizing (v72) */
