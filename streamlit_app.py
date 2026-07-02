@@ -147,32 +147,32 @@ st.markdown(f"""
     div[data-testid="column"] {{ padding: 2px !important; }}
   }}
 
-  /* Sleek Cyber-Themed Refresh Button (v72) */
+  /* Sleek Cyber-Themed Refresh Button (v72 - styled like jump buttons, darker cyber blue tone) */
   .stButton button[kind="secondary"] {{
-    background: linear-gradient(135deg, #0a0a14 0%, #111113 100%) !important;
-    color: #00e5ff !important;
-    border: 1px solid #00e5ff !important;
-    border-radius: 3px !important;
+    background: rgba(0, 138, 255, 0.08) !important;
+    color: #008aff !important;
+    border: 1px solid #008aff !important;
+    border-radius: 4px !important;
     font-family: 'Courier New', Courier, monospace !important;
-    font-size: 0.72rem !important;
+    font-size: 0.68rem !important;
     font-weight: bold !important;
     letter-spacing: 1.2px !important;
     text-transform: uppercase !important;
     padding: 8px 18px !important;
-    box-shadow: 0 0 12px rgba(0, 229, 255, 0.25) !important;
+    box-shadow: 0 0 15px rgba(0, 138, 255, 0.35) !important;
     transition: all 0.2s cubic-bezier(0.23, 1.0, 0.32, 1) !important;
     min-height: 42px !important;
   }}
   .stButton button[kind="secondary"]:hover {{
-    background: linear-gradient(135deg, #111113 0%, #1a1a20 100%) !important;
+    background: rgba(0, 138, 255, 0.18) !important;
     color: #00ff41 !important;
     border-color: #00ff41 !important;
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.45) !important;
-    text-shadow: 0 0 6px #00ff4140;
+    box-shadow: 0 0 25px rgba(0, 255, 65, 0.5) !important;
+    text-shadow: 0 0 8px #00ff4140;
   }}
   .stButton button[kind="secondary"]:active {{
     transform: translateY(1px) !important;
-    box-shadow: 0 0 8px rgba(0, 229, 255, 0.6) !important;
+    box-shadow: 0 0 10px rgba(0, 138, 255, 0.65) !important;
   }}
 
   /* Why AI Security Matters + Key Regulations section - Mobile friendly sizing (v72) */
@@ -464,10 +464,13 @@ f"""
 # ── REFRESH CONTROL (v72 — sleek cyber theme) ─────────────────────────────────────────────
 col_r1, col_r2, col_r3 = st.columns([3, 2, 3])
 with col_r2:
-    if st.button("Sync & Clear Cache", type="secondary", use_container_width=True, help="Clears all cached threat intel and reloads fresh data from APIs."):
+    if st.button("🔄 SYNC & REFRESH", type="secondary", use_container_width=True, help="Clears all cached threat intel and reloads fresh data from APIs."):
         st.cache_data.clear()
         st.toast("Cache cleared. Reloading latest threat intel...", icon="🔄")
         st.rerun()
+
+# Tighten vertical spacing to the section title below
+st.markdown('<div style="margin-top:-10px; margin-bottom:2px;"></div>', unsafe_allow_html=True)
 
 with st.spinner("Syncing threat intelligence feeds…"):
     kev=fetch_kev(); baz=fetch_bazaar(); uhaus=fetch_urlhaus()
@@ -499,7 +502,7 @@ if not tor:
 # Moved here for CISO/Board visibility, enhanced visuals & specific data
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
-<div id="why-ai-security-matters" style="text-align: left; margin: 25px 0 15px 5px; scroll-margin-top: 25px;">
+<div id="why-ai-security-matters" style="text-align: left; margin: 8px 0 15px 5px; scroll-margin-top: 8px;">
   <div style="font-size: 0.95rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
     &gt;&gt; Why AI Security Matters: Risk, Regulation &amp; Business Impact
   </div>
@@ -527,45 +530,63 @@ st.markdown(f'<div class="rl-p" style="margin-top:5px; margin-bottom:10px;">📊
 c = st.columns(4)
 with c[0]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:135px; border-left:5px solid {RED}; padding:12px 14px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#ff4b4b; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.8px; font-weight:bold;">#1 HIGHEST AI FINE</div>
-      <div style="color:#ff4b4b; font-size:2.1rem; font-weight:bold; line-height:1; margin:6px 0 2px;">7%</div>
-      <div style="color:#ddd; font-size:0.78rem; font-weight:600;">of global gross revenue</div>
-      <div style="color:#aaa; font-size:0.68rem; margin-top:4px;">EU AI Act — Prohibited practices<br>€35M+ cap also applies</div>
-      <div style="color:#ffaa00; font-size:0.7rem; margin-top:8px; font-weight:bold;">Highest percentage-based fine globally</div>
+    <div class="pulse" style="min-height:148px; border-left:5px solid {RED}; padding:11px 13px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ff4b4b; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.7px; font-weight:bold;">#1 HIGHEST AI FINE — UNPRECEDENTED</div>
+      <div style="color:#ff4b4b; font-size:2.05rem; font-weight:bold; line-height:1; margin:5px 0 1px;">7% GLOBAL REVENUE</div>
+      <div style="color:#ddd; font-size:0.74rem; font-weight:600;">(or €35M+ — whichever higher)</div>
+      <div style="color:#ffaa00; font-size:0.66rem; margin-top:5px; line-height:1.35;">
+        <b>EU AI Act 2026 enforcement begins</b><br>
+        Prohibited: social scoring, real-time public biometrics, manipulative AI<br>
+        <span style="color:#ff4b4b;">First fines issued Q2 2026 • Can halt non-compliant AI deployments EU-wide</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.65rem; margin-top:6px; font-weight:bold;">Highest % penalty in regulatory history for any technology</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c[1]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:135px; border-left:5px solid {AMBER}; padding:12px 14px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#ffaa00; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.8px; font-weight:bold;">#2 SHADOW AI BREACHES</div>
-      <div style="color:#ffaa00; font-size:2.1rem; font-weight:bold; line-height:1; margin:6px 0 2px;">22%</div>
-      <div style="color:#ddd; font-size:0.78rem; font-weight:600;">of all breaches involve unauthorized AI</div>
-      <div style="color:#aaa; font-size:0.68rem; margin-top:4px;">IBM 2026 • Adds <b style="color:#ffaa00;">+$680k</b> to avg breach cost</div>
-      <div style="color:#ffaa00; font-size:0.7rem; margin-top:8px; font-weight:bold;">1,300+ unauthorized AI apps per org avg</div>
+    <div class="pulse" style="min-height:148px; border-left:5px solid {AMBER}; padding:11px 13px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ffaa00; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.7px; font-weight:bold;">#2 SHADOW AI — SILENT BREACH ACCELERATOR</div>
+      <div style="color:#ffaa00; font-size:2.05rem; font-weight:bold; line-height:1; margin:5px 0 1px;">22% OF ALL BREACHES</div>
+      <div style="color:#ddd; font-size:0.74rem; font-weight:600;">involve unauthorized / shadow AI (IBM 2026)</div>
+      <div style="color:#ffaa00; font-size:0.66rem; margin-top:5px; line-height:1.35;">
+        <b>Adds +$680k to average breach cost</b> (some cases +$2M+)<br>
+        1,300+ unsanctioned AI apps per enterprise on avg<br>
+        <span style="color:#ff4b4b;">97% of breached orgs had ZERO AI access controls</span><br>
+        PII exposed in 66% of shadow AI incidents
+      </div>
+      <div style="color:#ffaa00; font-size:0.65rem; margin-top:5px; font-weight:bold;">Only 3% of orgs with proper AI governance controls in place</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c[2]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:135px; border-left:5px solid {CYAN}; padding:12px 14px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#00e5ff; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.8px; font-weight:bold;">#3 GDPR ENFORCEMENT</div>
-      <div style="color:#00e5ff; font-size:1.6rem; font-weight:bold; line-height:1; margin:6px 0 2px;">€1.2 Billion</div>
-      <div style="color:#ddd; font-size:0.78rem; font-weight:600;">single fine (Meta — record)</div>
-      <div style="color:#aaa; font-size:0.68rem; margin-top:4px;">Up to 4% global turnover<br>AI systems processing EU data in scope</div>
-      <div style="color:#ffaa00; font-size:0.7rem; margin-top:8px; font-weight:bold;">Most enforced data protection law</div>
+    <div class="pulse" style="min-height:148px; border-left:5px solid {CYAN}; padding:11px 13px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00e5ff; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.7px; font-weight:bold;">#3 RECORD GDPR ENFORCEMENT WAVE</div>
+      <div style="color:#00e5ff; font-size:1.85rem; font-weight:bold; line-height:1; margin:5px 0 1px;">€1.2 BILLION</div>
+      <div style="color:#ddd; font-size:0.74rem; font-weight:600;">single largest fine (Meta — record holder)</div>
+      <div style="color:#ffaa00; font-size:0.66rem; margin-top:5px; line-height:1.35;">
+        <b>€4.6B+ total GDPR fines since 2018</b><br>
+        AI training data, inference &amp; profiling now primary enforcement focus<br>
+        <span style="color:#ff4b4b;">Up to 4% global annual turnover • Most enforced data protection law globally</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.65rem; margin-top:5px; font-weight:bold;">AI systems processing EU resident data = direct regulatory exposure</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c[3]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:135px; border-left:5px solid {GREEN}; padding:12px 14px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#00ff41; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.8px; font-weight:bold;">#4 SEC + DEEPFAKE/BEC</div>
-      <div style="color:#00ff41; font-size:1.6rem; font-weight:bold; line-height:1; margin:6px 0 2px;">Active + $25M+</div>
-      <div style="color:#ddd; font-size:0.78rem; font-weight:600;">Real deepfake CEO fraud cases</div>
-      <div style="color:#aaa; font-size:0.68rem; margin-top:4px;">4-business-day disclosure required<br>Multiple enforcement actions 2025-2026</div>
-      <div style="color:#ffaa00; font-size:0.7rem; margin-top:8px; font-weight:bold;">Personal liability rising (DORA/NIS2)</div>
+    <div class="pulse" style="min-height:148px; border-left:5px solid {GREEN}; padding:11px 13px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00ff41; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.7px; font-weight:bold;">#4 DEEPFAKE CEO FRAUD + EXEC LIABILITY</div>
+      <div style="color:#00ff41; font-size:1.85rem; font-weight:bold; line-height:1; margin:5px 0 1px;">$28M+ REAL LOSS</div>
+      <div style="color:#ddd; font-size:0.74rem; font-weight:600;">documented deepfake video call fraud (Hong Kong)</div>
+      <div style="color:#ffaa00; font-size:0.66rem; margin-top:5px; line-height:1.35;">
+        <b>Voice cloning now possible with 3 seconds of audio</b><br>
+        +442% YoY surge in AI vishing/deepfake attacks (CrowdStrike 2026)<br>
+        <span style="color:#ff4b4b;">SEC 4-business-day disclosure now covers AI incidents • Multiple 2025-2026 enforcement actions</span><br>
+        Directors face personal liability under DORA/NIS2
+      </div>
+      <div style="color:#ffaa00; font-size:0.65rem; margin-top:5px; font-weight:bold;">BEC losses exploding via AI voice cloning • Avg wire fraud now multimillion in targeted cases</div>
     </div>
     """, unsafe_allow_html=True)
 
