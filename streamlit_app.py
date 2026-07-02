@@ -9,7 +9,7 @@ from io import StringIO
 # ==========================================================
 # SEC AI NEXUS — CYBER THREAT INTELLIGENCE DASHBOARD
 # Author: Adam Kistler
-# Version: 1.4 (v73)
+# Version: 5.334
 # Last Updated: July 2, 2026
 # ==========================================================
 # --------------------------- 
@@ -35,7 +35,7 @@ st.markdown(csp_meta, unsafe_allow_html=True)
 st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🤖",
                    initial_sidebar_state="collapsed")
 
-# ====================== AUTHOR HEADER (neat top bar - v73) ======================
+# ====================== AUTHOR HEADER (neat top bar - v5.334) ======================
 st.markdown("""
 <div class="author-header" style="background:#0a0a0a; border-bottom:1px solid #1a1a2e; padding:8px 14px; margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; font-family:'Courier New', Courier, monospace; font-size:0.68rem; letter-spacing:0.5px;">
   <div style="color:#00ff41; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -147,32 +147,32 @@ st.markdown(f"""
     div[data-testid="column"] {{ padding: 2px !important; }}
   }}
 
-  /* Sleek Cyber-Themed Refresh Button (v73 - styled like jump buttons, darker cyber blue tone) */
+  /* Sleek Cyber-Themed Refresh Button (v5.334 - styled like jump buttons, darker cyber blue tone) */
   .stButton button[kind="secondary"] {{
-    background: rgba(0, 138, 255, 0.08) !important;
-    color: #008aff !important;
-    border: 1px solid #008aff !important;
+    background: rgba(0, 229, 255, 0.10) !important;
+    color: #00e5ff !important;
+    border: 1px solid #00e5ff !important;
     border-radius: 4px !important;
     font-family: 'Courier New', Courier, monospace !important;
-    font-size: 0.68rem !important;
+    font-size: 0.62rem !important;
     font-weight: bold !important;
-    letter-spacing: 1.2px !important;
+    letter-spacing: 1.0px !important;
     text-transform: uppercase !important;
-    padding: 8px 18px !important;
-    box-shadow: 0 0 15px rgba(0, 138, 255, 0.35) !important;
+    padding: 6px 14px !important;
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.35) !important;
     transition: all 0.2s cubic-bezier(0.23, 1.0, 0.32, 1) !important;
-    min-height: 42px !important;
+    min-height: 34px !important;
   }}
   .stButton button[kind="secondary"]:hover {{
-    background: rgba(0, 138, 255, 0.18) !important;
+    background: rgba(0, 255, 65, 0.12) !important;
     color: #00ff41 !important;
     border-color: #00ff41 !important;
-    box-shadow: 0 0 25px rgba(0, 255, 65, 0.5) !important;
-    text-shadow: 0 0 8px #00ff4140;
+    box-shadow: 0 0 18px rgba(0, 255, 65, 0.45) !important;
+    text-shadow: 0 0 6px #00ff4140;
   }}
   .stButton button[kind="secondary"]:active {{
     transform: translateY(1px) !important;
-    box-shadow: 0 0 10px rgba(0, 138, 255, 0.65) !important;
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.55) !important;
   }}
 
   /* Why AI Security Matters + Key Regulations section - Mobile friendly sizing (v72) */
@@ -421,7 +421,7 @@ f"""
       <span style="font-size: 1.7rem; font-weight: bold; color: {CYAN}; text-shadow: 0 0 15px {CYAN}80; letter-spacing: 1.5px;">
         🤖 SecAI-Nexus
       </span>
-      <span style="font-size: .52rem; color: #00ff41; background:#0a0a0a; border:1px solid #00ff4140; padding:1px 6px; margin-left: 8px; vertical-align: middle; border-radius:2px; font-weight:bold; white-space:nowrap;">v73 • JUL 2026</span>
+      <span style="font-size: .52rem; color: #00ff41; background:#0a0a0a; border:1px solid #00ff4140; padding:1px 6px; margin-left: 8px; vertical-align: middle; border-radius:2px; font-weight:bold; white-space:nowrap;">v5.334 • JUL 2026</span>
     </div>
     <div style="font-size: 0.9rem; font-weight: bold; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; opacity: 0.8;">
       Cybersecurity GRC Observability Platform
@@ -461,7 +461,7 @@ f"""
 </div>
 """, unsafe_allow_html=True)
 
-# ── REFRESH CONTROL (v73 — sleek cyber theme) ─────────────────────────────────────────────
+# ── REFRESH CONTROL (v5.334 — sleek cyber theme) ─────────────────────────────────────────────
 col_r1, col_r2, col_r3 = st.columns([3, 2, 3])
 with col_r2:
     if st.button("🔄 SYNC & REFRESH", type="secondary", use_container_width=True, help="Clears all cached threat intel and reloads fresh data from APIs."):
@@ -527,6 +527,27 @@ st.markdown(f"""
 # Key Impact Stats — refined fonts, tighter spacing, consistent cyber mono feel
 st.markdown(f'<div class="rl-p" style="margin-top:3px; margin-bottom:9px;">📊 MOST IMPACTFUL AI RISKS (MONETARY &amp; REGULATORY)</div>', unsafe_allow_html=True)
 
+# ══════════════════════════════════════════════════════════════════════════════
+# 2026 AI CYBER RISK LANDSCAPE — TOP 20 MOST IMPACTFUL RISKS (RESTRUCTURED)
+# ══════════════════════════════════════════════════════════════════════════════
+
+st.markdown(f"""
+<div id="ai-risk-landscape" style="text-align: left; margin: 8px 0 18px 5px; scroll-margin-top: 8px;">
+  <div style="font-size: 1.02rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.6px; text-transform: uppercase; text-shadow: 0 0 6px {CYAN}20;">
+    &gt;&gt; 2026 AI Cyber Risk Landscape — Top 20 Most Impactful Risks
+  </div>
+  <div style="font-size: 0.58rem; color: #505060; margin-top: 5px; letter-spacing: 0.4px;">
+    Prioritized by regulatory exposure, financial impact, and operational urgency • Updated July 2026
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+# ──────────────────────────────────────────────────────────────────────────────
+# GROUP 1: REGULATORY, FINANCIAL & EXECUTIVE AI RISKS
+# ──────────────────────────────────────────────────────────────────────────────
+st.markdown(f'<div class="rl-p" style="margin-top:8px;">🔴 REGULATORY, FINANCIAL &amp; EXECUTIVE AI RISKS</div>', unsafe_allow_html=True)
+
+# Row 1
 c = st.columns(4)
 with c[0]:
     st.markdown(f"""
@@ -535,9 +556,9 @@ with c[0]:
       <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">7% GLOBAL REVENUE</div>
       <div style="color:#ddd; font-size:0.62rem; font-weight:600;">(or €35M+ — whichever higher)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>EU AI Act 2026 enforcement begins</b><br>
-        Prohibited: social scoring, real-time public biometrics, manipulative AI<br>
-        <span style="color:#ff4b4b;">First fines issued Q2 2026 • Can halt non-compliant AI deployments EU-wide</span>
+        <b>EU AI Act 2026 enforcement active</b><br>
+        Prohibited practices already in force • First fines issued Q2 2026<br>
+        <span style="color:#ff4b4b;">Can halt non-compliant AI deployments EU-wide</span>
       </div>
       <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Highest % penalty in regulatory history for any technology</div>
     </div>
@@ -545,52 +566,49 @@ with c[0]:
 
 with c[1]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#2 SHADOW AI — SILENT BREACH ACCELERATOR</div>
-      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">22% OF ALL BREACHES</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">involve unauthorized / shadow AI (IBM 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {RED}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#2 DEEPFAKE CEO FRAUD + EXEC LIABILITY</div>
+      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">$28M+ REAL LOSS</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">documented deepfake video call fraud (Hong Kong)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>Adds +$680k to average breach cost</b> (some cases +$2M+)<br>
-        1,300+ unsanctioned AI apps per enterprise on avg<br>
-        <span style="color:#ff4b4b;">97% of breached orgs had ZERO AI access controls</span><br>
-        PII exposed in 66% of shadow AI incidents
+        <b>Voice cloning possible with just 3 seconds of audio</b><br>
+        +442% YoY surge in AI vishing/deepfake attacks<br>
+        <span style="color:#ff4b4b;">SEC 4-business-day disclosure now covers AI incidents</span>
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Only 3% of orgs with proper AI governance controls in place</div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">BEC losses exploding via AI voice cloning</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c[2]:
     st.markdown(f"""
     <div class="pulse" style="min-height:138px; border-left:5px solid {CYAN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#00e5ff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#3 RECORD GDPR ENFORCEMENT WAVE</div>
+      <div style="color:#00e5ff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#3 RECORD GDPR ENFORCEMENT</div>
       <div style="color:#00e5ff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {CYAN}30;">€1.2 BILLION</div>
       <div style="color:#ddd; font-size:0.62rem; font-weight:600;">single largest fine (Meta — record holder)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
         <b>€4.6B+ total GDPR fines since 2018</b><br>
-        AI training data, inference &amp; profiling now primary enforcement focus<br>
-        <span style="color:#ff4b4b;">Up to 4% global annual turnover • Most enforced data protection law globally</span>
+        AI training data, inference &amp; profiling now primary enforcement focus
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">AI systems processing EU resident data = direct regulatory exposure</div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Most enforced data protection law globally</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c[3]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {GREEN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#00ff41; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#4 DEEPFAKE CEO FRAUD + EXEC LIABILITY</div>
-      <div style="color:#00ff41; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {GREEN}30;">$28M+ REAL LOSS</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">documented deepfake video call fraud (Hong Kong)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#4 SHADOW AI — SILENT BREACH ACCELERATOR</div>
+      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">22% OF ALL BREACHES</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">involve unauthorized / shadow AI (IBM 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>Voice cloning now possible with 3 seconds of audio</b><br>
-        +442% YoY surge in AI vishing/deepfake attacks (CrowdStrike 2026)<br>
-        <span style="color:#ff4b4b;">SEC 4-business-day disclosure now covers AI incidents • Multiple 2025-2026 enforcement actions</span><br>
-        Directors face personal liability under DORA/NIS2
+        <b>Adds +$680k to average breach cost</b> (some cases +$2M+)<br>
+        1,300+ unsanctioned AI apps per enterprise on average<br>
+        <span style="color:#ff4b4b;">97% of breached orgs had ZERO AI access controls</span>
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">BEC losses exploding via AI voice cloning • Avg wire fraud now multimillion in targeted cases</div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Only 3% of orgs have proper AI governance controls in place</div>
     </div>
     """, unsafe_allow_html=True)
 
-# Second row of 4 cards
+# Row 2
 c2 = st.columns(4)
 with c2[0]:
     st.markdown(f"""
@@ -600,269 +618,226 @@ with c2[0]:
       <div style="color:#ddd; font-size:0.62rem; font-weight:600;">No visibility into machine-to-machine / AI agent traffic (Salt Security 1H 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
         <b>78.6%</b> exec/board scrutiny on AI agent security<br>
-        <b>Only 23.5%</b> say current tools effective vs agentic threats<br>
-        <span style="color:#ff4b4b;">47% delayed AI releases over API/agent risk</span><br>
-        92% lack advanced security maturity for agentic environments
+        <b>Only 23.5%</b> say current tools are effective vs agentic threats<br>
+        <span style="color:#ff4b4b;">47% delayed AI releases over API/agent risk</span>
       </div>
       <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Attackers know what your agents are doing — do you?</div>
-      <div style="margin-top:2px;"><a href="https://salt.security/blog/the-era-of-agentic-security-is-here-key-findings-from-the-1h-2026-state-of-ai-and-api-security-report" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Salt Security 1H 2026 →</a></div>
     </div>
     """, unsafe_allow_html=True)
 
 with c2[1]:
     st.markdown(f"""
     <div class="pulse" style="min-height:138px; border-left:5px solid {RED}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#6 GITHUB ADVISORY SURGE — AI CODE DRIVING VULN VOLUME</div>
-      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">RECORD 1,560 ADVISORIES</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">in May 2026 alone (GitHub Advisory Database)</div>
+      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#6 AI-POWERED ATTACK CONCERN DOUBLED</div>
+      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">34% (DOUBLED YoY)</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">now cite AI-powered cyberattacks as a top concern (AlixPartners 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>Private reports surged to 3,000+/week</b> • Repo advisories 5,000+/wk<br>
-        Review times stretched to multiple weeks (widening unpatched windows)<br>
-        <span style="color:#ff4b4b;">AI-generated code accelerating insecure patterns &amp; vuln discovery</span><br>
-        GitHub deploying AI triage but human curation is the bottleneck
+        <b>Only 48%</b> of organizations say they are “very prepared” for cyber threats in 2026<br>
+        <span style="color:#ff4b4b;">75% have not yet completed system upgrades to address AI-powered threats</span>
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Unpatched flaw exposure windows expanding across open source supply chain</div>
-      <div style="margin-top:2px;"><a href="https://www.helpnetsecurity.com/2026/06/30/github-advisory-database-review/" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Help Net Security / GitHub Advisory June 2026 →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Board-level concern is rising faster than defensive readiness</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c2[2]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#7 AGENTIC AI AUTONOMOUS ESPIONAGE</div>
-      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">MINIMAL HUMAN OVERSIGHT</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">First documented large-scale cyber-espionage by agentic AI (PRC-linked)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {CYAN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00e5ff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#7 GITHUB ADVISORY SURGE — AI CODE</div>
+      <div style="color:#00e5ff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {CYAN}30;">RECORD 1,560 ADVISORIES</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">in May 2026 alone (GitHub Advisory Database)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>Agent performed recon → vuln ID → exploit → lateral movement → data exfil autonomously</b><br>
-        Humans only intervened at key decision points (Nov 2025 disclosure)<br>
-        <span style="color:#ff4b4b;">Paradigm shift: machine-speed attacks outpacing human-paced defenses</span>
+        <b>Private reports surged to 3,000+/week</b><br>
+        AI-generated code accelerating insecure patterns &amp; vuln discovery
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Agentic AI transforms discrete incidents into self-directed, adaptive campaigns</div>
-      <div style="margin-top:2px;"><a href="https://www.cyber.nj.gov/threat-landscape/2026-cyber-threat-assessment" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">NJCCIC 2026 Cyber Threat Assessment →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Unpatched flaw exposure windows expanding across open source supply chain</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c2[3]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {CYAN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#00e5ff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#8 AI AGENT TRAFFIC — MALICIOUS VS BENIGN BLUR</div>
-      <div style="color:#00e5ff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {CYAN}30;">7,851% GROWTH</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">in AI agent traffic (HUMAN Security 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {GREEN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00ff41; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#8 AI AGENT VISIBILITY CRISIS</div>
+      <div style="color:#00ff41; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {GREEN}30;">48.9% BLIND TO AGENTS</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">No visibility into machine-to-machine / AI agent traffic (Salt Security)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>Only 0.5% separates benign automation rate from malicious automation</b><br>
-        Attackers targeting same surfaces AI agents use (checkout, account mgmt, discovery)<br>
-        <span style="color:#ff4b4b;">92% of security leaders concerned about workforce AI agent impact on security</span>
+        <b>78.6%</b> exec/board scrutiny on AI agent security<br>
+        <b>Only 23.5%</b> say current tools are effective vs agentic threats
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Malicious automation now nearly indistinguishable at machine speed</div>
-      <div style="margin-top:2px;"><a href="https://www.humansecurity.com/learn/resources/2026-state-of-ai-traffic-cyberthreat-benchmarks/" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">HUMAN Security 2026 AI Traffic Report →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Attackers know what your agents are doing — do you?</div>
     </div>
     """, unsafe_allow_html=True)
-st.markdown(f'<div class="rl-p" style="margin-top:15px;">📊 MOST IMPACTFUL AI RISKS (CONTINUED — FRESH 2026 INSIGHTS)</div>', unsafe_allow_html=True)
 
+st.markdown("---")
+
+# ──────────────────────────────────────────────────────────────────────────────
+# GROUP 2: OPERATIONAL AI THREAT REALITIES & BLIND SPOTS
+# ──────────────────────────────────────────────────────────────────────────────
+st.markdown(f'<div class="rl-p" style="margin-top:8px;">🟠 OPERATIONAL AI THREAT REALITIES &amp; BLIND SPOTS</div>', unsafe_allow_html=True)
+
+# Row 3
 c3 = st.columns(4)
-
 with c3[0]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {CYAN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#00e5ff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#9 AI VULNERABILITIES — FASTEST GROWING RISK</div>
-      <div style="color:#00e5ff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {CYAN}30;">87% OF ORGS</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">identify AI-related vulnerabilities as the fastest-growing cyber risk (WEF Global Cybersecurity Outlook 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {RED}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#9 AI NOW IN 83% OF INCIDENTS</div>
+      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">83% OF BREACHES</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">now involve AI in some form (Gigamon 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>Security assessment of AI tools nearly doubled to 64% in 2026</b> (from 37% in 2025)<br>
-        Supply chain vulnerabilities now the #1 challenge for <b>65%</b> of large companies<br>
-        <span style="color:#ff4b4b;">Geopolitical fractures + AI accelerating risk at unprecedented pace</span>
+        <b>Breach rate hit 65%</b> — highest in three years<br>
+        AI is embedded across external attacks and shadow AI
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Stronger governance adoption is happening — but still lagging the threat velocity</div>
-      <div style="margin-top:2px;"><a href="https://reports.weforum.org/docs/WEF_Global_Cybersecurity_Outlook_2026.pdf" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">WEF Global Cybersecurity Outlook 2026 →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">AI has become table stakes in the modern breach</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c3[1]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {RED}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#10 AI AGENT SECURITY CONCERN</div>
-      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">92% OF LEADERS</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">concerned with security implications of AI agents across the workforce (Darktrace 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#10 GENERATIVE AI &amp; AGENT BREACH REALITY</div>
+      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">89.5% / 88.4%</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">experienced GenAI breach / AI agent-related breach (AvePoint 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>87%</b> say AI is significantly increasing the number of threats requiring attention<br>
-        Sensitive data exposure remains the top concern (61%)<br>
-        <span style="color:#ff4b4b;">Regulatory compliance violations a close second (56%)</span>
+        <b>Nearly 9 in 10 organizations</b> hit by agent-related incidents
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Defensive AI is helping — 96% say it significantly improves security capabilities</div>
-      <div style="margin-top:2px;"><a href="https://www.darktrace.com/resource/the-state-of-ai-cybersecurity-2026" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Darktrace State of AI Cybersecurity 2026 →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Generative AI and autonomous agents are active breach vectors</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c3[2]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#11 AI BREACH DETECTION GAP</div>
-      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">31% UNCERTAIN</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">whether they experienced an AI security breach in the past 12 months (HiddenLayer 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {CYAN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00e5ff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#11 CONFIDENCE VS REALITY GAP</div>
+      <div style="color:#00e5ff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {CYAN}30;">82.7% CONFIDENT</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">they can prevent unauthorized AI data access — yet ~89% were still breached</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>Major visibility & detection gap</b> in AI-related incidents<br>
-        Significant portion report shadow AI as a definite or probable problem<br>
-        <span style="color:#ff4b4b;">High adoption of open-weight models from public repos — but fewer than half consistently scan them</span>
+        <b>Massive disconnect</b> between perceived and actual control
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">If you can't confidently say whether you were breached, you probably were</div>
-      <div style="margin-top:2px;"><a href="https://www.hiddenlayer.com/report-and-guide/threatreport2026" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">HiddenLayer 2026 AI Threat Landscape Report →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">This is currently the most dangerous illusion in AI security</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c3[3]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {GREEN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#00ff41; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#12 SUPPLY CHAIN — #1 BOARD-LEVEL CHALLENGE</div>
-      <div style="color:#00ff41; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {GREEN}30;">65% OF LARGE COS</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">cite third-party & supply chain vulnerabilities as their greatest challenge (WEF 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {RED}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#12 RANSOMWARE HANDOFFS IN 22 SECONDS</div>
+      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">22 SECONDS</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">average access hand-off between ransomware partners (Mandiant M-Trends 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>AI pipelines now a confirmed, high-velocity attack surface</b><br>
-        LiteLLM, Trivy, and related compromises hit in March 2026<br>
-        <span style="color:#ff4b4b;">Model poisoning, “slopsquatting,” and CI/CD pipeline attacks surging</span>
+        <b>“Recovery Denial” tactics</b> now standard — attackers target backups and virtualization layers
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">30%+ of AI model/application incidents now tied to supply chain vectors</div>
-      <div style="margin-top:2px;"><a href="https://reports.weforum.org/docs/WEF_Global_Cybersecurity_Outlook_2026.pdf" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">WEF Global Cybersecurity Outlook 2026 →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Modern ransomware is now fundamentally a resilience problem</div>
     </div>
     """, unsafe_allow_html=True)
-    # ==========================================================
-# ANOTHER 4 NEW CARDS (Fourth row - c4)
-# Insert this entire block right after your previous c3 block
-# and right before: st.markdown("---")
-# ==========================================================
 
+# Row 4
 c4 = st.columns(4)
-
 with c4[0]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {BLUE}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#008aff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#13 AI NOW IN 83% OF INCIDENTS</div>
-      <div style="color:#008aff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {BLUE}30;">83% OF BREACHES</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">now involve AI in some form (Gigamon 2026 Hybrid Cloud Security Survey)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#13 DETECTION GETTING SLOWER DESPITE AI TOOLS</div>
+      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">41% LONGER</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">say it now takes longer to detect breaches despite heavy investment (Gigamon 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>Breach rate hit 65%</b> — highest level in three years<br>
-        AI is no longer a niche vector — it is embedded across external attacks and shadow AI incidents<br>
-        <span style="color:#ff4b4b;">Organizations increasing security spend, yet outcomes are lagging</span>
+        <b>93%</b> invested in new detection tools<br>
+        Yet 41% report slower outcomes as AI increases data volume
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">AI has become table stakes in the modern breach</div>
-      <div style="margin-top:2px;"><a href="https://www.gigamon.com/campaigns/hybrid-cloud-security-survey.html" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Gigamon 2026 Hybrid Cloud Security Survey →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">More tools + more AI traffic = visibility debt is growing</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c4[1]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {RED}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#14 GENERATIVE AI BREACH REALITY</div>
-      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">89.5% BREACHED</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">experienced a generative AI security breach in 2025 (AvePoint State of AI 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {GREEN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00ff41; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#14 CISOs RUSHING TO FUND AI DEFENSES</div>
+      <div style="color:#00ff41; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {GREEN}30;">~90% OF CISOs</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">expect to increase AI security spending sharply in the next 12–18 months (RH-ISAC 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>88.4%</b> also had an AI agent-related breach<br>
-        Nearly 9 in 10 organizations hit by agent-related incidents<br>
-        <span style="color:#ff4b4b;">The gap between AI adoption and actual security controls remains massive</span>
+        <b>43%</b> anticipate significant growth in AI-security budgets
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Generative AI and autonomous agents are no longer theoretical risks — they are active breach vectors</div>
-      <div style="margin-top:2px;"><a href="https://www.avepoint.com/shifthappens/reports/artificial-intelligence-report-2026" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">AvePoint State of AI 2026 →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">AI risk is now a board-level funding priority</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c4[2]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#15 CONFIDENCE VS REALITY GAP</div>
-      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">82.7% CONFIDENT</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">they can prevent unauthorized AI data access — yet ~89% were still breached (AvePoint 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {CYAN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00e5ff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#15 AI INDUSTRIALIZING ATTACKS</div>
+      <div style="color:#00e5ff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {CYAN}30;">AI USED OFFENSIVELY</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">inside already-compromised environments (Mandiant M-Trends 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>Massive disconnect</b> between perceived and actual control<br>
-        Overconfidence is now one of the biggest amplifiers of AI risk<br>
-        <span style="color:#ff4b4b;">82.7% confident → but nearly 9 in 10 of those same organizations suffered incidents</span>
+        <b>Attackers are actively abusing AI</b> within breached networks<br>
+        The industrialization of cybercrime has entered a new phase
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">This is the most dangerous illusion in AI security today</div>
-      <div style="margin-top:2px;"><a href="https://www.avepoint.com/shifthappens/reports/artificial-intelligence-report-2026" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">AvePoint State of AI 2026 →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">The asymmetry between attacker speed and defender response continues to widen</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c4[3]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {GREEN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#00ff41; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#16 AI-POWERED ATTACK CONCERN DOUBLED</div>
-      <div style="color:#00ff41; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {GREEN}30;">34% (DOUBLED)</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">now cite AI-powered cyberattacks as a top cybersecurity concern (up from 17% in 2025 — AlixPartners 2026 U.S. Risk Survey)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {BLUE}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#008aff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#16 AI VULNERABILITIES — FASTEST GROWING RISK</div>
+      <div style="color:#008aff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {BLUE}30;">87% OF ORGS</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">identify AI-related vulnerabilities as the fastest-growing cyber risk (WEF 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>Only 48%</b> of organizations say they are “very prepared” to address cyber threats in 2026<br>
-        AI attack concern rising faster than defensive readiness<br>
-        <span style="color:#ff4b4b;">75% have not yet completed system upgrades to address AI-powered threats</span>
+        <b>Security assessment of AI tools nearly doubled to 64%</b> in 2026 (from 37% in 2025)
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Concern is surging — but actual preparedness is not keeping pace</div>
-      <div style="margin-top:2px;"><a href="https://www.alixpartners.com/insights/2026-us-risk-survey/" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">AlixPartners 2026 U.S. Risk Survey →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Stronger governance adoption is happening — but still lagging the threat velocity</div>
     </div>
     """, unsafe_allow_html=True)
-    # ==========================================================
-# FINAL 4 CARDS (c5) — Bringing the section to 20 cards total
-# Insert right after your c4 block and before: st.markdown("---")
-# ==========================================================
 
+# Row 5
 c5 = st.columns(4)
-
 with c5[0]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {CYAN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#00e5ff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#17 RANSOMWARE HANDOFFS IN 22 SECONDS</div>
-      <div style="color:#00e5ff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {CYAN}30;">22 SECONDS</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">average access hand-off between ransomware partners (Mandiant M-Trends 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {RED}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#17 AI AGENT SECURITY CONCERN</div>
+      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">92% OF LEADERS</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">concerned with security implications of AI agents across the workforce (Darktrace 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>Attack chains are now industrialized</b><br>
-        Operators deliberately target backup infrastructure, identity services, and virtualization layers<br>
-        <span style="color:#ff4b4b;">“Recovery Denial” is the new ransomware playbook — not just encryption</span>
+        <b>87%</b> say AI is significantly increasing the number of threats requiring attention
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Speed has become the primary advantage for financially motivated actors</div>
-      <div style="margin-top:2px;"><a href="https://cloud.google.com/security/resources/m-trends" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Mandiant M-Trends 2026 →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Defensive AI is helping — 96% say it significantly improves security capabilities</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c5[1]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {RED}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#18 DETECTION GETTING SLOWER DESPITE AI TOOLS</div>
-      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">41% LONGER</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">say it now takes longer to detect and investigate breaches (Gigamon 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#18 AI BREACH DETECTION GAP</div>
+      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">31% UNCERTAIN</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">whether they experienced an AI security breach in the past 12 months (HiddenLayer 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>93%</b> invested in new detection/visibility tools<br>
-        Yet <b>41%</b> report slower outcomes as AI increases data volumes and complexity<br>
-        <span style="color:#ff4b4b;">More tools + more AI traffic = visibility debt is growing</span>
+        <b>Major visibility & detection gap</b> in AI-related incidents
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Investment is up. Speed of detection is down. This is the AI security paradox.</div>
-      <div style="margin-top:2px;"><a href="https://www.gigamon.com/campaigns/hybrid-cloud-security-survey.html" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Gigamon 2026 Hybrid Cloud Security Survey →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">If you can't confidently say whether you were breached, you probably were</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c5[2]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#19 CISOs RUSHING TO FUND AI DEFENSES</div>
-      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">~90% OF CISOs</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">expect to increase AI security spending sharply in the next 12–18 months (RH-ISAC CISO Benchmark 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {GREEN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00ff41; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#19 SUPPLY CHAIN — #1 BOARD-LEVEL CHALLENGE</div>
+      <div style="color:#00ff41; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {GREEN}30;">65% OF LARGE COS</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">cite third-party & supply chain vulnerabilities as their greatest challenge (WEF 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>43%</b> anticipate significant growth in AI-security budgets<br>
-        Spending is being reallocated from existing budgets in many cases<br>
-        <span style="color:#ff4b4b;">AI governance and security tooling is now a top budget priority for most security leaders</span>
+        <b>AI pipelines now a confirmed, high-velocity attack surface</b><br>
+        LiteLLM, Trivy, and related compromises hit in March 2026
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">The market is voting with dollars — AI risk is now a board-level funding priority</div>
-      <div style="margin-top:2px;"><a href="https://rhisac.org/wp-content/uploads/CISO-Benchmark-2026_CLEAR.pdf" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">RH-ISAC CISO Benchmark 2026 →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">30%+ of AI model/application incidents now tied to supply chain vectors</div>
     </div>
     """, unsafe_allow_html=True)
 
 with c5[3]:
     st.markdown(f"""
-    <div class="pulse" style="min-height:138px; border-left:5px solid {GREEN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#00ff41; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#20 AI IS INDUSTRIALIZING ATTACKS</div>
-      <div style="color:#00ff41; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {GREEN}30;">ATTACKERS USING AI</div>
-      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">to automate reconnaissance, exploit chaining, and post-exploitation inside environments (Mandiant M-Trends 2026)</div>
+    <div class="pulse" style="min-height:138px; border-left:5px solid {CYAN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00e5ff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#20 AI AGENT TRAFFIC — MALICIOUS VS BENIGN BLUR</div>
+      <div style="color:#00e5ff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {CYAN}30;">7,851% GROWTH</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">in AI agent traffic (HUMAN Security 2026)</div>
       <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
-        <b>AI is no longer just a tool for defenders</b><br>
-        Attackers are actively abusing AI within already-compromised networks<br>
-        <span style="color:#ff4b4b;">The industrialization of cybercrime has entered a new phase</span>
+        <b>Only 0.5% separates benign automation rate from malicious automation</b><br>
+        <span style="color:#ff4b4b;">92% of security leaders concerned about workforce AI agent impact on security</span>
       </div>
-      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">The asymmetry between attacker speed and defender response continues to widen</div>
-      <div style="margin-top:2px;"><a href="https://cloud.google.com/security/resources/m-trends" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Mandiant M-Trends 2026 →</a></div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Malicious automation now nearly indistinguishable at machine speed</div>
     </div>
     """, unsafe_allow_html=True)
 st.markdown("---")
@@ -2216,20 +2191,20 @@ with col5:
     st.plotly_chart(fig_heatmap, use_container_width=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
-# NEW: ONE-CLICK FRAMEWORK CROSSWALK + GAP MATRIX (v73 — Enhanced)
+# NEW: ONE-CLICK FRAMEWORK CROSSWALK + GAP MATRIX (v5.334 — Enhanced)
 # Maps regulatory penalties & risks directly to control coverage/gaps across frameworks.
 # Extremely useful for GRC professionals doing multi-framework mapping & compliance rationalization
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
 <div id="framework-gap-matrix" style="scroll-margin-top: 20px;">
-  <div class="rl-p" style="margin-top:25px;">🧭 INDUSTRY FRAMEWORK GAP MATRIX <span style="color:#ffaa00; font-size:0.62rem; border:1px solid #ffaa0040; padding:1px 5px; border-radius:2px;">BETA v73</span></div>
+  <div class="rl-p" style="margin-top:25px;">🧭 INDUSTRY FRAMEWORK GAP MATRIX <span style="color:#ffaa00; font-size:0.62rem; border:1px solid #ffaa0040; padding:1px 5px; border-radius:2px;">BETA v5.334</span></div>
   <div style="font-size:0.54rem; color:#505060; margin-top:2px; margin-bottom:8px; letter-spacing:0.3px;">
     Interactive crosswalk tool for GRC teams. Select 2+ frameworks to instantly see consolidated control coverage, identify gaps (especially AI/LLM, Vendor/Third-Party Risk, Business Continuity), and map coverage against high-impact regulations (EU AI Act 7% fines, NIS2/DORA supply chain, GDPR, SEC AI disclosure, CMMC). Helps prioritize control enhancements, framework rationalization, and AI governance investments. <b>Ties directly to the top "Why AI Security Matters" risks.</b>
   </div>
 </div>
 """, unsafe_allow_html=True)
 
-# ── PRESET BUTTONS for common GRC use cases (NEW in v73 Beta) ─────────────────────────────
+# ── PRESET BUTTONS for common GRC use cases (NEW in v5.334 Beta) ─────────────────────────────
 st.markdown('<div style="margin-bottom:6px;"><span style="color:#ffaa00; font-size:0.62rem; font-weight:bold; text-transform:uppercase; letter-spacing:0.5px;">QUICK PRESETS (click to auto-select common regulatory combos)</span></div>', unsafe_allow_html=True)
 p1, p2, p3, p4 = st.columns(4)
 with p1:
@@ -2269,7 +2244,7 @@ core_controls = [
     "AI / LLM Specific Controls"
 ]
 
-# Coverage matrix (0-100). Higher = framework covers this control strongly. Updated for v73 with better AI/Reg alignment.
+# Coverage matrix (0-100). Higher = framework covers this control strongly. Updated for v5.334 with better AI/Reg alignment.
 coverage_matrix = {
     "NIST CSF 2.0":        [85, 90, 88, 95, 80, 92, 75, 85, 90, 40],
     "ISO 27001:2022":      [90, 85, 80, 92, 88, 82, 85, 88, 85, 35],
@@ -2599,6 +2574,6 @@ st.markdown(f'''
        style="color:#505060;font-size:.6rem;text-decoration:none;border:1px solid #1a1a2e;padding:3px 10px;border-radius:3px;">
        Star on GitHub</a></div>
   <div style="color:#2a2a3a;font-size:.6rem;">
-    SecAI-Nexus GRC [v73] | Live Data Engine | 12 hr Cache |
+    SecAI-Nexus GRC [v5.334] | Live Data Engine | 12 hr Cache |
     118 Metrics | 10 Intel Tables | 2 Maps | 80 Resources | {now_utc.strftime("%Y")}</div></div>
 ''', unsafe_allow_html=True)
