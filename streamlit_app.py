@@ -657,7 +657,73 @@ with c2[3]:
       <div style="margin-top:2px;"><a href="https://www.humansecurity.com/learn/resources/2026-state-of-ai-traffic-cyberthreat-benchmarks/" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">HUMAN Security 2026 AI Traffic Report →</a></div>
     </div>
     """, unsafe_allow_html=True)
+st.markdown(f'<div class="rl-p" style="margin-top:15px;">📊 MOST IMPACTFUL AI RISKS (CONTINUED — FRESH 2026 INSIGHTS)</div>', unsafe_allow_html=True)
 
+c3 = st.columns(4)
+
+with c3[0]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {CYAN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00e5ff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#9 AI VULNERABILITIES — FASTEST GROWING RISK</div>
+      <div style="color:#00e5ff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {CYAN}30;">87% OF ORGS</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">identify AI-related vulnerabilities as the fastest-growing cyber risk (WEF Global Cybersecurity Outlook 2026)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>Security assessment of AI tools nearly doubled to 64% in 2026</b> (from 37% in 2025)<br>
+        Supply chain vulnerabilities now the #1 challenge for <b>65%</b> of large companies<br>
+        <span style="color:#ff4b4b;">Geopolitical fractures + AI accelerating risk at unprecedented pace</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Stronger governance adoption is happening — but still lagging the threat velocity</div>
+      <div style="margin-top:2px;"><a href="https://reports.weforum.org/docs/WEF_Global_Cybersecurity_Outlook_2026.pdf" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">WEF Global Cybersecurity Outlook 2026 →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c3[1]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {RED}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#10 AI AGENT SECURITY CONCERN</div>
+      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">92% OF LEADERS</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">concerned with security implications of AI agents across the workforce (Darktrace 2026)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>87%</b> say AI is significantly increasing the number of threats requiring attention<br>
+        Sensitive data exposure remains the top concern (61%)<br>
+        <span style="color:#ff4b4b;">Regulatory compliance violations a close second (56%)</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Defensive AI is helping — 96% say it significantly improves security capabilities</div>
+      <div style="margin-top:2px;"><a href="https://www.darktrace.com/resource/the-state-of-ai-cybersecurity-2026" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Darktrace State of AI Cybersecurity 2026 →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c3[2]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#11 AI BREACH DETECTION GAP</div>
+      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">31% UNCERTAIN</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">whether they experienced an AI security breach in the past 12 months (HiddenLayer 2026)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>Major visibility & detection gap</b> in AI-related incidents<br>
+        Significant portion report shadow AI as a definite or probable problem<br>
+        <span style="color:#ff4b4b;">High adoption of open-weight models from public repos — but fewer than half consistently scan them</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">If you can't confidently say whether you were breached, you probably were</div>
+      <div style="margin-top:2px;"><a href="https://www.hiddenlayer.com/report-and-guide/threatreport2026" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">HiddenLayer 2026 AI Threat Landscape Report →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c3[3]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {GREEN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00ff41; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#12 SUPPLY CHAIN — #1 BOARD-LEVEL CHALLENGE</div>
+      <div style="color:#00ff41; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {GREEN}30;">65% OF LARGE COS</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">cite third-party & supply chain vulnerabilities as their greatest challenge (WEF 2026)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>AI pipelines now a confirmed, high-velocity attack surface</b><br>
+        LiteLLM, Trivy, and related compromises hit in March 2026<br>
+        <span style="color:#ff4b4b;">Model poisoning, “slopsquatting,” and CI/CD pipeline attacks surging</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">30%+ of AI model/application incidents now tied to supply chain vectors</div>
+      <div style="margin-top:2px;"><a href="https://reports.weforum.org/docs/WEF_Global_Cybersecurity_Outlook_2026.pdf" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">WEF Global Cybersecurity Outlook 2026 →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
