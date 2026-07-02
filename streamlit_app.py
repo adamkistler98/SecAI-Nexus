@@ -9,8 +9,8 @@ from io import StringIO
 # ==========================================================
 # SEC AI NEXUS — CYBER THREAT INTELLIGENCE DASHBOARD
 # Author: Adam Kistler
-# Version: 1.3 (v33)
-# Last Updated: June 14, 2026
+# Version: 1.4 (v34)
+# Last Updated: July 2, 2026
 # ==========================================================
 # --------------------------- 
 # Page Configuration
@@ -34,6 +34,25 @@ st.markdown(csp_meta, unsafe_allow_html=True)
 # ===================================================================
 st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🤖",
                    initial_sidebar_state="collapsed")
+
+# ====================== AUTHOR HEADER (neat top bar) ======================
+st.markdown("""
+<div style="background:#0a0a0a; border-bottom:1px solid #1a1a2e; padding:7px 14px; margin:-8px 0 12px 0; display:flex; align-items:center; justify-content:space-between; font-family:'Courier New', Courier, monospace; font-size:0.68rem; letter-spacing:0.5px;">
+  <div style="color:#00ff41;">
+    <span style="color:#008aff; font-weight:bold;">▸</span> DEVELOPED BY <b style="color:#fff; text-shadow:0 0 4px #00ff4140;">ADAM KISTLER</b>
+  </div>
+  <div style="display:flex; align-items:center; gap:14px;">
+    <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" 
+       style="color:#008aff; text-decoration:none; border-bottom:1px dashed #008aff50; padding-bottom:1px; transition:0.2s;">LINKEDIN</a>
+    <a href="https://github.com/adamkistler98/SecAI-Nexus" target="_blank" 
+       style="color:#008aff; text-decoration:none; border-bottom:1px dashed #008aff50; padding-bottom:1px; transition:0.2s;">GITHUB</a>
+  </div>
+  <div style="color:#4a4a5a; font-size:0.62rem; background:#111; padding:1px 6px; border:1px solid #1a1a2e; border-radius:2px;">
+    v34 • JUL 2026
+  </div>
+</div>
+""", unsafe_allow_html=True)
+# ===================================================================
 # ====================== LINKEDIN PREVIEW IMAGE ======================
 st.markdown("""
 <meta property="og:title" content="SecAI-Nexus GRC — Real-Time Cyber Threat Intelligence Dashboard">
@@ -118,7 +137,7 @@ st.markdown(f"""
   .sg {{background:{GREEN};box-shadow:0 0 4px {GREEN};}} .sa {{background:{AMBER};box-shadow:0 0 4px {AMBER};}}
   .sc {{background:{CYAN};box-shadow:0 0 4px {CYAN};}}
 
-  /* Responsive improvements for mobile / smaller screens (v33) */
+  /* Responsive improvements for mobile / smaller screens (v34) */
   @media (max-width: 1200px) {{
     .cm, .pulse {{ min-height: auto !important; padding: 6px 7px 5px !important; }}
     .cm-v, .pulse .cm-v {{ font-size: 1.0rem !important; }}
@@ -130,6 +149,34 @@ st.markdown(f"""
     .cm-s, .pulse .cm-s, .cm-f, .pulse .cm-f {{ font-size: 0.52rem !important; }}
     div[data-testid="column"] {{ padding: 2px !important; }}
   }}
+
+  /* Sleek Cyber-Themed Refresh Button (v34) */
+  .stButton button[kind="secondary"] {
+    background: linear-gradient(135deg, #0a0a14 0%, #111113 100%) !important;
+    color: #00e5ff !important;
+    border: 1px solid #00e5ff !important;
+    border-radius: 3px !important;
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 0.72rem !important;
+    font-weight: bold !important;
+    letter-spacing: 1.2px !important;
+    text-transform: uppercase !important;
+    padding: 8px 18px !important;
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.25) !important;
+    transition: all 0.2s cubic-bezier(0.23, 1.0, 0.32, 1) !important;
+    min-height: 42px !important;
+  }
+  .stButton button[kind="secondary"]:hover {
+    background: linear-gradient(135deg, #111113 0%, #1a1a20 100%) !important;
+    color: #00ff41 !important;
+    border-color: #00ff41 !important;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.45) !important;
+    text-shadow: 0 0 6px #00ff4140;
+  }
+  .stButton button[kind="secondary"]:active {
+    transform: translateY(1px) !important;
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.6) !important;
+  }
 </style>
 """, unsafe_allow_html=True)
 S = requests.Session()
@@ -332,7 +379,7 @@ f"""
       <span style="font-size: 1.7rem; font-weight: bold; color: {CYAN}; text-shadow: 0 0 15px {CYAN}80; letter-spacing: 1.5px;">
         🤖 SecAI-Nexus
       </span>
-      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v33</span>
+      <span style="font-size: .45rem; color: #4a4a5a; border: 1px solid #2a2a3a; padding: 1px 4px; margin-left: 6px; vertical-align: middle;">v34</span>
     </div>
     <div style="font-size: 0.9rem; font-weight: bold; color: #8892b0; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; opacity: 0.8;">
       Cybersecurity GRC Observability Platform
@@ -364,10 +411,10 @@ f"""
 </div>
 """, unsafe_allow_html=True)
 
-# ── REFRESH CONTROL (new in v33) ─────────────────────────────────────────────
+# ── REFRESH CONTROL (enhanced v34 — sleek cyber theme) ─────────────────────────────────────────────
 col_r1, col_r2, col_r3 = st.columns([3, 2, 3])
 with col_r2:
-    if st.button("🔄 Refresh All Data & Clear Cache", type="secondary", use_container_width=True, help="Clears all @st.cache_data and reloads fresh API responses. Useful after long sessions."):
+    if st.button("⟳ SYNC & CLEAR INTEL CACHE", type="secondary", use_container_width=True, help="Clears @st.cache_data + reloads fresh API responses. Cyber refresh for latest threat intel."):
         st.cache_data.clear()
         st.toast("Cache cleared. Reloading latest threat intel...", icon="🔄")
         st.rerun()
@@ -376,7 +423,7 @@ with st.spinner("Syncing threat intelligence feeds…"):
     kev=fetch_kev(); baz=fetch_bazaar(); uhaus=fetch_urlhaus()
     feodo=fetch_feodo(); sans=fetch_sans(); tor=fetch_tor()
     topports=fetch_topports(); topips=fetch_topips(); honeypot=fetch_honeypot()
-# ── BASELINES (updated June 14 2026 with IBM 2025 / CrowdStrike 2026 GTR + latest verified data) ─────────────────────────────────────────────────────────────────
+# ── BASELINES (updated July 2026 with IBM 2025 / CrowdStrike 2026 GTR + mid-year verified data) ─────────────────────────────────────────────────────────────────
 CVE_TOT=32_800; CVE_CRIT=5_100; CVE_HIGH=13_900
 RANSOM=6_400; SUPPLY=3_700; INSIDER=7_800
 BREACH=8_700_000_000; BEC=24_500; PHISH=2_300_000
@@ -398,7 +445,7 @@ if not sans:
 if not tor:
     tor={"c":7800}
 # ══════════════════════════════════════════════════════════════════════════════
-# AI SECURITY & THREAT INTELLIGENCE REFERENCE (UPDATED May 26 2026)
+# AI SECURITY & THREAT INTELLIGENCE REFERENCE (UPDATED July 2026)
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
 <div id="threat-intel-reference" style="text-align: left; margin: 30px 0 15px 5px; scroll-margin-top: 30px;">
@@ -448,7 +495,7 @@ if kev_recent:
             (rw, f"text-align:center;"),
             (du, f"color:{AMBER};white-space:nowrap;")
         ])
-# ── TOP 15 AI MODELS & CAPABILITIES (updated May 26 2026) ───────────────────────────────────
+# ── TOP 15 AI MODELS & CAPABILITIES (as of July 2026) ───────────────────────────────────
 ai_models_data = [
     ("1. Gemini 3.2 Ultra", "https://gemini.google.com/", "Multimodal Reasoning", "Complex tasks & integration", "Google's flagship with 2M+ context & superior multimodal", "Prompt Injection"),
     ("2. Claude 4.7 Sonnet", "https://claude.ai/", "Advanced Reasoning", "Safety & long-form content", "Anthropic's top model excelling in logic and ethical alignment", "Insecure Output"),
@@ -475,7 +522,7 @@ for name, link, use_case, best_for, desc, vuln in ai_models_data:
         (desc, f"color:#888;font-size:.56rem;"),
         (f'<a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" style="color:{RED};text-decoration:none;">{vuln}</a>', f"color:{RED};font-weight:bold;")
     ])
-# ── TOP 15 AI-POWERED CYBERCRIME (updated May 26 2026) ──────────────────────────────────────
+# ── TOP 15 AI-POWERED CYBERCRIME (as of July 2026) ──────────────────────────────────────
 ai_crime_data = [
     ("1. AI Phishing Campaigns", "Scaling 420% YoY", "Hyper-personalized spear-phishing with perfect grammar", "CrowdStrike GTR 2026", "https://www.crowdstrike.com/global-threat-report/"),
     ("2. Deepfake Vishing", "442% ↑", "3-second voice cloning for CEO fraud & wire transfers", "IBM Cost of Breach 2025", "https://www.ibm.com/reports/data-breach"),
@@ -1497,7 +1544,7 @@ st.markdown("---")
 st.markdown(f"""
 <div id="framework-comparison" style="text-align: left; margin: 35px 0 15px 5px; scroll-margin-top: 35px;">
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
-    &gt;&gt; Cybersecurity Framework Comparison &amp; Control Lineage (Enhanced May 26 2026)
+    &gt;&gt; Cybersecurity Framework Comparison &amp; Control Lineage (Enhanced July 2026)
   </div>
   <div style="font-size: 0.55rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px; line-height: 1.5;">
     <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">12 MAJOR FRAMEWORKS • VERIFIED 2026 DATA</span>
@@ -1782,5 +1829,5 @@ st.markdown(f"""
        style="color:#505060;font-size:.6rem;text-decoration:none;border:1px solid #1a1a2e;padding:3px 10px;border-radius:3px;">
        ⭐ Star on GitHub</a></div>
   <div style="color:#2a2a3a;font-size:.6rem;">
-    SecAI-Nexus GRC [v32.0] · Live Data Engine · 12hr Cache ·
+    SecAI-Nexus GRC [v34] · Live Data Engine · 12hr Cache ·
     118 Metrics · 10 Intel Tables · 2 Maps · 80 Resources · {now_utc.strftime("%Y")}</div></div>""", unsafe_allow_html=True)
