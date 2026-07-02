@@ -507,7 +507,7 @@ st.markdown(f"""
     &gt;&gt; Why AI Security Matters: Risk, Regulation &amp; Business Impact
   </div>
   <div style="font-size: 0.58rem; color: #505060; margin-top: 5px; letter-spacing: 0.4px;">
-    Executive Brief • Updated July 2026 • <span style="color:#ffaa00;">Regulatory penalties now link to Framework Gap Matrix below</span>
+    Executive Brief • Updated July 2026 
   </div>
 </div>
 """, unsafe_allow_html=True)
