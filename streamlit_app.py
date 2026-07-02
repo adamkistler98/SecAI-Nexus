@@ -461,32 +461,32 @@ if not sans:
 if not tor:
     tor={"c":7800}
 # ══════════════════════════════════════════════════════════════════════════════
-# WHY AI SECURITY MATTERS — EXECUTIVE BRIEF (Most Impactful First)
-# Sleek board/CISO-ready section with consistent cyber theme (v72 refresh)
+# WHY AI SECURITY MATTERS — BUSINESS IMPACT & REGULATORY EXPOSURE
+# Educational focus on real organizational costs, risks, and practical implications
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown(f"""
 <div id="why-ai-security-matters" style="text-align: left; margin: 25px 0 15px 5px; scroll-margin-top: 25px;">
   <div style="font-size: 0.95rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
-    &gt;&gt; Why AI Security Matters: Risk, Regulation &amp; Business Impact
+    &gt;&gt; Why AI Security Matters: Business Impact, Regulatory Exposure &amp; Emerging Threats
   </div>
   <div style="font-size: 0.58rem; color: #505060; margin-top: 4px;">
-    Executive Brief • Updated July 2026 • Board &amp; CISO Priority
+    Educational Overview • Updated July 2026 • Real Costs &amp; Organizational Consequences
   </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Executive Summary Box — polished for readability and impact
+# Educational intro box — focused on measurable business/organizational impact (no board/CISO framing)
 st.markdown(f"""
-<div style="background: linear-gradient(135deg, #0a0a14, #111113); border-left: 5px solid {RED}; padding: 18px 22px; margin-bottom: 22px; border-radius: 4px; max-width: 1100px; box-shadow: 0 0 12px {RED}15;">
-  <div style="color:{RED}; font-size:0.78rem; font-weight:bold; letter-spacing:0.5px; text-transform:uppercase;">BOARD-LEVEL RISK IN 2026</div>
+<div style="background: linear-gradient(135deg, #0a0a14, #111113); border-left: 5px solid {RED}; padding: 16px 20px; margin-bottom: 20px; border-radius: 4px; max-width: 1100px; box-shadow: 0 0 10px {RED}15;">
+  <div style="color:{RED}; font-size:0.78rem; font-weight:bold; letter-spacing:0.5px; text-transform:uppercase;">REAL-WORLD BUSINESS CONSEQUENCES IN 2026</div>
   <div style="color:#ddd; font-size:0.82rem; line-height:1.55; margin-top:6px;">
-  AI governance failures now drive <b style="color:#ffaa00;">real financial losses</b>, regulatory fines up to <b style="color:#ff4b4b;">7% of global gross revenue</b>, personal executive liability, and rapid enforcement actions. Shadow AI, deepfakes, and model risks are inflating breach costs and triggering the strictest penalties in regulatory history. This is a C-suite and board priority — not just a technical control issue.
+  AI-related security failures are producing measurable organizational impacts: multimillion-dollar regulatory fines, significantly elevated breach costs, operational disruptions, supply chain exposure, and new compliance obligations across jurisdictions. Shadow AI, deepfakes, prompt injection, and model risks are amplifying traditional attack surfaces and creating novel threat vectors. Understanding these dynamics is essential for security practitioners, GRC teams, and risk professionals building resilient programs.
   </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Key Impact Stats — already sleek; kept pulse cards with minor polish for consistency
-st.markdown(f'<div class="rl-p" style="margin-top:5px; margin-bottom:12px;">📊 MOST IMPACTFUL AI RISKS (MONETARY &amp; REGULATORY)</div>', unsafe_allow_html=True)
+# Key Impact Stats header — reorganized for educational tone
+st.markdown(f'<div class="rl-p" style="margin-top:5px; margin-bottom:12px;">📊 Key AI-Driven Business &amp; Regulatory Risks (2026)</div>', unsafe_allow_html=True)
 
 c = st.columns(4)
 with c[0]:
@@ -525,101 +525,68 @@ with c[2]:
 with c[3]:
     st.markdown(f"""
     <div class="pulse" style="min-height:138px; border-left:5px solid {GREEN}; padding:13px 15px; background:linear-gradient(135deg,#0a0a14,#111113);">
-      <div style="color:#00ff41; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.8px; font-weight:bold;">#4 SEC + DEEPFAKE/BEC</div>
+      <div style="color:#00ff41; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.8px; font-weight:bold;">#4 DEEPFAKE &amp; BEC FRAUD</div>
       <div style="color:#00ff41; font-size:1.55rem; font-weight:bold; line-height:1; margin:7px 0 3px;">Active + $25M+</div>
-      <div style="color:#ddd; font-size:0.76rem; font-weight:600;">Real deepfake CEO fraud cases</div>
+      <div style="color:#ddd; font-size:0.76rem; font-weight:600;">Real documented deepfake fraud cases</div>
       <div style="color:#aaa; font-size:0.66rem; margin-top:5px; line-height:1.4;">4-business-day disclosure required<br>Multiple enforcement actions 2025-2026</div>
-      <div style="color:#ffaa00; font-size:0.68rem; margin-top:7px; font-weight:bold;">Personal liability rising (DORA/NIS2)</div>
+      <div style="color:#ffaa00; font-size:0.68rem; margin-top:7px; font-weight:bold;">Rapidly growing attack vector with real financial losses</div>
     </div>
     """, unsafe_allow_html=True)
 
 st.markdown("---")
 
-# ══════════════════════════════════════════════════════════════════════════════
-# KEY REGULATIONS — Sleek card grid (replaces expanders for better readability,
-# consistent cyber theme, proper contrast, no green body text issues)
-# ══════════════════════════════════════════════════════════════════════════════
+# Regulation Expanders (kept for depth)
 st.markdown(f'<div class="rl-p" style="margin-top:5px;">📜 KEY REGULATIONS — DETAILED IMPACT</div>', unsafe_allow_html=True)
 
-r1, r2 = st.columns(2)
+with st.expander("🇪🇺 EU AI Act — Highest AI-Specific Penalties (7% Global Turnover)", expanded=True):
+    st.markdown("""
+    **Maximum Penalty:** Up to **7% of global gross revenue** (or €35 million, whichever higher) for prohibited AI practices. 3% for most other violations.
+    
+    **Specific Impact:** Prohibited uses include social scoring, real-time biometric identification in public spaces (limited exceptions), and manipulative techniques. High-risk AI systems require risk management, data quality, transparency, human oversight, and logging.
+    
+    **Why it matters to leaders:** This is the strictest AI law globally with binding fines based on company-wide revenue. Non-compliance can halt AI projects and trigger massive financial penalties.
+    
+    **Official:** [EU AI Act](https://artificialintelligenceact.eu/)
+    """)
 
-with r1:
-    # EU AI Act — Highest Impact
-    st.markdown(f"""
-    <div style="background:linear-gradient(135deg,#0a0a14,#111113); border:1px solid #1a1a2e; border-left:5px solid {RED}; padding:14px 16px 16px; margin-bottom:14px; border-radius:4px; min-height:268px;">
-      <div style="display:flex; align-items:center; gap:8px;">
-        <span style="color:{RED}; font-size:0.95rem;">🇪🇺</span>
-        <span style="color:{RED}; font-size:0.72rem; font-weight:bold; text-transform:uppercase; letter-spacing:0.6px;">EU AI ACT — HIGHEST IMPACT</span>
-      </div>
-      <div style="color:#ff4b4b; font-size:1.75rem; font-weight:bold; line-height:1.05; margin:8px 0 2px;">7% GLOBAL GROSS REVENUE</div>
-      <div style="color:#ffaa00; font-size:0.68rem; font-weight:600;">(or €35 million — whichever is higher)</div>
-      <div style="color:#ccc; font-size:0.67rem; line-height:1.5; margin-top:9px;">
-        <b style="color:#ffaa00;">Prohibited practices:</b> social scoring, real-time biometric identification in public spaces, manipulative techniques.<br>
-        <b style="color:#ffaa00;">High-risk AI:</b> mandatory risk management, data quality, transparency, human oversight &amp; logging.<br>
-        Non-compliance can halt AI projects and trigger the largest fines in regulatory history.
-      </div>
-      <div style="margin-top:10px;"><a href="https://artificialintelligenceact.eu/" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">Official Text &amp; Guidance →</a></div>
-    </div>
-    """, unsafe_allow_html=True)
+with st.expander("🇪🇺 GDPR — Most Enforced, Real €1.2B Fines"):
+    st.markdown("""
+    **Maximum Penalty:** Up to **4% of global annual turnover** or €20 million.
+    
+    **Specific Impact:** AI systems processing personal data of EU residents must have lawful basis, DPIAs for high-risk processing, and transparency for automated decisions. Recent record fine: Meta €1.2 billion.
+    
+    **Why it matters:** AI training data, inference, and profiling fall under GDPR. Regulators are actively fining for inadequate AI governance.
+    
+    **Official:** [GDPR Text](https://eur-lex.europa.eu/eli/reg/2016/679/oj)
+    """)
 
-    # NIS2 + DORA — Personal Liability
-    st.markdown(f"""
-    <div style="background:linear-gradient(135deg,#0a0a14,#111113); border:1px solid #1a1a2e; border-left:5px solid {AMBER}; padding:14px 16px 16px; margin-bottom:14px; border-radius:4px; min-height:268px;">
-      <div style="display:flex; align-items:center; gap:8px;">
-        <span style="color:{AMBER}; font-size:0.95rem;">🇪🇺</span>
-        <span style="color:{AMBER}; font-size:0.72rem; font-weight:bold; text-transform:uppercase; letter-spacing:0.6px;">NIS2 + DORA — PERSONAL LIABILITY</span>
-      </div>
-      <div style="color:#ffaa00; font-size:1.55rem; font-weight:bold; line-height:1.05; margin:8px 0 2px;">2% GLOBAL TURNOVER</div>
-      <div style="color:#ffaa00; font-size:0.68rem; font-weight:600;">+ personal liability for management bodies (DORA)</div>
-      <div style="color:#ccc; font-size:0.67rem; line-height:1.5; margin-top:9px;">
-        <b style="color:#ffaa00;">NIS2:</b> Mandatory 24h/72h incident reporting, supply chain security, governance accountability. Broader sectors than NIS1.<br>
-        <b style="color:#ffaa00;">DORA (Finance):</b> ICT risk management + third-party (incl. AI providers) oversight. Executives can be held personally accountable.<br>
-        Expands regulatory reach significantly with real executive exposure.
-      </div>
-      <div style="margin-top:10px;"><a href="https://eur-lex.europa.eu/eli/dir/2022/2555/oj" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">NIS2</a> • <a href="https://eur-lex.europa.eu/eli/reg/2022/2554/oj" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">DORA →</a></div>
-    </div>
-    """, unsafe_allow_html=True)
+with st.expander("🇪🇺 NIS2 + DORA — Personal Liability & Supply Chain"):
+    st.markdown("""
+    **NIS2:** Up to 2% global turnover. Mandatory 24h/72h incident reporting, supply chain security, governance accountability.
+    
+    **DORA (Finance):** Up to 2% turnover + **personal liability** for management bodies. ICT risk management and third-party oversight (including AI providers).
+    
+    **Why it matters:** Executives can be held personally accountable. Expands to many more sectors than before.
+    
+    **Official:** [NIS2](https://eur-lex.europa.eu/eli/dir/2022/2555/oj) • [DORA](https://eur-lex.europa.eu/eli/reg/2022/2554/oj)
+    """)
 
-with r2:
-    # GDPR — Most Enforced
-    st.markdown(f"""
-    <div style="background:linear-gradient(135deg,#0a0a14,#111113); border:1px solid #1a1a2e; border-left:5px solid {CYAN}; padding:14px 16px 16px; margin-bottom:14px; border-radius:4px; min-height:268px;">
-      <div style="display:flex; align-items:center; gap:8px;">
-        <span style="color:{CYAN}; font-size:0.95rem;">🇪🇺</span>
-        <span style="color:{CYAN}; font-size:0.72rem; font-weight:bold; text-transform:uppercase; letter-spacing:0.6px;">GDPR — MOST ENFORCED</span>
-      </div>
-      <div style="color:#00e5ff; font-size:1.55rem; font-weight:bold; line-height:1.05; margin:8px 0 2px;">4% GLOBAL ANNUAL TURNOVER</div>
-      <div style="color:#ffaa00; font-size:0.68rem; font-weight:600;">or €20 million (record: Meta €1.2 Billion)</div>
-      <div style="color:#ccc; font-size:0.67rem; line-height:1.5; margin-top:9px;">
-        <b style="color:#ffaa00;">AI Impact:</b> Training data, inference, and profiling of EU residents fall under GDPR. Requires lawful basis + DPIAs for high-risk processing.<br>
-        <b style="color:#ffaa00;">Transparency:</b> Automated decision-making must be explainable. Regulators actively fining for inadequate AI governance.<br>
-        Most enforced data protection law globally with real precedent for massive fines.
-      </div>
-      <div style="margin-top:10px;"><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">Official GDPR Text →</a></div>
-    </div>
-    """, unsafe_allow_html=True)
+with st.expander("🇺🇸 US — SEC Disclosure, CMMC, State Privacy"):
+    st.markdown("""
+    **SEC Cybersecurity Rules:** Material incidents disclosed in **4 business days**. Annual board oversight disclosures. Multiple enforcement actions already in 2025-2026.
+    
+    **CMMC 2.0:** Contract loss and False Claims Act risk for DoD contractors.
+    
+    **State Laws (e.g. CPRA):** Up to $7,500 per intentional violation. Growing automated decision-making rules.
+    
+    **Why it matters:** Rapid disclosure requirements + real enforcement. Personal liability increasing in financial and defense sectors.
+    
+    **Official:** [SEC Rule](https://www.sec.gov/rules/final/2023/33-11216.pdf) • [CMMC](https://dodcio.defense.gov/CMMC/)
+    """)
 
-    # US — SEC, CMMC & State Privacy
-    st.markdown(f"""
-    <div style="background:linear-gradient(135deg,#0a0a14,#111113); border:1px solid #1a1a2e; border-left:5px solid {GREEN}; padding:14px 16px 16px; margin-bottom:14px; border-radius:4px; min-height:268px;">
-      <div style="display:flex; align-items:center; gap:8px;">
-        <span style="color:{GREEN}; font-size:0.95rem;">🇺🇸</span>
-        <span style="color:{GREEN}; font-size:0.72rem; font-weight:bold; text-transform:uppercase; letter-spacing:0.6px;">US — SEC, CMMC &amp; STATE PRIVACY</span>
-      </div>
-      <div style="color:#00ff41; font-size:1.35rem; font-weight:bold; line-height:1.05; margin:8px 0 2px;">4-BUSINESS-DAY DISCLOSURE</div>
-      <div style="color:#ffaa00; font-size:0.68rem; font-weight:600;">+ personal liability rising in finance &amp; defense</div>
-      <div style="color:#ccc; font-size:0.67rem; line-height:1.5; margin-top:9px;">
-        <b style="color:#ffaa00;">SEC:</b> Material cyber incidents must be disclosed in 4 business days. Board oversight disclosures required. Multiple enforcement actions 2025-2026.<br>
-        <b style="color:#ffaa00;">CMMC 2.0:</b> Contract loss + False Claims Act risk for DoD contractors and supply chain.<br>
-        <b style="color:#ffaa00;">State (CPRA etc.):</b> Up to $7,500 per intentional violation. Growing rules on automated decision-making.
-      </div>
-      <div style="margin-top:10px;"><a href="https://www.sec.gov/rules/final/2023/33-11216.pdf" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">SEC Rule</a> • <a href="https://dodcio.defense.gov/CMMC/" target="_blank" style="color:{CYAN}; font-size:0.64rem; text-decoration:none; border-bottom:1px dashed {CYAN}30;">CMMC →</a></div>
-    </div>
-    """, unsafe_allow_html=True)
+st.markdown("---")
 
-st.caption("Sources: Official regulatory texts (EUR-Lex, SEC, CMMC, CPPA). Enforcement trends based on 2025–2026 public actions and regulatory guidance. These represent the highest-impact regulations for AI governance and cyber risk in 2026.")
-
-# Quick Reference Table — Maximum Penalties (kept as-is, already sleek)
+# Quick Reference Table — Maximum Penalties (moved here just above AI Reference)
 quick_data = [
     ("EU AI Act (Prohibited)", "7% global turnover", "Highest AI-specific fine globally"),
     ("GDPR", "4% global turnover", "Most enforced data protection law"),
