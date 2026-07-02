@@ -443,7 +443,7 @@ f"""
       &gt;&gt; ⏬ LIVE THREAT MAP FEEDS &lt;&lt;
      </a>
      <a href="#framework-comparison" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
-      &gt;&gt; ⏬ FRAMEWORK COMPARISON &amp; LINEAGE &lt;&lt;
+      &gt;&gt; ⏬ FRAMEWORK COMPARISON &amp; LINEAGE (BETA) &lt;&lt;
      </a>
      <a href="#framework-gap-matrix" style="display: inline-block; padding: 8px 18px; border: 1px solid {CYAN}; border-radius: 4px; color: {CYAN}; font-size: 0.68rem; font-weight: bold; text-decoration: none; background: rgba(0, 229, 255, 0.1); box-shadow: 0 0 15px {CYAN}40; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase;">
       &gt;&gt; ⏬ GAP MATRIX (BETA) — AI/REG RISK &lt;&lt;
@@ -1880,7 +1880,7 @@ st.markdown("---")
 st.markdown(f"""
 <div id="framework-comparison" style="text-align: left; margin: 35px 0 15px 5px; scroll-margin-top: 35px;">
   <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
-    &gt;&gt; Cybersecurity Framework Comparison &amp; Control Lineage (Enhanced July 2026)
+    &gt;&gt; Cybersecurity Framework Comparison &amp; Control Lineage (BETA — Enhanced July 2026)
   </div>
   <div style="font-size: 0.55rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px; line-height: 1.5;">
     <span style="color: {BLUE}; border: 1px solid {BLUE}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">12 MAJOR FRAMEWORKS • VERIFIED 2026 DATA</span>
