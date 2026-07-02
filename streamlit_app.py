@@ -2044,8 +2044,6 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-</div>
-""", unsafe_allow_html=True)
 # Continue with original GRC Resources section (unchanged)
 st.markdown(
 f"""
@@ -2075,7 +2073,7 @@ with l4:
     st.markdown(f'<div style="font-size:.54rem;color:{BLUE};text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;border-bottom:1px dashed #1a1a2e;padding-bottom:2px;">▸ TRAINING, NEWS &amp; COMMUNITY</div>', unsafe_allow_html=True)
     for a in [("48","OWASP Top 10","https://owasp.org/www-project-top-ten/","Web app risks."),("49","OWASP LLM","https://owasp.org/www-project-top-10-for-large-language-model-applications/","LLM risks."),("50","OWASP API","https://owasp.org/API-Security/","API risks."),("51","HackTheBox","https://www.hackthebox.com/","Gamified training."),("52","TryHackMe","https://tryhackme.com/","Hands-on labs."),("53","PortSwigger","https://portswigger.net/web-security","Web vuln training."),("54","BleepingComputer","https://www.bleepingcomputer.com/","Security news."),("55","Hacker News","https://thehackernews.com/","Cyber news."),("56","SANS Papers","https://www.sans.org/white-papers/","Whitepapers."),("57","DEF CON","https://defcon.org/html/links/dc-archives.html","Archives."),("58","HackerOne","https://www.hackerone.com/","Bug bounty."),("59","Bugcrowd","https://www.bugcrowd.com/","Vuln disclosure."),("60","Dark Reading","https://www.darkreading.com/","Enterprise security news."),("61","Krebs on Security","https://krebsonsecurity.com/","Investigative security blog."),("62","KnowBe4 Free","https://www.knowbe4.com/free-cybersecurity-tools","Phishing sim & training."),("63","Gophish","https://getgophish.com/","Open-source phishing sim."),("64","IntelTechniques","https://inteltechniques.com/tools/","OSINT search tools."),("65","MITRE Engage","https://engage.mitre.org/","Adversary engagement.")]:
         st.markdown(gl(*a), unsafe_allow_html=True)
-st.markdown(f"""
+st.markdown(f'''
 <div style="border-top:1px solid #141420;padding-top:20px;margin-top:32px;text-align:center;font-family:{MONO};">
   <div style="color:#666;font-size:.8rem;margin-bottom:3px;">Questions, Comments, or Recommendations?</div>
   <div style="color:#666;font-size:.8rem;margin-bottom:10px;">
@@ -2112,4 +2110,4 @@ st.markdown(f"""
   <div style="color:#2a2a3a;font-size:.6rem;">
     SecAI-Nexus GRC [v34] | Live Data Engine | 12 hr Cache |
     118 Metrics | 10 Intel Tables | 2 Maps | 80 Resources | {now_utc.strftime("%Y")}</div></div>
-""", unsafe_allow_html=True)
+''', unsafe_allow_html=True)
