@@ -1869,6 +1869,94 @@ st.markdown(f"""
   Hover nodes/links for details. These visuals help GRC teams quickly see overlap, gaps, and consolidation opportunities when mapping multiple frameworks.
 </div>
 """, unsafe_allow_html=True)
+
+# ══════════════════════════════════════════════════════════════════════════════
+# NEW: REGULATORY RISK & PENALTY LANDSCAPE (July 2026)
+# Why compliance (especially AI governance) matters at the board level
+# ══════════════════════════════════════════════════════════════════════════════
+st.markdown(f"""
+<div id="regulatory-risk" style="text-align: left; margin: 35px 0 15px 5px; scroll-margin-top: 35px;">
+  <div style="font-size: 0.9rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
+    &gt;&gt; Regulatory Risk &amp; Penalty Landscape (July 2026)
+  </div>
+  <div style="font-size: 0.55rem; color: #505060; margin-top: 6px; letter-spacing: 0.5px; line-height: 1.5;">
+    <span style="color: {RED}; border: 1px solid {RED}40; padding: 1px 6px; border-radius: 2px; font-weight: bold;">ENFORCEMENT IS REAL</span>
+    &nbsp; GDPR • EU AI Act • NIS2 • DORA • SEC • State Privacy Laws
+  </div>
+  <div style="font-size: 0.55rem; color: #404050; margin-top: 4px; max-width: 1100px;">
+    Boards and CISOs are increasingly judged on regulatory posture. AI governance failures now carry some of the highest financial and reputational penalties in history. 
+    Below is a consolidated view of the most consequential regulations in 2026, their maximum penalties, and direct links to official requirements.
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+# Regulatory data (accurate as of July 2026)
+reg_data = [
+    ("GDPR", "EU", "Up to 4% of global annual turnover or €20M (whichever higher)", 
+     "Lawful basis, DPIAs for high-risk processing, Data Protection by Design, breach notification within 72h. AI systems processing personal data must meet transparency &amp; accountability requirements.",
+     "https://eur-lex.europa.eu/eli/reg/2016/679/oj"),
+    
+    ("EU AI Act", "EU", "Up to €35M or 7% of global turnover (prohibited practices); €15M or 3% for other obligations", 
+     "Risk-based classification of AI systems. High-risk systems require conformity assessment, transparency, human oversight, and logging. General-purpose AI models have additional obligations. Prohibited practices include social scoring and real-time biometric identification in public spaces (with narrow exceptions).",
+     "https://artificialintelligenceact.eu/"),
+    
+    ("NIS2 Directive", "EU", "Up to €10M or 2% of global turnover", 
+     "Mandatory risk management measures, incident reporting within 24h (early warning) / 72h (full report), supply chain security, and governance accountability for essential and important entities. Significantly expands scope beyond NIS1.",
+     "https://eur-lex.europa.eu/eli/dir/2022/2555/oj"),
+    
+    ("DORA", "EU", "Up to 2% of global turnover + personal liability for management", 
+     "Digital Operational Resilience Act for financial sector. Requires ICT risk management, incident reporting, digital operational resilience testing, and third-party risk management (including critical ICT providers). Management bodies have direct accountability.",
+     "https://eur-lex.europa.eu/eli/reg/2022/2554/oj"),
+    
+    ("CCPA / CPRA", "California, US", "Up to $7,500 per intentional violation (CPRA); $2,500 per violation (CCPA)", 
+     "Consumer rights (access, deletion, opt-out of sale/sharing). CPRA adds sensitive personal information protections, risk assessments for high-risk processing, and cybersecurity audit requirements. AI profiling and automated decision-making have specific disclosure rules.",
+     "https://cppa.ca.gov/"),
+    
+    ("SEC Cybersecurity Rules", "United States (Public Companies)", "Civil penalties + enforcement actions; potential criminal referrals", 
+     "Material cybersecurity incident disclosure within 4 business days (Form 8-K). Annual disclosure of cybersecurity risk management, strategy, and governance (including board oversight). Applies to public companies and certain foreign private issuers.",
+     "https://www.sec.gov/rules/final/2023/33-11216.pdf"),
+    
+    ("CMMC 2.0", "United States (DoD Contractors)", "Contract ineligibility, False Claims Act liability, potential debarment", 
+     "Cybersecurity Maturity Model Certification for Defense Industrial Base. Level 2 requires third-party assessment against NIST SP 800-171 controls. Flow-down requirements to subcontractors. Non-compliance can result in loss of contracts.",
+     "https://dodcio.defense.gov/CMMC/"),
+    
+    ("NYDFS 500", "New York (Financial Services)", "Up to $1,000 per day per violation; potential license revocation", 
+     "One of the strictest US financial cybersecurity regulations. Requires risk assessments, multi-factor authentication, encryption, incident response plans, and annual certification by senior officer. Strong enforcement history.",
+     "https://www.dfs.ny.gov/industry_guidance/cybersecurity"),
+    
+    ("HIPAA", "United States (Healthcare)", "Up to $1.5M+ per violation category per year; criminal penalties possible", 
+     "Privacy and Security Rules for protected health information (PHI). Requires risk analysis, access controls, audit controls, integrity controls, and breach notification. Increasing enforcement focus on ransomware and business associate agreements.",
+     "https://www.hhs.gov/hipaa/index.html"),
+]
+
+reg_rows = []
+for reg, jurisdiction, penalty, requirements, link in reg_data:
+    reg_rows.append([
+        (f'<a href="{link}" target="_blank" style="color:{CYAN};text-decoration:none;border-bottom:1px dashed {CYAN}40;">{reg}</a>', "color:#00e5ff; font-weight:bold; white-space:nowrap;"),
+        (jurisdiction, "color:#888;"),
+        (penalty, "color:#ffaa00; font-weight:600; font-size:0.58rem;"),
+        (requirements, "color:#ccc; font-size:0.56rem; line-height:1.35;"),
+        (f'<a href="{link}" target="_blank" style="color:{GREEN};text-decoration:none;">Official Site →</a>', "color:#00ff41; font-weight:bold; font-size:0.58rem;")
+    ])
+
+st.markdown(_tbl(
+    "📊 MAJOR REGULATORY PENALTIES &amp; COMPLIANCE REQUIREMENTS (2026)",
+    ["Regulation", "Jurisdiction", "Maximum Penalty", "Key Requirements (esp. AI/Data)", "Official Link"],
+    reg_rows,
+    RED
+), unsafe_allow_html=True)
+
+st.markdown(f"""
+<div style="background:#0a0a0a; border:1px solid #1a1a2e; padding:14px 16px; margin:12px 0 20px 0; border-radius:4px; font-size:0.62rem; line-height:1.5;">
+  <b style="color:#ffaa00;">Key Takeaways for GRC &amp; Security Leaders:</b><br>
+  • <b>EU AI Act</b> introduces the highest percentage-based fines globally for AI-specific violations (up to 7%).<br>
+  • <b>GDPR</b> remains the most enforced; AI systems processing EU personal data are squarely in scope.<br>
+  • <b>SEC rules</b> have already triggered multiple enforcement actions in 2025–2026 for inadequate disclosure.<br>
+  • Management liability is increasing (DORA, NIS2, SEC) — boards and CISOs can face personal consequences.<br>
+  • Many regulations now explicitly require <b>AI risk assessments</b>, logging, and human oversight for high-risk systems.
+</div>
+""", unsafe_allow_html=True)
+
 # Continue with original GRC Resources section (unchanged)
 st.markdown(
 f"""
