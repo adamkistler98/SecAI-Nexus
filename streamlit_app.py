@@ -478,11 +478,11 @@ st.markdown(f"""
 # Executive Summary Box
 st.markdown(f"""
 <div style="background: linear-gradient(135deg, #0a0a14, #111); border-left: 5px solid {RED}; padding: 16px 20px; margin-bottom: 20px; border-radius: 4px; max-width: 1100px; box-shadow: 0 0 10px {RED}20;">
-  <b style="color:{RED}; font-size:0.9rem;">BOARD-LEVEL RISK IN 2026</b><br>
+  <b style="color:{RED}; font-size:0.9rem;">AI CYBERSECURITY RISK IN 2026</b><br>
   <span style="color:#ddd; font-size:0.82rem; line-height:1.5;">
   AI governance failures are no longer theoretical. They drive real financial losses, regulatory fines up to <b>7% of global gross revenue</b>, personal liability for executives, and rapid enforcement actions. 
   Shadow AI, deepfakes, and model risks are inflating breach costs and triggering new laws with the highest penalties in regulatory history. 
-  This is now a C-suite and board priority — not just a technical issue.
+  This is now a C-suite priority — not just a technical issue.
   </span>
 </div>
 """, unsafe_allow_html=True)
