@@ -654,7 +654,7 @@ with r2:
     </div>
     """, unsafe_allow_html=True)
 
-st.caption("Sources: Official regulatory texts (EUR-Lex, SEC, CMMC, CPPA). These cards summarize the highest-impact regulations affecting AI governance, data protection, and cybersecurity compliance as of mid-2026. Enforcement trends based on 2025–2026 public actions.")
+st.caption("Sources: [EU AI Act](https://artificialintelligenceact.eu/) · [NIS2 Directive](https://eur-lex.europa.eu/eli/dir/2022/2555/oj) · [DORA Regulation](https://eur-lex.europa.eu/eli/reg/2022/2554/oj) · [GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj) · [SEC Cybersecurity Disclosure Rule](https://www.sec.gov/rules/final/2023/33-11216.pdf) · [CMMC 2.0](https://dodcio.defense.gov/CMMC/) · [CPRA / CCPA](https://cppa.ca.gov/). These cards summarize the highest-impact regulations affecting AI governance, data protection, and cybersecurity compliance as of mid-2026. Enforcement trends based on 2025–2026 public actions.")
 
 # Quick Reference Table — Maximum Penalties
 quick_data = [
@@ -676,7 +676,8 @@ for reg, fine, note in quick_data:
 
 st.markdown(_tbl("MAXIMUM PENALTIES AT A GLANCE", ["Regulation", "Maximum Fine", "Key Note"], quick_rows, CYAN), unsafe_allow_html=True)
 
-st.caption("Sources: Official regulatory texts (EUR-Lex, SEC, CMMC, CPPA). Enforcement trends based on 2025–2026 public actions and regulatory guidance.")
+st.caption("Sources: [EU AI Act](https://artificialintelligenceact.eu/) · [NIS2 Directive](https://eur-lex.europa.eu/eli/dir/2022/2555/oj) · [DORA Regulation](https://eur-lex.europa.eu/eli/reg/2022/2554/oj) · [GDPR](https://eur-lex.europa.eu/eli/reg/2016/679/oj) · [SEC Cybersecurity Disclosure Rule](https://www.sec.gov/rules/final/2023/33-11216.pdf) · [CMMC 2.0](https://dodcio.defense.gov/CMMC/) · [CPRA / CCPA](https://cppa.ca.gov/). Enforcement trends based on 2025–2026 public actions and regulatory guidance.")
+
 
 # AI Reference section starts here
 # ══════════════════════════════════════════════════════════════════════════════
