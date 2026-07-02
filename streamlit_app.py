@@ -724,6 +724,77 @@ with c3[3]:
       <div style="margin-top:2px;"><a href="https://reports.weforum.org/docs/WEF_Global_Cybersecurity_Outlook_2026.pdf" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">WEF Global Cybersecurity Outlook 2026 →</a></div>
     </div>
     """, unsafe_allow_html=True)
+    # ==========================================================
+# ANOTHER 4 NEW CARDS (Fourth row - c4)
+# Insert this entire block right after your previous c3 block
+# and right before: st.markdown("---")
+# ==========================================================
+
+c4 = st.columns(4)
+
+with c4[0]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {BLUE}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#008aff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#13 AI NOW IN 83% OF INCIDENTS</div>
+      <div style="color:#008aff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {BLUE}30;">83% OF BREACHES</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">now involve AI in some form (Gigamon 2026 Hybrid Cloud Security Survey)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>Breach rate hit 65%</b> — highest level in three years<br>
+        AI is no longer a niche vector — it is embedded across external attacks and shadow AI incidents<br>
+        <span style="color:#ff4b4b;">Organizations increasing security spend, yet outcomes are lagging</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">AI has become table stakes in the modern breach</div>
+      <div style="margin-top:2px;"><a href="https://www.gigamon.com/campaigns/hybrid-cloud-security-survey.html" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Gigamon 2026 Hybrid Cloud Security Survey →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c4[1]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {RED}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#14 GENERATIVE AI BREACH REALITY</div>
+      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">89.5% BREACHED</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">experienced a generative AI security breach in 2025 (AvePoint State of AI 2026)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>88.4%</b> also had an AI agent-related breach<br>
+        Nearly 9 in 10 organizations hit by agent-related incidents<br>
+        <span style="color:#ff4b4b;">The gap between AI adoption and actual security controls remains massive</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Generative AI and autonomous agents are no longer theoretical risks — they are active breach vectors</div>
+      <div style="margin-top:2px;"><a href="https://www.avepoint.com/shifthappens/reports/artificial-intelligence-report-2026" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">AvePoint State of AI 2026 →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c4[2]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#15 CONFIDENCE VS REALITY GAP</div>
+      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">82.7% CONFIDENT</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">they can prevent unauthorized AI data access — yet ~89% were still breached (AvePoint 2026)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>Massive disconnect</b> between perceived and actual control<br>
+        Overconfidence is now one of the biggest amplifiers of AI risk<br>
+        <span style="color:#ff4b4b;">82.7% confident → but nearly 9 in 10 of those same organizations suffered incidents</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">This is the most dangerous illusion in AI security today</div>
+      <div style="margin-top:2px;"><a href="https://www.avepoint.com/shifthappens/reports/artificial-intelligence-report-2026" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">AvePoint State of AI 2026 →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c4[3]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {GREEN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00ff41; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#16 AI-POWERED ATTACK CONCERN DOUBLED</div>
+      <div style="color:#00ff41; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {GREEN}30;">34% (DOUBLED)</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">now cite AI-powered cyberattacks as a top cybersecurity concern (up from 17% in 2025 — AlixPartners 2026 U.S. Risk Survey)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>Only 48%</b> of organizations say they are “very prepared” to address cyber threats in 2026<br>
+        AI attack concern rising faster than defensive readiness<br>
+        <span style="color:#ff4b4b;">75% have not yet completed system upgrades to address AI-powered threats</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Concern is surging — but actual preparedness is not keeping pace</div>
+      <div style="margin-top:2px;"><a href="https://www.alixpartners.com/insights/2026-us-risk-survey/" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">AlixPartners 2026 U.S. Risk Survey →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
