@@ -467,10 +467,10 @@ if not tor:
 st.markdown(f"""
 <div id="why-ai-security-matters" style="text-align: left; margin: 25px 0 15px 5px; scroll-margin-top: 25px;">
   <div style="font-size: 0.95rem; font-weight: bold; color: {CYAN}; letter-spacing: 1.5px; text-transform: uppercase;">
-    Executive Brief
+    &gt;&gt; Why AI Security Matters: Risk, Regulation &amp; Business Impact
   </div>
   <div style="font-size: 0.58rem; color: #505060; margin-top: 4px;">
-    Executive Brief • Updated July 2026
+    Executive Brief for CISOs, Boards &amp; Risk Committees • Updated July 2026
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -538,7 +538,7 @@ with c[3]:
 st.markdown("---")
 
 # Regulation Expanders (kept for depth)
-st.markdown(f'<div class="rl-p" style="margin-top:5px; color:#00e5ff;">📜 KEY REGULATIONS — DETAILED IMPACT</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="rl-p" style="margin-top:5px;">📜 KEY REGULATIONS — DETAILED IMPACT</div>', unsafe_allow_html=True)
 
 with st.expander("🇪🇺 EU AI Act — Highest AI-Specific Penalties (7% Global Turnover)", expanded=True):
     st.markdown("""
