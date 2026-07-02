@@ -795,6 +795,76 @@ with c4[3]:
       <div style="margin-top:2px;"><a href="https://www.alixpartners.com/insights/2026-us-risk-survey/" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">AlixPartners 2026 U.S. Risk Survey →</a></div>
     </div>
     """, unsafe_allow_html=True)
+    # ==========================================================
+# FINAL 4 CARDS (c5) — Bringing the section to 20 cards total
+# Insert right after your c4 block and before: st.markdown("---")
+# ==========================================================
+
+c5 = st.columns(4)
+
+with c5[0]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {CYAN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00e5ff; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#17 RANSOMWARE HANDOFFS IN 22 SECONDS</div>
+      <div style="color:#00e5ff; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {CYAN}30;">22 SECONDS</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">average access hand-off between ransomware partners (Mandiant M-Trends 2026)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>Attack chains are now industrialized</b><br>
+        Operators deliberately target backup infrastructure, identity services, and virtualization layers<br>
+        <span style="color:#ff4b4b;">“Recovery Denial” is the new ransomware playbook — not just encryption</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Speed has become the primary advantage for financially motivated actors</div>
+      <div style="margin-top:2px;"><a href="https://cloud.google.com/security/resources/m-trends" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Mandiant M-Trends 2026 →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c5[1]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {RED}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ff4b4b; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#18 DETECTION GETTING SLOWER DESPITE AI TOOLS</div>
+      <div style="color:#ff4b4b; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {RED}30;">41% LONGER</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">say it now takes longer to detect and investigate breaches (Gigamon 2026)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>93%</b> invested in new detection/visibility tools<br>
+        Yet <b>41%</b> report slower outcomes as AI increases data volumes and complexity<br>
+        <span style="color:#ff4b4b;">More tools + more AI traffic = visibility debt is growing</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Investment is up. Speed of detection is down. This is the AI security paradox.</div>
+      <div style="margin-top:2px;"><a href="https://www.gigamon.com/campaigns/hybrid-cloud-security-survey.html" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Gigamon 2026 Hybrid Cloud Security Survey →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c5[2]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {AMBER}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#ffaa00; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#19 CISOs RUSHING TO FUND AI DEFENSES</div>
+      <div style="color:#ffaa00; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {AMBER}30;">~90% OF CISOs</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">expect to increase AI security spending sharply in the next 12–18 months (RH-ISAC CISO Benchmark 2026)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>43%</b> anticipate significant growth in AI-security budgets<br>
+        Spending is being reallocated from existing budgets in many cases<br>
+        <span style="color:#ff4b4b;">AI governance and security tooling is now a top budget priority for most security leaders</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">The market is voting with dollars — AI risk is now a board-level funding priority</div>
+      <div style="margin-top:2px;"><a href="https://rhisac.org/wp-content/uploads/CISO-Benchmark-2026_CLEAR.pdf" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">RH-ISAC CISO Benchmark 2026 →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c5[3]:
+    st.markdown(f"""
+    <div class="pulse" style="min-height:138px; border-left:5px solid {GREEN}; padding:8px 10px; background:linear-gradient(135deg,#0a0a14,#111113);">
+      <div style="color:#00ff41; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; font-weight:bold;">#20 AI IS INDUSTRIALIZING ATTACKS</div>
+      <div style="color:#00ff41; font-size:1.32rem; font-weight:bold; line-height:1.05; margin:2px 0 1px; text-shadow:0 0 6px {GREEN}30;">ATTACKERS USING AI</div>
+      <div style="color:#ddd; font-size:0.62rem; font-weight:600;">to automate reconnaissance, exploit chaining, and post-exploitation inside environments (Mandiant M-Trends 2026)</div>
+      <div style="color:#ffaa00; font-size:0.56rem; margin-top:2px; line-height:1.28;">
+        <b>AI is no longer just a tool for defenders</b><br>
+        Attackers are actively abusing AI within already-compromised networks<br>
+        <span style="color:#ff4b4b;">The industrialization of cybercrime has entered a new phase</span>
+      </div>
+      <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">The asymmetry between attacker speed and defender response continues to widen</div>
+      <div style="margin-top:2px;"><a href="https://cloud.google.com/security/resources/m-trends" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">Mandiant M-Trends 2026 →</a></div>
+    </div>
+    """, unsafe_allow_html=True)
 st.markdown("---")
 
 # ══════════════════════════════════════════════════════════════════════════════
