@@ -541,6 +541,7 @@ with c[0]:
         <span style="color:#ff4b4b;">First fines issued Q2 2026 • Can halt non-compliant AI deployments EU-wide</span>
       </div>
       <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Highest % penalty in regulatory history for any technology</div>
+      <div style="margin-top:2px;"><a href="https://artificialintelligenceact.eu/" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">EU AI Act Official Guidance →</a></div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -557,6 +558,7 @@ with c[1]:
         PII exposed in 66% of shadow AI incidents
       </div>
       <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">Only 3% of orgs with proper AI governance controls in place</div>
+      <div style="margin-top:2px;"><a href="https://www.ibm.com/reports/data-breach" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">IBM Cost of a Data Breach Report 2026 →</a></div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -572,6 +574,7 @@ with c[2]:
         <span style="color:#ff4b4b;">Up to 4% global annual turnover • Most enforced data protection law globally</span>
       </div>
       <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">AI systems processing EU resident data = direct regulatory exposure</div>
+      <div style="margin-top:2px;"><a href="https://www.enforcementtracker.com/" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">GDPR Enforcement Tracker →</a></div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -588,6 +591,7 @@ with c[3]:
         Directors face personal liability under DORA/NIS2
       </div>
       <div style="color:#ffaa00; font-size:0.55rem; margin-top:3px; font-weight:bold;">BEC losses exploding via AI voice cloning • Avg wire fraud now multimillion in targeted cases</div>
+      <div style="margin-top:2px;"><a href="https://www.ibm.com/reports/data-breach" target="_blank" style="color:{CYAN}; font-size:0.54rem; text-decoration:none; border-bottom:1px dashed {CYAN}40;">IBM Cost of a Data Breach Report 2026 →</a></div>
     </div>
     """, unsafe_allow_html=True)
 
