@@ -905,56 +905,6 @@ with g10: st.markdown(_tbl("💰 BREACH COST BY INDUSTRY (2026)", ["Industry", "
 st.markdown(f'<div style="font-size:.48rem;color:#505060;margin:2px 0 0 4px;">Sources: <a href="https://www.ibm.com/reports/data-breach" target="_blank" class="sl">IBM Cost of Breach 2026</a> · <a href="https://www.crowdstrike.com/global-threat-report/" target="_blank" class="sl">CrowdStrike GTR 2026</a> · <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" class="sl">OWASP LLM Top 10</a> · <a href="https://attack.mitre.org/" target="_blank" class="sl">MITRE ATT&CK/ATLAS</a> · <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" class="sl">CISA KEV</a> · <a href="https://www.vulncheck.com/" target="_blank" class="sl">VulnCheck</a> · <a href="https://redcanary.com/" target="_blank" class="sl">Red Canary</a> · <a href="https://www.chainalysis.com/" target="_blank" class="sl">Chainalysis</a> · <a href="https://www.sophos.com/en-us/content/state-of-ransomware" target="_blank" class="sl">Sophos</a> · Public disclosures</div>', unsafe_allow_html=True)
 st.markdown("---")
 
-# (Cleaned all duplicate leftover sections)
-
-# NIS2 + DORA
-with st.expander("🇪🇺 **NIS2 Directive & DORA** — Critical Infrastructure & Financial Sector", expanded=False):
-    st.markdown("""
-    **NIS2 Maximum Penalty:** Up to **€10 million or 2% of global turnover**.
-    
-    **DORA Maximum Penalty:** Up to **2% of global turnover** + potential personal liability for management bodies.
-    
-    **Key Requirements:**
-    - NIS2 significantly expands the scope of the original NIS Directive to more sectors (including digital providers, postal services, waste management, etc.).
-    - Mandatory supply chain security and third-party risk management.
-    - 24h early warning + 72h full incident report.
-    - DORA applies specifically to the financial sector and requires ICT risk management, resilience testing, and oversight of critical third-party providers (including cloud and AI service providers).
-    
-    **Why CISOs should care:** Both explicitly require governance accountability at the highest levels. Management bodies can be held personally responsible.
-    
-    **Official Sources:** 
-    - [NIS2 Directive](https://eur-lex.europa.eu/eli/dir/2022/2555/oj)
-    - [DORA Regulation](https://eur-lex.europa.eu/eli/reg/2022/2554/oj)
-    """)
-
-# US Regulations
-with st.expander("🇺🇸 **US Regulatory Landscape** — SEC, CMMC, State Privacy Laws", expanded=False):
-    st.markdown("""
-    **SEC Cybersecurity Disclosure Rules**
-    - Material incidents must be disclosed on Form 8-K within **4 business days**.
-    - Annual disclosures required on cybersecurity risk management, strategy, and board oversight.
-    - Enforcement actions have already begun for inadequate or delayed disclosure.
-    
-    **CMMC 2.0 (Defense Contractors)**
-    - Level 2 requires third-party assessment against NIST SP 800-171.
-    - Non-compliance can lead to loss of DoD contracts and False Claims Act liability.
-    
-    **State Privacy Laws (CCPA/CPRA + others)**
-    - California: Up to $7,500 per intentional violation.
-    - Growing number of states with similar laws (Virginia, Colorado, Connecticut, Utah, etc.).
-    - Increasing requirements around automated decision-making and profiling disclosures.
-    
-    **Official Sources:**
-    - [SEC Final Rule](https://www.sec.gov/rules/final/2023/33-11216.pdf)
-    - [CMMC Program](https://dodcio.defense.gov/CMMC/)
-    - [CPPA (California)](https://cppa.ca.gov/)
-    """)
-
-st.markdown("---")
-
-# Quick Reference Table
-st.markdown(f'<div style="margin-top:10px; margin-bottom:8px; color:#888; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.8px;">Quick Reference — Maximum Penalties</div>', unsafe_allow_html=True)
-
 # Continue to Global Threat Metrics
 st.markdown(f"""
 <div id="global-threat-metrics" style="text-align: left; margin: 40px 0 20px 5px;">
