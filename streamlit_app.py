@@ -38,7 +38,7 @@ st.set_page_config(page_title="SecAI-Nexus GRC", layout="wide", page_icon="🤖"
 # ====================== AUTHOR HEADER (neat top bar - v72) ======================
 st.markdown("""
 <div style="background:#0a0a0a; border-bottom:1px solid #1a1a2e; padding:8px 14px; margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; font-family:'Courier New', Courier, monospace; font-size:0.68rem; letter-spacing:0.5px;">
-  <div style="color:#00ff41; display:flex; align-items:center; gap:14px;">
+  <div style="color:#00ff41; display:flex; align-items:center; gap:10px;">
     <span style="color:#008aff; font-weight:bold;">▸</span> 
     DEVELOPED BY <b style="color:#fff; text-shadow:0 0 4px #00ff4140;">ADAM KISTLER</b>
     <span style="color:#2a2a3a;">|</span>
@@ -47,7 +47,7 @@ st.markdown("""
     <a href="https://github.com/adamkistler98/SecAI-Nexus" target="_blank" 
        style="color:#008aff; text-decoration:none; border-bottom:1px dashed #008aff50; padding-bottom:1px; transition:0.2s; font-size:0.66rem;">GITHUB</a>
   </div>
-  <div style="color:#4a4a5a; font-size:0.62rem; background:#111; padding:2px 8px; border:1px solid #1a1a2e; border-radius:2px;">
+  <div style="color:#00ff41; font-size:0.62rem; background:#0a0a0a; padding:3px 10px; border:1px solid #00ff4140; border-radius:2px; text-shadow:0 0 4px #00ff4140; font-weight:bold;">
     v72 • JUL 2026
   </div>
 </div>
