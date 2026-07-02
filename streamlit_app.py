@@ -470,7 +470,7 @@ st.markdown(f"""
     &gt;&gt; Why AI Security Matters: Risk, Regulation &amp; Business Impact
   </div>
   <div style="font-size: 0.58rem; color: #505060; margin-top: 4px;">
-    Executive Brief for CISOs, Boards &amp; Risk Committees • Updated July 2026
+    Executive Brief • Updated July 2026
   </div>
 </div>
 """, unsafe_allow_html=True)
