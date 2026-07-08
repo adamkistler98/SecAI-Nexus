@@ -42,7 +42,7 @@ st.markdown("""
     <span style="color:#008aff; font-weight:bold;">▸</span> 
     DEVELOPED BY <b style="color:#fff; text-shadow:0 0 4px #00ff4140;">ADAM KISTLER</b>
     <span style="color:#2a2a3a;">|</span>
-    <a href="https://www.linkedin.com/in/adam-kistler-441a31192/" target="_blank" 
+    <a href="https://www.linkedin.com/in/adam-kistler-cissp-441a31192/" target="_blank" 
        style="color:#008aff; text-decoration:none; border-bottom:1px dashed #008aff50; padding-bottom:1px; transition:0.2s; font-size:0.66rem;">LINKEDIN</a>
     <a href="https://github.com/adamkistler98/SecAI-Nexus" target="_blank" 
        style="color:#008aff; text-decoration:none; border-bottom:1px dashed #008aff50; padding-bottom:1px; transition:0.2s; font-size:0.66rem;">GITHUB</a>
